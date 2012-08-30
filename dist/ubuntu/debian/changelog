@@ -1,0 +1,51 @@
+nested (1.2.3-1ubuntu1) oneiric; urgency=low
+
+  * Small bug corrected that prevented from rendering PDF.
+
+ -- Carlos Miguel Jenkins Pérez <carlos@jenkins.co.cr>  Sun, 18 Dec 2011 15:29:12 -0600
+
+nested (1.2.2-1ubuntu1) oneiric; urgency=low
+
+  * New upstream release. Bug-fix release.
+  * Publishing time reduced thanks to optimization of
+    the footnotes preprocessor.
+  * LaTeX abstract is correctly formatted now. Thanks
+    to David Narvaez for the report.
+
+ -- Carlos Miguel Jenkins Pérez <carlos@jenkins.co.cr>  Sun, 18 Dec 2011 14:18:28 -0600
+
+nested (1.2-1ubuntu1) oneiric; urgency=low
+
+  * New upstream release.
+  * Footnotes support! Works great, but it lags a bit the 
+    publishing process :(
+  * Several small bugs corrected.
+  * Corrected a bug that prevented the last child of any 
+    subsection to be deleted.
+  * Corrected a bug that prevented from rendering PDF when 
+    a code block with option is present (e.g: C-Sharp block).
+  * Corrected a bug that prevented to save a file (Save as) 
+    to the same folder where the source file was.
+  * Corrected a bug that prevented from loading filters for 
+    all the targets but the last.
+  * Linebreak filters are now a pre-filters, not post-filters, 
+    so they should play nice with other txt2tags markup.
+  * Image positioning is working now.
+  * The website was added to the Nested repository.
+  * Help menu now links to that documentation.
+  * .t2t file association on Windows.
+  * User is now able to easily find the Nested user folder.
+
+ -- Carlos Miguel Jenkins Pérez <carlos@jenkins.co.cr>  Sun, 18 Dec 2011 02:18:33 -0600
+
+nested (1.1-1ubuntu1) oneiric; urgency=low
+
+  * New upstream release. See CHANGELOG.txt
+
+ -- Carlos Miguel Jenkins Pérez <carlos@jenkins.co.cr>  Mon, 12 Dec 2011 02:46:11 -0600
+
+nested (1.0-1ubuntu1) oneiric; urgency=low
+
+  * Initial release
+
+ -- Carlos Miguel Jenkins Pérez <carlos@jenkins.co.cr>  Thu, 08 Dec 2011 01:48:02 -0600

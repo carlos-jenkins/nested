@@ -1,0 +1,6 @@
+?package(nested):needs="X11"\
+	section="Applications/Editors"\
+	title="Nested"\
+	longtitle="Specialized editor for structured documents"\
+	icon="/usr/share/pixmaps/nested.xpm"\
+	command="/usr/bin/nested"

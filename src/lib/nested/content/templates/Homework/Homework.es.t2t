@@ -1,0 +1,40 @@
+Título del documento
+Autores
+%%date(%B, %Y)
+
+%!target: tex
+%!style(xhtmls): media/themes/Clean/style.css
+%!options(tex): --enum-title --toc --toc-level 5
+%!nested(tex): --docclass {article} --pdf
+
+%S = Tabla de contenidos =[tabla_de_contenidos]
+
+%Tabla de contenidos
+%%toc
+
+%tex% ''\newpage''
+
+= Introducción =[introduccion]
+
+
+
+= Desarrollo =[desarrollo]
+
+
+
+== Primer tema ==[primer_tema]
+
+
+
+== Segundo tema ==[segundo_tema]
+
+
+
+= Conclusiones =[conclusiones]
+
+
+
+= Referencias =[referencias]
+
+
+

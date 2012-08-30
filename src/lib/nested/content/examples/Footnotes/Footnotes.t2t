@@ -1,0 +1,59 @@
+Footnotes example
+Carlos Jenkins
+%%date(%B, %Y)
+
+%!target: xhtmls
+%!style(xhtmls): media/themes/Clean/style.css
+%!postproc(xhtmls): 'FNMARK' '°°_'
+%!postproc(xhtmls): 'FNTEXT' '_°°'
+%!nested(tex): --docclass {article}
+
+= Footnotes =[footnotes]
+
+This is a simple document with footnotes. Footnotes in Nested°°_ are simple,
+you just need to include the token ``FNMARK`` to mark where a footnote 
+should be placed. Then, anywhere in that section, preferably at the end 
+of it, place the corresponding text and mark it with the token ``FNTEXT``. 
+
+Note that marks are interpreted sequentially, so the first mark will be 
+associated with the first footnote text found, an so on. Also note, that 
+if you want to have a multiline footnote you need to ident the following 
+lines with exactly 4 spaces. On HTML target the footnotes will be added at 
+the end of the section.
+
+Nested is a specialized editor focused on creating structured documents 
+such as reports, publications, presentations, books, etc. It is designed to 
+help the user concentrate on writing content without been distracted by 
+format or markup. It offers a rich WYSIWYM°°_ interface where the user writes 
+plain text with a lightweight markup language.
+
+Lorem ipsum°°_ dolor sit amet, consectetur adipiscing elit. Nullam iaculis 
+molestie adipiscing. Etiam aliquam hendrerit felis, et vulputate tortor 
+rhoncus vel. Class aptent taciti sociosqu ad litora torquent per conubia 
+nostra, per inceptos himenaeos. Quisque pretium turpis eu augue vehicula 
+aliquam. Maecenas volutpat, dui non vulputate lacinia, odio metus eleifend 
+turpis, vel imperdiet libero enim sit amet libero. Aenean nibh velit, vestibulum 
+in malesuada hendrerit, cursus tempus erat. Pellentesque non odio odio, non 
+ullamcorper nunc. Integer feugiat urna id diam consequat quis scelerisque purus 
+dapibus. Etiam condimentum orci ultrices justo rutrum sed fermentum arcu varius. 
+Integer ac arcu enim. Nulla sem arcu, condimentum in tempor sit amet, auctor in 
+turpis. Fusce sem arcu, tempus at mattis vitae, lacinia sit amet massa. Donec 
+mattis erat vitae justo fringilla in scelerisque quam condimentum. Aliquam erat 
+volutpat. Ut facilisis imperdiet pulvinar. Nullam ut dui ipsum, a accumsan magna.
+
+Quisque suscipit interdum erat non tempor. Maecenas commodo lacus vel elit ultricies 
+posuere. Sed eros mi, hendrerit in lacinia nec, rhoncus sit amet lacus. Integer 
+venenatis imperdiet dolor, vitae posuere ipsum vehicula id. Donec porta urna a nulla 
+fermentum in sodales nunc euismod. Suspendisse congue accumsan ipsum in hendrerit. 
+Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos 
+himenaeos. Curabitur tempus mi non nibh commodo tristique.
+
+_°° Nested is a specialized editor for structured documents. For more 
+    information visit http://nestededitor.sourceforge.net/.
+_°° **WYSIWYM** : What You See Is What You Mean.
+    See http://en.wikipedia.org/wiki/WYSIWYM.
+_°° Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. 
+    This particular text was generated using the Loren Ipsum generator avalaible 
+    at http://www.lipsum.com/.
+

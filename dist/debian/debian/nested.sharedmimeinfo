@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+	<mime-type type="text/x-txt2tags">
+		<comment>Nested/txt2tags source file</comment>
+		<glob pattern="*.t2t"/>
+	</mime-type>
+</mime-info>

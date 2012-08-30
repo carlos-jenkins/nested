@@ -1,0 +1,4 @@
+debian/nested.xpm usr/share/pixmaps/
+nested/nested.png usr/share/icons/hicolor/48x48/apps/
+nested/nested.svg usr/share/icons/hicolor/scalable/apps/
+debian/nested.desktop usr/share/applications/

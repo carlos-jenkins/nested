@@ -1,0 +1,289 @@
+; Nested NSIS script
+; Copyright 2011 Carlos Jenkins
+; http://nestededitor.sourceforge.net/
+; This files is part of Nested under the GPL2+
+
+;--------------------------------
+; Helper defines
+;--------------------------------
+!define PRODUCT_NAME "Nested"
+!define PRODUCT_VERSION "1.2.2"
+!define PRODUCT_PUBLISHER "Carlos Jenkins"
+!define PRODUCT_WEB_SITE "http://nestededitor.sourceforge.net/"
+
+!define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\nested.exe"
+!define PRODUCT_UNINST_REGKEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
+!define PRODUCT_ROOT_KEY "HKLM"
+!define PRODUCT_STARTMENU_REGVAL "NSIS:StartMenuDir"
+
+
+;--------------------------------
+; Modern User Interface
+;--------------------------------
+!include "MUI.nsh"
+
+; MUI Settings
+!define MUI_ABORTWARNING
+!define MUI_ICON "nested.ico"
+!define MUI_UNICON "nested-uninstall.ico"
+!define MUI_HEADERIMAGE
+!define MUI_HEADERIMAGE_BITMAP "header.bmp"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "welcomefinish.bmp"
+
+; Language Selection Dialog Settings
+!define MUI_LANGDLL_REGISTRY_ROOT "${PRODUCT_ROOT_KEY}"
+!define MUI_LANGDLL_REGISTRY_KEY "${PRODUCT_UNINST_REGKEY}"
+!define MUI_LANGDLL_REGISTRY_VALUENAME "NSIS:Language"
+
+; Welcome page
+!insertmacro MUI_PAGE_WELCOME
+; License page
+;!define MUI_PAGE_CUSTOMFUNCTION_SHOW licpageshow
+!insertmacro MUI_PAGE_LICENSE "..\..\..\LICENSE.txt"
+; Directory page
+!insertmacro MUI_PAGE_DIRECTORY
+; Start menu page
+var ICONS_GROUP
+!define MUI_STARTMENUPAGE_NODISABLE
+!define MUI_STARTMENUPAGE_DEFAULTFOLDER "Nested"
+!define MUI_STARTMENUPAGE_REGISTRY_ROOT "${PRODUCT_ROOT_KEY}"
+!define MUI_STARTMENUPAGE_REGISTRY_KEY "${PRODUCT_UNINST_REGKEY}"
+!define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "${PRODUCT_STARTMENU_REGVAL}"
+!insertmacro MUI_PAGE_STARTMENU Application $ICONS_GROUP
+; Instfiles page
+!insertmacro MUI_PAGE_INSTFILES
+; Finish page
+!define MUI_FINISHPAGE_RUN "$INSTDIR\nested.exe"
+!insertmacro MUI_PAGE_FINISH
+
+; Uninstaller pages
+!insertmacro MUI_UNPAGE_INSTFILES
+
+; Language files
+!insertmacro MUI_LANGUAGE "English"
+!insertmacro MUI_LANGUAGE "Spanish"
+
+; Monospace font for license (default is 8, too big, next is 7, too small :S)
+;Function licpageshow
+;  FindWindow $0 "#32770" "" $HWNDPARENT
+;  CreateFont $1 "Courier New" "$(^FontSize)"
+;  GetDlgItem $0 $0 1000
+;  SendMessage $0 ${WM_SETFONT} $1 1
+;FunctionEnd
+
+
+;--------------------------------
+; Unistall log
+;--------------------------------
+!include "UninstallLog.nsh"
+
+; Set the name of the uninstall log
+!define UninstLog "uninstall.log"
+Var UninstLog
+
+; Uninstall log file missing.
+LangString UninstLogMissing ${LANG_ENGLISH} "${UninstLog} not found!$\r$\nUninstallation cannot proceed!"
+
+; AddItem macro
+!define AddItem "!insertmacro AddItem"
+; File macro
+!define File "!insertmacro File"
+; CreateShortcut macro
+!define CreateShortcut "!insertmacro CreateShortcut"
+; Copy files macro
+!define CopyFiles "!insertmacro CopyFiles"
+; Rename macro
+!define Rename "!insertmacro Rename"
+; CreateDirectory macro
+!define CreateDirectory "!insertmacro CreateDirectory"
+; SetOutPath macro
+!define SetOutPath "!insertmacro SetOutPath"
+; WriteUninstaller macro
+!define WriteUninstaller "!insertmacro WriteUninstaller"
+; WriteIniStr macro
+!define WriteIniStr "!insertmacro WriteIniStr"
+; WriteRegStr macro
+!define WriteRegStr "!insertmacro WriteRegStr"
+; WriteRegDWORD macro
+!define WriteRegDWORD "!insertmacro WriteRegDWORD"
+
+Section -openlogfile
+  CreateDirectory "$INSTDIR"
+  IfFileExists "$INSTDIR\${UninstLog}" +3
+    FileOpen $UninstLog "$INSTDIR\${UninstLog}" w
+  Goto +4
+    SetFileAttributes "$INSTDIR\${UninstLog}" NORMAL
+    FileOpen $UninstLog "$INSTDIR\${UninstLog}" a
+    FileSeek $UninstLog 0 END
+SectionEnd
+
+
+;--------------------------------
+; Application data
+;--------------------------------
+Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
+OutFile "${PRODUCT_NAME}-${PRODUCT_VERSION}.exe"
+InstallDir "$PROGRAMFILES\Nested"
+InstallDirRegKey "${PRODUCT_ROOT_KEY}" "${PRODUCT_DIR_REGKEY}" ""
+ShowInstDetails show
+ShowUnInstDetails show
+
+
+;--------------------------------
+; Installer functions
+;--------------------------------
+Function .onInit
+  !insertmacro MUI_LANGDLL_DISPLAY
+FunctionEnd
+
+
+;--------------------------------
+; Install files
+;--------------------------------
+Section "Principal" SEC01
+  ${SetOutPath} "$INSTDIR"
+  SetOverwrite try
+  
+  ; Files placeholder
+  ; FILE_PLACEHOLDER
+
+  ; Shortcuts
+  ${WriteIniStr} "$INSTDIR\${PRODUCT_NAME}.url" "InternetShortcut" "URL" "${PRODUCT_WEB_SITE}"
+  !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
+  ${CreateShortCut} "$DESKTOP\Nested.lnk" "$INSTDIR\nested.exe"
+  ${CreateDirectory} "$SMPROGRAMS\$ICONS_GROUP"
+  ${CreateShortCut} "$SMPROGRAMS\$ICONS_GROUP\Nested.lnk" "$INSTDIR\nested.exe"
+  ${CreateShortCut} "$SMPROGRAMS\$ICONS_GROUP\Website.lnk" "$INSTDIR\${PRODUCT_NAME}.url"
+  ${CreateShortCut} "$SMPROGRAMS\$ICONS_GROUP\Uninstall.lnk" "$INSTDIR\uninst.exe"
+  !insertmacro MUI_STARTMENU_WRITE_END
+SectionEnd
+
+
+;--------------------------------
+; Install fonts
+;--------------------------------
+!include "FontName.nsh"
+!include "FontReg.nsh"
+!include "WinMessages.nsh"
+
+; Register DejaVu fonts
+Section "Fonts"
+  StrCpy $FONT_DIR $FONTS
+  !define NESTED_FONT_DIR "dejavu-fonts\ttf\"
+
+  !insertmacro InstallTTFFont "${NESTED_FONT_DIR}DejaVuSans-Bold.ttf"
+  !insertmacro InstallTTFFont "${NESTED_FONT_DIR}DejaVuSans-BoldOblique.ttf"
+  !insertmacro InstallTTFFont "${NESTED_FONT_DIR}DejaVuSans-ExtraLight.ttf"
+  !insertmacro InstallTTFFont "${NESTED_FONT_DIR}DejaVuSans-Oblique.ttf"
+  !insertmacro InstallTTFFont "${NESTED_FONT_DIR}DejaVuSans.ttf"
+  !insertmacro InstallTTFFont "${NESTED_FONT_DIR}DejaVuSansCondensed-Bold.ttf"
+  !insertmacro InstallTTFFont "${NESTED_FONT_DIR}DejaVuSansCondensed-BoldOblique.ttf"
+  !insertmacro InstallTTFFont "${NESTED_FONT_DIR}DejaVuSansCondensed-Oblique.ttf"
+  !insertmacro InstallTTFFont "${NESTED_FONT_DIR}DejaVuSansCondensed.ttf"
+  !insertmacro InstallTTFFont "${NESTED_FONT_DIR}DejaVuSansMono-Bold.ttf"
+  !insertmacro InstallTTFFont "${NESTED_FONT_DIR}DejaVuSansMono-BoldOblique.ttf"
+  !insertmacro InstallTTFFont "${NESTED_FONT_DIR}DejaVuSansMono-Oblique.ttf"
+  !insertmacro InstallTTFFont "${NESTED_FONT_DIR}DejaVuSansMono.ttf"
+  !insertmacro InstallTTFFont "${NESTED_FONT_DIR}DejaVuSerif-Bold.ttf"
+  !insertmacro InstallTTFFont "${NESTED_FONT_DIR}DejaVuSerif-BoldItalic.ttf"
+  !insertmacro InstallTTFFont "${NESTED_FONT_DIR}DejaVuSerif-Italic.ttf"
+  !insertmacro InstallTTFFont "${NESTED_FONT_DIR}DejaVuSerif.ttf"
+  !insertmacro InstallTTFFont "${NESTED_FONT_DIR}DejaVuSerifCondensed-Bold.ttf"
+  !insertmacro InstallTTFFont "${NESTED_FONT_DIR}DejaVuSerifCondensed-BoldItalic.ttf"
+  !insertmacro InstallTTFFont "${NESTED_FONT_DIR}DejaVuSerifCondensed-Italic.ttf"
+  !insertmacro InstallTTFFont "${NESTED_FONT_DIR}DejaVuSerifCondensed.ttf"
+SectionEnd
+
+
+;--------------------------------
+; Install register and extension
+;--------------------------------
+!include "FileAssociation.nsh"
+
+Section -Post
+  ${WriteUninstaller} "$INSTDIR\uninst.exe"
+  ${WriteRegStr} ${PRODUCT_ROOT_KEY} "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\nested.exe"
+  ${WriteRegStr} ${PRODUCT_ROOT_KEY} "${PRODUCT_UNINST_REGKEY}" "DisplayName" "$(^Name)"
+  ${WriteRegStr} ${PRODUCT_ROOT_KEY} "${PRODUCT_UNINST_REGKEY}" "UninstallString" "$INSTDIR\uninst.exe"
+  ${WriteRegStr} ${PRODUCT_ROOT_KEY} "${PRODUCT_UNINST_REGKEY}" "DisplayIcon" "$INSTDIR\nested.exe"
+  ${WriteRegStr} ${PRODUCT_ROOT_KEY} "${PRODUCT_UNINST_REGKEY}" "DisplayVersion" "${PRODUCT_VERSION}"
+  ${WriteRegStr} ${PRODUCT_ROOT_KEY} "${PRODUCT_UNINST_REGKEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
+  ${WriteRegStr} ${PRODUCT_ROOT_KEY} "${PRODUCT_UNINST_REGKEY}" "Publisher" "${PRODUCT_PUBLISHER}"
+  
+  ; Register extension
+  ${registerExtension} "$INSTDIR\nested.exe" ".t2t" "Nested document"
+  
+SectionEnd
+
+
+;--------------------------------
+; Uninstaller functions
+;--------------------------------
+Function un.onUninstSuccess
+  HideWindow
+  MessageBox MB_ICONINFORMATION|MB_OK "The $(^Name) uninstall completed successfully."
+FunctionEnd
+
+Function un.onInit
+!insertmacro MUI_UNGETLANGUAGE
+  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "Are you sure do you want to completely remove $(^Name)?" IDYES +2
+  Abort
+FunctionEnd
+
+
+;--------------------------------
+; Uninstaller
+;--------------------------------
+Section Uninstall
+  ; Can't uninstall if uninstall log is missing!
+  IfFileExists "$INSTDIR\${UninstLog}" +3
+    MessageBox MB_OK|MB_ICONSTOP "$(UninstLogMissing)"
+      Abort
+
+  ; Unregister extension
+  ${unregisterExtension} ".t2t" "Nested document"
+
+  Push $R0
+  Push $R1
+  Push $R2
+  SetFileAttributes "$INSTDIR\${UninstLog}" NORMAL
+  FileOpen $UninstLog "$INSTDIR\${UninstLog}" r
+  StrCpy $R1 -1
+
+  GetLineCount:
+    ClearErrors
+    FileRead $UninstLog $R0
+    IntOp $R1 $R1 + 1
+    StrCpy $R0 $R0 -2
+    Push $R0
+    IfErrors 0 GetLineCount
+
+  Pop $R0
+
+  LoopRead:
+    StrCmp $R1 0 LoopDone
+    Pop $R0
+
+    IfFileExists "$R0\*.*" 0 +3
+      RMDir $R0  ;is dir
+    Goto +9
+    IfFileExists $R0 0 +3
+      Delete $R0 ;is file
+    Goto +6
+    StrCmp $R0 "${PRODUCT_ROOT_KEY} ${PRODUCT_DIR_REGKEY}" 0 +3
+      DeleteRegKey ${PRODUCT_ROOT_KEY} "${PRODUCT_DIR_REGKEY}"    ;is Reg Element
+    Goto +3
+    StrCmp $R0 "${PRODUCT_ROOT_KEY} ${PRODUCT_UNINST_REGKEY}" 0 +2
+      DeleteRegKey ${PRODUCT_ROOT_KEY} "${PRODUCT_UNINST_REGKEY}" ;is Reg Element
+
+    IntOp $R1 $R1 - 1
+    Goto LoopRead
+  LoopDone:
+  FileClose $UninstLog
+  Delete "$INSTDIR\${UninstLog}"
+  RMDir "$INSTDIR" ; This is required because the unistall log will prevent the remove
+  Pop $R2
+  Pop $R1
+  Pop $R0
+
+SectionEnd

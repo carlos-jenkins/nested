@@ -1,0 +1,17 @@
+include CHANGELOG.txt
+include LICENSE.txt
+include MANIFEST.in
+include README.txt
+graft l10n
+prune l10n/mo
+recursive-exclude l10n *.pyc
+include nested/config.ini
+include nested/gui.glade
+include nested/nested.svg
+include nested/nested.png
+include nested/logos.png
+graft nested/examples
+graft nested/icons
+graft nested/libraries
+graft nested/templates
+graft nested/themes

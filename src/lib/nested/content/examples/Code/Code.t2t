@@ -1,0 +1,337 @@
+Code Test Page
+Carlos Jenkins
+Version 3.0.83
+
+%!target: xhtmls
+%!style(xhtmls): media/themes/Clean/style.css
+%!options(xhtmls): --toc --toc-level 5
+%!nested(xhtmls): --libs syntaxhighlighter
+%!options(tex): --enum-title --toc --toc-level 5
+%!nested(tex): --docclass {book}
+
+= Supported programming languages =[supported_programming_languages]
+
+%
+% This is the Code Test Page.
+%
+% This document requires the SyntaxHighlighter library for proper visualization on the HTML target, so make 
+% sure 'syntaxhighlighter' is included in the libraries of this document (by default it is).
+% 
+% All 'Hello World' examples were taken from http://en.wikipedia.org/wiki/Hello_world_program_examples
+% 
+This the Nested Code Test Page. 
+
+In this example, all the programming languages whose syntax is supported for highlighting are shown with a 'Hello World' code example.
+
+This document requires the SyntaxHighlighter library for proper visualization on the HTML target, so make sure on the document properties that 'syntaxhighlighter' is included in the libraries of this document (by default it is).
+
+The SyntaxHighlighter is a Javascript library developed by Alex Gorbatchev, for more information visit: 
+	http://alexgorbatchev.com/SyntaxHighlighter/
+
+Almost all the 'Hello World' examples were taken from the great Wikipedia:
+	http://en.wikipedia.org/wiki/Hello_world_program_examples
+
+The Nested is a specialized editor for creating structured documents of many kinds and formats. For more information visit:
+	http://nestededitor.sourceforge.net/
+
+
+== ActionScript 3.0 ==[actionscript_30]
+
+{{{ as3
+package com.example
+{
+    import flash.text.TextField;
+    import flash.display.Sprite;
+ 
+    public class Greeter extends Sprite
+    {
+        public function Greeter()
+        {
+            var txtHello:TextField = new TextField();
+            txtHello.text = "Hello World";
+            addChild(txtHello);
+        }
+    }
+}
+}}}
+
+== Bash/Shell ==[bashshell]
+
+{{{ bash
+echo Hello World
+}}}
+
+== CFML/ColdFusion ==[cfmlcoldfusion]
+
+{{{ cf
+<cfscript>
+    variables.greeting = "Hello, world!";
+    WriteOutput( variables.greeting );
+</cfscript>
+}}}
+
+== C# ==[c]
+
+{{{ csharp
+using System;
+class ExampleClass
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Hello, world!");
+    }
+}
+}}}
+
+== C/C++ ==[cc]
+
+**C**
+{{{ cpp
+#include <stdio.h>
+ 
+int main(void)
+{
+  printf("Hello world\n");
+  return 0;
+}
+}}}
+
+**C++**
+{{{ cpp
+#include <iostream>
+ 
+int main()
+{
+  std::cout << "Hello World!" << std::endl;
+  return 0;
+}
+}}}
+
+== CSS ==[css]
+
+{{{ css
+#id {
+    font-size : 2em;
+    color : red;
+}
+
+.class1 {
+    color : blue;
+}
+
+body {
+    padding: 10px;
+}
+}}}
+
+== Delphi ==[delphi]
+
+{{{ delphi
+{$APPTYPE CONSOLE}
+begin
+  Writeln('Hello, world!');
+end.
+}}}
+
+== Diff ==[diff]
+
+{{{ diff
+@@ -778,13 +791,17 @@
+     def safe_string(self, string):
+         """Transform any string to a safer representation:
+             e.g: 'Quién sabe caño' -> 'quien_sabe_cano'"""
++        
+         string = string.strip()
+         nkfd_form = unicodedata.normalize('NFKD', unicode(string))
+         normalized = u''.join([c for c in nkfd_form if not unicodedata.combining(c)])
+         normalized = normalized.lower()
+         normalized = normalized.replace(' ', '_')
+-        normalized = normalized.replace('\'', '')
+-        return normalized
++        clean = []
++        for c in normalized:
++            if c.isalnum() or c == '_':
++                clean.append(c)
++        return ''.join(clean)
+}}}
+
+== Erlang ==[erlang]
+
+{{{ erlang
+-module(hello).
+-export([hello_world/0]).
+
+hello_world() -> io:fwrite("hello, world\n").
+}}}
+
+== Groovy ==[groovy]
+
+{{{ groovy
+println "Hello World!"
+}}}
+
+== Javascript ==[javascript]
+
+{{{ javascript
+alert('Hello world!');
+}}}
+
+== Java ==[java]
+
+{{{ java
+public class HelloWorld {
+   public static void main(String[] args) {
+       System.out.println("Hello world!");
+   }
+}
+}}}
+
+== JavaFX ==[javafx]
+
+{{{ javafx
+import javafx.scene.Scene;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+Stage {
+	title: "Die, Ajax! - Hello World"
+	width: 250
+	height: 50
+	scene: Scene {
+        	content: [
+			Text { 
+				content: "Hello World!" 
+				x:0 
+				y:12
+				font: Font {
+					name: "Sans Serif"
+					size: 12 
+				} 
+			}
+	        ]
+	}
+}
+}}}
+
+== Perl ==[perl]
+
+{{{ perl
+use v5.10;
+say 'Hello World.';
+}}}
+
+== PHP ==[php]
+
+{{{ php
+<?php
+echo "Hello, world";
+?>
+}}}
+
+== Plain text ==[plain_text]
+
+{{{ plain
+He... 'hello world'? :P
+}}}
+
+== PowerShell ==[powershell]
+
+{{{ powershell
+Write-Host "Hello world!"
+}}}
+
+== Python ==[python]
+
+{{{ python
+print 'Hello World'
+}}}
+
+== Ruby ==[ruby]
+
+{{{ ruby
+puts "Hello world!"
+}}}
+
+== Scala ==[scala]
+
+{{{ scala
+object HelloWorld extends Application {
+  println("Hello world!")
+}
+}}}
+
+== SQL ==[sql]
+
+{{{ sql
+SELECT 'Hello world!'
+}}}
+
+== Visual Basic / Visual Basic .NET ==[visual_basic__visual_basic_net]
+
+**Visual Basic**
+{{{ vb
+MsgBox "Hello, world!"
+}}}
+
+**Visual Basic .NET**
+{{{ vb
+Module Module1
+    Sub Main() 
+        Console.WriteLine("Hello, world!")
+    End Sub
+End Module
+ 
+'non-console example:
+Class Form1
+    Public Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load()
+        MsgBox("Hello, world!")
+    End Sub
+End Class
+}}}
+
+== HTML/XML ==[htmlxml]
+
+**HTML**
+{{{ xhtml
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>HTML4 Strict Hellow World</TITLE>
+   </HEAD>
+   <BODY>
+      <P>Hello World!
+   </BODY>
+</HTML>
+}}}
+
+**HTML5**
+{{{ xhtml
+<!doctype html>
+<html>
+   <head>
+     <meta charset="UTF-8">
+     <title>HTML5 Hello World</title>
+   </head>
+   <body>
+     <p>Hello World!</p>
+   </body>
+</html>
+}}}
+
+**XML**
+{{{ xhtml
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   <title>
+     XML Document Hello World
+   </title>
+   <para>
+     Hello World!
+   </para>
+   <note>
+     Whatever.
+   </note>
+</root>
+}}}

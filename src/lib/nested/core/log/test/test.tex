@@ -1,0 +1,278 @@
+\newcommand{\superscript}[1]{\ensuremath{^{\textrm{\small#1}}}}
+\newcommand{\subscript}[1]{\ensuremath{_{\textrm{\small#1}}}}
+
+\documentclass{article}
+
+\usepackage{graphicx} % images and graphics
+\usepackage{paralist} % needed for compact lists
+\usepackage[normalem]{ulem} % needed by strike
+\usepackage{listings} % required for code blocks
+\usepackage[urlcolor=blue,colorlinks=true,hyperfootnotes=false]{hyperref} % links
+\usepackage[utf8]{inputenc}  % char encoding
+\usepackage[bottom]{footmisc} % footnotes
+
+% header
+\usepackage[top=3cm, bottom=3cm, left=3cm, right=3cm]{geometry}
+\usepackage[spanish]{babel}
+\usepackage{float} % To fix images position
+
+% Prettify code documentation
+\usepackage{color}
+\definecolor{gray97}{gray}{.97}
+\definecolor{gray75}{gray}{.75}
+\definecolor{gray45}{gray}{.45}
+\lstset{ frame=Ltb,
+     framerule=0pt,
+     aboveskip=0.5cm,
+     framextopmargin=3pt,
+     framexbottommargin=3pt,
+     framexleftmargin=0.4cm,
+     framesep=0pt,
+     rulesep=.4pt,
+     backgroundcolor=\color{gray97},
+     rulesepcolor=\color{black},
+     %
+     stringstyle=\ttfamily,
+     showstringspaces = false,
+     basicstyle=\small\ttfamily,
+     commentstyle=\color{gray45},
+     keywordstyle=\bfseries,
+     %
+     numbers=left,
+     numbersep=15pt,
+     numberstyle=\tiny,
+     numberfirstline = false,
+     breaklines=true,
+     xleftmargin=20px,
+   }
+
+% Spacing
+\addtolength{\parskip}{\baselineskip} % Paragraph spacing
+\linespread{1.15} % Lines spacing
+\setlength{\plitemsep}{0.5\baselineskip} % List items spacing
+\definecolor{deepblue}{RGB}{0,0,61}
+\hypersetup{linkcolor=deepblues,}
+
+\begin{document}
+
+% Title
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\begin{titlepage}
+\begin{center}
+
+% Upper part of the page
+\includegraphics[width=0.30\textwidth]{media/images/tec_logo.png}\\[1cm]
+\textsc{\LARGE Instituto Tecnológico de Costa Rica}\\[1.5cm]
+\textsc{\Large Diseño de Software}\\[0.5cm]
+
+
+% Document itle
+\HRule \\[0.4cm]
+{ \huge \bfseries Refactoring}\\[0.4cm]
+\HRule \\[1.5cm]
+
+
+% Author
+\emph{Autores:}\\
+Carlos \textsc{Jenkins} - 200769999\\
+Aarón \textsc{Ruiz} - 200725709\\
+Jose Freddy \textsc{Montero} - 200824166\\
+
+\vfill
+
+% Bottom of the page
+{\large \today}
+
+\end{center}
+\end{titlepage}
+% Title end
+
+\tableofcontents
+
+\newpage
+
+
+\hypertarget{introduccion}{}
+\section{Introducción}
+
+El presente documento tiene como propósito explicar qué es \textit{refactoring} en el ámbito de 
+ingeniería de Software, así como cuando es relevante aplicarlo, cómo se aplica y cómo se gestiona.
+Además, se presenta un caso de estudio de un refactoring simple.
+
+La palabra \textit{refactoring} tiene dos acepciones según se utilice como verbo o sustantivo. La siguiente
+cita de Fowler menciona ambas acepciones:
+
+	\begin{quotation}
+``Refactoring es una \textbf{técnica} disciplinada para la reestructuración de un cuerpo ya
+existente de código, alterando su estructura interna sin cambiar su comportamiento
+externo. Su núcleo está compuesto por una serie de pequeñas transformaciones que preservan 
+el comportamiento del programa. Cada \textbf{transformación} (llamada a su vez `refactoring')
+hace muy poco, pero una secuencia de transformaciones produce una importante
+reestructuración.'' - (Fowler)
+	\end{quotation}
+
+En su acepción de \textit{técnica}, el refactoring se refiere a un tipo de reestructuración del código 
+que se aplica usualmente en desarrollos orientados a objetos, teniendo como objetivo principal 
+limpiar el código para que sea más fácil de entender y modificar por los desarrolladores. Al aplicar 
+esta técnica, se obtiene como resultado una mejora en el diseño del software, ya que queda más legible
+y menos propenso a errores; también es importante ya que permite encontrar errores de una manera más 
+sencilla, ayudando al mantenimiento futuro del sistema.
+
+En su acepción de \textit{transformación}, el refactoring se refiere al método o mecanismo para producir
+dicha transformación.
+
+\hrulefill{}
+
+Uno de los problemas más importantes en el desarrollo de sistemas es el conseguir código de calidad, es decir obtener código que cumple satisfactoriamente las propiedades de claridad y sencillez, tanto en estructura como en diseño, donde el código sea fácil de leer por otros desarrolladores y a la vez fácil de mantener, si por el contrario tenemos un código con diseño deficiente y funcionalidad duplicada será difícil de entender y mantener y muy susceptible a errores en el futuro. 
+Es por lo anterior que actualmente muchos proyectos de desarrollo de software abarcan más tiempo del que debieran y por lo tanto se gastan más recursos de los que en realidad se necesitaban y una causa de eso, que aunque parezca sencilla, es que en las últimas etapas de desarrollo, al no llevar el código fuente legible y apto para cambios, aumentan los errores al momento de depurarlo y resulta muy tedioso adentrarse en el código para detectar y solucionar los errores. A partir de dicha problemática surge la rama de la ingeniería de software que se centra en la investigación de cómo mejorar el código fuente, es decir la aplicación de transformaciones al código ya existente. La restructuración de código fuente nació como la aplicación de modificaciones al código fuente para hacerlo más fácil de cambiar y de entender, o hacerlo menos susceptible a errores cuando futuros cambios sean aplicados. En formar general el refactoring es una herramienta que podría ayudar a resolver el problema del enorme esfuerzo que se requiere en la fase de mantenimiento, dentro del ciclo de vida del desarrollo de software.
+El objetivo principal que tiene refactoring es mantener o aumentar el valor del software, ya que exteriormente el valor se aumenta con la satisfacción de los usuarios, ya estén estos relacionados con el proyecto o no. Por ejemplo los usuarios se verán más satisfechos si cada vez que hacen nuevas peticiones sobre el software, dichos cambios se pueden agregar y mostrar de una manera más eficaz. El valor interno del software aumenta con refactoring en el ahorro en costo de mantenimiento, el ahorro que proporciona la reutilización de componentes.
+Por esta y más razones es que hoy en día ya varias empresas aplican el principio de refactoring para mejorar sus proyectos y lograr que todos los involucrados en el mismo, se encuentren satisfechos.
+
+
+\hypertarget{code_refactoring}{}
+\section{Code refactoring}
+
+TODO: Intro a la sección...
+
+\hypertarget{cuando_aplica}{}
+\subsection{Cuando aplica}
+
+Debido a que refactoring básicamente lo que hace es mejorar el diseño del código sin cambiar lo que hace, entonces podemos aplicarlo a varias situaciones:
+
+\begin{compactitem}
+\item Cuando se va a escribir código duplicado: por ejemplo cuando se tiene código exactamente igual en varios sitios o bien hay líneas de código muy parecidas o estructura similar, lo correcto sería extraer métodos y llamarlos cuando es requerido.
+\item Grupos de Datos: también por ejemplo cuando en varios lugares aparecen juntos los mismos datos, lo ideal aquí sería extraer una clase con dichos datos y crear instancias de ellas en los lugares donde tenemos ese conjunto de datos.
+\item Métodos que necesitan muchos parámetros: por ejemplo cuando se posean métodos que reciben muchos parámetros es bueno hacer una clase con los parámetros del método como sus atributos, pero aún así los parámetros tienen que ver unos con otros y suelen ir juntos siempre.
+\item Métodos muy largos: en algunas situaciones se llega a tener un método que sea muy largo en cuanto a código se refiere, lo ideal aquí es dividir diferentes partes del código poniéndolos en otros métodos y llamando a los mismos, con el fin de hacer más corto el método y resumir su funcionalidad.
+\item Clases muy grandes: en el momento que se tienen clases muy grandes lo primero que debemos hacer es identificar lo que hace dicha clase, determinar si de verdad tiene que ver cada funcionalidad una con otra y si no es así, entonces se debería separar esas funcionalidades y colocarlas en clases más pequeñas.
+\item Los switch: por lo general un switch-case se tiene que repetir en el código en varios sitios, aunque en cada sitio sea para hacer cosas diferentes. Existen formas usando el polimorfismo que evitan tener que repetir el switch-case en varios sitios, o incluso evita tener que ponerlo en ningún lado.
+\item Clase perezosa: se refiere por ejemplo cuando tenemos una clase que no hace mucho en realidad, lo mejor sería eliminarla del todo y lo poco que hacía agregárselo a otra clase.
+\item Clases alternativas con diferentes interfaces: por ejemplo cuando se tiene una serie de métodos dentro de una clase que hacen lo mismo que otros métodos en otra clase, pero tienen distintas interfaces, lo correcto sería agregar dichos métodos a la interfaz ya existente y eliminar la otra.
+\item Característica envidiada: es decir cuando un método está más interesado en una clase, la cual no es la que lo contiene, lo correcto es mover dicho método a la clase por la cual está más interesado.
+\end{compactitem}
+
+TODO: Describir necesidad...
+
+\begin{compactitem}
+\item Migrar de un plataforma a otra.
+\item Actualizar código de una nueva versión de una misma plataforma.
+\item Adaptarse a un estilo de codificación.
+\end{compactitem}
+
+TODO: e.g. ...
+
+\hypertarget{tecnicas}{}
+\subsection{Técnicas}
+
+TODO: Describir herramientas para el procedimiento.
+
+\begin{compactitem}
+\item Simple ``Search and replace''.
+\item Search and replace utilizando expresiones regulares.
+\item Técnicas más complejas de análisis semántico.
+\item Manualmente.
+\end{compactitem}
+
+\hypertarget{metodologia_de_gestion}{}
+\subsection{Metodología de gestión}
+
+Un proceso de refactoring 
+
+TODO: Describir forma de gestionar un proceso de refactoring.
+
+\begin{compactitem}
+\item Sistema de control de versiones.
+\item Pruebas unitarias y control de calidad.
+\end{compactitem}
+
+\newpage
+
+
+\hypertarget{caso_de_estudio}{}
+\section{Caso de estudio}
+
+Para ilustrar las técnicas de refactoring se utilizará un caso de estudio de la migración 
+del Software Nested\footnotemark{} del toolkit gráfico Gtk+\footnotemark{} 2.24 a la nueva versión Gtk+ 3.0.
+
+\addtocounter{footnote}{-2}
+\stepcounter{footnote}\footnotetext{\textit{Nested}  : Nested es un Software para la creación de documentos estructurados. Éste documento fue creado en Nested. Sitio web: \htmladdnormallink{http://nestededitor.sourceforge.net/}{http://nestededitor.sourceforge.net/} }
+\stepcounter{footnote}\footnotetext{\textit{Gtk}     : ``The GIMP Toolkit'' es una biblioteca para la creación de interfaz gráfica. Es multiplataforma y es la biblioteca más utilizada en el entorno gráfico Gnome de sistemas GNU/Linux. Sitio web: \htmladdnormallink{http://www.gtk.org/}{http://www.gtk.org/}. }
+
+\hypertarget{contexto}{}
+\subsection{Contexto}
+
+Nested está escrito en el lenguaje de programación Python y utiliza los \textit{bindings}\footnotemark{} de Gtk+ 2.24 
+llamados \textit{PyGtk}, y se migrará a los nuevos \textit{bindings} de Gtk+ 3.0 llamados \textit{PyGObject}. 
+PyGtk es un API estático escrito manualmente, mientras que PyGObject funciona utilizando técnicas 
+avanzadas de \textit{introspección} (análisis interno de la biblioteca subyacente) para generar módulos 
+dinámicos, simplificando enormemente la tarea de mantenimiento del binding. Claramente PyGObject no 
+es retro-compatible con PyGtk y la API expuesta a cambiado considerablemente. 
+
+Para realizar la migración se debe realizar un proceso de \textit{refactoring} a todos los archivos que 
+interactúen con la interfaz gráfica, es decir, se desea cambiar la estructura interna de la
+aplicación sin que cambie el comportamiento externo. En éste caso particular se mostrará el procedimiento 
+y los cambios realizados al archivo \textit{spellcheck.py} cuya función es realizar la unión entre el buffer 
+de texto de la interfaz gráfica y la biblioteca de corrección ortográfica. El archivo consiste en 
+aproximadamente 300 líneas de código en las cuales se hace un uso intensivo de la antigua API.
+
+Como se mencionó en \htmladdnormallink{Code refactoring}{\#code\_refactoring} se realizarán transformaciones progresivas
+que preserven el comportamiento, partiendo desde simples funciones de buscar y remplazar, pasando a
+utilizar expresiones regulares hasta culminar en cambios manuales que sólo pueden ser realizados
+por un ser humano (o por una herramienta sumamente compleja cuyo costo de desarrollo es mucho mayor
+a la realización del refactoring manual). Sin embargo, a diferencia de la definición de Fowler que 
+indica que cada unidad de cambio debe producir un sistema funcional, es éste caso particular es la suma
+de las unidades de cambio las que producen un sistema funcional, dado que una migración de este tipo
+no puede "quedar a medias".
+
+\begin{compactitem}
+\item Buscar y remplazar.
+\item Expresiones regulares.
+\item Cambios manuales.
+\end{compactitem}
+
+\addtocounter{footnote}{-1}
+\stepcounter{footnote}\footnotetext{\textit{Bindings}: En computación, un binding (en español "ligadura") de un lenguaje de programación a una biblioteca o servicio del sistema operativo es un API que provee dichos servicios en ese lenguaje. En este caso se realiza una ligadura del lenguaje de programación Python a la biblioteca Gtk+ que está escrita en C. }
+
+
+\hypertarget{conclusiones}{}
+\section{Conclusiones}
+
+\begin{compactitem}
+\item Si vamos haciendo refactoring sistemáticamente cada vez que veamos mucho código 
+  aglomerado o ``feo'', el código se mantendrá más elegante y sencillo.
+\item Refactoring permite que en nuestras fases más avanzadas del proyecto, el código 
+  siga siendo legible y fácil de modificar o añadirle otras funcionalidades.
+\item Al principio parece que estar arreglando el código es una pérdida de tiempo, pero 
+  al final veremos que es más tiempo el que se gana haciendo refactoring que el que 
+  se pierde.
+\item Las funcionalidades nuevas que se agregan a nuestro proyecto, se añaden de una manera 
+  más rápida y eficaz, haciendo refactoring, y se pierde mucho menos tiempo en depurar y 
+  entender el código.
+\item Se recomienda no añadir una nueva funcionalidad mientras se refactoriza, para verificar 
+  que el comportamiento siga igual, esto porque el objetivo no es cambiar la funcionalidad 
+  del sistema o su comportamiento a nivel externo.
+\item Se exhorta a tener un conjunto de pruebas, para hacer control de calidad sobre el código 
+  una vez reestructurado, para comprobar que se mantenga la funcionalidad.
+\item Se recomienda hacer `refactoring' antes de agregar una nueva funcionalidad, ya que se hace 
+  más sencillo añadirla; también después de agregar una funcionalidad es bueno hacer el 
+  proceso, ya que se facilita el código una vez añadida.
+\item Aplicar la técnica de reestructuración, permite añadir de una forma más sencilla nuevo 
+  código, por lo que se pierde menos tiempo en un futuro.
+\end{compactitem}
+
+
+\hypertarget{referencias}{}
+\section{Referencias}
+
+\begin{compactitem}
+\item Fowler, M. (n.d.). \textit{Refactoring home page}. Obtenido desde \htmladdnormallink{http://martinfowler.com/refactoring/}{http://martinfowler.com/refactoring/}
+\item Pavlova, M. (n.d.). \textit{Defining Refactoring}. Obtenido desde \htmladdnormallink{http://sourcemaking.com/refactoring/}{http://sourcemaking.com/refactoring/}
+\item Sicilia, M. Nov 25, 2008. \textit{¿Qué es refactoring?}. Obtenido desde \htmladdnormallink{http://cnx.org/content/m17444/latest/}{http://cnx.org/content/m17444/latest/}
+\item M. Fowler. \textit{Refactoring: improving the design of existing code}. Addison-Wesley,(1999).
+\item M. Streckenbach and G. Snelting. \textit{Refactoring class hierarchies}, pages 315-323. ACM (2004)
+\item Mendez, M. \textit{Refactoring de código estructurado}. Universidad de la Plata . \newline{}
+  Obtenido desde \htmladdnormallink{http://www.fortranrefactoring.com.ar/papers/Trabajo.pdf}{http://www.fortranrefactoring.com.ar/papers/Trabajo.pdf}
+\end{compactitem}
+
+\end{document}

@@ -1,0 +1,1469 @@
+Nested - Specialized editor for structured documents
+Carlos Jenkins
+
+
+%!target: xhtmls
+%!style(xhtmls): media/themes/NestedWebsite/style.css
+%!options(xhtmls): --toc --toc-level 5
+%!preproc(xhtmls): 'MYWEBSITE' 'http://nestededitor.sourceforge.net/'
+%!preproc(xhtmls): 'MY_WEBSITE' 'MYWEBSITE'
+%!postproc(xhtmls): 'LINEBREAK' '@@'
+%!postproc(xhtmls): 'HTMLCOMMENT' '%html%'
+%!postproc(xhtmls): 'CODEOPEN' '{{{'
+%!postproc(xhtmls): 'MATHOPEN' '<<<'
+%!postproc(xhtmls): 'VERBATIM' '`'
+%!postproc(xhtmls): 'FNMARK' '°°_'
+%!postproc(xhtmls): 'FNTEXT' '_°°'
+%!postproc(xhtmls): '<div class="post-proc">' '<div style="background-color: lightBlue;">'
+%!nested(xhtmls): --libs jquery,syntaxhighlighter,mathjax
+%!preproc(tex): 'MYWEBSITE' 'http://nestededitor.sourceforge.net/'
+%!preproc(tex): 'MY_WEBSITE' 'MYWEBSITE'
+%!nested(tex): --docclass {article}
+
+= Overview =[overview]
+
+Under construction...
+
+= Markup =[markup]
+
+% This is the Nested website Learn page.
+% This document uses the NestedWebsite theme, make sure it is installed with
+% your themes (File -> Examples -> My Nested folder, copy it to 'themes')
+
+Nested uses a superset of a markup called [txt2tags http://txt2tags.org/]. 
+This section is based on the oficial txt2tags documentation, created by Aurélio Jargas.
+
+The markup used by Nested is simple and easy. But wait, it's powerful too!
+
+You can insert images, make lists, quotes and even tables. All of that using just a 
+few extra characters on your text. No more tag names or funky attributes to remember.
+
+The following section is a complete guide of the marks. For a more lightweight example
+load in Nested:
+
+```
+	File > Examples > Markup
+```
+
+
+== Paragraphs ==[paragraphs]
+
+Paragraphs are groups of lines delimited by blank lines. 
+Other blocks like lists, quote, table or verbatim also ends a paragraph.
+
+**Example:**
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+A paragraph is made by one or
+more lines.
+
+A blank line separates them.
+```
+
+%html% '''
+%html%     </td>
+%html%     <td>
+%html% '''
+
+A paragraph is made by one or
+more lines.
+
+A blank line separates them.
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+== Line breaks ==[line_breaks]
+
+Sometimes the user requires to explicitly insert a line break,
+this can be acomplished using the ``LINEBREAK`` tag.
+
+**Example:**
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+| This is a LINEBREAK multiline LINEBREAK table | The other cell |
+ 
+This is a line break in a paragraph. Lorem ipsum 
+dolor sit amet, consectetur adipiscing elit. 
+Phasellus semper tempus est, non pulvinar mi 
+venenatis vel. LINEBREAK
+Phasellus consequat arcu ut ligula feugiat id 
+posuere erat imperdiet. Duis vehicula, quam in 
+varius fringilla, elit felis varius lorem, ut 
+sagittis odio nunc id lacus.
+```
+
+%html% '''
+%html%     </td>
+%html%     <td>
+%html% '''
+
+| This is a @@ multiline @@ table | The other cell |
+
+This is a line break in a paragraph. Lorem ipsum 
+dolor sit amet, consectetur adipiscing elit. 
+Phasellus semper tempus est, non pulvinar mi 
+venenatis vel. @@
+Phasellus consequat arcu ut ligula feugiat id 
+posuere erat imperdiet. Duis vehicula, quam in 
+varius fringilla, elit felis varius lorem, ut 
+sagittis odio nunc id lacus.
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+== Comments ==[comments]
+
+Used to insert text that will not appear on the published document. 
+It can also be used to deactivate (not delete) large portions of 
+the contents. Useful for TODO and FIXME reminders and editor's notes.
+
+**Example:**
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+% start a line with
+a percent sign,
+% and it will be ignored
+useful for TODOs!
+
+%%%
+This is some text that I don't want 
+to be shown anymore. 
+This can be as large as I want.
+%%%
+```
+
+%html% '''
+%html%     </td>
+%html%     <td>
+%html% '''
+
+% start a line with
+a percent sign,
+% and it will be ignored
+useful for TODOs!
+
+%%%
+This is some text that I don't want to be shown anymore. 
+This can be as large as I want.
+%%%
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+== Target comments ==[target_comments]
+
+You can comment out some content and specific it to be shown only for some particular target.
+For example, if you want a link to appear only when publishing to HTML, or if you want to link
+to different version of your document depending on the way it is shown.
+
+**Syntax:**
+
+```
+%target%<space>Conditional comment content
+```
+
+**//Note://** The target comments avalaible are: 
+
+- HTML: ``%xhtmls%`` or ``%html%``
+- LaTeX: ``%tex%``, ``%latex%`` or ``%pdf%``
+- Plain text: ``%txt%`` or ``%text%``
+- 
+
+Also, please note the trailing space after the ``%target%``.
+
+**Example:**
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+HTMLCOMMENT You can download the PDF version of this document from 
+HTMLCOMMENT [my website http://www.somedomain.com/myfile.pdf]
+%pdf% You can view the HTML version of this document in 
+%pdf% [my website http://www.somedomain.com/myfile.html]
+```
+
+%html% '''
+%html%     </td>
+%html%     <td>
+%html% '''
+
+%html% You can download the PDF version of this document from 
+%html% [my website http://www.somedomain.com/myfile.pdf]
+%pdf% You can view the HTML version of this document in 
+%pdf% [my website http://www.somedomain.com/myfile.html]
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+== Beautifiers ==[beautifiers]
+
+Beautifiers can be used to format content. Nested supports seven beautifier types:
+
++ Bold: **Bold text**
++ Italic: //Italic text//
++ Underline: __Underlined text__
++ Strike: --Striked text--
++ Superscript: ^^Superscript text^^
++ Underscript: ,,Undescript text,,
++ Monospace: ``Monospaced text``
+
+
+**//Note://** The marks must be glued with the contents (no spaces): 
+``** this **`` or ``** this**`` is invalid.
+
+**Example:**
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+Simple beautifiers:
+
++ Bold: **Bold text**
++ Italic: //Italic text//
++ Underline: __Underlined text__
++ Strike: --Striked text--
++ Superscript: ^^Superscript^ ^
++ Underscript: ,,Undescript, ,
++ Monospace: ``Monospaced text``
+
+
+Nested beautifiers:
+
++ Bold and Italic: **//Bold Italic//** 
+  or //**Bold Italic**//
++ Underline and strike: 
+  __--Underlined strike--__
++ Superscript and bold: 
+  ^^**Superscript bold**^ ^
++ etc..
+
+
+```
+
+%html% '''
+%html%     </td>
+%html%     <td>
+%html% '''
+
+Simple beautifiers:
+
++ Bold: **Bold text**
++ Italic: //Italic text//
++ Underline: __Underlined text__
++ Strike: --Striked text--
++ Superscript: ^^Superscript text^^
++ Underscript: ,,Undescript text,,
++ Monospace: ``Monospaced text``
+
+
+Nested beautifiers:
+
++ Bold and Italic: **//Bold Italic//** 
+  or //**Bold Italic**//
++ Underline and strike: 
+  __--Underlined strike--__
++ Superscript and bold: 
+  ^^**Superscript bold**^^
++ etc..
+
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+== Lists ==[lists]
+
+Nested supports three types of lists. All the list are written 
+in a natural way and leading spaces define the depth.
+
+**//Note://** Two blank lines close all the lists. An empty item 
+closes the current list. Lists can be mixed, like a definition 
+list inside a numbered list.
+
+**Example:**
+
+=== Ordered list ===[ordered_list]
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+- This is a list of items
+- Just use hyphens
+  - More indent opens a sublist
+
+
+Two blank lines close all the lists.
+```
+
+%html% '''
+%html%     </td>
+%html%     <td>
+%html% '''
+
+- This is a list of items
+- Just use hyphens
+  - More indent opens a sublist
+
+
+Two blank lines close all the lists.
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+=== Unordered list ===[unordered_list]
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
++ Change the hyphen by a plus
++ And you have a numbered list
+  + Same rules apply
+  +
++
+An empty item closes the current list.
+```
+
+%html% '''
+%html%     </td>
+%html%     <td>
+%html% '''
+
++ Change the hyphen by a plus
++ And you have a numbered list
+  + Same rules apply
+  +
++
+An empty item closes the current list.
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+=== Definition list ===[definition_list]
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+: Definition list
+  A list with terms
+: Start term with colon
+  And its definition follows
+:
+```
+
+%html% '''
+%html%     </td>
+%html%     <td>
+%html% '''
+
+: Definition list
+  A list with terms
+: Start term with colon
+  And its definition follows
+:
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+== Quotes ==[quotes]
+
+A block quotation (also known as a long quotation or extract) is a 
+quotation in a written document, that set off from the main text as 
+a paragraph, or block of text, and typically distinguished visually 
+using indentation and a different typeface or smaller size quotation.
+
+To insert a quotation prepend the line with the quote with a 
+tabulation (press //<Tab>// key).
+
+**Example:**
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+A quoted paragraph is prefixed
+	by a TAB.
+		More TABs, more deep.
+No TAB or blank line, closes quote.
+```
+
+%html% '''
+%html%     </td>
+%html%     <td>
+%html% '''
+
+A quoted paragraph is prefixed
+	by a TAB.
+		More TABs, more deep.
+No TAB or blank line, closes quote.
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+== Verbatim ==[verbatim]
+
+Verbatim block and lines are used to insert pre-formatted text, 
+preserving spacing and line breaks, using a monospaced font 
+and escaping markup and macros.
+
+To insert a verbatim line insert 3 consecutive backquotes at
+the beginning of the line, followed by a space, followed by 
+the text, ``VERBATIMVERBATIMVERBATIM like this``
+
+To insert a verbatim block surround your text with 3 consecutive 
+backquotes. See the example.
+
+**Example:**
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+VERBATIMVERBATIMVERBATIM
+This **text** will not be interpreted
+  and    //spacing// and line breaks
+    will    remain the   same.
+%%date
+VERBATIMVERBATIMVERBATIM
+
+This line will be interpreted.
+VERBATIMVERBATIMVERBATIM But this line won't.
+```
+
+%html% '''
+%html%     </td>
+%html%     <td>
+%html% '''
+
+```
+This **text** will not be interpreted
+  and    //spacing// and line breaks
+    will    remain the   same.
+%%date
+```
+
+This line will be interpreted.
+``` But this line won't.
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+== Math block ==[math_block]
+
+A math block is a special type of block for documenting mathematical
+formulas.
+
+On HTML target mathematical formulas rendering is supported by a stripped
+down version of the [MathJax http://www.mathjax.org/] library and on 
+LaTeX/PDF targets support is provided natively.
+If you want formulae rendering on HTML target please check that 
+the ``mathjax`` library is included in your HTML libraries 
+when publishing to that target. If that library is not included your 
+code blocks will be shown as traditional ``<p>`` blocks.
+
+Nested includes a helper button for an easy way to include formulas 
+(it insert an example code). That button will automatically include 
+the MathJax library to the document libraries when used.
+
+For an extensive example on how to use the math block open in Nested:
+
+```
+	File > Examples > Math
+```
+
+**Syntax:**
+
+```
+MATHOPEN
+<math lines>
+>>>
+```
+
+**Example:**
+
+Let's assume you're writting a Math book:
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+The Cauchy-Schwarz Inequality
+MATHOPEN
+\[
+\left( \sum_{k=1}^n a_k b_k \right)^{\!\!2} \leq
+ \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
+\]
+>>>
+
+An Identity of Ramanujan
+MATHOPEN
+\[
+   \frac{1}{(\sqrt{\phi \sqrt{5}}-\phi) e^{\frac25 \pi}} =
+     1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+      {1+\frac{e^{-8\pi}} {1+\ldots} } } }
+\]
+>>>
+```
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+
+The above will be rendered on HTML target as:
+
+%html% <table>
+%html%   <tr>
+%html%     <td style="display: none;"></td>
+%html%     <td>
+%html% '''
+
+The Cauchy-Schwarz Inequality
+<<<
+\[
+\left( \sum_{k=1}^n a_k b_k \right)^{\!\!2} \leq
+ \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
+\]
+>>>
+
+An Identity of Ramanujan
+<<<
+\[
+   \frac{1}{(\sqrt{\phi \sqrt{5}}-\phi) e^{\frac25 \pi}} =
+     1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+      {1+\frac{e^{-8\pi}} {1+\ldots} } } }
+\]
+>>>
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+== Code block ==[code_block]
+
+A code block is a special type of block for documenting computer 
+instructions or programming code.
+
+On HTML target syntax highlight is supported by the 
+[SyntaxHighlighter http://alexgorbatchev.com/SyntaxHighlighter/] library 
+and on LaTeX/PDF targets support is provided by the 
+[listings http://www.ctan.org/tex-archive/macros/latex/contrib/listings/] 
+package. If you want syntax highlight on HTML target please check that 
+the ``syntaxhighlighter`` library is included in your HTML libraries 
+when publishing to that target. If that library is not included your 
+code blocks will be shown as traditional ``<pre>`` blocks. ``listings`` 
+package is unthemed by default, check ``File > Examples > Code`` for 
+a complete example on how to theme the ``listings`` package via the 
+LaTeX header.
+
+Nested includes a helper dialog for an easy way to include code. That
+dialog will automatically include the SyntaxHighlighter library to
+the document libraries when used.
+
+**Syntax:**
+
+```
+CODEOPEN code
+<code lines>
+}}}
+```
+
+**//Note://** Code must be one of the following: ``as3``, ``bash``, 
+``cf``, ``csharp``, ``cpp``, ``css``, ``delphi``, ``diff``, ``erlang``, 
+``groovy``, ``javascript``, ``java``, ``javafx``, ``perl``, ``php``, 
+``plain``, ``powershell``, ``python``, ``ruby``, ``scala``, ``sql``, 
+``vb`` or ``xhtml``.
+
+**Example:**
+
+Let's assume you're writting a Python book:
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+Ok, let's write our first Python program. First, open a terminal and 
+launch the Python interpreter:
+
+CODEOPEN bash
+user@computer:~$ python
+}}}
+
+Then, write the following:
+
+CODEOPEN python
+$$$ print('Hello World')
+Hello World
+}}}
+
+To find out what python interpreters do you have type:
+
+CODEOPEN bash
+user@computer:~$ ls -lah /usr/bin/ | grep python
+
+lrwxrwxrwx  1 root   root        9 2011-11-12 12:34 python -> python2.7
+-rwxr-xr-x  1 root   root     2,7M 2011-10-04 15:26 python2.7
+}}}
+```
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+
+The above will be rendered on HTML target as:
+
+%html% <table>
+%html%   <tr>
+%html%     <td style="display: none;"></td>
+%html%     <td>
+%html% '''
+
+Ok, let's write our first Python program. First, open a terminal and 
+launch the Python interpreter:
+
+{{{ bash
+user@computer:~$ python
+}}}
+
+Then, write the following:
+
+{{{ python
+$$$ print('Hello World')
+Hello World
+}}}
+
+To find out what python interpreters do you have type:
+
+{{{ bash
+user@computer:~$ ls -lah /usr/bin/ | grep python
+
+lrwxrwxrwx  1 root   root        9 2011-11-12 12:34 python -> python2.7
+-rwxr-xr-x  1 root   root     2,7M 2011-10-04 15:26 python2.7
+}}}
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+== Tagged ==[tagged]
+
+Nested supports the inclusion of target code in case your document
+requires some tunning that can only be accomplished using target code.
+As you might infer, this feature nicely complements 
+[target comments #target_comments].
+
+Target code can be inserted inline, per line or in a block. To include
+target code inline enclose the target code with 2 single quotes ``''``,
+to include a whole line as target code prepend the line with 3 single
+quotes ``'''`` and to include several lines as target code enclose those
+lines with 3 single quotes.
+
+**Example:**
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+HTMLCOMMENT ''' 
+HTMLCOMMENT <div style="text-align: right;">
+HTMLCOMMENT <!-- This is a HTML comment -->
+HTMLCOMMENT '''
+
+A tagged area is enclosed
+inside three single quotes.
+
+No ''<span style="color:red;">**parsing**</span>''
+is made inside it, useful to insert target code.
+
+HTMLCOMMENT ''' </div>
+```
+
+%html% '''
+%html%     </td>
+%html%     <td>
+%html% '''
+
+%html% '''
+%html% <div style="text-align: right;">
+%html% <!-- This is a HTML comment -->
+%html% '''
+
+A tagged area is enclosed
+inside three single quotes.
+
+No ''<span style="color:red;">**parsing**</span>''
+is made inside it, useful to insert target code.
+
+%html% ''' </div>
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+== Tables ==[tables]
+
+Nested supports the insertion of tables to present tabular data.
+Table syntax is very flexible and powerfull, these are the rules:
+
+- A leading pipe ``"|"`` identifies a table row.
+- A leading double pipe ``"||"`` identifies a table title row.
+- Leading spaces before first pipe identifies table centered align.
+- The fields are separated by the ``" | "`` string (space pipe space).
+- A final pipe ``"|"`` at the first table row sets visible borders.
+- A final pipe ``"|"`` at the other table rows are ignored (just cosmetic).
+- Closing a cell with more than one pipe ``"|"`` identifies column span: 
+  ``"||"`` for 2 columns, ``"|||"`` for 3 and so on.
+- Natural spaces inside each cell identifies its alignment.
+
+
+**Example:**
+
+To create a table, separate the cells with a ``|`` character. 
+Like this:
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+| This  | is   | a simple |
+| table | cell | cell     |
+```
+
+%html% '''
+%html%     </td>
+%html%     <td>
+%html% '''
+
+| This  | is   | a simple |
+| table | cell | cell     |
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+If you want the first row of the table to be the table heading, just
+add two ``|`` characters at the beginning of that line. Like this:
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+|| Element  | Symbol |
+ | Hydrogen | H      |
+ | Helium   | He     |
+ | Lithium  | Li     |
+```
+
+%html% '''
+%html%     </td>
+%html%     <td>
+%html% '''
+
+|| Element  | Symbol |
+ | Hydrogen | H      |
+ | Helium   | He     |
+ | Lithium  | Li     |
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+Now, let's change some options of the previous table, now we want it
+centered (note the leading space on the first line) and without a 
+border (note the missing pipe at the end of the first line).
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+ || Element | Symbol
+ | Hydrogen | H      |
+ | Helium   | He     |
+ | Lithium  | Li     |
+```
+
+%html% '''
+%html%     </td>
+%html%     <td>
+%html% '''
+
+ || Element | Symbol
+ | Hydrogen | H      |
+ | Helium   | He     |
+ | Lithium  | Li     |
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+Now, let's create a more complex example using column span:
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+ ||        Monday menu        |||
+  |       __Breakfast__       |||
+  |  Food   |    //Drink//    ||
+  |  Toast  |  Coffee  |  Tea |
+```
+
+%html% '''
+%html%     </td>
+%html%     <td>
+%html% '''
+
+ ||        Monday menu        |||
+  |       __Breakfast__       |||
+  |  Food   |    //Drink//    ||
+  |  Toast  |  Coffee  |  Tea |
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+Finally, let's see and example of text alignment in cells:
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+ || Table Heading | Table Heading |
+ |          Table |     align     |
+ |          lines |      is       |
+ |      with cell |     nice!     |
+```
+
+%html% '''
+%html%     </td>
+%html%     <td>
+%html% '''
+
+ || Table Heading | Table Heading |
+ |          Table |     align     |
+ |          lines |      is       |
+ |      with cell |     nice!     |
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+== Images ==[images]
+
+Nested supports the inclusion of images, resize them and 
+specify its position.
+
+The use of the gallery assistant is highly recommended, it will 
+take care of the filename format and copy of the image to the 
+correct location. 
+That is, when imported with the gallery assistant images will be 
+[transliterated http://en.wikipedia.org/wiki/Transliteration] 
+and renamed to a Web safe name. Document images are saved 
+to a folder called ``images`` that will be located aside the 
+main (.t2t) document.
+
+**Example:**
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+This is the Nested logo:
+
+[logo.png]
+
+The very same logo, but proportionally 
+resized to 60px wide:
+
+[60-logo.png]
+
+Now, the key to position the image 
+is the ratio between the right margin 
+and left margin (right/left spaces):
+
+- If ratio is the same, the image is 
+  centered. This also apply to images
+  without margin at all (like the above).
+     [60-logo.png]     
+% Note the same amount of spaces on the 
+% right and left of the mark.
+- If left margin is greater than the 
+  right margin, then the image is right 
+  aligned.
+     [60-logo.png]
+- If right margin is greater than the 
+  left margin, then the image is left 
+  aligned.
+[60-logo.png]     
+% Note the presence of several spaces on
+% the right.
+
+
+Easy, right?
+```
+
+%html% '''
+%html%     </td>
+%html%     <td>
+%html% '''
+
+This is the Nested logo:
+
+[logo.png]
+
+The very same logo, but proportionally 
+resized to 60px wide:
+
+[60-logo.png]
+
+Now, the key to position the image 
+is the ratio between the right margin 
+and left margin (right/left spaces):
+
+- If ratio is the same, the image is 
+  centered. This also apply to images
+  without margin at all (like the above).
+     [60-logo.png]     
+% Note the same amount of spaces on the 
+% right and left of the mark.
+- If left margin is greater than the 
+  right margin, then the image is right 
+  aligned.
+     [60-logo.png]
+- If right margin is greater than the 
+  left margin, then the image is left 
+  aligned.
+[60-logo.png]     
+% Note the presence of several spaces on
+% the right.
+
+
+Easy, right?
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+== Links ==[links]
+
+Nested supports internal links (a.k.a anchors), named links 
+and automatic recognition of e-mail and internet addresses.
+
+Any valid internet URL, ftp, news or e-mail address is 
+detected and converted automatically. Links can be used 
+with [images #images] too.
+
+The use of the included assistant is recommended, in 
+particular for the transliteration of the section name,
+but otherwise is not absolutely required.
+
+**Example:**
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+The following internet address will be automatically 
+recognized as such and thus is converted to a link:
+
+- Visit the Nested website at 
+http://nestededitor.sourceforge.net/.
+
+
+Now, the same internet address but as a named link:
+
+- Visit the Nested website 
+[here http://nestededitor.sourceforge.net/].
+
+
+Now, the same internet address but as an image link:
+
+- Visit the Nested website 
+[[60-logo.png] http://nestededitor.sourceforge.net/]
+
+
+The following is an internal link pointing to the
+//Keyboard shortcuts// section:
+
+- After you learn the markup, visit the 
+[Keyboard shortcuts #keyboard_shortcuts] section.
+
+
+Finally, note that e-mails are automatically 
+recognized too:
+
+- If you have a problem, send your question to
+nestededitor@googlegroups.com.
+
+
+```
+
+%html% '''
+%html%     </td>
+%html%     <td>
+%html% '''
+
+The following internet address will be automatically 
+recognized as such and thus is converted to a link:
+
+- Visit the Nested website at 
+http://nestededitor.sourceforge.net/.
+
+
+Now, the same internet address but as a named link:
+
+- Visit the Nested website 
+[here http://nestededitor.sourceforge.net/].
+
+
+Now, the same internet address but as an image link:
+
+- Visit the Nested website 
+[[60-logo.png] http://nestededitor.sourceforge.net/]
+
+
+The following is an internal link pointing to the
+//Keyboard shortcuts// section:
+
+- After you learn the markup, visit the 
+[Keyboard shortcuts #keyboard_shortcuts] section.
+
+
+Finally, note that e-mails are automatically 
+recognized too:
+
+- If you have a problem, send your question to
+nestededitor@googlegroups.com.
+
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+== Footnotes ==[footnotes]
+
+Footnotes in Nested are simple, you just need to include a special 
+token to mark where a footnote should be placed. Then, anywhere in 
+that section, preferably at the end of it, place the corresponding 
+text and mark it with the token. Note that marks are interpreted 
+sequentially, so the first mark will be associated with the first 
+footnote text found, an so on. Also note, that if you want to have
+a multiline footnote you need to ident the following lines with 
+exactly 4 spaces. On HTML target the footnotes will be added at 
+the end of the section.
+
+In summary, inserting a footnote is a process of two steps:
+
++ Place the footnote mark: ``FNMARK``
++ Place the footnote text: ``FNTEXT``
+
+
+**Example:**
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+NestedFNMARK is a specialized editor focused on 
+creating structured documents such as reports, 
+publications, presentations, books, etc. It 
+is designed to help the user concentrate on 
+writing content without been distracted by 
+format or markup. It offers a rich WYSIWYMFNMARK 
+interface where the user writes plain text 
+with a lightweight markup language.
+
+FNTEXT Nested is a specialized editor 
+    for structured documents. For 
+    more information visit 
+    http://nestededitor.sourceforge.net/.
+FNTEXT **WYSIWYM** : What You See Is What You Mean.
+    See http://en.wikipedia.org/wiki/WYSIWYM.
+```
+
+%html% '''
+%html%     </td>
+%html%     <td>
+%html% '''
+
+Nested°°_ is a specialized editor focused on 
+creating structured documents such as reports, 
+publications, presentations, books, etc. It 
+is designed to help the user concentrate on 
+writing content without been distracted by 
+format or markup. It offers a rich WYSIWYM°°_ 
+interface where the user writes plain text 
+with a lightweight markup language.
+
+_°° Nested is a specialized editor 
+    for structured documents. For 
+    more information visit 
+    http://nestededitor.sourceforge.net/.
+_°° **WYSIWYM** : What You See Is What You Mean.
+    See http://en.wikipedia.org/wiki/WYSIWYM.
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+== Lines ==[lines]
+
+Lines are used to separate sections or to differentiate parts of the content.
+
+**Example:**
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+A separator line:
+--------------------
+And a stronger one:
+====================
+(At least 20 chars)
+```
+
+%html% '''
+%html%     </td>
+%html%     <td>
+%html% '''
+
+A separator line:
+--------------------
+And a stronger one:
+====================
+(At least 20 chars)
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+== Macros ==[macros]
+
+Macros are special purpose keywords, that are expanded on 
+conversion time. They are used to insert dynamic information, 
+for example the current date or the document table of contents.
+
+A macro is represented by the ``%%`` chars followed by its name, 
+such as ``%%date``. Date macro do accept an optional formatting 
+string inside parenthesis, right after the macro name, such as 
+``%%date(%Y-%m-%d)``. This format string mixes common text with 
+special directives, identified by a percent sign ``%`` followed by 
+an identification character. If no format string is given, the 
+default format ``%Y%m%d`` is used. See 
+http://docs.python.org/library/time.html for more information.
+
+: **``%%date``**
+  Insert the current date. The default format is ``%%date(%Y%m%d)``, 
+  which gives YYYYMMDD.
+
+: **``%%toc``**
+  Specifies where the Table of Contents will be placed. You can 
+  even use it multiple times. Note that you must also use the 
+  //Table of Contents// option in the document properties.
+
+
+**Example:**
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+This is the Nested markup reference 
+document. Last update was the 
+**%%date(%Y-%m-%d %X)**.
+```
+
+%html% '''
+%html%     </td>
+%html%     <td>
+%html% '''
+
+This is the Nested markup reference 
+document. Last update was the 
+**%%date(%Y-%m-%d %X)**.
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+**//Note://** Currently, Nested supports only a subset of the macros
+provided by txt2tags. This limitation is because txt2tags is used as a 
+module and not directly. Macros **NOT** supported by Nested are:
+
+- ``%%mtime``: The source file modification time.
+- ``%%infile``: The source file path.
+- ``%%outfile``: The output file path.
+
+
+= Filters =[filters]
+
+Nested has an advanced and powerful filter system. Filters 
+can be explained as a "find and replace" function. Filters 
+can be applied before or after the convertion of the source 
+document. Filters applied before the convertion are called 
+**preproc** (pre-processors) and those applied after the 
+convertion are called **postproc** (post-processors).
+
+Filters can be applied for a specific target, so you can have
+a filter for when you're publishing to HTML and another one that
+will be used when publishing to LaTeX.
+
+To add a filter to your document open the document properties 
+``File > Properties``. You can find on the left pane two inputs 
+where you can write your filters, one is for preprocs and the 
+other for postprocs. Filters syntax is:
+
+``` %!type(target): 'find' 'replace'
+
+- **``type``** is one of **``preproc``** or **``postproc``**
+- **``target``** can be omitted, if present, it must be one of 
+  **``xhtmls``** (for HTML), **``tex``** (for LaTeX, PDF) or 
+  **``txt``** (for plain text).
+- **``find``** can be any simple text or a Python 
+  [regular expression http://en.wikipedia.org/wiki/Regular_expression]. @@
+  You can find complete information of Python regular expressions 
+  [here http://docs.python.org/howto/regex.html] and 
+  [here http://docs.python.org/library/re.html].
+- **``replace``** can be any simple text or a composite text that 
+  uses tokens found by the **``find``** regular expression.
+
+
+For example:
+
+```
+%!preproc: 'MY_WEBSITE' 'http://nestededitor.sourceforge.net/'
+%!postproc(xhtmls): '(?i)(</?)b>' '\1strong>'
+%!postproc(html): '<body.*?>' '<body style="background-color: green">'
+```
+
+**Example:**
+
+Using the following preproc and postproc:
+
+```
+%!preproc: 'MY_WEBSITE' 'http://nestededitor.sourceforge.net/'
+%!postproc(xhtmls): '<div class="post-proc">' '<div style="background-color: lightBlue;">'
+```
+
+%html% '''
+%html% <table>
+%html%   <tr>
+%html%     <td>
+%html% '''
+
+```
+HTMLCOMMENT ''' <div class="post-proc">
+
+Nested is a specialized editor for 
+structured documents. For more information
+visit the project MY_WEBSITE.
+
+HTMLCOMMENT ''' </div>
+```
+
+%html% '''
+%html%     </td>
+%html%     <td>
+%html% '''
+
+%html% ''' <div class="post-proc">
+
+Nested is a specialized editor for 
+structured documents. For more information
+visit the project MYWEBSITE.
+
+%html% ''' </div>
+
+%html% '''
+%html%     </td>
+%html%   </tr>
+%html% </table>
+%html% '''
+
+**//Note://** preprocs and postprocs will process the entire
+document without considering blocks or markup. So verbatim
+blocks in particular, or any other markup, can be affected by
+the filter.
+
+= Keyboard shortcuts =[keyboard_shortcuts]
+
+**Section management**
+|| Keyboard shortcut |                 Action                  |
+| ``Ctrl+1``         | Change the focus to the sections pane   |
+| ``Alt+A``          | Add a new section                       |
+| ``Alt+Up``         | Move current section up                 |
+| ``Alt+Down``       | Move current section down               |
+| ``Alt+Right``      | Indent current section                  |
+| ``Alt+Left``       | Outdent current section                 |
+
+**Content formatting**
+|| Keyboard shortcut |                 Action                  |
+| ``Ctrl+2``         | Change the focus to the content pane    |
+| ``Ctrl+B``         | Bold current selection                  |
+| ``Ctrl+I``         | Italic current selection                |
+| ``Ctrl+U``         | Underscore current selection            |
+
+**Content edition**
+|| Keyboard shortcut |                 Action                  |
+| ``Ctrl+Z``         | Undo last change                        |
+| ``Ctrl+Y``         | Redo last change                        |
+| ``Ctrl+C``         | Copy current selection to the clipboard |
+| ``Ctrl+X``         | Cut current selection to the clipboard  |
+| ``Ctrl+V``         | Paste content of the clipboard          |
+
+**File management**
+|| Keyboard shortcut |                 Action                  |
+| ``Ctrl+N``         | Create a new document                   |
+| ``Ctrl+O``         | Open a document                         |
+| ``Ctrl+S``         | Save current document                   |
+| ``Shift+Ctrl+S``   | Open //Save as// dialog to save the current document |
+| ``Ctrl+P``         | Publish current document                |
+| ``Alt+F4``         | Exit Nested                             |
+
+**Editor appearance**
+|| Keyboard shortcut |                 Action                  |
+| ``Shift+F11``      | Toggle Focus/Concentration mode         |
+| ``F11``            | Toggle fullscreen                       |
+| ``Ctrl++``         | Increase editor font                    |
+| ``Ctrl+-``         | Decrease editor font                    |
+

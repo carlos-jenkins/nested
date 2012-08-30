@@ -1,0 +1,164 @@
+Nested - Specialized editor for structured documents
+Carlos Jenkins
+
+
+%!target: xhtmls
+%!style(xhtmls): media/themes/NestedWebsite/style.css
+%!options(xhtmls): --toc --toc-level 5
+%!postproc(xhtmls): '<blockquote>' '<blockquote><p>'
+%!postproc(xhtmls): '</blockquote>' '</p></blockquote>'
+%!nested(xhtmls): --libs jquery
+%!nested(tex): --docclass {article}
+
+%S = Downloads =[downloads]
+
+% This is the Nested website Downloads page.
+% This document uses the NestedWebsite theme, make sure it is installed with
+% your themes (File -> Examples -> My Nested folder, copy it to 'themes')
+Nested is multiplatform Software avalaible for GNU/Linux and Microsoft Windows.
+
+Do you like Nested? Please consider donating to the project:
+
+%html% '''
+%html% <div id="donate-button">
+%html% <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+%html%   <fieldset style="border: none;">
+%html%   <input type="hidden" name="cmd" value="_s-xclick" />
+%html%   <input type="hidden" name="hosted_button_id" value="TYRDUDJRBM6A4" />
+%html%   <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" name="submit" alt="Pay through PayPal." />
+%html%   <img alt="" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1" />
+%html%   </fieldset>
+%html% </form>
+%html% </div>
+%html% <div style="clear: right;" />
+%html% '''
+
+= Windows =[windows]
+
+%html% ''' <div class="download-logo">
+
+[logo_windows.png]
+
+%html% ''' </div>
+
+Download installer for Microsoft Windows from 
+[here http://sourceforge.net/projects/nestededitor/files/].
+
+Minimun requirements:
+
+- Microsoft Windows XP, Windows Vista or Windows 7.
+- 50MB in disk, 1024MB of RAM (Nested requires ~30MB only).
+
+
+If you want to use the LaTeX or PDF target you need to install 
+[MikTeX http://miktex.org/]. MikTeX is a LaTeX distribution for 
+Microsoft Windows that install required packages on the fly.
+
+**//Note://** MikTeX needs to be installed in ``%ProgramFiles%/MikTeX*`` 
+(case insensitive) in order to be found by Nested.
+
+= GNU/Linux =[gnulinux]
+
+%html% ''' <div class="download-logo">
+
+[logo_gnu_linux.png]
+
+%html% ''' </div>
+
+Nested is avalaible for a several distributions of GNU/Linux. If yours 
+is not listed Nested is always looking for packagers and maintainers. 
+See [Participate participate.html#packaging] for more information.
+
+== Ubuntu ==[ubuntu]
+
+%html% ''' <div class="download-logo">
+
+[logo_ubuntu.png]
+
+%html% ''' </div>
+
+Nested is avalaible for Ubuntu 11.10 Oneric Ocelot and up. You can 
+download the **.deb** package from the [Debian #debian] section or 
+use the following PPA:
+
+```
+	sudo add-apt-repository ppa:carlos.jenkins/nested
+	sudo apt-get update
+	sudo apt-get install nested
+```
+
+**//Note://** Nested requires a complete TexLive environment (~150MB), 
+so installation may take a while.
+
+== Debian ==[debian]
+
+%html% ''' <div class="download-logo">
+
+[logo_debian.png]
+
+%html% ''' </div>
+
+Nested is avalaible for Debian Wheezy. Download the **.deb** package 
+from [here http://sourceforge.net/projects/nestededitor/files/].
+
+**//Note://** The Nested team is looking for a Debian Maintainer that 
+could include this package on the Debian repositories.
+
+== Fedora ==[fedora]
+
+%html% ''' <div class="download-logo">
+
+[logo_fedora.png]
+
+%html% ''' </div>
+
+Nested is available on the Fedora 16 Verne oficial repositories. 
+Just execute:
+
+```
+	sudo yum install nested	
+```
+
+Also, note that Nested is also available on the 
+[EPEL http://fedoraproject.org/wiki/EPEL] repositories, so it is 
+also available to install on Red Hat Enterprise Linux (RHEL), CentOS 
+and Scientific Linux (SL) 6.x releases.
+
+Alternatively, you can download the **.rpm** package from 
+[here http://sourceforge.net/projects/nestededitor/files/].
+
+== openSUSE ==[opensuse]
+
+%html% ''' <div class="download-logo">
+
+[logo_opensuse.png]
+
+%html% ''' </div>
+
+Nested is avalaible for openSUSE Factory, Tumbleweed, 12.1, 11.4 and 11.3.
+Go to:
+
+	http://software.opensuse.org/
+
+Select your version and search '//Nested//'. Then, click on the **1-Click Install** link.
+
+You can also add one of the following repositories using zypper:
+
+```
+http://download.opensuse.org/repositories/editors/openSUSE_11.3/
+http://download.opensuse.org/repositories/editors/openSUSE_11.4/
+http://download.opensuse.org/repositories/editors/openSUSE_12.1/
+http://download.opensuse.org/repositories/editors/openSUSE_Factory/
+http://download.opensuse.org/repositories/home:/izaac/openSUSE_Tumbleweed/
+```
+
+= Source code =[source_code]
+
+Get source code package from [here http://sourceforge.net/projects/nestededitor/files/].
+
+**//Note://** this package contains only the Nested application 
+source code as a Python source package. If you plan to hack the 
+application it is recommended to checkout the full repository. 
+See [Participate participate.html#hacking_and_patching] for more 
+information.
+

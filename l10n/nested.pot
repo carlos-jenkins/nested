@@ -1,0 +1,1109 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-12 15:18-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../nested/nested_gui.py:3435
+msgid " file published to: "
+msgstr ""
+
+#: ../nested/modules/oxt_import/oxt_import.py:122
+msgid "'{0}' declared in registry but not found within the extension."
+msgstr ""
+
+#: ../nested/nested_gui.py:1090
+msgid "<None>"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibmm.glade:32
+msgid "<b>Bibliography</b>"
+msgstr ""
+
+#: ../nested/modules/latex/log/viewer.glade:197
+msgid "<b>Status</b>"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibmm.glade:160
+msgid "<b>Summary</b>"
+msgstr ""
+
+#: ../nested/nested_gui.py:805
+msgid "<html>Unable to preview. Please check the syntax.</html>"
+msgstr ""
+
+#: ../nested/gui.glade:504
+msgid "<span size=\"large\">Color scheme</span>"
+msgstr ""
+
+#: ../nested/gui.glade:1380
+msgid "<span size=\"large\">Document properties:</span>"
+msgstr ""
+
+#: ../nested/gui.glade:450
+msgid "<span size=\"large\">Font</span>"
+msgstr ""
+
+#: ../nested/gui.glade:752
+msgid "<span size=\"large\">Image gallery</span>"
+msgstr ""
+
+#: ../nested/gui.glade:309
+msgid "<span size=\"large\">Insert code here:</span>"
+msgstr ""
+
+#: ../nested/gui.glade:2661
+msgid "<span size=\"large\">Insert table</span>"
+msgstr ""
+
+#: ../nested/gui.glade:994
+msgid "<span size=\"large\">Link type</span>"
+msgstr ""
+
+#: ../nested/gui.glade:1681
+msgid "<span size=\"large\">Publishing options:</span>"
+msgstr ""
+
+#: ../nested/gui.glade:1993
+msgid "<span size=\"small\">Coma separated</span>"
+msgstr ""
+
+#: ../nested/gui.glade:2135
+msgid "<span size=\"small\">HTML base64 encoded inline image.</span>"
+msgstr ""
+
+#: ../nested/gui.glade:2473
+msgid "<span size=\"small\">Plain text has no options implemented yet.</span>"
+msgstr ""
+
+#: ../nested/gui.glade:1502
+msgid "<span size=\"small\">Suggested format: %%date(%B, %Y), {version}</span>"
+msgstr ""
+
+#: ../nested/gui.glade:1462
+msgid "<span size=\"small\">Suggested format: {author-name}, {e-mail}</span>"
+msgstr ""
+
+#: ../nested/gui.glade:1591
+msgid ""
+"<span size=\"small\">e. g.: <tt>%!postproc(xhtmls): '(&lt;/?)b>' "
+"'\\1strong>'</tt></span>"
+msgstr ""
+
+#: ../nested/gui.glade:1639
+msgid ""
+"<span size=\"small\">e. g.: <tt>%!preproc: 'NE' 'Nested Editor'</tt></span>"
+msgstr ""
+
+#: ../nested/gui.glade:1947
+msgid "<span size=\"small\">e.g.: jquery, mathjax, mylib</span>"
+msgstr ""
+
+#: ../nested/gui.glade:2102
+msgid "<span size=\"small\">user@domain.com > user (a) domain com</span>"
+msgstr ""
+
+#: ../nested/gui.glade:1230
+msgid ""
+"<span size=\"x-large\" font_weight=\"bold\">The current file has not been "
+"saved yet.</span>\n"
+"\n"
+"Do you want to save before closing?"
+msgstr ""
+
+#: ../nested/gui.glade:4169
+msgid "<span size=\"x-large\">Processing. Please wait...</span>"
+msgstr ""
+
+#: ../nested/gui.glade:2254
+msgid ""
+"<span size=\"x-small\"><b>Note:</b> the first section will be used as "
+"abstract \n"
+"if the document class supports it.</span>"
+msgstr ""
+
+#: ../nested/gui.glade:2414
+msgid ""
+"<span size=\"xx-small\">Here you can include packages, options or "
+"cofiguration for your LaTeX document. For example:\n"
+"<tt>\n"
+"\t\\usepackage{color}\n"
+"\t\\definecolor{gray97}{gray}{.97}\n"
+"\t\\definecolor{gray75}{gray}{.75}\n"
+"\t\\definecolor{gray45}{gray}{.45}\n"
+"</tt>\n"
+"This header will be added after system packages and before the beginning of "
+"the document.</span>"
+msgstr ""
+
+#: ../nested/nested_gui.py:408
+msgid ""
+"<tt>pdflatex</tt> command wasn 't found. Please install\n"
+"{0}"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:103
+msgid "A Master's thesis."
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:117
+msgid "A Ph.D. thesis."
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:61
+msgid "A book with an explicit publisher."
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:138
+msgid "A document having an author and title, but not formally published."
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:82
+msgid "A part of a book having its own title."
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:75
+msgid ""
+"A part of a book, usually untitled. May be a chapter (or section or "
+"whatever) and/or a range of pages."
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:131
+msgid ""
+"A report published by a school or other institution, usually numbered within "
+"a series."
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:68
+msgid ""
+"A work that is printed and bound, but without a named publisher or "
+"sponsoring institution."
+msgstr ""
+
+#: ../nested/gui.glade:3366
+msgid "About"
+msgstr ""
+
+#: ../nested/gui.glade:171
+msgid "About Nested"
+msgstr ""
+
+#: ../nested/gui.glade:769 ../nested/gui.glade:3672 ../nested/gui.glade:3674
+msgid "Add"
+msgstr ""
+
+#: ../nested/modules/textviews/spellcheck.py:226
+#, python-format
+msgid "Add \"%s\" to Dictionary"
+msgstr ""
+
+#: ../nested/gui.glade:858
+msgid "Add image"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:54
+msgid "An article from a journal or magazine."
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:89
+msgid "An article in a conference proceedings."
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:53
+msgid "Article"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:88
+msgid "Article in a conference proceedings"
+msgstr ""
+
+#: ../nested/gui.glade:2113
+msgid "As inline image"
+msgstr ""
+
+#: ../nested/gui.glade:2081
+msgid "As text"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibmm.glade:267
+msgid "Author"
+msgstr ""
+
+#: ../nested/gui.glade:1416
+msgid "Author:"
+msgstr ""
+
+#: ../nested/gui.glade:583
+msgid "Background color:"
+msgstr ""
+
+#: ../nested/gui.glade:4236
+msgid "Backward search"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibmm.glade:7
+msgid "Bibliography"
+msgstr ""
+
+#: ../nested/gui.glade:3644
+msgid "Bloqued"
+msgstr ""
+
+#: ../nested/gui.glade:3837 ../nested/gui.glade:3839
+msgid "Bold"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:60
+msgid "Book"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:81
+msgid "Book part"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:67
+msgid "Booklet"
+msgstr ""
+
+#: ../nested/gui.glade:4292
+msgid "Close"
+msgstr ""
+
+#: ../nested/gui.glade:2741
+msgid "Columns:"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:123
+msgid "Conference proceedings"
+msgstr ""
+
+#: ../nested/gui.glade:108 ../nested/gui.glade:109 ../nested/gui.glade:3131
+#: ../nested/gui.glade:3500 ../nested/gui.glade:3502
+msgid "Copy"
+msgstr ""
+
+#: ../nested/gui.glade:515
+msgid "Custom"
+msgstr ""
+
+#: ../nested/gui.glade:113 ../nested/gui.glade:114 ../nested/gui.glade:3122
+#: ../nested/gui.glade:3485 ../nested/gui.glade:3487
+msgid "Cut"
+msgstr ""
+
+#: ../nested/gui.glade:3259
+msgid "Decrease font"
+msgstr ""
+
+#: ../nested/nested_gui.py:2999
+msgid "Do you want to overwrite the file?"
+msgstr ""
+
+#: ../nested/gui.glade:2214
+msgid "Document class:"
+msgstr ""
+
+#: ../nested/gui.glade:685
+msgid "Document image gallery"
+msgstr ""
+
+#: ../nested/gui.glade:1308
+msgid "Document properties"
+msgstr ""
+
+#: ../nested/nested_gui.py:2975
+msgid "Document saved in "
+msgstr ""
+
+#: ../nested/nested_gui.py:2926
+msgid "Document saved to backup file .backup.t2t.bak"
+msgstr ""
+
+#: ../nested/gui.glade:1262
+msgid "Don't save"
+msgstr ""
+
+#: ../nested/gui.glade:3741 ../nested/gui.glade:3756
+msgid "Downgrade"
+msgstr ""
+
+#: ../nested/gui.glade:3088
+msgid "Edit"
+msgstr ""
+
+#: ../nested/gui.glade:401 ../nested/gui.glade:3240
+msgid "Editor appearance"
+msgstr ""
+
+#: ../nested/gui.glade:469
+msgid "Editor font:"
+msgstr ""
+
+#: ../nested/modules/oxt_import/oxt_import.py:125
+msgid "Error while processing extension {0}."
+msgstr ""
+
+#: ../nested/nested_gui.py:962
+msgid "Error, file not found for entry: "
+msgstr ""
+
+#: ../nested/nested_gui.py:1118
+msgid "Error, file not found: "
+msgstr ""
+
+#: ../nested/modules/latex/log/viewer.py:146
+msgid "Errors found on the log file."
+msgstr ""
+
+#: ../nested/gui.glade:3011
+msgid "Examples"
+msgstr ""
+
+#: ../nested/modules/oxt_import/oxt_import.py:128
+msgid "Extension '{0}' has no dictionary registry."
+msgstr ""
+
+#: ../nested/modules/oxt_import/oxt_import.py:130
+msgid "Extension '{0}' is not a valid zip file."
+msgstr ""
+
+#: ../nested/gui.glade:1010
+msgid "External"
+msgstr ""
+
+#: ../nested/modules/oxt_import/oxt_import.py:70
+msgid "Extract path is not a directory."
+msgstr ""
+
+#: ../nested/gui.glade:2966
+msgid "File"
+msgstr ""
+
+#: ../nested/nested_gui.py:2786
+msgid "File successfully loaded: "
+msgstr ""
+
+#: ../nested/gui.glade:3167 ../nested/gui.glade:3179
+msgid "Find"
+msgstr ""
+
+#: ../nested/gui.glade:3217
+msgid "Find and replace"
+msgstr ""
+
+#: ../nested/gui.glade:3351
+msgid "Find help online"
+msgstr ""
+
+#: ../nested/gui.glade:3190
+msgid "Find next"
+msgstr ""
+
+#: ../nested/gui.glade:3201
+msgid "Find previous"
+msgstr ""
+
+#: ../nested/gui.glade:4198
+msgid "Find:"
+msgstr ""
+
+#: ../nested/nested_gui.py:175
+msgid "Fixing Glade file for MS Windows."
+msgstr ""
+
+#: ../nested/gui.glade:3275
+msgid "Focus mode"
+msgstr ""
+
+#: ../nested/gui.glade:540
+msgid "Font color:"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:110
+msgid "For use when nothing else fits."
+msgstr ""
+
+#: ../nested/gui.glade:4251
+msgid "Forward search"
+msgstr ""
+
+#: ../nested/gui.glade:3285
+msgid "Fullscreen"
+msgstr ""
+
+#: ../nested/gui.glade:2175
+msgid "HTML"
+msgstr ""
+
+#: ../nested/gui.glade:2442
+msgid "Header:"
+msgstr ""
+
+#: ../nested/gui.glade:3299
+msgid "Help"
+msgstr ""
+
+#: ../nested/gui.glade:2049
+msgid "Hide e-mails:"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibmm.glade:253
+msgid "ID"
+msgstr ""
+
+#: ../nested/gui.glade:1920
+msgid ""
+"If enabled, this options will create \n"
+"a single HTML file with inline style \n"
+"and scripts. If disabled, style (css) \n"
+"and scripts (js) will be put aside the \n"
+"published file in the media directory."
+msgstr ""
+
+#: ../nested/modules/textviews/spellcheck.py:229
+msgid "Ignore all"
+msgstr ""
+
+#: ../nested/nested_gui.py:3256
+msgid "Ignoring library {0}"
+msgstr ""
+
+#: ../nested/gui.glade:3249
+msgid "Increase font"
+msgstr ""
+
+#: ../nested/gui.glade:721 ../nested/modules/bibmm/bibmm.glade:84
+msgid "Insert"
+msgstr ""
+
+#: ../nested/gui.glade:253 ../nested/gui.glade:4027 ../nested/gui.glade:4029
+msgid "Insert code"
+msgstr ""
+
+#: ../nested/gui.glade:4002 ../nested/gui.glade:4004
+msgid "Insert footnote"
+msgstr ""
+
+#: ../nested/gui.glade:3948 ../nested/gui.glade:3950
+msgid "Insert image"
+msgstr ""
+
+#: ../nested/gui.glade:3933 ../nested/gui.glade:3935
+msgid "Insert link"
+msgstr ""
+
+#: ../nested/gui.glade:4042 ../nested/gui.glade:4044
+msgid "Insert math"
+msgstr ""
+
+#: ../nested/gui.glade:2595 ../nested/gui.glade:3973 ../nested/gui.glade:3975
+msgid "Insert table"
+msgstr ""
+
+#: ../nested/gui.glade:3988
+msgid "Insert verbatim"
+msgstr ""
+
+#: ../nested/gui.glade:3990
+msgid "Insert verbatim block"
+msgstr ""
+
+#: ../nested/gui.glade:1027
+msgid "Internal"
+msgstr ""
+
+#: ../nested/gui.glade:3853 ../nested/gui.glade:3855
+msgid "Italic"
+msgstr ""
+
+#: ../nested/gui.glade:2462
+msgid "LaTeX"
+msgstr ""
+
+#: ../nested/modules/latex/log/viewer.glade:173
+msgid ""
+"LaTeX compiled the document successfully. No errors or warnings were "
+"encountered while processing the document."
+msgstr ""
+
+#: ../nested/modules/latex/log/viewer.glade:342
+msgid "LaTeX document"
+msgstr ""
+
+#: ../nested/modules/latex/log/viewer.glade:132
+msgid ""
+"LaTeX was able to compile the document, but not without warnings. Please "
+"check them below."
+msgstr ""
+
+#: ../nested/modules/latex/log/viewer.glade:92
+msgid ""
+"LaTeX was unable to complete the compilation of the document because some "
+"errors were encountered. Please check them below."
+msgstr ""
+
+#: ../nested/gui.glade:1073
+msgid "Label: <span size=\"small\">(optional)</span>"
+msgstr ""
+
+#: ../nested/modules/textviews/spellcheck.py:252
+msgid "Languages"
+msgstr ""
+
+#: ../nested/gui.glade:1962
+msgid ""
+"Libraries available by default:\n"
+"\n"
+"- syntaxhighlighter, for code syntax highlight.\n"
+"- mathjax, for math (LaTeX) rendering on browser.\n"
+"- jquery, powerfull javascript library.\n"
+"\n"
+"You can add libraries by putting them on your 'libraries' folder."
+msgstr ""
+
+#: ../nested/gui.glade:1982
+msgid "Libraries:"
+msgstr ""
+
+#: ../nested/nested_gui.py:2717
+msgid "Loading file: {0}"
+msgstr ""
+
+#: ../nested/modules/latex/log/viewer.glade:7
+msgid "Log Viewer"
+msgstr ""
+
+#: ../nested/modules/latex/log/viewer.glade:300
+msgid "Log file"
+msgstr ""
+
+#: ../nested/nested_gui.py:390
+msgid "MacTeX from http://www.tug.org/mactex/."
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:95
+msgid "Manual"
+msgstr ""
+
+#: ../nested/gui.glade:4088
+msgid "Markup"
+msgstr ""
+
+#: ../nested/gui.glade:3309
+msgid "Markup reference"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:102
+msgid "Master's thesis."
+msgstr ""
+
+#: ../nested/nested_gui.py:394
+msgid "MikTeX from http://miktex.org/."
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:109
+msgid "Miscellaneous"
+msgstr ""
+
+#: ../nested/gui.glade:3722 ../nested/gui.glade:3724
+msgid "Move down"
+msgstr ""
+
+#: ../nested/gui.glade:3705 ../nested/gui.glade:3707
+msgid "Move up"
+msgstr ""
+
+#: ../nested/nested_gui.py:514 ../nested/nested_gui.py:528
+msgid "My Nested folder"
+msgstr ""
+
+#: ../nested/gui.glade:118 ../nested/gui.glade:119 ../nested/gui.glade:2976
+#: ../nested/gui.glade:3389 ../nested/gui.glade:3391
+msgid "New"
+msgstr ""
+
+#: ../nested/nested_gui.py:2853
+msgid "New file created..."
+msgstr ""
+
+#: ../nested/gui.glade:4278
+msgid "Next section"
+msgstr ""
+
+#: ../nested/gui.glade:2064
+msgid "No"
+msgstr ""
+
+#: ../nested/modules/textviews/spellcheck.py:213
+msgid "No suggestions"
+msgstr ""
+
+#: ../nested/gui.glade:1809 ../nested/gui.glade:2284
+msgid "Numbered headers"
+msgstr ""
+
+#: ../nested/gui.glade:421
+msgid "Ok"
+msgstr ""
+
+#: ../nested/gui.glade:123 ../nested/gui.glade:124 ../nested/gui.glade:2985
+#: ../nested/gui.glade:3404 ../nested/gui.glade:3406
+msgid "Open"
+msgstr ""
+
+#: ../nested/gui.glade:1154
+msgid "Open file"
+msgstr ""
+
+#: ../nested/gui.glade:2994
+msgid "Open recent"
+msgstr ""
+
+#: ../nested/gui.glade:2362
+msgid "Options:"
+msgstr ""
+
+#: ../nested/gui.glade:3909 ../nested/gui.glade:3911
+msgid "Ordered list"
+msgstr ""
+
+#: ../nested/gui.glade:2267
+msgid "Output as PDF"
+msgstr ""
+
+#: ../nested/gui.glade:2017
+msgid "Packaging:"
+msgstr ""
+
+#: ../nested/gui.glade:142 ../nested/gui.glade:143 ../nested/gui.glade:3141
+#: ../nested/gui.glade:3515 ../nested/gui.glade:3517
+msgid "Paste"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:116
+msgid "Ph.D. thesis"
+msgstr ""
+
+#: ../nested/gui.glade:2484
+msgid "Plain text"
+msgstr ""
+
+#: ../nested/nested_gui.py:1601 ../nested/nested_gui.py:2819
+msgid "Please select a filename."
+msgstr ""
+
+#: ../nested/gui.glade:4155
+msgid "Please wait..."
+msgstr ""
+
+#: ../nested/nested_gui.py:2990
+msgid "Please write a filename."
+msgstr ""
+
+#: ../nested/gui.glade:1553
+msgid "Postprocessing filters:"
+msgstr ""
+
+#: ../nested/gui.glade:3154
+msgid "Preferences"
+msgstr ""
+
+#: ../nested/gui.glade:1539
+msgid "Preprocessing filters:"
+msgstr ""
+
+#: ../nested/gui.glade:1887
+msgid "Presentation:"
+msgstr ""
+
+#: ../nested/gui.glade:4110
+msgid "Preview"
+msgstr ""
+
+#: ../nested/nested_gui.py:422
+msgid ""
+"Preview is currently not supported for Microsoft Windows, but you still\n"
+"can publish the document to HTML.\n"
+"If you need this functionality you can help the developer by packaging\n"
+"pywebkitgtk for Windows: http://code.google.com/p/pywebkitgtk/"
+msgstr ""
+
+#: ../nested/gui.glade:4265
+msgid "Previous section"
+msgstr ""
+
+#: ../nested/gui.glade:3050 ../nested/gui.glade:3444 ../nested/gui.glade:3446
+msgid "Properties"
+msgstr ""
+
+#: ../nested/gui.glade:147 ../nested/gui.glade:148 ../nested/gui.glade:3059
+#: ../nested/gui.glade:3460 ../nested/gui.glade:3462
+msgid "Publish"
+msgstr ""
+
+#: ../nested/gui.glade:1700
+msgid "Publish to:"
+msgstr ""
+
+#: ../nested/gui.glade:3074
+msgid "Quit"
+msgstr ""
+
+#: ../nested/gui.glade:152 ../nested/gui.glade:153 ../nested/gui.glade:3107
+#: ../nested/gui.glade:3579 ../nested/gui.glade:3581
+msgid "Redo"
+msgstr ""
+
+#: ../nested/gui.glade:784 ../nested/gui.glade:3689 ../nested/gui.glade:3691
+msgid "Remove"
+msgstr ""
+
+#: ../nested/gui.glade:3342
+msgid "Report a bug"
+msgstr ""
+
+#: ../nested/gui.glade:2730
+msgid "Rows:"
+msgstr ""
+
+#: ../nested/modules/latex/log/viewer.py:208
+#: ../nested/modules/bibmm/bibmm.py:139
+msgid "Running standalone shutdown..."
+msgstr ""
+
+#: ../nested/gui.glade:128 ../nested/gui.glade:129 ../nested/gui.glade:3026
+#: ../nested/gui.glade:3419 ../nested/gui.glade:3421
+msgid "Save"
+msgstr ""
+
+#: ../nested/gui.glade:133 ../nested/gui.glade:134 ../nested/gui.glade:3035
+msgid "Save as"
+msgstr ""
+
+#: ../nested/gui.glade:2523
+msgid "Save file"
+msgstr ""
+
+#: ../nested/gui.glade:1222
+msgid "Save file?"
+msgstr ""
+
+#: ../nested/gui.glade:2159
+msgid "Security:"
+msgstr ""
+
+#: ../nested/gui.glade:927
+msgid "Select link"
+msgstr ""
+
+#: ../nested/gui.glade:1849 ../nested/gui.glade:2324
+msgid "Show up to level:"
+msgstr ""
+
+#: ../nested/gui.glade:1916
+msgid "Single document"
+msgstr ""
+
+#: ../nested/gui.glade:182
+msgid "Software for the creation of structured documents."
+msgstr ""
+
+#: ../nested/nested_gui.py:2460
+msgid "Sorry, {0} target is not supported. Using xhtmls."
+msgstr ""
+
+#: ../nested/gui.glade:3539
+msgid "Spell checking"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibmm.py:257
+msgid "Starting Bibliography Managment Module standalone..."
+msgstr ""
+
+#: ../nested/modules/latex/log/viewer.py:253
+msgid "Starting LaTeX Log Viewer standalone..."
+msgstr ""
+
+#: ../nested/nested_gui.py:3441
+msgid "Starting Nested..."
+msgstr ""
+
+#: ../nested/modules/bibmm/bibmm.glade:178
+msgid "Style:"
+msgstr ""
+
+#: ../nested/modules/textviews/spellcheck.py:260
+msgid "Suggestions"
+msgstr ""
+
+#: ../nested/gui.glade:1825 ../nested/gui.glade:2300
+#: ../nested/nested_gui.py:2317 ../nested/nested_gui.py:2364
+msgid "Table of contents"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:96
+msgid "Technical documentation."
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:130
+msgid "Technical report"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibmm.glade:50
+msgid "Template:"
+msgstr ""
+
+#: ../nested/gui.glade:3002
+msgid "Templates"
+msgstr ""
+
+#: ../nested/modules/latex/log/viewer.py:184
+msgid "The log file is invalid."
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:124
+msgid "The proceedings of a conference.."
+msgstr ""
+
+#: ../nested/gui.glade:617 ../nested/gui.glade:649
+msgid "Theme"
+msgstr ""
+
+#: ../nested/nested_gui.py:3347
+msgid "Theme {0} could not be found"
+msgstr ""
+
+#: ../nested/gui.glade:1772
+msgid "Theme:"
+msgstr ""
+
+#: ../nested/gui.glade:1118 ../nested/gui.glade:3631 ../nested/gui.glade:3794
+#: ../nested/modules/bibmm/bibmm.glade:281
+msgid "Title"
+msgstr ""
+
+#: ../nested/gui.glade:1403
+msgid "Title:"
+msgstr ""
+
+#: ../nested/gui.glade:3333
+msgid "Translate Nested"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibmm.glade:239
+msgid "Type"
+msgstr ""
+
+#: ../nested/gui.glade:295
+msgid "Type:"
+msgstr ""
+
+#: ../nested/nested_gui.py:1054
+msgid ""
+"Unable to add {0} to the recent files file. Are you in a read-only system?"
+msgstr ""
+
+#: ../nested/nested_gui.py:163
+msgid "Unable to create recent.txt file. Read-only system?"
+msgstr ""
+
+#: ../nested/nested_gui.py:258
+msgid "Unable to import spellcheck: spell checking will be unavailable."
+msgstr ""
+
+#: ../nested/nested_gui.py:3252
+msgid "Unable to include library {0}."
+msgstr ""
+
+#: ../nested/nested_gui.py:223
+msgid "Unable to install .oxt dictionaries"
+msgstr ""
+
+#: ../nested/nested_gui.py:2725
+msgid "Unable to load file {0}."
+msgstr ""
+
+#: ../nested/nested_gui.py:1567
+msgid "Unable to load image {0}."
+msgstr ""
+
+#: ../nested/modules/oxt_import/oxt_import.py:144
+msgid "Unable to move extension, file with same name exists within move_path."
+msgstr ""
+
+#: ../nested/modules/oxt_import/oxt_import.py:146
+msgid "Unable to move extension, move_path is not a directory."
+msgstr ""
+
+#: ../nested/nested_gui.py:2747
+msgid "Unable to open LaTex header. Do you have permissions?"
+msgstr ""
+
+#: ../nested/nested_gui.py:3340
+msgid "Unable to open footer {0}."
+msgstr ""
+
+#: ../nested/nested_gui.py:3329
+msgid "Unable to open header {0}."
+msgstr ""
+
+#: ../nested/nested_gui.py:3297
+msgid "Unable to open script {0}."
+msgstr ""
+
+#: ../nested/nested_gui.py:3284
+msgid "Unable to open style {0}."
+msgstr ""
+
+#: ../nested/nested_gui.py:3398
+msgid "Unable to publish the document. Are you in a read-only system?"
+msgstr ""
+
+#: ../nested/nested_gui.py:1076
+msgid "Unable to read the recent files file. Do you have permissions?"
+msgstr ""
+
+#: ../nested/nested_gui.py:1021
+msgid "Unable to read {0} theme requires file. Do you have permissions?"
+msgstr ""
+
+#: ../nested/nested_gui.py:1138
+msgid "Unable to remove entry from recent files file. Read-only system?"
+msgstr ""
+
+#: ../nested/nested_gui.py:2928
+msgid "Unable to save backup file. Are you in a read-only system?"
+msgstr ""
+
+#: ../nested/nested_gui.py:885
+msgid "Unable to save preferences. Are you in a read-only system?"
+msgstr ""
+
+#: ../nested/nested_gui.py:2966
+msgid "Unable to save the Tex header file. Read-only system?"
+msgstr ""
+
+#: ../nested/nested_gui.py:2953
+msgid "Unable to save the document. Are you in a read-only system?"
+msgstr ""
+
+#: ../nested/gui.glade:3869 ../nested/gui.glade:3871
+msgid "Underline"
+msgstr ""
+
+#: ../nested/gui.glade:161 ../nested/gui.glade:162 ../nested/gui.glade:3098
+#: ../nested/gui.glade:3564 ../nested/gui.glade:3566
+msgid "Undo"
+msgstr ""
+
+#: ../nested/gui.glade:3895 ../nested/gui.glade:3897
+msgid "Unordered list"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:137
+msgid "Unpublished"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibtexdef.py:74
+msgid "Untitled book part"
+msgstr ""
+
+#: ../nested/gui.glade:2947 ../nested/nested_gui.py:2845
+msgid "Untitled document* - Nested"
+msgstr ""
+
+#: ../nested/nested_gui.py:1849 ../nested/nested_gui.py:2671
+#: ../nested/nested_gui.py:2846
+msgid "Untitled section"
+msgstr ""
+
+#: ../nested/gui.glade:3810
+msgid "Untitled section 1"
+msgstr ""
+
+#: ../nested/gui.glade:3739 ../nested/gui.glade:3758
+msgid "Upgrade"
+msgstr ""
+
+#: ../nested/gui.glade:3318
+msgid "User manual"
+msgstr ""
+
+#: ../nested/nested_gui.py:553
+msgid "Using arguments:"
+msgstr ""
+
+#: ../nested/nested_gui.py:145
+msgid "Using configuration files: "
+msgstr ""
+
+#: ../nested/nested_gui.py:382
+msgid "Using user path for pdflatex: {0}"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibmm.glade:99
+msgid "Validate"
+msgstr ""
+
+#: ../nested/gui.glade:1431
+msgid "Version:"
+msgstr ""
+
+#: ../nested/gui.glade:3230
+msgid "View"
+msgstr ""
+
+#: ../nested/nested_gui.py:764
+msgid "Wait what? Error on sync_tree_fields() :S"
+msgstr ""
+
+#: ../nested/modules/latex/log/viewer.py:130
+msgid "Warnings found on the log file."
+msgstr ""
+
+#: ../nested/nested_gui.py:121
+msgid "We are in {0}"
+msgstr ""
+
+#: ../nested/nested_gui.py:2374
+msgid "What? Document class combo has nothing selected :S"
+msgstr ""
+
+#: ../nested/nested_gui.py:2068
+msgid "What? Forcing the formatting to target 'xhtmls' in format_config()"
+msgstr ""
+
+#: ../nested/nested_gui.py:2265
+msgid "What? Target combo has nothing selected :S"
+msgstr ""
+
+#: ../nested/nested_gui.py:2303
+msgid "What? Theme combo has nothing selected :S"
+msgstr ""
+
+#: ../nested/modules/bibmm/bibmm.glade:295
+msgid "Year"
+msgstr ""
+
+#: ../nested/nested_gui.py:386
+msgid ""
+"packages <tt>texlive</tt>, <tt>texlive-publishers</tt>\n"
+"and <tt>texlive-latex-extra</tt>."
+msgstr ""
+
+#: ../nested/nested_gui.py:3419
+msgid "pdflatex command is not avalaible."
+msgstr ""

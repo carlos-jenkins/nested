@@ -1,0 +1,3 @@
+# This document list the libraries required (coma separated) to make this theme work, for example, it can be something like:
+# jquery, library1, library2
+# Only the first valid line is read, so any line after that are ignored.

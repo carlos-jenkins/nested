@@ -1,0 +1,15 @@
+# Set default Microsoft Windows Theme
+gtk-theme-name = "MS-Windows"
+
+# Use a prettier theme
+gtk-icon-theme-name = "humanityxp"
+
+# Toolbuttons to show icons only
+gtk-toolbar-style = GTK_TOOLBAR_ICONS
+
+style "nested-win"
+{
+    font_name = "DejaVu Sans 9.5"
+}
+
+class "*" style "nested-win"

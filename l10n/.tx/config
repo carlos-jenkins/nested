@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.net
+
+[nested.nested-application]
+file_filter = po/<lang>.po
+source_file = nested.pot
+source_lang = en
+

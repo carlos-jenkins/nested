@@ -1,0 +1,33 @@
+Source: nested
+Section: editors
+Priority: optional
+Maintainer: Carlos Jenkins <carlos@jenkins.co.cr>
+Build-Depends: python (>=2.6), debhelper (>= 8)
+Standards-Version: 3.9.4
+X-Python-Version: >= 2.7
+Homepage: http://nestededitor.sourceforge.net/
+Vcs-Browser: http://sourceforge.net/p/nestededitor/code/
+Vcs-Svn: svn://svn.code.sf.net/p/nestededitor/code/trunk
+
+Package: nested
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}, python-webkit, python-gtk2 (>= 2.24), ttf-dejavu, xdg-utils, texlive, texlive-publishers, texlive-latex-extra
+Suggests: otf-stix
+Description: specialized editor for structured documents
+ Nested is a specialized editor focused on creating structured documents such 
+ as reports, publications, presentations, books, etc. It is designed to help the
+ user concentrate on writing content without been distracted by format or 
+ markup. It offers a rich WYSIWYM interface where the user writes plain text 
+ with a lightweight markup language.
+ .
+ Basic users are assisted with extensive examples, formatting buttons, a simple 
+ image gallery per document, assisted internal and external links, section based
+ layout and easy publishing options in HTML, LaTeX or PDF. Power users will like
+ the advanced pre-processing and post-processing options, advanced theming, 
+ version control systems compatibility, LaTeX formulas support, a complete set
+ of keyboard shortcuts, among others.
+ .
+ Nested separates content from presentation and publishing option, so same 
+ content can be presented as a HTML web page, a rich standard-compliant HTML 
+ presentation, a IEEE journal publication, a beautiful PDF book, etc. Nested 
+ files are plain text so they can be used with common version control systems.

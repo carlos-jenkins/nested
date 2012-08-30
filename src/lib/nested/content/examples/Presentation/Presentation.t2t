@@ -1,0 +1,450 @@
+Presentation Test Page
+Carlos Jenkins
+%%date(%B, %Y)
+
+%!target: xhtmls
+%!style(xhtmls): media/themes/Clean Presentation/style.css
+%!nested(xhtmls): --libs syntaxhighlighter,jquery
+%!nested(tex): --docclass {article}
+
+= Programming languages =[programming_languages]
+
+% This document requires the SyntaxHighlighter library for proper visualization on the HTML target, so make 
+% sure 'syntaxhighlighter' is included in the libraries of this document (by default it is).
+%
+% This document requires the jQuery library for proper visualization on the HTML target, so make sure 
+% 'jquery' is included in the libraries of this document (by default it is).
+% 
+% Almost all 'Hello World' examples were taken from:
+%     http://en.wikipedia.org/wiki/Hello_world_program_examples
+%
+% All descriptions were taken from the corresponding Wikipedia page.
+%     
+This is the example presentation file include with Nested:
+
+	http://nestededitor.sourceforge.net/
+
+In this presentation we will show a brief description for each of the supported programming languages. Each
+programming language is accompanied by a example 'hello world' program.
+
+== ActionScript 3.0 ==[actionscript_30]
+
+% Source: http://en.wikipedia.org/wiki/ActionScript
+ActionScript is an object-oriented language originally developed by Macromedia Inc. (now owned by Adobe Systems). It is a dialect of ECMAScript (meaning it is a superset of the syntax and semantics of the language more widely known JavaScript), and is used primarily for the development of websites and software targeting the Adobe Flash Player platform, used on Web pages in the form of embedded SWF files. The language itself is open-source in that its specification is offered free of charge and both an open source compiler (as part of Adobe Flex) and open source virtual machine (Mozilla Tamarin) are available.
+
+{{{ as3
+package com.example
+{
+    import flash.text.TextField;
+    import flash.display.Sprite;
+ 
+    public class Greeter extends Sprite
+    {
+        public function Greeter()
+        {
+            var txtHello:TextField = new TextField();
+            txtHello.text = "Hello World";
+            addChild(txtHello);
+        }
+    }
+}
+}}}
+
+== Bash/Shell ==[bashshell]
+
+% Source: http://en.wikipedia.org/wiki/Bash_(Unix_shell)
+Bash is a Unix shell written by Brian Fox for the GNU Project as a free software replacement for the Bourne shell (sh). Bash is a command processor, typically run in a text window, allowing the user to type commands which cause actions. Bash can also read commands from a file, called a script. Like all Unix shells, it supports filename wildcarding, piping, here documents, command substitution, variables and control structures for condition-testing and iteration. The keywords, syntax and other basic features of the language were all copied from sh. Other features, e.g., history, were copied from csh and ksh. Bash is a POSIX shell but with a number of extensions.
+
+{{{ bash
+echo Hello World
+}}}
+
+== CFML/ColdFusion ==[cfmlcoldfusion]
+
+% Source: http://en.wikipedia.org/wiki/CFML
+ColdFusion Markup Language, more commonly known as CFML, is a scripting language for web development that runs on the JVM, the .NET framework, and Google App Engine. Multiple commercial and open source implementations of CFML engines are available.
+
+In its simplest form, like many other web scripting languages CFML augments standard HTML files with database commands, conditional operators, high-level formatting functions, and other elements to produce web applications. CFML also includes numerous other constructs including ColdFusion Components (CFCs), CFML's version of objects, that allow for separation of business logic from presentation.
+
+{{{ cf
+<cfscript>
+    variables.greeting = "Hello, world!";
+    WriteOutput( variables.greeting );
+</cfscript>
+}}}
+
+== C# ==[c]
+
+% Source: http://en.wikipedia.org/wiki/C_Sharp_(programming_language)
+C# (pronounced see sharp) is a multi-paradigm programming language encompassing strong typing, imperative, declarative, functional, generic, object-oriented (class-based), and component-oriented programming disciplines. It was developed by Microsoft within its .NET initiative and later approved as a standard by Ecma (ECMA-334) and ISO (ISO/IEC 23270). C# is one of the programming languages designed for the Common Language Infrastructure.
+
+C# is intended to be a simple, modern, general-purpose, object-oriented programming language. Its development team is led by Anders Hejlsberg. The most recent version is C# 4.0, which was released on April 12, 2010.
+
+{{{ csharp
+using System;
+class ExampleClass
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Hello, world!");
+    }
+}
+}}}
+
+== C/C++ ==[cc]
+
+**C**
+
+% Source: http://en.wikipedia.org/wiki/C_(programming_language)
+C (pronounced like the letter C) is a general-purpose computer programming language developed between 1969 and 1973 by Dennis Ritchie at the Bell Telephone Laboratories for use with the Unix operating system. Although C was designed for implementing system software, it is also widely used for developing portable application software.
+
+C is one of the most widely used programming languages of all time and there are very few computer architectures for which a C compiler does not exist. C has greatly influenced many other popular programming languages, most notably C++, which began as an extension to C.
+
+{{{ cpp
+#include <stdio.h>
+ 
+int main(void)
+{
+  printf("Hello world\n");
+  return 0;
+}
+}}}
+
+**C++**
+
+% Source: http://en.wikipedia.org/wiki/C%2B%2B
+C++ (pronounced "cee plus plus") is a statically typed, free-form, multi-paradigm, compiled, general-purpose programming language. It is regarded as an intermediate-level language, as it comprises a combination of both high-level and low-level language features. It was developed by Bjarne Stroustrup starting in 1979 at Bell Labs as an enhancement to the C language. Originally named C with Classes, the language was later renamed C++ in 1983.
+
+{{{ cpp
+#include <iostream>
+ 
+int main()
+{
+  std::cout << "Hello World!" << std::endl;
+  return 0;
+}
+}}}
+
+== CSS ==[css]
+
+% Source: http://en.wikipedia.org/wiki/CSS
+Cascading Style Sheets (CSS) is a style sheet language used to describe the presentation semantics (the look and formatting) of a document written in a markup language. Its most common application is to style web pages written in HTML and XHTML, but the language can also be applied to any kind of XML document, including plain XML, SVG and XUL.
+
+{{{ css
+#id {
+    font-size : 2em;
+    color : red;
+}
+
+.class1 {
+    color : blue;
+}
+
+body {
+    padding: 10px;
+}
+}}}
+
+== Delphi ==[delphi]
+
+% Source: http://en.wikipedia.org/wiki/Delphi_(language)
+Object Pascal refers to a branch of object-oriented derivatives of Pascal, mostly known as the primary programming language of Embarcadero Delphi. Object Pascal is an extension of the Pascal language that was developed at Apple Computer by a team led by Larry Tesler in consultation with Niklaus Wirth, the inventor of Pascal. It is descended from an earlier object-oriented version of Pascal called Clascal, which was available on the Lisa computer.
+
+{{{ delphi
+{$APPTYPE CONSOLE}
+begin
+  Writeln('Hello, world!');
+end.
+}}}
+
+== Diff ==[diff]
+
+% Source: http://en.wikipedia.org/wiki/Diff
+In computing, diff is a file comparison utility that outputs the differences between two files. It is typically used to show the changes between one version of a file and a former version of the same file. Diff displays the changes made per line for text files. Modern implementations also support binary files. The output is called a "diff", or a patch, since the output can be applied with the Unix program patch. The output of similar file comparison utilities are also called a "diff". Like the use of the word "grep" for describing the act of searching, the word diff is used in jargon as a verb for calculating any difference.
+
+{{{ diff
+@@ -778,13 +791,17 @@
+     def safe_string(self, string):
+         """Transform any string to a safer representation:
+             e.g: 'Quién sabe caño' -> 'quien_sabe_cano'"""
++        
+         string = string.strip()
+         nkfd_form = unicodedata.normalize('NFKD', unicode(string))
+         normalized = u''.join([c for c in nkfd_form if not unicodedata.combining(c)])
+         normalized = normalized.lower()
+         normalized = normalized.replace(' ', '_')
+-        normalized = normalized.replace('\'', '')
+-        return normalized
++        clean = []
++        for c in normalized:
++            if c.isalnum() or c == '_':
++                clean.append(c)
++        return ''.join(clean)
+}}}
+
+== Erlang ==[erlang]
+
+% Source: http://en.wikipedia.org/wiki/Erlang_(programming_language)
+Erlang is a general-purpose concurrent, garbage-collected programming language and runtime system. The sequential subset of Erlang is a functional language, with strict evaluation, single assignment, and dynamic typing. For concurrency it follows the Actor model. It was designed by Ericsson to support distributed, fault-tolerant, soft-real-time, non-stop applications. It supports hot swapping, so that code can be changed without stopping a system.
+
+{{{ erlang
+-module(hello).
+-export([hello_world/0]).
+
+hello_world() -> io:fwrite("hello, world\n").
+}}}
+
+== Groovy ==[groovy]
+
+% Source: http://en.wikipedia.org/wiki/Groovy_(programming_language)
+Groovy is an object-oriented programming language for the Java platform. It is a dynamic language with features similar to those of Python, Ruby, Perl, and Smalltalk. It can be used as a scripting language for the Java Platform.
+
+Groovy uses a Java-like bracket syntax. It is dynamically compiled to Java Virtual Machine (JVM) bytecode and interoperates with other Java code and libraries. Most Java code is also syntactically valid Groovy.
+
+{{{ groovy
+println "Hello World!"
+}}}
+
+== Javascript ==[javascript]
+
+% Source: http://en.wikipedia.org/wiki/Javascript
+JavaScript is a prototype-based scripting language that is dynamic, weakly typed and has first-class functions. It is a multi-paradigm language, supporting object-oriented, imperative, and functional programming styles.
+
+JavaScript was formalized in the ECMAScript language standard and is primarily used in the form of client-side JavaScript, implemented as part of a Web browser in order to provide enhanced user interfaces and dynamic websites.
+
+JavaScript uses syntax influenced by that of C. JavaScript copies many names and naming conventions from Java, but the two languages are otherwise unrelated and have very different semantics. The key design principles within JavaScript are taken from the Self and Scheme programming languages
+
+{{{ javascript
+alert('Hello world!');
+}}}
+
+== Java ==[java]
+
+% Source: http://en.wikipedia.org/wiki/Java_(programming_language)
+Java is a programming language originally developed by James Gosling at Sun Microsystems (now part of Oracle Corporation) and released in 1995 as a core component of Sun Microsystems' Java platform. The language derives much of its syntax from C and C++ but has a simpler object model and fewer low-level facilities.
+
+Java applications are typically compiled to bytecode (class file) that can run on any Java Virtual Machine (JVM) regardless of computer architecture. Java is a general-purpose, concurrent, class-based, object-oriented language that is specifically designed to have as few implementation dependencies as possible. It is intended to let application developers "write once, run anywhere." Java is currently one of the most popular programming languages in use, particularly for client-server web applications.
+
+{{{ java
+public class HelloWorld {
+   public static void main(String[] args) {
+       System.out.println("Hello world!");
+   }
+}
+}}}
+
+== JavaFX ==[javafx]
+
+% Source: http://en.wikipedia.org/wiki/JavaFX_Script
+JavaFX Script is a scripting language designed by Sun Microsystems, forming part of the JavaFX family of technologies on the Java Platform.
+
+JavaFX targets the Rich Internet Application domain (competing with Adobe Flex and Microsoft Silverlight), specializing in rapid development of visually rich applications for the desktop and mobile markets. JavaFX Script works with integrated development environments such as NetBeans and Eclipse. JavaFX is released under the GNU General Public License, via the Sun sponsored OpenJFX project.
+
+{{{ javafx
+import javafx.scene.Scene;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+Stage {
+	title: "Die, Ajax! - Hello World"
+	width: 250
+	height: 50
+	scene: Scene {
+        	content: [
+			Text { 
+				content: "Hello World!" 
+				x:0 
+				y:12
+				font: Font {
+					name: "Sans Serif"
+					size: 12 
+				} 
+			}
+	        ]
+	}
+}
+}}}
+
+== Perl ==[perl]
+
+% Source: http://en.wikipedia.org/wiki/Perl
+Perl is a high-level, general-purpose, interpreted, dynamic programming language. Perl was originally developed by Larry Wall in 1987 as a general-purpose Unix scripting language to make report processing easier. Since then, it has undergone many changes and revisions and become widely popular amongst programmers. Larry Wall continues to oversee development of the core language, and its upcoming version, Perl 6. 
+
+Perl borrows features from other programming languages including C, shell scripting (sh), AWK, and sed. The language provides powerful text processing facilities without the arbitrary data length limits of many contemporary Unix tools, facilitating easy manipulation of text files. Perl gained widespread popularity in the late 1990s as a CGI scripting language, in part due to its parsing abilities.
+
+{{{ perl
+use v5.10;
+say 'Hello World.';
+}}}
+
+== PHP ==[php]
+
+% Source: http://en.wikipedia.org/wiki/PHP
+PHP is a general-purpose server-side scripting language originally designed for web development to produce dynamic web pages. For this purpose, PHP code is embedded into the HTML source document and interpreted by a web server with a PHP processor module, which generates the web page document.
+
+PHP was originally created by Rasmus Lerdorf in 1995. The main implementation of PHP is now produced by The PHP Group and serves as the de facto standard for PHP as there is no formal specification. PHP is free software released under the PHP License which is incompatible with the GNU General Public License (GPL) due to restrictions on the usage of the term PHP.
+
+While PHP originally stood for "Personal Home Page", it is now said to stand for "PHP: Hypertext Preprocessor", a recursive acronym.
+
+{{{ php
+<?php
+echo "Hello, world";
+?>
+}}}
+
+== Plain text ==[plain_text]
+
+% Source: http://en.wikipedia.org/wiki/Plain_text
+In computing, plain text is the contents of an ordinary sequential file readable as textual material without much processing, usually opposed to formatted text.
+
+{{{ plain
+He... 'hello world'? :P
+}}}
+
+== PowerShell ==[powershell]
+
+% Source: http://en.wikipedia.org/wiki/Powershell
+Windows PowerShell is Microsoft's task automation framework, consisting of a command-line shell and associated scripting language built on top of, and integrated with the .NET Framework. PowerShell provides full access to COM and WMI, enabling administrators to perform administrative tasks on both local and remote Windows systems.
+
+{{{ powershell
+Write-Host "Hello world!"
+}}}
+
+== Python ==[python]
+
+% Source: http://en.wikipedia.org/wiki/Python_(programming_language)
+Python is a general-purpose, high-level programming language whose design philosophy emphasizes code readability. Python claims to "[combine] remarkable power with very clear syntax", and its standard library is large and comprehensive. Its use of indentation for block delimiters is unique among popular programming languages.
+
+Python supports multiple programming paradigms, primarily but not limited to object-oriented, imperative and, to a lesser extent, functional programming styles. It features a fully dynamic type system and automatic memory management, similar to that of Scheme, Ruby, Perl, and Tcl. Like other dynamic languages, Python is often used as a scripting language, but is also used in a wide range of non-scripting contexts. Using third-party tools, Python code can be packaged into standalone executable programs. Python interpreters are available for many operating systems.
+
+{{{ python
+print 'Hello World'
+}}}
+
+== Ruby ==[ruby]
+
+% Source: http://en.wikipedia.org/wiki/Ruby_(programming_language)
+Ruby is a dynamic, reflective, general-purpose object-oriented programming language that combines syntax inspired by Perl with Smalltalk-like features. Ruby originated in Japan during the mid-1990s and was first developed and designed by Yukihiro "Matz" Matsumoto. It was influenced primarily by Perl, Smalltalk, Eiffel, and Lisp.
+
+Ruby supports multiple programming paradigms, including functional, object oriented, imperative and reflective. It also has a dynamic type system and automatic memory management; it is therefore similar in varying respects to Smalltalk, Python, Perl, Lisp, Dylan, Pike, and CLU.
+
+{{{ ruby
+puts "Hello world!"
+}}}
+
+== Scala ==[scala]
+
+% Source: http://en.wikipedia.org/wiki/Scala_(programming_language)
+Scala (pronounced /ˈskɑːlə/ skah-lə) is a multi-paradigm programming language designed to integrate features of object-oriented programming and functional programming. The name Scala is a portmanteau of "scalable" and "language", signifying that it is designed to grow with the demands of its users.
+
+{{{ scala
+object HelloWorld extends Application {
+  println("Hello world!")
+}
+}}}
+
+== SQL ==[sql]
+
+% Source: http://en.wikipedia.org/wiki/SQL
+SQL (officially  /ˈɛs kjuː ˈɛl/, often  /ˌsiːkwəl/; often referred to as Structured Query Language) is a programming language designed for managing data in relational database management systems (RDBMS).
+
+Originally based upon relational algebra and tuple relational calculus, its scope includes data insert, query, update and delete, schema creation and modification, and data access control.
+
+SQL was one of the first commercial languages for Edgar F. Codd's relational model, as described in his influential 1970 paper, "A Relational Model of Data for Large Shared Data Banks". Despite not adhering to the relational model as described by Codd, it became the most widely used database language.
+
+{{{ sql
+SELECT 'Hello world!'
+}}}
+
+== Visual Basic / Visual Basic .NET ==[visual_basic__visual_basic_net]
+
+**Visual Basic**
+
+% Source: http://en.wikipedia.org/wiki/Visual_Basic
+Visual Basic (VB) is the third-generation event-driven programming language and integrated development environment (IDE) from Microsoft for its COM programming model.
+
+Visual Basic was derived from BASIC and enables the rapid application development (RAD) of graphical user interface (GUI) applications, access to databases using Data Access Objects, Remote Data Objects, or ActiveX Data Objects, and creation of ActiveX controls and objects. Scripting languages such as VBA and VBScript are syntactically similar to Visual Basic, but perform differently.
+
+{{{ vb
+MsgBox "Hello, world!"
+}}}
+
+**Visual Basic .NET**
+
+% Source: http://en.wikipedia.org/wiki/Visual_Basic_.NET
+Visual Basic .NET (VB.NET), is an object-oriented computer programming language that can be viewed as an evolution of the classic Visual Basic (VB), which is implemented on the .NET Framework.
+
+{{{ vb
+Module Module1
+    Sub Main() 
+        Console.WriteLine("Hello, world!")
+    End Sub
+End Module
+ 
+'non-console example:
+Class Form1
+    Public Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load()
+        MsgBox("Hello, world!")
+    End Sub
+End Class
+}}}
+
+== HTML/XML ==[htmlxml]
+
+**HTML**
+
+% Source: http://en.wikipedia.org/wiki/HTML
+HyperText Markup Language (HTML) is the predominant markup language for web pages. HTML elements are the basic building-blocks of webpages.
+
+{{{ xhtml
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>HTML4 Strict Hellow World</TITLE>
+   </HEAD>
+   <BODY>
+      <P>Hello World!
+   </BODY>
+</HTML>
+}}}
+
+**HTML5**
+
+% Source: http://en.wikipedia.org/wiki/HTML5
+HTML5 is a language for structuring and presenting content for the World Wide Web, and is a core technology of the Internet originally proposed by Opera Software. It is the fifth revision of the HTML standard (created in 1990 and standardized as HTML4 as of 1997) and as of November 2011 is still under development. Its core aims have been to improve the language with support for the latest multimedia while keeping it easily readable by humans and consistently understood by computers and devices (web browsers, parsers, etc.).
+
+{{{ xhtml
+<!doctype html>
+<html>
+   <head>
+     <meta charset="UTF-8">
+     <title>HTML5 Hello World</title>
+   </head>
+   <body>
+     <p>Hello World!</p>
+   </body>
+</html>
+}}}
+
+**XML**
+
+% Source: http://en.wikipedia.org/wiki/XML
+Extensible Markup Language (XML) is a set of rules for encoding documents in machine-readable form. It is defined in the XML 1.0 Specification produced by the W3C, and several other related specifications, all gratis open standards. The design goals of XML emphasize simplicity, generality, and usability over the Internet.
+
+{{{ xhtml
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   <title>
+     XML Document Hello World
+   </title>
+   <para>
+     Hello World!
+   </para>
+   <note>
+     Whatever.
+   </note>
+</root>
+}}}
+
