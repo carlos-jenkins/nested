@@ -30,7 +30,8 @@ import pango
 
 from .bibparse import parse_data
 from .bibtexdef import bibtex_entries, create_template
-from nested.core.widgets.textbuffer.bibtex_buffer import BibTeXBuffer
+from ..widgets.textbuffer.bibtex_buffer import BibTeXBuffer
+from ..widgets.textview.code_view import CodeView
 
 WHERE_AM_I = os.path.get_module_path(__file__)
 logger = logging.getLogger(__name__)
@@ -55,14 +56,18 @@ class BibMM(object):
         self.builder.add_from_file(glade_file)
 
         # Get the main objects
-        self.dialog_bib = self.builder.get_object('dialog_bib')
-        self.view_bibtex = self.builder.get_object('view_bibtex')
-        self.buffer_bibtex = BibTeXBuffer()
-        self.view_bibtex.set_buffer(self.buffer_bibtex)
-        self.summary = self.builder.get_object('summary')
+        go = self.builder.get_object
+        self.dialog_bib = go('dialog_bib')
+        self.summary = go('summary')
         self.summary_liststore = self.summary.get_model()
-        self.templates = self.builder.get_object('templates')
+        self.templates = go('templates')
         self.templates_liststore = self.templates.get_model()
+
+        # Create objects
+        holder = go('main_view_holder')
+        self.buffer_bibtex = BibTeXBuffer()
+        self.view_bibtex = CodeView(self.buffer_bibtex)
+        holder.add(self.view_bibtex)
 
         # Create tags and marks
         self.buffer_bibtex.create_tag(self.LINE_SEARCH,
@@ -106,6 +111,8 @@ class BibMM(object):
                 bib_data = bib_handler.read()
                 self.view_bibtex.get_buffer().set_text(bib_data)
                 self._reload_summary(bib_data)
+        else:
+            logger.warning(_('Unable to find file {}.'.format(bib_path)))
         self.buffer_bibtex.place_cursor(self.buffer_bibtex.get_start_iter())
 
         if self.dialog_bib.get_transient_for() is None:

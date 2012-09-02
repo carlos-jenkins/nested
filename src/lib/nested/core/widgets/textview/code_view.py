@@ -52,6 +52,8 @@ class CodeView(TextView):
         self._margin = Margin(self)
         self._spellcheck = SpellChecker(self, locale.getdefaultlocale()[0])
 
+        self.show()
+
     def set_buffer(self, buffer):
         """
         Overrides the set_buffer parent method.
