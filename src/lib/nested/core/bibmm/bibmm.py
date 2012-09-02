@@ -70,6 +70,8 @@ class BibMM(object):
         self.styles_liststore = self.styles.get_model()
         self.help_browser = go('help_browser')
         self.help_viewer_wrapper = go('help_viewer_wrapper')
+        self.style_previewer = go('style_previewer')
+        self.style_canvas = go('style_canvas')
 
         # Create objects
         holder = go('main_view_holder')
@@ -237,6 +239,16 @@ class BibMM(object):
         if self.help_viewer is None:
             return
         self.help_viewer.go_forward()
+
+    def _show_style_cb(self, widget):
+        """
+        Show a simple dialog with a rendering of the currently selected style.
+        """
+        style = self.styles_liststore[self.styles.get_active()][0]
+        style_file = os.path.join(WHERE_AM_I, 'styles', style + '.png')
+        self.style_canvas.set_from_file(style_file)
+        self.style_previewer.run()
+        self.style_previewer.hide()
 
     def _validate_cb(self, widget):
         """
