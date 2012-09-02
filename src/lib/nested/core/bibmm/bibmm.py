@@ -207,16 +207,17 @@ class BibMM(object):
         """
         Open the help browser for currently selected entry.
         """
-        # Load help
         if self.help_viewer is None:
             return
 
-        # Load help file
+        # Find help file
         entry = self.templates_liststore[self.templates.get_active()][0]
         help_file = 'entry_{}.html'.format(entry)
         help_path = os.path.join(WHERE_AM_I, 'help', context_lang, help_file)
         if not os.path.isfile(help_path):
             help_path = os.path.join(WHERE_AM_I, 'help', 'en_US', help_file)
+
+        # Load help file
         if not os.path.isfile(help_path):
             self.help_viewer.load_html_string(
                 '<p>File {} not found.</p>'.format(help_path), 'file:///')
@@ -226,6 +227,22 @@ class BibMM(object):
         # Run help window
         self.help_browser.run()
         self.help_browser.hide()
+
+    def _help_viewer_back_cb(self, widget):
+        """
+        Go back in help viewer.
+        """
+        if self.help_viewer is None:
+            return
+        self.help_viewer.go_back()
+
+    def _help_viewer_forward_cb(self, widget):
+        """
+        Go forward in help viewer.
+        """
+        if self.help_viewer is None:
+            return
+        self.help_viewer.go_forward()
 
     def _reload_summary(self, bib_data):
         """
