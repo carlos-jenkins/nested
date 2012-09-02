@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="2.24"/>
+  <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkDialog" id="dialog_bib">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
@@ -10,9 +11,8 @@
     <property name="default_height">600</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
-      <object class="GtkBox" id="dialog-vbox1">
+      <object class="GtkVBox" id="dialog-vbox1">
         <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
         <child>
           <object class="GtkHPaned" id="paned1">
             <property name="visible">True</property>
@@ -123,15 +123,12 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkScrolledWindow" id="scrolledwindow2">
+                  <object class="GtkScrolledWindow" id="main_view_holder">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="shadow_type">in</property>
                     <child>
-                      <object class="GtkTextView" id="view_bibtex">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                      </object>
+                      <placeholder/>
                     </child>
                   </object>
                   <packing>
@@ -216,9 +213,6 @@
                         <property name="search_column">3</property>
                         <property name="tooltip_column">6</property>
                         <signal name="cursor-changed" handler="_scroll_to_item" swapped="no"/>
-                        <child internal-child="selection">
-                          <object class="GtkTreeSelection" id="treeview-selection3"/>
-                        </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="line_treeviewcolumn">
                             <property name="title">#</property>
@@ -326,7 +320,7 @@
           </packing>
         </child>
         <child internal-child="action_area">
-          <object class="GtkButtonBox" id="dialog-action_area1">
+          <object class="GtkHButtonBox" id="dialog-action_area1">
             <property name="can_focus">False</property>
             <property name="homogeneous">True</property>
             <property name="layout_style">end</property>
