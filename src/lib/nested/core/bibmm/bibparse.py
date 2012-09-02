@@ -31,6 +31,14 @@ import bibtexdef
 import latex
 latex.register()
 
+class MalformedBibTeX(Exception):
+    """
+    Exception raised when malformed input.
+    """
+    def __init__(self, text, line):
+        self.text = text
+        self.line = line
+
 def match_pair(expr, pair=(r'{', r'}'), start=0):
     """
     Find the outermost pair enclosing a given expresion
@@ -260,16 +268,16 @@ def remove_comments(data):
             result.append(line)
     return u'\n'.join(result)
 
-def parse_data(data):
+def parse_data(raw):
     """
     Parses a string with a BibTeX database
     """
 
+    # Remove comments
+    data = remove_comments(raw)
+
     # Get lines
     lines = data.split('\n')
-
-    # Remove comments
-    data = remove_comments(data)
 
     # Regular expressions to use:
     #   A '@' followed by any word and an opening brace or parenthesis
@@ -289,7 +297,7 @@ def parse_data(data):
         entry = {}
         m = pub_rex.search(ss)
 
-        if m == None:
+        if m is None:
             break
 
         if m.group(0)[-1] == '(':
@@ -309,6 +317,14 @@ def parse_data(data):
                 entry['_line'] = find_line(entry['_code'], lines)
                 entries[entry['_code']] = entry
             ss = ss[d[1]+1:].strip()
+        else:
+            where = '@' + ss.split('@')[1].split(',')[0]
+            errl = 1
+            for l in raw.split('\n'):
+                if where in l:
+                    break
+                errl += 1
+            raise MalformedBibTeX(l, errl)
 
     return strings, entries
 

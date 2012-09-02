@@ -28,7 +28,7 @@ import gettext
 import gtk
 import pango
 
-from .bibparse import parse_data
+from .bibparse import parse_data, MalformedBibTeX
 from .bibtexdef import bibtex_entries, create_template
 from ..widgets.textbuffer.bibtex_buffer import BibTeXBuffer
 from ..widgets.textview.code_view import CodeView
@@ -124,6 +124,19 @@ class BibMM(object):
         # Connect signals
         self.builder.connect_signals(self)
 
+    def _show_error(self, msg='', parent=None):
+        """
+        Show an error message to the user.
+        """
+        if parent is None:
+            parent = self.dialog_bib
+        error = gtk.MessageDialog(parent,
+                                  gtk.DIALOG_DESTROY_WITH_PARENT,
+                                  gtk.MESSAGE_ERROR,
+                                  gtk.BUTTONS_CLOSE, msg)
+        error.run()
+        error.destroy()
+
     def load_bib(self, bib_path):
         """
         Load a bibliography file from the given path into the GUI.
@@ -139,7 +152,7 @@ class BibMM(object):
                 self._reload_summary(bib_data)
                 self.current_file = bib_path
         else:
-            logger.warning(_('Unable to find file {}.'.format(bib_path)))
+            logger.warning(_('Unable to find file {}.').format(bib_path))
         self.buffer_bibtex.place_cursor(self.buffer_bibtex.get_start_iter())
 
         if self.dialog_bib.get_transient_for() is None:
@@ -216,7 +229,7 @@ class BibMM(object):
         # Load help file
         if not os.path.isfile(help_path):
             self.help_viewer.load_html_string(
-                '<p>File {} not found.</p>'.format(help_path), 'file:///')
+                _('<p>File {} not found.</p>').format(help_path), 'file:///')
         else:
             self.help_viewer.load_uri('file:///' + help_path)
 
@@ -263,7 +276,14 @@ class BibMM(object):
         """
         Rebuild the BibTeX entries summary.
         """
-        strings, entries = parse_data(bib_data)
+        try:
+            strings, entries = parse_data(bib_data)
+        except MalformedBibTeX as e:
+            self._show_error(
+                _('An error ocurred while parsing the database. Please check '
+                  '"{}" at line {}.').format(e.text, e.line))
+            return
+
         self.available_keys = entries.keys() #!
         if entries:
 
@@ -341,10 +361,10 @@ class BibMM(object):
         if self.current_file is None:
             return False
 
+        content = self.view_bibtex.get_buffer().get_all_text()
         self._validate_cb(widget)
 
         with open(self.current_file, 'w') as handler:
-            content = self.view_bibtex.get_buffer().get_all_text()
             handler.write(content)
 
         self._close_cb(widget)

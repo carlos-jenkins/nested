@@ -100,5 +100,5 @@ class Checker(object):
         if plugin_path is None:
             self._show_error('Please select a plugin file.')
             return False
-        
+
         print('Perfoming checks to {}.'.format(plugin_path))
