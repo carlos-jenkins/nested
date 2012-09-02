@@ -28,8 +28,9 @@ import gettext
 import gtk
 import pango
 
-import bibparse
-from bibtexdef import bibtex_entries, create_template
+from .bibparse import parse_data
+from .bibtexdef import bibtex_entries, create_template
+from nested.core.widgets.textbuffer.bibtex_buffer import BibTeXBuffer
 
 WHERE_AM_I = os.path.get_module_path(__file__)
 logger = logging.getLogger(__name__)
@@ -49,7 +50,7 @@ class BibMM(object):
 
         # Create the interface
         self.builder = gtk.Builder()
-        self.builder.set_translation_domain(AppContext.DEFAULT_APP)
+        self.builder.set_translation_domain('nested')
         glade_file = os.path.join(WHERE_AM_I, 'bibmm.glade')
         self.builder.add_from_file(glade_file)
 
@@ -173,7 +174,7 @@ class BibMM(object):
         """
         Rebuild the BibTeX entries summary
         """
-        strings, entries = bibparse.parse_data(bib_data)
+        strings, entries = parse_data(bib_data)
         self.available_keys = entries.keys() #!
         if entries:
 

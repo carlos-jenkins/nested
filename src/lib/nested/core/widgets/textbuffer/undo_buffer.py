@@ -114,7 +114,7 @@ class UndoRemoveTag(Undoable):
         self.buffer.remove_tag_at_offset(self.tag, self.start, self.end)
 
 
-class TextBuffer(TextBuffer):
+class UndoBuffer(TextBuffer):
 
     def __init__(self, *args, **kwargs):
         TextBuffer.__init__(self, *args)
@@ -283,9 +283,9 @@ class TextBuffer(TextBuffer):
         self.current_undo = UndoCollection(self)
 
 gobject.signal_new('undo-stack-changed',
-                   TextBuffer,
+                   UndoBuffer,
                    gobject.SIGNAL_RUN_FIRST,
                    gobject.TYPE_NONE,
                    ())
 
-gobject.type_register(TextBuffer)
+gobject.type_register(UndoBuffer)

@@ -1,35 +1,31 @@
-# -*- coding: utf-8 -*-
-#       bibtexdef.py - BibTeX entries and fields definitions
+# -*- coding:utf-8 -*-
 #
-#       Copyright (c) 2012 Carlos Jenkins <cjenkins@softwarelibrecr.org>
+# Copyright (C) 2011, 2012 Carlos Jenkins <carlos@jenkins.co.cr>
 #
-#       This program is free software; you can redistribute it and/or modify
-#       it under the terms of the GNU General Public License as published by
-#       the Free Software Foundation; either version 2 of the License, or
-#       (at your option) any later version.
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
 #
-#       This program is distributed in the hope that it will be useful,
-#       but WITHOUT ANY WARRANTY; without even the implied warranty of
-#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#       GNU General Public License for more details.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
 #
-#       You should have received a copy of the GNU General Public License
-#       along with this program. If not, see <http://www.gnu.org/licenses/>
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""@package bibtexdef
+"""
 BibTeX entries and fields definitions.
 """
 
-####################################
-# Use application context
-if __name__ == '__main__':
-    import sys
-    sys.path.append('../..')
-from context import AppContext
+import os
+import logging
+import gettext
 
-WHERE_AM_I = AppContext.where_am_i(__file__)
-_ = AppContext().what_do_i_speak()
-####################################
+WHERE_AM_I = os.path.get_module_path(__file__)
+logger = logging.getLogger(__name__)
+_ = gettext.translation().gettext
 
 # "Official" BibTeX fields
 bibtex_fields = ['address', 'author', 'booktitle', 'chapter', 'edition',
@@ -146,7 +142,7 @@ bibtex_entries = {
 
 def create_template(key, id=None, optional=True):
     """Create a template for the given entry type"""
-    
+
     if not key in bibtex_entries.keys():
         return ''
 
@@ -162,14 +158,14 @@ def create_template(key, id=None, optional=True):
     separation = ''
     if required_fields and optional_fields:
         separation = '\n'
-    
+
     template = '@{entry_type}{{{uid},\n{required}{sep}{optional}\n}}\n'
     result = template.format(entry_type=key.upper(),
                              uid=key+'???',
                              required='\n'.join(required_fields),
                              sep=separation,
                              optional='\n'.join(optional_fields))
-    
+
     return result
 
 # Testing

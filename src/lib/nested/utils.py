@@ -87,15 +87,3 @@ def default_open(something_to_open):
 
     return ret_code
 
-
-def check_prefix(prefix, string):
-    """
-    Check that everyline in the given string begins with given prefix.
-    """
-    lines = string.splitlines()
-    result = []
-    for line in lines:
-        line = line.strip()
-        if line.startswith(prefix):
-            result.append(line)
-    return ('\n').join(result)

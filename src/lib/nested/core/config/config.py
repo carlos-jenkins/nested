@@ -23,6 +23,18 @@ Nested configuration manager.
     # Configuration functions
     #####################################
 
+    def check_prefix(prefix, string):
+        """
+        Check that everyline in the given string begins with given prefix.
+        """
+        lines = string.splitlines()
+        result = []
+        for line in lines:
+            line = line.strip()
+            if line.startswith(prefix):
+                result.append(line)
+        return ('\n').join(result)
+
     def format_proc(self, is_preproc, procs, target=''):
         """Format a list of filters to a list of strings in the form (%!p***proc...)"""
 

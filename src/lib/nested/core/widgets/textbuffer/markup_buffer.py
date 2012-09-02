@@ -31,7 +31,7 @@ by Hannes Matuschek:
 """
 
 import re
-from .undo_buffer import TextBuffer
+from .undo_buffer import UndoBuffer as TextBuffer
 
 class Tag(object):
     def __init__(self, start, end, tagname, rule):
