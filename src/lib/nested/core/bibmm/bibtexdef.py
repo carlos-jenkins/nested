@@ -30,71 +30,86 @@ _ = gettext.translation().gettext
 # "Official" BibTeX fields description
 bibtex_fields_desc = {
 
-'address'     : _('Publisher\'s address. For major publishing houses, just '
-                  'the city is given. For small publishers, you can help '
-                  'the reader by giving the complete address.'),
+'address'     :
+    _('Publisher\'s address. For major publishing houses, just the city is '
+      'given. For small publishers, you can help the reader by giving the '
+      'complete address.'),
 
-'author'      : _('The name(s) of the author(s).'),
+'author'      :
+    _('The name(s) of the author(s).'),
 
-'booktitle'   : _('The work\'s title.'),
+'booktitle'   :
+    _('The work\'s title.'),
 
-'chapter'     : _('A chapter number.'),
+'chapter'     :
+    _('A chapter number.'),
 
-'edition'     : _('The edition of a book - for example, "second".'),
+'edition'     :
+    _('The edition of a book - for example, "second".'),
 
-'editor'      : _('Name(s) of editor(s). If there is also an "author" '
-                  'field, then the "editor" field gives the editor of the '
-                  'book or collection in which the reference appears.'),
+'editor'      :
+    _('Name(s) of editor(s). If there is also an "author" field, then the '
+      '"editor" field gives the editor of the book or collection in which the '
+      'reference appears.'),
 
-'howpublished': _('How something strange has been published.'),
+'howpublished':
+    _('How something strange has been published.'),
 
-'institution' : _('The institution that published the work.'),
+'institution' :
+    _('The institution that published the work.'),
 
-'journal'     : _('A journal name. Abbreviations are provided for many '
-                  'journals.'),
+'journal'     :
+    _('A journal name. Abbreviations are provided for many journals.'),
 
-'key'         : _('Used for alphabetizing and creating a label when the '
-                  '"author" and "editor" fields are missing. This field '
-                  'should not be confused with the citation key that '
-                  'appears in the citation command and at the beginning of '
-                  'the entry.'),
+'key'         :
+    _('Used for alphabetizing and creating a label when the "author" and '
+      '"editor" fields are missing. This field should not be confused with the '
+      'citation key that appears in the citation command and at the beginning '
+      'of the entry.'),
 
-'month'       : _('The month in which the work was published or, for an '
-                  'unpublished work, in which it was written.'),
+'month'       :
+    _('The month in which the work was published or, for an unpublished work, '
+      'in which it was written.'),
 
-'note'        : _('Any additional information that can help the reader.'),
+'note'        :
+    _('Any additional information that can help the reader.'),
 
-'number'      : _('The number of a journal, magazine, or technical report.'
-                  ' An issue of a journal or magazine is usually identified'
-                  ' by its volume and number; the organization that issues '
-                  'a technical report usually gives it a number.'),
+'number'      :
+    _('The number of a journal, magazine, or technical report. An issue of a '
+      'journal or magazine is usually identified by its volume and number; the '
+      'organization that issues a technical report usually gives it a number.'),
 
-'organization': _('The organization sponsoring a conference.'),
+'organization':
+    _('The organization sponsoring a conference.'),
 
-'pages'       : _('A page number or range of numbers such as "42--111"; you'
-                  ' may also have several of these, separating them with '
-                  'commas: "7,41,73--97". The standard styles convert a '
-                  'single dash to a double.'),
+'pages'       :
+    _('A page number or range of numbers such as "42--111"; you may also have '
+      'several of these, separating them with commas: "7,41,73--97". The '
+      'standard styles convert a single dash to a double.'),
 
-'publisher'   : _('The publisher\'s name.'),
+'publisher'   :
+    _('The publisher\'s name.'),
 
-'school'      : _('The name of the school where a thesis was written.'),
+'school'      :
+    _('The name of the school where a thesis was written.'),
 
-'series'      : _('The name of a series or set of books. When citing an '
-                  'entire book, the the "title" field gives its title and '
-                  'an optional "series" field gives the name of a series in'
-                  ' which the book is published.'),
+'series'      :
+    _('The name of a series or set of books. When citing an entire book, the '
+      'the "title" field gives its title and an optional "series" field gives '
+      'the name of a series in which the book is published.'),
 
-'title'       : _('The work\'s title.'),
+'title'       :
+    _('The work\'s title.'),
 
-'type'        : _('The type of a technical report - for example,'
-                  '"Research Note".'),
+'type'        :
+    _('The type of a technical report - for example, "Research Note".'),
 
-'volume'      : _('The volume of a journal or multivolume book work.'),
+'volume'      :
+    _('The volume of a journal or multivolume book work.'),
 
-'year'        : _('The year of publication or, for an unpublished work, '
-                  'the year it was written. This field\'s text should'
-                  'contain only numerals.'),
+'year'        :
+    _('The year of publication or, for an unpublished work, the year it was '
+      'written. This field\'s text should contain only numerals.'),
 }
 
 # "Official" BibTeX fields

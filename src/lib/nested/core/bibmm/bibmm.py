@@ -51,7 +51,7 @@ class BibMM(object):
         """
 
         self.available_keys = []
-        self.current_file = ''
+        self.current_file = None
 
         # Create the interface
         self.builder = gtk.Builder()
@@ -131,11 +131,11 @@ class BibMM(object):
 
         # Load file to TextView
         if os.path.isfile(bib_path):
-            self.current_file = bib_path #!
             with open(bib_path) as bib_handler:
                 bib_data = bib_handler.read()
                 self.view_bibtex.get_buffer().set_text(bib_data)
                 self._reload_summary(bib_data)
+                self.current_file = bib_path
         else:
             logger.warning(_('Unable to find file {}.'.format(bib_path)))
         self.buffer_bibtex.place_cursor(self.buffer_bibtex.get_start_iter())
@@ -143,7 +143,10 @@ class BibMM(object):
         if self.dialog_bib.get_transient_for() is None:
             self.dialog_bib.show()
         else:
-            response = self.dialog_bib.run()
+            while True:
+                response = self.dialog_bib.run()
+                if response >= 0:
+                    break
             self.dialog_bib.hide()
 
     def _reset_gui(self):
@@ -194,15 +197,6 @@ class BibMM(object):
         textbuffer.place_cursor(insert_iter)
         textview.grab_focus()
 
-    def _validate_cb(self, widget):
-        """
-        Re-validate the current content of the buffer.
-        """
-        self.summary_liststore.clear()
-        self.buffer_bibtex.refresh()
-        bib_data = self.buffer_bibtex.get_all_text()
-        self._reload_summary(bib_data)
-
     def _view_entry_help_cb(self, widget):
         """
         Open the help browser for currently selected entry.
@@ -243,6 +237,15 @@ class BibMM(object):
         if self.help_viewer is None:
             return
         self.help_viewer.go_forward()
+
+    def _validate_cb(self, widget):
+        """
+        Re-validate the current content of the buffer.
+        """
+        self.summary_liststore.clear()
+        self.buffer_bibtex.refresh()
+        bib_data = self.buffer_bibtex.get_all_text()
+        self._reload_summary(bib_data)
 
     def _reload_summary(self, bib_data):
         """
@@ -319,3 +322,17 @@ class BibMM(object):
             entry_line = self.summary_liststore.get_value(selection, 0)
             _highlight_line(self.view_bibtex, int(entry_line))
 
+    def _save_cb(self, widget):
+        """
+        Save buffer content back to original BibTeX file.
+        """
+        if self.current_file is None:
+            return False
+
+        self._validate_cb(widget)
+
+        with open(self.current_file, 'w') as handler:
+            content = self.view_bibtex.get_buffer().get_all_text()
+            handler.write(content)
+
+        self._close_cb(widget)

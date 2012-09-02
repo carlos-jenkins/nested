@@ -449,7 +449,7 @@
                 <property name="receives_default">True</property>
                 <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="_close_cb" swapped="no"/>
+                <signal name="clicked" handler="_save_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -468,9 +468,9 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="0">button8</action-widget>
+      <action-widget response="-1">button8</action-widget>
       <action-widget response="0">button9</action-widget>
-      <action-widget response="0">button10</action-widget>
+      <action-widget response="1">button10</action-widget>
     </action-widgets>
   </object>
   <object class="GtkDialog" id="help_browser">
