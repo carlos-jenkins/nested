@@ -84,6 +84,8 @@ class BibMM(object):
         # Configure interface
         if parent is not None:
             self.dialog_bib.set_transient_for(parent)
+        else:
+            self.dialog_bib.connect('delete-event', gtk.main_quit)
         #  Load templates
         for key in bibtex_entries.keys():
             registry = bibtex_entries[key]

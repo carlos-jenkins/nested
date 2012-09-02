@@ -161,7 +161,13 @@ class MarkupBuffer(TextBuffer):
         for name, props in self.styles.items():
             style = {}
             style.update(props)
-            self.create_tag(name, **style)
+            spellcheck = True
+            if 'spell_check' in style:
+                spellcheck = style['spell_check']
+                del style['spell_check']
+            tag = self.create_tag(name, **style)
+            tag.spell_check = spellcheck
+
 
         # store lang-definition
         self._lang_def = lang

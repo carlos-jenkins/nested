@@ -40,9 +40,10 @@ class Txt2tagsSyntax(object):
             'green':            {'foreground'   : 'darkgreen'},
             'raw':              {'font'         : 'Oblique'},
             'verbatim':         {'font'         : 'monospace'},
-            'tagged':           {},
+            'tagged':           {'spell_check'  : False},
             'link':             {'foreground'   : 'blue',
-                                 'underline'     : pango.UNDERLINE_SINGLE,},
+                                 'underline'    : pango.UNDERLINE_SINGLE,
+                                 'spell_check'  : False},
             'highlight':        {'background'   : 'yellow'},
             'quote':            {'background'   : '#6D6D6D'}
             }
