@@ -25,14 +25,14 @@ for translation files. It also provides a `os.path.get_data_path` function to
 let modules know where they could find their data.
 """
 
+import os
+import sys
+import locale
 import gettext
 import logging
-import os
-import os.path
-import sys
 
 # Public Objects
-__all__ = ['context_path']
+__all__ = ['context_path', 'context_lang']
 
 # Save the old `logging.Manager` and the old `gettext.translation`.
 logging._OldManager = logging.Manager
@@ -93,7 +93,6 @@ def get_module_path(file_var):
         return os.path.normpath(os.path.dirname(sys.executable))
 
 os.path.get_module_path = get_module_path
-context_path = get_module_path(__file__)
 
 # A new `gettext.translation` function that cares about the localedir for every
 # application that uses it. So a default path for all translation files could be
@@ -145,6 +144,9 @@ gettext.set_locale_dir = _gettext.set_locale_dir
 
 # setting LANG environment variable if not already set
 if os.getenv('LANG') is None:
-    import locale
     lang, enc = locale.getdefaultlocale()
     os.environ['LANG'] = lang
+
+# Context variables
+context_path = get_module_path(__file__)
+context_lang = locale.getdefaultlocale()[0]

@@ -1,30 +1,28 @@
-# -*- coding: utf-8 -*-
-#       bibparse.py - BibTeX parser
+# -*- coding:utf-8 -*-
 #
-#       Copyright (c) 2012 Carlos Jenkins <cjenkins@softwarelibrecr.org>
-#       Copyright (c) 2011 Juan Fiol <juanfiol@gmail.com>
+# Copyright (c) 2011, 2012 Carlos Jenkins <cjenkins@softwarelibrecr.org>
+# Copyright (c) 2011 Juan Fiol <juanfiol@gmail.com>
 #
-#       This program is free software; you can redistribute it and/or modify
-#       it under the terms of the GNU General Public License as published by
-#       the Free Software Foundation; either version 2 of the License, or
-#       (at your option) any later version.
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
 #
-#       This program is distributed in the hope that it will be useful,
-#       but WITHOUT ANY WARRANTY; without even the implied warranty of
-#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#       GNU General Public License for more details.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
 #
-#       You should have received a copy of the GNU General Public License
-#       along with this program. If not, see <http://www.gnu.org/licenses/>
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""@package bibparse
+"""
 Set of routines to parse BibTeX data and return each entry as a dictionary
 
 USAGE:
     strings, db = parse_file(bibtexfile)
         *or*
     strings, db = parse_data(bibtexdata)
-
 """
 
 import os
@@ -36,7 +34,7 @@ latex.register()
 def match_pair(expr, pair=(r'{', r'}'), start=0):
     """
     Find the outermost pair enclosing a given expresion
-    
+
     pair is a 2-tuple containing (begin, end) where both may be characters or
     strings for instance:
         pair = ('[',']')    or
@@ -66,7 +64,7 @@ def match_pair(expr, pair=(r'{', r'}'), start=0):
             count+= 1
         else:
             count+= -1
-                
+
         if count == 0:
             return sstart, match.end()
 
@@ -179,14 +177,14 @@ def get_fields(strng, strict=False):
     """
     Returns a list with pairs (field, value) from strng
     If strict is True, it will only allow known fields, defined in bibtexdef.bibtex_fields
-    """ 
+    """
 
     comma_rex = re.compile(r'\s*[,]')
     ss = strng.strip()
-    
+
     if not ss.endswith(','): # Add the last commma if missing
         ss += ','
-        
+
     fields = []
 
     while True:
@@ -249,7 +247,7 @@ def find_line(key, lines):
         if key_rex.match(lines[line_num]):
             return line_num + 1
     return -1
-    
+
 def remove_comments(data):
     """
     Removes commented lines from BibTeX file. Comments starts with a %
@@ -269,10 +267,10 @@ def parse_data(data):
 
     # Get lines
     lines = data.split('\n')
-    
+
     # Remove comments
     data = remove_comments(data)
-    
+
     # Regular expressions to use:
     #   A '@' followed by any word and an opening brace or parenthesis
     pub_rex = re.compile('\s?@(\w*)\s*[{\(]')
@@ -316,17 +314,17 @@ def parse_data(data):
 
 def parse_entry(source):
     """
-    Reads an item in bibtex form from a string 
+    Reads an item in bibtex form from a string
     """
     try:
         source + ' '
     except:
         raise TypeError
 
-    # Transform Latex symbols and strip newlines and multiple spaces 
+    # Transform Latex symbols and strip newlines and multiple spaces
     if not isinstance(source, unicode):
         source = source.decode('latex+utf8', 'ignore')
-    
+
     source.replace('\n',' ')
     source = re.sub('\s+', ' ', source)
 

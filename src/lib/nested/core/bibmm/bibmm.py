@@ -38,13 +38,17 @@ logger = logging.getLogger(__name__)
 _ = gettext.translation().gettext
 
 class BibMM(object):
-    """Specialized GUI to handle bibliography (BibTex) data."""
+    """
+    Specialized GUI to handle bibliography (BibTex) data.
+    """
 
     LINE_CURRENT = 'bibmm-current-entry'
     LINE_SEARCH  = 'bibmm-search-entry'
 
     def __init__(self, parent=None):
-        """The object constructor."""
+        """
+        The object constructor.
+        """
 
         self.available_keys = []
         self.current_file = ''
