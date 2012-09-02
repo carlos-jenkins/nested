@@ -83,28 +83,18 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
-                              <object class="GtkHButtonBox" id="hbuttonbox1">
+                              <object class="GtkButton" id="button7">
+                                <property name="label" translatable="yes">Insert</property>
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkButton" id="button7">
-                                    <property name="label" translatable="yes">Insert</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">True</property>
-                                    <property name="use_action_appearance">False</property>
-                                    <signal name="clicked" handler="_insert_template_cb" swapped="no"/>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="use_action_appearance">False</property>
+                                <property name="image">image1</property>
+                                <signal name="clicked" handler="_insert_template_cb" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
-                                <property name="fill">False</property>
+                                <property name="fill">True</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -610,6 +600,11 @@
     <property name="xpad">1</property>
     <property name="ypad">3</property>
     <property name="stock">gtk-help</property>
+  </object>
+  <object class="GtkImage" id="image1">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-jump-to</property>
   </object>
   <object class="GtkListStore" id="styles_liststore">
     <columns>
