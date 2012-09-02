@@ -117,13 +117,14 @@
                                 <property name="icon_size">2</property>
                                 <property name="icon_size_set">True</property>
                                 <child>
-                                  <object class="GtkToolButton" id="toolbutton1">
+                                  <object class="GtkToolButton" id="entries_help">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="use_action_appearance">False</property>
                                     <property name="label" translatable="yes">toolbutton1</property>
                                     <property name="use_underline">True</property>
                                     <property name="stock_id">gtk-help</property>
+                                    <signal name="clicked" handler="_view_entry_help_cb" swapped="no"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -231,9 +232,16 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkComboBox" id="combobox1">
+                          <object class="GtkComboBox" id="styles">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="model">styles_liststore</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext2"/>
+                              <attributes>
+                                <attribute name="text">1</attribute>
+                              </attributes>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">True</property>
@@ -267,6 +275,7 @@
                           </object>
                           <packing>
                             <property name="expand">False</property>
+                            <property name="homogeneous">True</property>
                           </packing>
                         </child>
                       </object>
@@ -474,12 +483,96 @@
       <action-widget response="0">button10</action-widget>
     </action-widgets>
   </object>
+  <object class="GtkDialog" id="help_browser">
+    <property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="title" translatable="yes">Help</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="default_width">550</property>
+    <property name="default_height">375</property>
+    <property name="type_hint">dialog</property>
+    <property name="transient_for">dialog_bib</property>
+    <child internal-child="vbox">
+      <object class="GtkVBox" id="dialog-vbox2">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkHButtonBox" id="dialog-action_area2">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="button1">
+                <property name="label">gtk-close</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="help_viewer_wrapper">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="hscrollbar_policy">automatic</property>
+            <property name="vscrollbar_policy">automatic</property>
+            <property name="shadow_type">etched-out</property>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkHSeparator" id="hseparator1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="0">button1</action-widget>
+    </action-widgets>
+  </object>
   <object class="GtkImage" id="help_image">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="xpad">1</property>
     <property name="ypad">3</property>
     <property name="stock">gtk-help</property>
+  </object>
+  <object class="GtkListStore" id="styles_liststore">
+    <columns>
+      <!-- column-name id -->
+      <column type="gchararray"/>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+    </columns>
   </object>
   <object class="GtkListStore" id="summary_liststore">
     <columns>

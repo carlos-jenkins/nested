@@ -66,12 +66,25 @@ class BibMM(object):
         self.summary_liststore = self.summary.get_model()
         self.templates = go('templates')
         self.templates_liststore = self.templates.get_model()
+        self.styles = go('styles')
+        self.styles_liststore = self.styles.get_model()
+        self.help_browser = go('help_browser')
+        self.help_viewer_wrapper = go('help_viewer_wrapper')
 
         # Create objects
         holder = go('main_view_holder')
         self.buffer_bibtex = BibTeXBuffer()
         self.view_bibtex = CodeView(self.buffer_bibtex)
         holder.add(self.view_bibtex)
+        self.help_viewer = None
+        try:
+            import webkit
+            self.help_viewer = webkit.WebView()
+            self.help_viewer_wrapper.add_with_viewport(self.help_viewer)
+            self.help_viewer.show()
+        except ImportError:
+            logger.warning('Unable to import webkit module. Entries help will be unavailable.')
+            go('entries_help').set_sensitive(False)
 
         # Create tags and marks
         self.buffer_bibtex.create_tag(self.LINE_SEARCH,
@@ -90,6 +103,7 @@ class BibMM(object):
             self.dialog_bib.set_transient_for(parent)
         else:
             self.dialog_bib.connect('delete-event', gtk.main_quit)
+
         #  Load templates
         for key in bibtex_entries.keys():
             registry = bibtex_entries[key]
@@ -99,6 +113,11 @@ class BibMM(object):
                                         registry['comment']
                                             ])
         self.templates.set_active(0)
+
+        # Load styles
+        # TODO: Should not be hardwire
+        self.styles_liststore.append(['apalike', 'APA like style (apalike)'])
+        self.styles.set_active(0)
 
         # Connect signals
         self.builder.connect_signals(self)
@@ -170,22 +189,47 @@ class BibMM(object):
 
         # Scroll to the currently inserted entry
         textview.scroll_mark_onscreen(textbuffer.get_mark(self.LINE_CURRENT))
-        insert_iter = textbuffer.get_iter_at_mark(textbuffer.get_mark(self.LINE_CURRENT))
+        insert_iter = textbuffer.get_iter_at_mark(
+                                        textbuffer.get_mark(self.LINE_CURRENT))
         textbuffer.place_cursor(insert_iter)
         textview.grab_focus()
 
     def _validate_cb(self, widget):
         """
-        Re-validate the current content of the buffer
+        Re-validate the current content of the buffer.
         """
         self.summary_liststore.clear()
         self.buffer_bibtex.refresh()
         bib_data = self.buffer_bibtex.get_all_text()
         self._reload_summary(bib_data)
 
+    def _view_entry_help_cb(self, widget):
+        """
+        Open the help browser for currently selected entry.
+        """
+        # Load help
+        if self.help_viewer is None:
+            return
+
+        # Load help file
+        entry = self.templates_liststore[self.templates.get_active()][0]
+        help_file = 'entry_{}.html'.format(entry)
+        help_path = os.path.join(WHERE_AM_I, 'help', context_lang, help_file)
+        if not os.path.isfile(help_path):
+            help_path = os.path.join(WHERE_AM_I, 'help', 'en_US', help_file)
+        if not os.path.isfile(help_path):
+            self.help_viewer.load_html_string(
+                '<p>File {} not found.</p>'.format(help_path), 'file:///')
+        else:
+            self.help_viewer.load_uri('file:///' + help_path)
+
+        # Run help window
+        self.help_browser.run()
+        self.help_browser.hide()
+
     def _reload_summary(self, bib_data):
         """
-        Rebuild the BibTeX entries summary
+        Rebuild the BibTeX entries summary.
         """
         strings, entries = parse_data(bib_data)
         self.available_keys = entries.keys() #!
@@ -221,17 +265,20 @@ class BibMM(object):
 
     def _scroll_to_item(self, widget):
         """
-        Scroll to the source line of the BibTeX entry currently selected in summary.
+        Scroll to the source line of the BibTeX entry currently selected in
+        summary.
         """
 
         def _highlight_line(textview, line_num):
             textbuffer = textview.get_buffer()
 
             # Remove previous highlight
-            old_line_iter = textbuffer.get_iter_at_mark(textbuffer.get_mark(self.LINE_SEARCH))
+            old_line_iter = textbuffer.get_iter_at_mark(
+                                        textbuffer.get_mark(self.LINE_SEARCH))
             old_line_end = old_line_iter.copy()
             old_line_end.forward_to_line_end()
-            textbuffer.remove_tag_by_name(self.LINE_SEARCH, old_line_iter, old_line_end)
+            textbuffer.remove_tag_by_name(self.LINE_SEARCH,
+                                        old_line_iter, old_line_end)
 
             # Highlight line if required and place cursor
             if line_num < 1:
