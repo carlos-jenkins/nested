@@ -20,6 +20,7 @@ Independent Bibliography (BibTeX) Management Module for Python and PyGtk.
 """
 
 from nested import *
+from nested.utils import show_error, ask_user
 
 import os
 import logging
@@ -109,11 +110,9 @@ class BibMM(object):
         #  Load templates
         for key in bibtex_entries.keys():
             registry = bibtex_entries[key]
-            self.templates_liststore.append([
-                                        key,
-                                        '@' + key.upper() + ' - ' + registry['name'],
-                                        registry['comment']
-                                            ])
+            self.templates_liststore.append([key,
+                                '@' + key.upper() + ' - ' + registry['name'],
+                                registry['comment']])
         self.templates.set_active(0)
 
         # Load styles
@@ -130,12 +129,12 @@ class BibMM(object):
         """
         if parent is None:
             parent = self.dialog_bib
-        error = gtk.MessageDialog(parent,
-                                  gtk.DIALOG_DESTROY_WITH_PARENT,
-                                  gtk.MESSAGE_ERROR,
-                                  gtk.BUTTONS_CLOSE, msg)
-        error.run()
-        error.destroy()
+        show_error(msg, parent)
+
+    def _ask_user(self, msg='', parent=None):
+        if parent is None:
+            parent = self.dialog_bib
+        return ask_user(msg, parent)
 
     def load_bib(self, bib_path):
         """
@@ -149,7 +148,11 @@ class BibMM(object):
             with open(bib_path) as bib_handler:
                 bib_data = bib_handler.read()
                 self.view_bibtex.get_buffer().set_text(bib_data)
-                self._reload_summary(bib_data)
+                try:
+                    strings, entries = parse_data(bib_data)
+                    self._reload_summary(entries)
+                except MalformedBibTeX as e:
+                    logger.warning(_('Malformed bibliographic database {}.').format(bib_path))
                 self.current_file = bib_path
         else:
             logger.warning(_('Unable to find file {}.').format(bib_path))
@@ -160,6 +163,7 @@ class BibMM(object):
         else:
             while True:
                 response = self.dialog_bib.run()
+                print('Dialog returned...')
                 if response >= 0:
                     break
             self.dialog_bib.hide()
@@ -267,15 +271,7 @@ class BibMM(object):
         """
         Re-validate the current content of the buffer.
         """
-        self.summary_liststore.clear()
-        self.buffer_bibtex.refresh()
         bib_data = self.buffer_bibtex.get_all_text()
-        self._reload_summary(bib_data)
-
-    def _reload_summary(self, bib_data):
-        """
-        Rebuild the BibTeX entries summary.
-        """
         try:
             strings, entries = parse_data(bib_data)
         except MalformedBibTeX as e:
@@ -286,7 +282,16 @@ class BibMM(object):
             else:
                 self._show_error(
                     _('An error ocurred while parsing the database.'))
-            return
+            return False
+        self._reload_summary(entries)
+        self.buffer_bibtex.refresh()
+
+    def _reload_summary(self, entries):
+        """
+        Rebuild the BibTeX entries summary.
+        """
+
+        self.summary_liststore.clear()
 
         self.available_keys = entries.keys() #!
         if entries:
@@ -318,6 +323,7 @@ class BibMM(object):
 
             # Sort the model by line number
             self.summary_liststore.set_sort_column_id(0, gtk.SORT_ASCENDING)
+        return True
 
     def _scroll_to_item(self, widget):
         """
@@ -365,9 +371,17 @@ class BibMM(object):
         if self.current_file is None:
             return False
 
+        # Check buffer
         content = self.view_bibtex.get_buffer().get_all_text()
-        self._validate_cb(widget)
+        try:
+            strings, entries = parse_data(content)
+        except MalformedBibTeX as e:
+            yes = self._ask_user(
+                _('The current database has errors, do you still want to save?'))
+            if not yes:
+                return False
 
+        # Save file
         with open(self.current_file, 'w') as handler:
             handler.write(content)
 

@@ -24,6 +24,7 @@ import hashlib
 import unicodedata
 import subprocess
 import webbrowser
+import gtk
 
 def transliterate_string(string):
     """
@@ -86,4 +87,26 @@ def default_open(something_to_open):
         ret_code = subprocess.call(['start', something_to_open], shell=True)
 
     return ret_code
+
+
+def show_error(msg='', parent=None):
+    """
+    Show an error message to the user.
+    """
+    error = gtk.MessageDialog(parent,
+                            gtk.DIALOG_DESTROY_WITH_PARENT,
+                            gtk.MESSAGE_ERROR,
+                            gtk.BUTTONS_CLOSE, msg)
+    error.run()
+    error.destroy()
+
+
+def ask_user(msg='', parent=None):
+    message = gtk.MessageDialog(parent,
+                            gtk.DIALOG_DESTROY_WITH_PARENT,
+                            gtk.MESSAGE_QUESTION,
+                            gtk.BUTTONS_YES_NO, msg)
+    response = message.run()
+    message.destroy()
+    return response == gtk.RESPONSE_YES
 
