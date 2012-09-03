@@ -20,7 +20,7 @@ Independent Bibliography (BibTeX) Management Module for Python and PyGtk.
 """
 
 from nested import *
-from nested.utils import show_error, ask_user
+from nested.utils import show_error, ask_user, get_builder
 
 import os
 import logging
@@ -37,6 +37,87 @@ from ..widgets.textview.code_view import CodeView
 WHERE_AM_I = os.path.get_module_path(__file__)
 logger = logging.getLogger(__name__)
 _ = gettext.translation().gettext
+
+class HelpViewer(object):
+    """
+    Simple widget to watch help documentation in HTML.
+    """
+
+    def __init__(self, parent=None):
+        """
+        The object constructor.
+        """
+        # Create the interface
+        self.builder, go = get_builder(WHERE_AM_I, 'help.glade')
+
+        # Get the main objects
+        self.help_dialog = go('help_dialog')
+        help_holder = go('help_holder')
+
+        self.help_view = None
+        try:
+            import webkit
+            self.help_view = webkit.WebView()
+            help_holder.add_with_viewport(self.help_view)
+            self.help_view.show()
+        except ImportError:
+            logger.warning('Unable to import webkit module. Entries help will be unavailable.')
+            windows_warning = _('''\
+Help viewer is not currently supported for Microsoft Windows.
+If you need this functionality you can help the developer by packaging
+pywebkitgtk for Windows: http://code.google.com/p/pywebkitgtk/\
+''')
+            placeholder = gtk.Label(windows_warning)
+            help_holder.add_with_viewport(placeholder)
+            placeholder.show()
+
+        # Configure interface
+        if parent is not None:
+            self.help_dialog.set_transient_for(parent)
+
+        # Connect signals
+        self.builder.connect_signals(self)
+
+    def load_help(self, entry):
+        """
+        Load help for given entry id.
+        """
+        if self.help_view is None:
+            return
+
+        # Find help file
+        help_file = 'entry_{}.html'.format(entry)
+        help_path = os.path.join(WHERE_AM_I, 'help', context_lang, help_file)
+        if not os.path.isfile(help_path):
+            help_path = os.path.join(WHERE_AM_I, 'help', 'en_US', help_file)
+
+        # Load help file
+        if not os.path.isfile(help_path):
+            self.help_view.load_html_string(
+                _('<p>File {} not found.</p>').format(help_path), 'file:///')
+        else:
+            self.help_view.load_uri('file:///' + help_path)
+
+        # Run help dialog
+        self.help_dialog.run()
+        self.help_dialog.hide()
+
+    def _back_cb(self, widget):
+        """
+        Go back in help viewer.
+        """
+        if self.help_view is not None:
+            self.help_view.go_back()
+        return False
+
+    def _forward_cb(self, widget):
+        """
+        Go forward in help viewer.
+        """
+        if self.help_view is not None:
+            self.help_view.go_forward()
+        return False
+
 
 class BibMM(object):
     """
@@ -55,22 +136,19 @@ class BibMM(object):
         self.current_file = None
 
         # Create the interface
-        self.builder = gtk.Builder()
-        self.builder.set_translation_domain('nested')
-        glade_file = os.path.join(WHERE_AM_I, 'bibmm.glade')
-        self.builder.add_from_file(glade_file)
+        self.builder, go = get_builder(WHERE_AM_I, 'bibmm.glade')
 
         # Get the main objects
-        go = self.builder.get_object
         self.dialog_bib = go('dialog_bib')
+
         self.summary = go('summary')
         self.summary_liststore = self.summary.get_model()
+
         self.templates = go('templates')
         self.templates_liststore = self.templates.get_model()
+
         self.styles = go('styles')
         self.styles_liststore = self.styles.get_model()
-        self.help_browser = go('help_browser')
-        self.help_viewer_wrapper = go('help_viewer_wrapper')
         self.style_previewer = go('style_previewer')
         self.style_canvas = go('style_canvas')
 
@@ -79,15 +157,7 @@ class BibMM(object):
         self.buffer_bibtex = BibTeXBuffer()
         self.view_bibtex = CodeView(self.buffer_bibtex)
         holder.add(self.view_bibtex)
-        self.help_viewer = None
-        try:
-            import webkit
-            self.help_viewer = webkit.WebView()
-            self.help_viewer_wrapper.add_with_viewport(self.help_viewer)
-            self.help_viewer.show()
-        except ImportError:
-            logger.warning('Unable to import webkit module. Entries help will be unavailable.')
-            go('entries_help').set_sensitive(False)
+        self.help_viewer = HelpViewer(self.dialog_bib)
 
         # Create tags and marks
         self.buffer_bibtex.create_tag(self.LINE_SEARCH,
@@ -106,6 +176,8 @@ class BibMM(object):
             self.dialog_bib.set_transient_for(parent)
         else:
             self.dialog_bib.connect('delete-event', gtk.main_quit)
+        if self.help_viewer.help_view is None:
+            go('entries_help').set_sensitive(False)
 
         #  Load templates
         for key in bibtex_entries.keys():
@@ -135,6 +207,15 @@ class BibMM(object):
         if parent is None:
             parent = self.dialog_bib
         return ask_user(msg, parent)
+
+    def _view_entry_help_cb(self, widget):
+        """
+        Load help for currently selected entry type.
+        """
+        if self.help_viewer.help_view is not None:
+            entry = self.templates_liststore[self.templates.get_active()][0]
+            self.help_viewer.load_help(entry)
+        return False
 
     def load_bib(self, bib_path):
         """
@@ -215,47 +296,6 @@ class BibMM(object):
                                         textbuffer.get_mark(self.LINE_CURRENT))
         textbuffer.place_cursor(insert_iter)
         textview.grab_focus()
-
-    def _view_entry_help_cb(self, widget):
-        """
-        Open the help browser for currently selected entry.
-        """
-        if self.help_viewer is None:
-            return
-
-        # Find help file
-        entry = self.templates_liststore[self.templates.get_active()][0]
-        help_file = 'entry_{}.html'.format(entry)
-        help_path = os.path.join(WHERE_AM_I, 'help', context_lang, help_file)
-        if not os.path.isfile(help_path):
-            help_path = os.path.join(WHERE_AM_I, 'help', 'en_US', help_file)
-
-        # Load help file
-        if not os.path.isfile(help_path):
-            self.help_viewer.load_html_string(
-                _('<p>File {} not found.</p>').format(help_path), 'file:///')
-        else:
-            self.help_viewer.load_uri('file:///' + help_path)
-
-        # Run help window
-        self.help_browser.run()
-        self.help_browser.hide()
-
-    def _help_viewer_back_cb(self, widget):
-        """
-        Go back in help viewer.
-        """
-        if self.help_viewer is None:
-            return
-        self.help_viewer.go_back()
-
-    def _help_viewer_forward_cb(self, widget):
-        """
-        Go forward in help viewer.
-        """
-        if self.help_viewer is None:
-            return
-        self.help_viewer.go_forward()
 
     def _show_style_cb(self, widget):
         """

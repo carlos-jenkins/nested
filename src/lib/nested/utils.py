@@ -19,6 +19,7 @@
 Utilities for Nested.
 """
 
+import os
 import time
 import hashlib
 import unicodedata
@@ -110,3 +111,10 @@ def ask_user(msg='', parent=None):
     message.destroy()
     return response == gtk.RESPONSE_YES
 
+
+def get_builder(base, glade_file):
+    builder = gtk.Builder()
+    builder.set_translation_domain('nested')
+    glade_path = os.path.join(base, glade_file)
+    builder.add_from_file(glade_path)
+    return builder, builder.get_object
