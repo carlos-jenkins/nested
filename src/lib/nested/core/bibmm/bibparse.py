@@ -252,6 +252,8 @@ def find_line(key, lines):
     """
     key_rex = re.compile(r'\s*@(\w*)\s*[{\(]\s*' + re.escape(key))
     for line_num in range(len(lines)):
+        if lines[line_num].startswith('%'):
+            continue
         if key_rex.match(lines[line_num]):
             return line_num + 1
     return -1
@@ -273,17 +275,14 @@ def parse_data(raw):
     Parses a string with a BibTeX database
     """
 
-    # Remove comments
-    data = remove_comments(raw)
-
     # Get lines
-    lines = data.split('\n')
+    raw_lines = raw.split('\n')
 
     # Regular expressions to use:
     #   A '@' followed by any word and an opening brace or parenthesis
     pub_rex = re.compile('\s?@(\w*)\s*[{\(]')
     # Reformat the string
-    ss = re.sub('\s+', ' ', data).strip()
+    ss = re.sub('\s+', ' ', raw).strip()
 
     # Find entries
     strings = {}
@@ -314,17 +313,23 @@ def parse_data(raw):
                 # Add system fields
                 entry['_num'] = num
                 num += 1
-                entry['_line'] = find_line(entry['_code'], lines)
+                entry['_line'] = find_line(entry['_code'], raw_lines)
                 entries[entry['_code']] = entry
             ss = ss[d[1]+1:].strip()
         else:
+            # An error happened, try to find where
             where = '@' + ss.split('@')[1].split(',')[0]
-            errl = 1
-            for l in raw.split('\n'):
+            err_line = 1
+            found = False
+            for l in raw_lines:
                 if where in l:
+                    found = True
                     break
-                errl += 1
-            raise MalformedBibTeX(l, errl)
+                err_line += 1
+            if found:
+                raise MalformedBibTeX(l, err_line)
+            else:
+                raise MalformedBibTeX('', -1)
 
     return strings, entries
 
@@ -386,5 +391,3 @@ def parse_entry(source):
         return None, None
     else:
         return None, None
-
-

@@ -279,9 +279,13 @@ class BibMM(object):
         try:
             strings, entries = parse_data(bib_data)
         except MalformedBibTeX as e:
-            self._show_error(
-                _('An error ocurred while parsing the database. Please check '
-                  '"{}" at line {}.').format(e.text, e.line))
+            if e.line >= 0:
+                self._show_error(
+                    _('An error ocurred while parsing the database. Please check '
+                      '"{}" at line {}.').format(e.text, e.line))
+            else:
+                self._show_error(
+                    _('An error ocurred while parsing the database.'))
             return
 
         self.available_keys = entries.keys() #!
