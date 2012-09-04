@@ -114,6 +114,10 @@ class Txt2tagsSyntax(object):
         # Create lexer
         self.lang = MarkupDefinition(self.patterns)
 
+        # Overlaps
+        self.overlaps = ['bold', 'italic', 'underline', 'strikethrough',
+                'highlight', 'ulist', 'olist']
+
     def get_pattern(self, char, style):
         # original strikethrough in txt2tags: r'--([^\s](|.*?[^\s])-*)--'
         # txt2tags docs say that format markup is greedy, but
@@ -139,5 +143,7 @@ class Txt2tagsBuffer(MarkupBuffer):
         syntax_highlight = Txt2tagsSyntax()
         lang = syntax_highlight.lang
         styles = syntax_highlight.styles
-        MarkupBuffer.__init__(self, table, lang=lang, styles=styles)
+        overlaps = syntax_highlight.overlaps
+        MarkupBuffer.__init__(self, table,
+                        lang=lang, styles=styles, overlaps=overlaps)
 

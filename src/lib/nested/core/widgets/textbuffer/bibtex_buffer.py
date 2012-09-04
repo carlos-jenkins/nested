@@ -33,11 +33,11 @@ class BibTeXSyntax(object):
                                  'foreground'   : 'black',
                                  'spell_check'  : False},
             'ids'       :       {'weight'       : pango.WEIGHT_ULTRABOLD,
-                                 'scale'        : pango.SCALE_LARGE,
+                                #'scale'        : pango.SCALE_LARGE,
                                  'foreground'   : 'darkblue',
                                  'spell_check'  : False},
             'bracket'   :       {'weight'       : pango.WEIGHT_ULTRABOLD,
-                                 'scale'        : pango.SCALE_X_LARGE,
+                                #'scale'        : pango.SCALE_X_LARGE,
                                  'foreground'   : 'red'},
             'fields'    :       {'foreground'   : '#C95200',
                                  'underline'    : pango.UNDERLINE_SINGLE,
@@ -66,6 +66,8 @@ class BibTeXSyntax(object):
         # Create lexer
         self.lang = MarkupDefinition(self.patterns)
 
+        self.overlaps = ['types', 'bracket', 'ids']
+
 
 class BibTeXBuffer(MarkupBuffer):
     """
@@ -80,4 +82,6 @@ class BibTeXBuffer(MarkupBuffer):
         syntax_highlight = BibTeXSyntax()
         lang = syntax_highlight.lang
         styles = syntax_highlight.styles
-        MarkupBuffer.__init__(self, table, lang=lang, styles=styles)
+        overlaps = syntax_highlight.overlaps
+        MarkupBuffer.__init__(self, table,
+                        lang=lang, styles=styles, overlaps=overlaps)

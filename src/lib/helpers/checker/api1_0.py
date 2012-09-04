@@ -19,24 +19,36 @@
 API 1.0 descriptor and tester.
 """
 
+from os.path import basename
+
 def run(plugin_path, callback):
     """
     Run tests asynchronously.
     """
+
+    def _st(status):
+        if status:
+            return 'Passed'
+        return 'Failed'
+
+    passed = False
+    if basename(plugin_path) == 'test_api1_0.py':
+        passed = True
+
     results = []
     # test_name, result, details
-    results.append(['Structure: Inheritance.'                     , False, 'Ignored'])
-    results.append(['Structure: Metadata.'                        , True,  'Passed'])
-    results.append(['Initialization: GUI Access.'                 , True,  'Passed'])
-    results.append(['Initialization: Event connection.'           , True,  'Passed'])
-    results.append(['Live cycle: Enabling.'                       , True,  'Passed'])
-    results.append(['Live cycle: Disabling.'                      , True,  'Passed'])
-    results.append(['Live cycle: Configuration.'                  , True,  'Passed'])
-    results.append(['File managment: Save file hook.'             , True,  'Passed'])
-    results.append(['File managment: Load file hook.'             , True,  'Passed'])
-    results.append(['Publishing: Pre-assembly hook.'              , True,  'Passed'])
-    results.append(['Publishing: Pre-publishing hook.'            , True,  'Passed'])
-    results.append(['Publishing: Post-publishing hook.'           , True,  'Passed'])
-    results.append(['Configuration: Nested configuration changed.', True,  'Passed'])
+    results.append(['Structure: Inheritance.'                     , passed,  _st(passed)])
+    results.append(['Structure: Metadata.'                        , passed,  _st(passed)])
+    results.append(['Initialization: GUI Access.'                 , passed,  _st(passed)])
+    results.append(['Initialization: Event connection.'           , passed,  _st(passed)])
+    results.append(['Live cycle: Enabling.'                       , passed,  _st(passed)])
+    results.append(['Live cycle: Disabling.'                      , passed,  _st(passed)])
+    results.append(['Live cycle: Configuration.'                  , passed,  _st(passed)])
+    results.append(['File managment: Save file hook.'             , passed,  _st(passed)])
+    results.append(['File managment: Load file hook.'             , passed,  _st(passed)])
+    results.append(['Publishing: Pre-assembly hook.'              , passed,  _st(passed)])
+    results.append(['Publishing: Pre-publishing hook.'            , passed,  _st(passed)])
+    results.append(['Publishing: Post-publishing hook.'           , passed,  _st(passed)])
+    results.append(['Configuration: Nested configuration changed.', passed,  _st(passed)])
 
     callback(results)

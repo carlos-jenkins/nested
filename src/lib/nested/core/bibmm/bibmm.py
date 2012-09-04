@@ -325,6 +325,7 @@ class BibMM(object):
             return False
         self._reload_summary(entries)
         self.buffer_bibtex.refresh()
+        self.view_bibtex._spellcheck.recheck() # FIXME
 
     def _reload_summary(self, entries):
         """

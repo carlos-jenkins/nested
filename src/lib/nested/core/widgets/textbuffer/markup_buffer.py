@@ -151,7 +151,7 @@ class MarkupDefinition(object):
 
 class MarkupBuffer(TextBuffer):
 
-    def __init__(self, table=None, lang=None, styles={}):
+    def __init__(self, table=None, lang=None, styles={}, overlaps=[]):
         TextBuffer.__init__(self, table)
 
         # update styles with user-defined
@@ -172,8 +172,8 @@ class MarkupBuffer(TextBuffer):
         # store lang-definition
         self._lang_def = lang
 
-        self.overlaps = ['bold', 'italic', 'underline', 'strikethrough',
-                         'highlight', 'ulist', 'olist']
+        # Store overlaps data
+        self.overlaps = overlaps
 
         self.connect_after('insert-text', self._markup_on_insert_text)
         self.connect_after('delete-range', self._markup_on_delete_range)
