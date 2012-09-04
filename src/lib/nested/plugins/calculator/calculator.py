@@ -177,11 +177,13 @@ class Calculator(object):
         # Line at cursor
         else:
             start = buff.get_iter_at_mark(buff.get_insert())
-            start.backward_visible_line()
-            start.forward_visible_line()
+            start.set_line_offset(0)
             end = start.copy()
             end.forward_to_line_end()
-            line = buff.get_text(start, end).strip()
+            if start.get_line() == end.get_line():
+                line = buff.get_text(start, end).strip()
+            else:
+                line = ''
 
         if not line:
             return False
