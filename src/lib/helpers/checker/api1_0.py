@@ -19,19 +19,24 @@
 API 1.0 descriptor and tester.
 """
 
-#import threading
-
-tests = 10
-
 def run(plugin_path, callback):
-    pass
+    """
+    Run tests asynchronously.
+    """
+    results = []
+    # test_name, result, details
+    results.append(['Structure: Inheritance.'                     , False, 'Ignored'])
+    results.append(['Structure: Metadata.'                        , True,  'Passed'])
+    results.append(['Initialization: GUI Access.'                 , True,  'Passed'])
+    results.append(['Initialization: Event connection.'           , True,  'Passed'])
+    results.append(['Live cycle: Enabling.'                       , True,  'Passed'])
+    results.append(['Live cycle: Disabling.'                      , True,  'Passed'])
+    results.append(['Live cycle: Configuration.'                  , True,  'Passed'])
+    results.append(['File managment: Save file hook.'             , True,  'Passed'])
+    results.append(['File managment: Load file hook.'             , True,  'Passed'])
+    results.append(['Publishing: Pre-assembly hook.'              , True,  'Passed'])
+    results.append(['Publishing: Pre-publishing hook.'            , True,  'Passed'])
+    results.append(['Publishing: Post-publishing hook.'           , True,  'Passed'])
+    results.append(['Configuration: Nested configuration changed.', True,  'Passed'])
 
-    # Importable
-    # Registered plugins
-    # For each
-        # Instantiable
-        # Function 1
-        # Function 2
-        # ...
-    #threading.Thread(target=self.process_images, name='Nested process_images()', args=[images]).start()
-
+    callback(results)

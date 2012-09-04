@@ -23,8 +23,10 @@ from nested import *
 from nested.utils import show_error, get_builder
 
 import os
+import sys
 import logging
 import gettext
+import threading
 
 import gtk
 import gobject
@@ -38,6 +40,8 @@ APIS = [{
             'name'   : _('API v1.0 - September 2012'),
             'module' : 'api1_0',
         }]
+
+sys.path.append(WHERE_AM_I)
 
 class Checker(object):
     """
@@ -115,7 +119,19 @@ class Checker(object):
 
         # Run tests
         logger.debug('Perfoming checks to {}.'.format(plugin_path))
-        api.run(plugin_path, self._test_cb)
+        threading.Thread(
+            target=api.run,
+            name='API impl. run()',
+            args=[plugin_path, self._test_cb]).start()
 
-    def _test_cb(self, result):
-        print(result)
+    def _test_cb(self, results):
+        """
+        Handle asynchronous test results.
+        """
+        def _load_into_model(r):
+            self.results_model.append(r)
+
+        for r in results:
+            gobject.idle_add(_load_into_model, r)
+
+gobject.threads_init()

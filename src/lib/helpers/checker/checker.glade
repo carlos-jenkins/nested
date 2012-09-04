@@ -18,7 +18,7 @@
       <!-- column-name test_name -->
       <column type="gchararray"/>
       <!-- column-name result -->
-      <column type="gchararray"/>
+      <column type="gboolean"/>
       <!-- column-name details -->
       <column type="gchararray"/>
     </columns>
@@ -189,9 +189,9 @@
                     <property name="clickable">True</property>
                     <property name="sort_column_id">1</property>
                     <child>
-                      <object class="GtkCellRendererText" id="cellrenderertext3"/>
+                      <object class="GtkCellRendererToggle" id="cellrenderertoggle1"/>
                       <attributes>
-                        <attribute name="text">1</attribute>
+                        <attribute name="active">1</attribute>
                       </attributes>
                     </child>
                   </object>
