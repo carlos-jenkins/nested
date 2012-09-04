@@ -39,7 +39,8 @@ class CustomBuffer(TextBuffer):
         Get all text currently in the buffer, in UTF-8.
         Note: Can't believe TextBuffer doesn't have this method :S
         """
-        return self.get_text(self.get_start_iter(), self.get_end_iter()).decode('utf-8')
+        return self.get_text(
+            self.get_start_iter(), self.get_end_iter()).decode('utf-8')
 
     def get_selection_bounds(self):
         """
@@ -50,9 +51,15 @@ class CustomBuffer(TextBuffer):
 
         if not native:
             start_iter = self.get_iter_at_mark(self.get_insert())
-            end_iter = start_iter
+            end_iter = start_iter.copy()
         else:
             start_iter, end_iter = native
 
         return start_iter, end_iter
 
+    def get_selected_text(self):
+        """
+        Return the currently selected text.
+        """
+        start, end = self.get_selection_bounds()
+        return self.get_text(start, end)

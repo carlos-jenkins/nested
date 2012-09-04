@@ -124,9 +124,9 @@ class Calculator(object):
         expr = self.entry.get_text()
         try:
             result = evaluate(expr)
+            self.last = result
             content = log_format.format(expr, result)
             self.entry.set_text('')
-            self.last = content
         except ParseException as err:
             err_msg = '\n'.join([
                         '  ' + ' ' * (err.column - 1) + '^',
@@ -158,3 +158,60 @@ class Calculator(object):
         content = etr.get_text()
         etr.set_text(content[:position - 1] + content[position:])
         etr.set_position(max(position - 1, 0))
+
+    def _load_cb(self, widget):
+        """
+        Load currently selected line from attached textview.
+        """
+        if self.textview is None:
+            return False
+
+        buff = self.textview.get_buffer()
+        # Selection
+        if buff.get_has_selection():
+            start, end = buff.get_selection_bounds()
+            selected = buff.get_text(start, end).strip()
+            if not selected:
+                return False
+            line = selected.split('\n')[0].strip()
+        # Line at cursor
+        else:
+            start = buff.get_iter_at_mark(buff.get_insert())
+            start.backward_visible_line()
+            start.forward_visible_line()
+            end = start.copy()
+            end.forward_to_line_end()
+            line = buff.get_text(start, end).strip()
+
+        if not line:
+            return False
+
+        etr = self.entry
+        position = etr.get_position()
+        content = etr.get_text()
+        etr.set_text(content[:position] + line + content[position:])
+        etr.set_position(position + len(line))
+
+    def _insert_cb(self, widget):
+        """
+        Insert calculator history at textbuffer insert.
+        """
+        if self.textview is None:
+            return False
+
+        buff = self.log.get_buffer()
+        # Selection
+        if buff.get_has_selection():
+            start, end = buff.get_selection_bounds()
+            text = buff.get_text(start, end).strip()
+            if not text:
+                return False
+        # Last result
+        else:
+            text = str(self.last)
+
+        if not text:
+            return False
+
+        view = self.textview.get_buffer()
+        view.insert_at_cursor(text)

@@ -1,9 +1,9 @@
 = ABOUT =
 
-Nested is a specialized editor focused on creating structured documents such 
+Nested is a specialized editor focused on creating structured documents such
 as reports, publications, presentations, books, etc. It is designed to help the
-user concentrate on writing content without been distracted by format or 
-markup. It offers a rich WYSIWYM interface where the user writes plain text 
+user concentrate on writing content without been distracted by format or
+markup. It offers a rich WYSIWYM interface where the user writes plain text
 with a lightweight markup language.
 
     http://nestededitor.sourceforge.net/
@@ -18,9 +18,9 @@ This software depends on the following python libraries (as Ubuntu package name)
 
     + python (>= 2.7)
     + python-gtk2 (>= 2.24)
-    + python-gtksourceview2
     + python-webkit (optional)
     + python-gtkspellcheck (optional)
+      Available at http://pygtkspellcheck.readthedocs.org/
 
 For Latex functionality the following packages are required:
 
@@ -34,6 +34,10 @@ To improve LaTeX export install rubber compilation system:
 To have spell checking languages translated install:
     + iso-codes
 
+If you want to use the Calculator plugin you need to install:
+    + python-pyparsing
+
+
 = SCRIPTS =
 
 To run Nested:
@@ -42,7 +46,7 @@ To run Nested:
 
 To create a Python source distribution:
     python setup.py sdist
-    
+
 To extract l10n strings:
     cd po/
     extract_strings.sh
@@ -96,9 +100,9 @@ TODO v2.0:
 
     - Name and selected path on dialog when creating new file/opening example/opening file is not changed.
     - Publishing might take a while, and no visual feedback is given.
-    - The gallery can only handle raster images (gif, png, jpg), but vectorial ones like eps, svg, pdf 
+    - The gallery can only handle raster images (gif, png, jpg), but vectorial ones like eps, svg, pdf
       are more suitable for LaTeX targets.
-    - Common procs (%!preproc:, %!postproc:) will be correctly interpreted and saved, 
+    - Common procs (%!preproc:, %!postproc:) will be correctly interpreted and saved,
       but when file is re-opened they will appear present in all targets. This is known
       limitation because a the way txt2tags process the file.
     - Website theme: content of section with commented title will not be avalaible. Feature?

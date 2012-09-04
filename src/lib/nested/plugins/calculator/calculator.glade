@@ -124,6 +124,7 @@
             <property name="image">load_image</property>
             <property name="focus_on_click">False</property>
             <property name="xalign">0</property>
+            <signal name="clicked" handler="_load_cb" swapped="no"/>
           </object>
           <packing>
             <property name="top_attach">1</property>
@@ -159,6 +160,7 @@
             <property name="image">insert_image</property>
             <property name="focus_on_click">False</property>
             <property name="xalign">0</property>
+            <signal name="clicked" handler="_insert_cb" swapped="no"/>
           </object>
         </child>
       </object>
