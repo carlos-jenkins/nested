@@ -20,16 +20,24 @@ API Checker Module for Python and PyGtk.
 """
 
 from nested import *
+from nested.utils import show_error, get_builder
 
 import os
 import logging
 import gettext
 
 import gtk
+import gobject
 
 WHERE_AM_I = os.path.get_module_path(__file__)
 logger = logging.getLogger(__name__)
 _ = gettext.translation().gettext
+
+APIS = [{
+            'id'     :  '1.0',
+            'name'   : _('API v1.0 - September 2012'),
+            'module' : 'api1_0',
+        }]
 
 class Checker(object):
     """
@@ -42,13 +50,9 @@ class Checker(object):
         """
 
         # Create the interface
-        self.builder = gtk.Builder()
-        self.builder.set_translation_domain('nested')
-        glade_file = os.path.join(WHERE_AM_I, 'checker.glade')
-        self.builder.add_from_file(glade_file)
+        self.builder, go = get_builder(WHERE_AM_I, 'checker.glade')
 
         # Get the main objects
-        go = self.builder.get_object
         self.window_checker = go('window_checker')
         self.plugin = go('plugin')
         self.plugin_filter = go('plugin_filter')
@@ -64,7 +68,8 @@ class Checker(object):
         self.plugin.add_filter(self.plugin_filter)
 
         # Load compatibilities
-        self.compat_model.append(['1.0', _('API v1.0 - September 2012')])
+        for api in APIS:
+            self.compat_model.append([api['id'], api['name'], api['module']])
         self.compat.set_active(0)
 
         # Connect signals
@@ -76,12 +81,7 @@ class Checker(object):
         """
         if parent is None:
             parent = self.window_checker
-        error = gtk.MessageDialog(parent,
-                                  gtk.DIALOG_DESTROY_WITH_PARENT,
-                                  gtk.MESSAGE_ERROR,
-                                  gtk.BUTTONS_CLOSE, msg)
-        error.run()
-        error.destroy()
+        show_error(msg, parent)
 
     def _close_cb(self, widget, what=''): # 'what' is required for delete-event
         """
@@ -98,7 +98,24 @@ class Checker(object):
         # Check file is selected
         plugin_path = self.plugin.get_filename()
         if plugin_path is None:
-            self._show_error('Please select a plugin file.')
+            self._show_error(_('Please select a plugin file.'))
             return False
 
-        print('Perfoming checks to {}.'.format(plugin_path))
+        # Load verification module
+        selected = self.compat.get_active()
+        if selected < 0:
+            return
+        try:
+            module = self.compat_model[selected][2]
+            api = __import__(module)
+        except ImportError:
+            self._show_error(
+                _('Unable to load module {}. No test will be run.').format(module))
+            return False
+
+        # Run tests
+        logger.debug('Perfoming checks to {}.'.format(plugin_path))
+        api.run(plugin_path, self._test_cb)
+
+    def _test_cb(self, result):
+        print(result)

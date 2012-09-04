@@ -28,6 +28,9 @@ For Latex functionality the following packages are required:
     + texlive (LaTeX, fonts, etc)
     + texlive-latex-extra (To use paralist package)
 
+To improve LaTeX export install rubber compilation system:
+    + rubber
+
 To have spell checking languages translated install:
     + iso-codes
 

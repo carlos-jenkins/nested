@@ -20,14 +20,14 @@ This package contains the clases for syntax highlight of Txt2Tags markup.
 """
 
 import pango
-import nested.core.publish.txt2tags as txt2tags
 from .markup_buffer import Pattern, MarkupDefinition, MarkupBuffer
+from ...publish.txt2tags import getRegexes
 
 class Txt2tagsSyntax(object):
     """Txt2tags syntax highlight class."""
     def __init__(self):
 
-        self.bank = txt2tags.getRegexes()
+        self.bank = getRegexes()
 
         # Styles
         self.styles = {

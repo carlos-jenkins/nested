@@ -1,0 +1,799 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="2.24"/>
+  <!-- interface-naming-policy project-wide -->
+  <object class="GtkImage" id="backspace_image">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-go-back</property>
+  </object>
+  <object class="GtkImage" id="clear_image">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-clear</property>
+  </object>
+  <object class="GtkImage" id="insert_image">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-undo</property>
+  </object>
+  <object class="GtkImage" id="load_image">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-redo</property>
+  </object>
+  <object class="GtkVBox" id="main">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="border_width">10</property>
+    <property name="spacing">5</property>
+    <child>
+      <object class="GtkScrolledWindow" id="log_holder">
+        <property name="height_request">100</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="hscrollbar_policy">automatic</property>
+        <property name="vscrollbar_policy">automatic</property>
+        <property name="shadow_type">etched-out</property>
+        <child>
+          <object class="GtkTextView" id="log">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="editable">False</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">True</property>
+        <property name="fill">True</property>
+        <property name="position">0</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkHSeparator" id="separator1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkEntry" id="entry">
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="invisible_char">•</property>
+        <property name="primary_icon_activatable">False</property>
+        <property name="secondary_icon_activatable">False</property>
+        <property name="primary_icon_sensitive">True</property>
+        <property name="secondary_icon_sensitive">True</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">2</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkHSeparator" id="separator2">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">3</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkTable" id="actions_pad">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="n_rows">2</property>
+        <property name="n_columns">2</property>
+        <property name="column_spacing">5</property>
+        <property name="row_spacing">5</property>
+        <property name="homogeneous">True</property>
+        <child>
+          <object class="GtkButton" id="clear">
+            <property name="label" translatable="yes">Clear</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <property name="image">clear_image</property>
+            <property name="focus_on_click">False</property>
+            <property name="xalign">0</property>
+            <signal name="clicked" handler="_clear_cb" swapped="no"/>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="right_attach">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="load">
+            <property name="label" translatable="yes">Load</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <property name="image">load_image</property>
+            <property name="focus_on_click">False</property>
+            <property name="xalign">0</property>
+          </object>
+          <packing>
+            <property name="top_attach">1</property>
+            <property name="bottom_attach">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="backspace">
+            <property name="label" translatable="yes">Backspace</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <property name="image">backspace_image</property>
+            <property name="focus_on_click">False</property>
+            <property name="xalign">0</property>
+            <signal name="clicked" handler="_backspace_cb" swapped="no"/>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="right_attach">2</property>
+            <property name="top_attach">1</property>
+            <property name="bottom_attach">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="insert">
+            <property name="label" translatable="yes">Insert</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <property name="image">insert_image</property>
+            <property name="focus_on_click">False</property>
+            <property name="xalign">0</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">4</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkTable" id="buttons_pad">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="n_rows">5</property>
+        <property name="n_columns">6</property>
+        <property name="column_spacing">5</property>
+        <property name="row_spacing">5</property>
+        <property name="homogeneous">True</property>
+        <child>
+          <object class="GtkButton" id="equal">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <property name="focus_on_click">False</property>
+            <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+            <child>
+              <object class="GtkLabel" id="equal_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label">&lt;span weight="bold" size="large"&gt;=&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="xvar">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <property name="focus_on_click">False</property>
+            <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+            <child>
+              <object class="GtkLabel" id="xvar_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label">&lt;span style="italic" weight="bold" size="large"&gt;x&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="right_attach">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="yvar">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <property name="focus_on_click">False</property>
+            <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+            <child>
+              <object class="GtkLabel" id="yvar_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label">&lt;span style="italic" weight="bold" size="large"&gt;y&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="right_attach">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="zvar">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <property name="focus_on_click">False</property>
+            <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+            <child>
+              <object class="GtkLabel" id="zvar_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label">&lt;span style="italic" weight="bold" size="large"&gt;z&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="right_attach">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="pow">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <property name="focus_on_click">False</property>
+            <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+            <child>
+              <object class="GtkLabel" id="pow_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label">&lt;span weight="bold" size="large"&gt;^&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="left_attach">4</property>
+            <property name="right_attach">5</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="div">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <property name="focus_on_click">False</property>
+            <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+            <child>
+              <object class="GtkLabel" id="div_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label">&lt;span weight="bold" size="large"&gt;/&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="left_attach">5</property>
+            <property name="right_attach">6</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="opar">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <property name="focus_on_click">False</property>
+            <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+            <child>
+              <object class="GtkLabel" id="opar_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label">&lt;span weight="bold" size="large"&gt;(&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="top_attach">1</property>
+            <property name="bottom_attach">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="cpar">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <property name="focus_on_click">False</property>
+            <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+            <child>
+              <object class="GtkLabel" id="cpar_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label">&lt;span weight="bold" size="large"&gt;)&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="top_attach">2</property>
+            <property name="bottom_attach">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="e">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <property name="focus_on_click">False</property>
+            <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+            <child>
+              <object class="GtkLabel" id="e_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label">&lt;span style="italic" weight="bold" size="large"&gt;e&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="top_attach">3</property>
+            <property name="bottom_attach">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="pi">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <property name="focus_on_click">False</property>
+            <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+            <child>
+              <object class="GtkLabel" id="pi_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label">&lt;span style="italic" weight="bold" size="large"&gt;π&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="top_attach">4</property>
+            <property name="bottom_attach">5</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="mult">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <property name="focus_on_click">False</property>
+            <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+            <child>
+              <object class="GtkLabel" id="mult_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label">&lt;span weight="bold" size="large"&gt;*&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="left_attach">5</property>
+            <property name="right_attach">6</property>
+            <property name="top_attach">1</property>
+            <property name="bottom_attach">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="sub">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <property name="focus_on_click">False</property>
+            <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+            <child>
+              <object class="GtkLabel" id="sub_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label">&lt;span weight="bold" size="large"&gt;-&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="left_attach">5</property>
+            <property name="right_attach">6</property>
+            <property name="top_attach">2</property>
+            <property name="bottom_attach">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="sum">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <property name="focus_on_click">False</property>
+            <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+            <child>
+              <object class="GtkLabel" id="sum_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label">&lt;span weight="bold" size="large"&gt;+&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="left_attach">5</property>
+            <property name="right_attach">6</property>
+            <property name="top_attach">3</property>
+            <property name="bottom_attach">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="eval">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <property name="focus_on_click">False</property>
+            <signal name="clicked" handler="_evaluate_cb" swapped="no"/>
+            <child>
+              <object class="GtkImage" id="eval_image">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="stock">gtk-apply</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="left_attach">5</property>
+            <property name="right_attach">6</property>
+            <property name="top_attach">4</property>
+            <property name="bottom_attach">5</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkHBox" id="numbers_holder">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkTable" id="numbers_pad">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="n_rows">4</property>
+                <property name="n_columns">3</property>
+                <property name="column_spacing">5</property>
+                <property name="row_spacing">5</property>
+                <property name="homogeneous">True</property>
+                <child>
+                  <object class="GtkButton" id="num7">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="use_action_appearance">False</property>
+                    <property name="focus_on_click">False</property>
+                    <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+                    <child>
+                      <object class="GtkLabel" id="num7_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">&lt;span weight="bold" size="large"&gt;7&lt;/span&gt;</property>
+                        <property name="use_markup">True</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="num8">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="use_action_appearance">False</property>
+                    <property name="focus_on_click">False</property>
+                    <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+                    <child>
+                      <object class="GtkLabel" id="num8_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">&lt;span weight="bold" size="large"&gt;8&lt;/span&gt;</property>
+                        <property name="use_markup">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="num9">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="use_action_appearance">False</property>
+                    <property name="focus_on_click">False</property>
+                    <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+                    <child>
+                      <object class="GtkLabel" id="num9_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">&lt;span weight="bold" size="large"&gt;9&lt;/span&gt;</property>
+                        <property name="use_markup">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">2</property>
+                    <property name="right_attach">3</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="num4">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="use_action_appearance">False</property>
+                    <property name="focus_on_click">False</property>
+                    <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+                    <child>
+                      <object class="GtkLabel" id="num4_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">&lt;span weight="bold" size="large"&gt;4&lt;/span&gt;</property>
+                        <property name="use_markup">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="top_attach">1</property>
+                    <property name="bottom_attach">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="num5">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="use_action_appearance">False</property>
+                    <property name="focus_on_click">False</property>
+                    <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+                    <child>
+                      <object class="GtkLabel" id="num5_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">&lt;span weight="bold" size="large"&gt;5&lt;/span&gt;</property>
+                        <property name="use_markup">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">1</property>
+                    <property name="bottom_attach">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="num6">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="use_action_appearance">False</property>
+                    <property name="focus_on_click">False</property>
+                    <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+                    <child>
+                      <object class="GtkLabel" id="num6_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">&lt;span weight="bold" size="large"&gt;6&lt;/span&gt;</property>
+                        <property name="use_markup">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">2</property>
+                    <property name="right_attach">3</property>
+                    <property name="top_attach">1</property>
+                    <property name="bottom_attach">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="num1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="use_action_appearance">False</property>
+                    <property name="focus_on_click">False</property>
+                    <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+                    <child>
+                      <object class="GtkLabel" id="num1_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">&lt;span weight="bold" size="large"&gt;1&lt;/span&gt;</property>
+                        <property name="use_markup">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="top_attach">2</property>
+                    <property name="bottom_attach">3</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="num2">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="use_action_appearance">False</property>
+                    <property name="focus_on_click">False</property>
+                    <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+                    <child>
+                      <object class="GtkLabel" id="num2_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">&lt;span weight="bold" size="large"&gt;2&lt;/span&gt;</property>
+                        <property name="use_markup">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">2</property>
+                    <property name="bottom_attach">3</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="num3">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="use_action_appearance">False</property>
+                    <property name="focus_on_click">False</property>
+                    <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+                    <child>
+                      <object class="GtkLabel" id="num3_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">&lt;span weight="bold" size="large"&gt;3&lt;/span&gt;</property>
+                        <property name="use_markup">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">2</property>
+                    <property name="right_attach">3</property>
+                    <property name="top_attach">2</property>
+                    <property name="bottom_attach">3</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="dot">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="use_action_appearance">False</property>
+                    <property name="focus_on_click">False</property>
+                    <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+                    <child>
+                      <object class="GtkLabel" id="dot_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">&lt;span weight="bold" size="large"&gt;.&lt;/span&gt;</property>
+                        <property name="use_markup">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">3</property>
+                    <property name="bottom_attach">4</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="num0">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="use_action_appearance">False</property>
+                    <property name="focus_on_click">False</property>
+                    <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+                    <child>
+                      <object class="GtkLabel" id="num0_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">&lt;span weight="bold" size="large"&gt;0&lt;/span&gt;</property>
+                        <property name="use_markup">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="top_attach">3</property>
+                    <property name="bottom_attach">4</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="ans">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="use_action_appearance">False</property>
+                    <property name="focus_on_click">False</property>
+                    <signal name="clicked" handler="_btn_press_cb" swapped="no"/>
+                    <child>
+                      <object class="GtkLabel" id="ans_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">&lt;span weight="bold" size="small"&gt;Ans&lt;/span&gt;</property>
+                        <property name="use_markup">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">2</property>
+                    <property name="right_attach">3</property>
+                    <property name="top_attach">3</property>
+                    <property name="bottom_attach">4</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="right_attach">5</property>
+            <property name="top_attach">1</property>
+            <property name="bottom_attach">5</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">5</property>
+      </packing>
+    </child>
+  </object>
+</interface>

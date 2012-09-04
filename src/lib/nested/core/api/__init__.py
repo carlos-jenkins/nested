@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 #
-# Copyright (C) 2011, 2012 Carlos Jenkins <carlos@jenkins.co.cr>
+# Copyright (C) 2012, Carlos Jenkins <carlos@jenkins.co.cr>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,23 +15,4 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""
-API 1.0 descriptor and tester.
-"""
-
-#import threading
-
-tests = 10
-
-def run(plugin_path, callback):
-    pass
-
-    # Importable
-    # Registered plugins
-    # For each
-        # Instantiable
-        # Function 1
-        # Function 2
-        # ...
-    #threading.Thread(target=self.process_images, name='Nested process_images()', args=[images]).start()
-
+from .base_plugin import NestedPlugin

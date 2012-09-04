@@ -20,8 +20,8 @@ This package contains the clases for syntax highlight of BibTeX markup.
 """
 
 import pango
-from nested.core.bibmm.bibtexdef import all_fields, bibtex_entries
 from .markup_buffer import Pattern, MarkupDefinition, MarkupBuffer
+from ...bibmm.bibtexdef import all_fields, bibtex_entries
 
 class BibTeXSyntax(object):
     """BibTeX syntax highlight class."""

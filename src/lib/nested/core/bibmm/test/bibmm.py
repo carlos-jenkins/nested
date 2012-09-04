@@ -5,7 +5,6 @@ from nested.core.bibmm.bibmm import BibMM
 
 WHERE_AM_I = normpath(dirname(abspath(realpath(__file__))))
 
-# Run standalone
 if __name__ == '__main__':
 
     if len(sys.argv) == 2:
