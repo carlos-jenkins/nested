@@ -146,7 +146,6 @@ class Calculator(object):
         Clear the expression entry.
         """
         self.entry.set_text('')
-        self.entry.grab_focus()
 
     def _backspace_cb(self, widget):
         """

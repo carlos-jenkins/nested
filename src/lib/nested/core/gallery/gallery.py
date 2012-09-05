@@ -16,9 +16,47 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Image gallery for Nested.
+Image gallery module for Nested.
 """
 
+from nested import *
+from nested.utils import get_builder
+
+import os
+import logging
+import gettext
+import threading
+
+import gtk
+import gobject
+
+WHERE_AM_I = os.path.get_module_path(__file__)
+logger = logging.getLogger(__name__)
+_ = gettext.translation().gettext
+
+class Gallery(object):
+    """
+    Generic image gallery.
+    """
+
+    def __init__(self, parent=None, gallery_path=None, textview=None):
+        """
+        The object constructor.
+        """
+        # Create the interface
+        self.builder, go = get_builder(WHERE_AM_I, 'gallery.glade')
+
+        # Get the main objects
+        self.main = go('main')
+        self.images_filter = go('images_filter')
+        self.wait = go('wait')
+
+        # Configure interface
+        if parent is not None:
+            self.help_dialog.set_transient_for(parent)
+
+        # Connect signals
+        self.builder.connect_signals(self)
 
     def select_image(self, iter):
         """Select given image in gallery"""
@@ -244,3 +282,5 @@ Image gallery for Nested.
 
             # Move to valid item, if exists
             self.select_image(iter)
+
+gobject.threads_init()

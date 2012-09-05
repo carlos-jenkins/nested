@@ -67,40 +67,6 @@ class Nested(object):
         - Callbacks of the buttons and menus.
     """
 
-    def fix_glade(self, glade_file):
-        """Fix Glade/GtkBuilder weird default behaviour for GtkScrolledWindow"""
-
-        import xml.dom.minidom
-        dom = xml.dom.minidom.parse(glade_file)
-
-        for gui_object in dom.getElementsByTagName('object'):
-            if gui_object.getAttribute('class') == 'GtkScrolledWindow':
-                object_properties = gui_object.getElementsByTagName('property')
-                hscrollbar_policy_found = False
-                vscrollbar_policy_found = False
-                for object_property in object_properties:
-
-                    if not hscrollbar_policy_found and object_property.getAttribute('name') == 'hscrollbar_policy':
-                        hscrollbar_policy_found = True
-
-                    if not vscrollbar_policy_found and object_property.getAttribute('name') == 'vscrollbar_policy':
-                        vscrollbar_policy_found = True
-
-                if not hscrollbar_policy_found:
-                    new_property = dom.createElement('property')
-                    new_property.setAttribute('name', 'hscrollbar_policy')
-                    new_property.childNodes = [dom.createTextNode('automatic')]
-                    gui_object.insertBefore(new_property, gui_object.firstChild)
-
-                if not vscrollbar_policy_found:
-                    new_property = dom.createElement('property')
-                    new_property.setAttribute('name', 'vscrollbar_policy')
-                    new_property.childNodes = [dom.createTextNode('automatic')]
-                    gui_object.insertBefore(new_property, gui_object.firstChild)
-
-        return dom.toxml(encoding='UTF-8')
-
-
     def __init__(self):
         """The Nested constructor."""
 
@@ -154,25 +120,11 @@ class Nested(object):
 
         # Clipboards
         self.text_clipboard = gtk.Clipboard() # Default display, CLIPBOARD
-        self.sections_clipboard = gtk.Clipboard(selection='SECONDARY')
 
         # Get the GUI
-        self.builder = gtk.Builder()
-        self.builder.set_translation_domain('nested') # For l10n
-        if sys.platform.startswith('win'):
-            logger.info(_('Fixing Glade file for MS Windows.'))
-            fixed_glade = self.fix_glade('gui.glade')
-            # I don't want to build rsvg just for the logo :S
-            fixed_glade = fixed_glade.replace(
-                '<property name="icon">nested.svg</property>',
-                '<property name="icon">nested.png</property>', 1)
-            self.builder.add_from_string(fixed_glade)
-        else:
-            self.builder.add_from_file('gui.glade')
-        go = self.builder.get_object
+        self.builder, go = get_builder(WHERE_AM_I, 'gui.glade')
         self.window                        = go('main_window')
         self.about                         = go('dialog_about')
-        self.please_wait                   = go('please_wait')
         #  GUI Elements
         self.program_menu                  = go('program_menu')
         self.program_toolbar               = go('program_toolbar')

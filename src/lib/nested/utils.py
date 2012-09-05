@@ -69,7 +69,6 @@ def default_open(something_to_open):
     """
     Open given file with default user program.
     """
-
     # Check if URL
     if something_to_open.startswith('http') or something_to_open.endswith('.html'):
         webbrowser.open(something_to_open)
@@ -103,6 +102,9 @@ def show_error(msg='', parent=None):
 
 
 def ask_user(msg='', parent=None):
+    """
+    Show a question message to the user.
+    """
     message = gtk.MessageDialog(parent,
                             gtk.DIALOG_DESTROY_WITH_PARENT,
                             gtk.MESSAGE_QUESTION,
@@ -113,6 +115,9 @@ def ask_user(msg='', parent=None):
 
 
 def get_builder(base, glade_file):
+    """
+    Get a GtkBuilder object ready to use.
+    """
     builder = gtk.Builder()
     builder.set_translation_domain('nested')
     glade_path = os.path.join(base, glade_file)

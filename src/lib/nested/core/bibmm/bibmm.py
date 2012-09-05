@@ -127,7 +127,7 @@ class BibMM(object):
     LINE_CURRENT = 'bibmm-current-entry'
     LINE_SEARCH  = 'bibmm-search-entry'
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, textview=None):
         """
         The object constructor.
         """
@@ -239,15 +239,7 @@ class BibMM(object):
             logger.warning(_('Unable to find file {}.').format(bib_path))
         self.buffer_bibtex.place_cursor(self.buffer_bibtex.get_start_iter())
 
-        if self.dialog_bib.get_transient_for() is None:
-            self.dialog_bib.show()
-        else:
-            while True:
-                response = self.dialog_bib.run()
-                print('Dialog returned...')
-                if response >= 0:
-                    break
-            self.dialog_bib.hide()
+        self.dialog_bib.run()
 
     def _reset_gui(self):
         """
@@ -257,13 +249,11 @@ class BibMM(object):
         self.summary_liststore.clear()
         self.view_bibtex.grab_focus()
 
-    def _close_cb(self, widget, what=''): # 'what' is required for delete-event
+    def _close_cb(self, widget):
         """
-        If ran standalone exit the application.
+        Hide the dialog.
         """
-        if self.dialog_bib.get_transient_for() is None:
-            logger.info(_('Running standalone shutdown...'))
-            gtk.main_quit()
+        self.dialog_bib.hide()
 
     def _insert_template_cb(self, widget):
         """

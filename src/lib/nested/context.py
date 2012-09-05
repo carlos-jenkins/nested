@@ -34,6 +34,11 @@ import logging
 # Public Objects
 __all__ = ['context_path', 'context_lang']
 
+# Setting LANG environment variable if not already set
+if os.getenv('LANG') is None:
+    lang, enc = locale.getdefaultlocale()
+    os.environ['LANG'] = lang
+
 # Save the old `logging.Manager` and the old `gettext.translation`.
 logging._OldManager = logging.Manager
 gettext._old_translation = gettext.translation
@@ -142,10 +147,56 @@ _gettext = Gettext()
 gettext.translation = _gettext.translation
 gettext.set_locale_dir = _gettext.set_locale_dir
 
-# setting LANG environment variable if not already set
-if os.getenv('LANG') is None:
-    lang, enc = locale.getdefaultlocale()
-    os.environ['LANG'] = lang
+# Do some monkey patching, to fix bug in PyGtk 2.24.
+if sys.platform.startswith('win'):
+
+    import gtk
+    import xml.dom.minidom
+
+    def fix_glade(glade_file):
+        """
+        Fix Glade/GtkBuilder weird default behaviour for GtkScrolledWindow.
+        Shotgun fix for bug in PyGtk 2.24.
+        """
+        dom = xml.dom.minidom.parse(glade_file)
+
+        for gui_object in dom.getElementsByTagName('object'):
+            if gui_object.getAttribute('class') == 'GtkScrolledWindow':
+                object_properties = gui_object.getElementsByTagName('property')
+                hscrollbar_policy_found = False
+                vscrollbar_policy_found = False
+                for object_property in object_properties:
+
+                    if not hscrollbar_policy_found and object_property.getAttribute('name') == 'hscrollbar_policy':
+                        hscrollbar_policy_found = True
+
+                    if not vscrollbar_policy_found and object_property.getAttribute('name') == 'vscrollbar_policy':
+                        vscrollbar_policy_found = True
+
+                if not hscrollbar_policy_found:
+                    new_property = dom.createElement('property')
+                    new_property.setAttribute('name', 'hscrollbar_policy')
+                    new_property.childNodes = [dom.createTextNode('automatic')]
+                    gui_object.insertBefore(new_property, gui_object.firstChild)
+
+                if not vscrollbar_policy_found:
+                    new_property = dom.createElement('property')
+                    new_property.setAttribute('name', 'vscrollbar_policy')
+                    new_property.childNodes = [dom.createTextNode('automatic')]
+                    gui_object.insertBefore(new_property, gui_object.firstChild)
+
+        return dom.toxml(encoding='UTF-8')
+
+    class Builder(gtk.Builder):
+        def add_from_file(filename):
+            logger.debug(_('Fixing Glade file for MS Windows.'))
+            # GtkScrolledWindow default behavior is diferent in PyGtk 2.24
+            fixed_glade = fix_glade(filename)
+            # Win32 version of PyGtk doesn't inclde rsvg library
+            fixed_glade = fixed_glade.replace('.svg', '.png')
+            super(Builder, self).add_from_string(fixed_glade)
+
+    gtk.Builder = Builder
 
 # Context variables
 context_path = get_module_path(__file__)
