@@ -38,6 +38,9 @@ _ = gettext.translation().gettext
 
 THUMBNAILSIZE = (200, 300)
 PREVIEWSIZE = (200, 300)
+# If you change the size of the thumbnails you'll need to update the
+# cellrenderers at the Glade file.
+
 
 class ImporterThread(WorkingThread):
     """
@@ -79,11 +82,13 @@ class ImporterThread(WorkingThread):
                 continue
 
             # Load image in the gui
+            info, width, height = gtk.gdk.pixbuf_get_file_info(destination)
+            size = '({w} x {h})'.format(w=width, h=height)
             thumbnail = gtk.gdk.pixbuf_new_from_file_at_size(
                                                     destination,
                                                     THUMBNAILSIZE[0],
                                                     THUMBNAILSIZE[1])
-            gobject.idle_add(gallery._load_thumbnail, thumbnail, new_name)
+            gobject.idle_add(gallery._load_thumbnail, thumbnail, new_name, size)
 
             # Update progress
             gallery.loading.pulse(new_name)
@@ -283,7 +288,7 @@ class Gallery(object):
     #########################
     # IMAGE HANDLING
     #########################
-    def _load_thumbnail(self, thumbnail, name):
+    def _load_thumbnail(self, thumbnail, name, size):
         """
         Load a thumbnail to the images view.
         """
@@ -292,9 +297,9 @@ class Gallery(object):
             current_name = self.images_liststore[index][1]
             if name < current_name:
                 self.last_image = self.images_liststore.insert(
-                                                    index, [thumbnail, name])
+                                                index, [thumbnail, name, size])
                 return False
-        self.last_image = self.images_liststore.append([thumbnail, name])
+        self.last_image = self.images_liststore.append([thumbnail, name, size])
         return False
 
     def rescan_gallery(self):

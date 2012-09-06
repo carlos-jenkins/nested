@@ -218,7 +218,9 @@
                 <property name="can_focus">True</property>
                 <property name="model">images_liststore</property>
                 <child>
-                  <object class="GtkCellRendererPixbuf" id="pixbuf_renderer"/>
+                  <object class="GtkCellRendererPixbuf" id="pixbuf_renderer">
+                    <property name="width">200</property>
+                  </object>
                   <attributes>
                     <attribute name="pixbuf">0</attribute>
                   </attributes>
@@ -226,10 +228,21 @@
                 <child>
                   <object class="GtkCellRendererText" id="name_renderer">
                     <property name="alignment">center</property>
+                    <property name="ellipsize">middle</property>
                     <property name="wrap_width">200</property>
                   </object>
                   <attributes>
                     <attribute name="text">1</attribute>
+                  </attributes>
+                </child>
+                <child>
+                  <object class="GtkCellRendererText" id="size_renderer">
+                    <property name="alignment">center</property>
+                    <property name="scale">0.90000000000000002</property>
+                    <property name="wrap_width">200</property>
+                  </object>
+                  <attributes>
+                    <attribute name="text">2</attribute>
                   </attributes>
                 </child>
               </object>
@@ -254,6 +267,8 @@
       <!-- column-name image -->
       <column type="GdkPixbuf"/>
       <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name size -->
       <column type="gchararray"/>
     </columns>
   </object>
