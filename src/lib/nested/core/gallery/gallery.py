@@ -388,7 +388,6 @@ class Gallery(object):
         """
         Open gallery dialog.
         """
-        self.loading.show(1, None)
         self.rescan_gallery()
         self.gallery.run()
 

@@ -120,8 +120,7 @@ class LoadingWindow(object):
                 raise Exception(
                         _('The thread needs to be a subclass of WorkingThread.'))
             self.workthread = workthread
-        else:
-            logger.debug(_('Showing the loading dialog without configuration.'))
+
         self.pulses = max(pulses, 1)
         self._count = 0
         self.progress.set_fraction(0.0)
