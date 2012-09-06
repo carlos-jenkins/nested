@@ -36,10 +36,63 @@ WHERE_AM_I = os.path.get_module_path(__file__)
 logger = logging.get_logger(__name__)
 _ = gettext.translation().gettext
 
-THUMBNAILSIZE = (200, 300)
-PREVIEWSIZE = (200, 300)
 # If you change the size of the thumbnails you'll need to update the
 # cellrenderers at the Glade file.
+THUMBNAILSIZE = (200, 300)
+PREVIEWSIZE = (200, 300)
+IMAGES = ['.png', '.jpg', '.gif']
+
+
+class LoaderThread(WorkingThread):
+    """
+    Independent thread that performs the heavy images loading process.
+    """
+    def payload(self):
+        # Get data
+        obj = self.data
+        gallery = obj.gallery_path
+
+        # Get list of loaded and available
+        already_loaded = [l[1] for l in obj.images_liststore]
+        files_in_gallery = os.listdir(gallery)
+
+        # Find files to load
+        images = []
+        for filename in files_in_gallery:
+            # Check if stop was requested
+            if self.stop:
+                break
+            name, ext = os.path.splitext(filename)
+            filepath = os.path.join(gallery, filename)
+            if os.path.isfile(filepath) and \
+                            ext in IMAGES and not filename in already_loaded:
+                images.append((filepath, filename))
+
+        if images and not self.stop:
+            gobject.idle_add(obj.loading.show, len(images), self)
+
+        for filepath, filename in images:
+            # Check if stop was requested
+            if self.stop:
+                break
+
+            # Load image in the gui
+            info, width, height = gtk.gdk.pixbuf_get_file_info(filepath)
+            size = '({w} x {h})'.format(w=width, h=height)
+            thumbnail = gtk.gdk.pixbuf_new_from_file_at_size(
+                                                    filepath,
+                                                    THUMBNAILSIZE[0],
+                                                    THUMBNAILSIZE[1])
+            gobject.idle_add(obj._load_thumbnail, thumbnail, filename , size)
+
+            # Update progress
+            obj.loading.pulse(filename)
+
+        # Select last image
+        gobject.idle_add(obj._select_last_image)
+
+        # Close loading dialog
+        obj.loading.close()
 
 
 class ImporterThread(WorkingThread):
@@ -130,7 +183,8 @@ class Gallery(object):
         self.images_liststore = go('images_liststore')
         self.images_filter = go('images_filter')
 
-        self.loading = LoadingWindow(self.gallery)
+        loading_parent = parent if parent is not None else self.gallery
+        self.loading = LoadingWindow(parent)
 
         # Configure interface
         self.images_filter.set_name('Images (*.png, *.jpg, *.gif)')
@@ -140,7 +194,7 @@ class Gallery(object):
         self.images_filter.add_pattern('*.png')
         self.images_filter.add_pattern('*.jpg')
         self.images_filter.add_pattern('*.gif')
-        #self.add_filter(self.images_filter)
+        self.add_image.add_filter(self.images_filter)
 
         # Configure interface
         if parent is not None:
@@ -303,7 +357,16 @@ class Gallery(object):
         return False
 
     def rescan_gallery(self):
-        print('Unimplemented')
+        """
+        Check if gallery rescan is needed.
+        """
+        if self.gallery_path is None or not os.path.isdir(self.gallery_path):
+            return None
+
+        workthread = LoaderThread((self))
+        workthread.start()
+
+        return workthread
 
     def import_images(self, images):
         """
@@ -325,6 +388,7 @@ class Gallery(object):
         """
         Open gallery dialog.
         """
+        self.loading.show(1, None)
         self.rescan_gallery()
         self.gallery.run()
 
@@ -340,96 +404,6 @@ class Gallery(object):
     def _insert_image_cb(self, widget):
         print('Unimplemented')
 
-#~
-#~
-#~
-    #~ def open_dialog_images(self, widget):
-        #~ """Show images dialog / gallery."""
-#~
-        #~ # Load images if gallery is empty
-        #~ if not len(self.images_liststore):
-            #~ loading_launched = self.load_images()
-            #~ if loading_launched:
-                #~ return
-        #~ self.images_view.grab_focus()
-        #~ self.dialog_images.run()
-        #~ self.dialog_images.hide()
-#~
-#~
-    #~ def thumbnail_image(self, image):
-        #~ """Creates a thumbnail GdkPixbuf of given image"""
-#~
-        #~ # Create thumbnail
-        #~ img = Image.open(image)
-        #~ img.thumbnail((200, 300), Image.ANTIALIAS)
-#~
-        #~ # Convert to GdkPixbuf
-        #~ if img.mode != 'RGB':          # Fix IOError: cannot write mode P as PPM
-            #~ img = img.convert('RGB')
-        #~ buff = StringIO.StringIO()
-        #~ img.save(buff, 'ppm')
-        #~ contents = buff.getvalue()
-        #~ buff.close()
-        #~ loader = gtk.gdk.PixbufLoader('pnm')
-        #~ loader.write(contents, len(contents))
-        #~ pixbuf = loader.get_pixbuf()
-        #~ loader.close()
-#~
-        #~ return pixbuf
-#~
-#~
-    #~ def process_images(self, images):
-        #~ """
-        #~ Process images: create thumbnail and send them to the GUI.
-        #~ Note: This function is expected to be run in an independent thread
-        #~ """
-#~
-        #~ def _thread_append(image_data):
-            #~ self.images_liststore.append(image_data)
-            #~ return False
-#~
-        #~ def _thread_end():
-            #~ self.please_wait.hide()
-            #~ iter = self.images_liststore.get_iter((0, ))
-            #~ self.select_image(iter)
-            #~ self.open_dialog_images(None)
-            #~ return False
-#~
-        #~ for path, name in images:
-            #~ thumbnail = self.thumbnail_image(path)
-            #~ gobject.idle_add(_thread_append, [thumbnail, name])
-#~
-        #~ gobject.idle_add(_thread_end)
-#~
-#~
-    #~ def load_images(self):
-        #~ """Load all images in the image folder"""
-#~
-        #~ # Verify, again, if images folder exists, if not, do nothing
-        #~ images_folder = os.path.join(self.current_file_path, 'images')
-        #~ if not os.path.exists(images_folder):
-            #~ return
-#~
-        #~ # List all images
-        #~ files_in_images = os.listdir(images_folder)
-        #~ files_in_images.sort()
-        #~ images = []
-        #~ # Process files
-        #~ for filename in files_in_images:
-            #~ name, ext = os.path.splitext(filename)
-            #~ filename = os.path.join(images_folder, filename)
-            #~ if os.path.isfile(filename) and ext in supported_images:
-                #~ images.append([filename, name + ext])
-        #~ # Load files
-        #~ if images:
-            #~ self.please_wait.show()
-            #~ threading.Thread(target=self.process_images, name='Nested process_images()', args=[images]).start()
-            #~ return True
-        #~ return False
-#~
-#~
-
-#~
     #~ def insert_image(self, widget):
         #~ """
         #~ Insert image markup at cursor.

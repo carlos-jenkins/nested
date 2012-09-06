@@ -106,7 +106,8 @@ class LoadingWindow(object):
     def show(self, pulses, workthread):
         """
         Show loading window.
-        This needs to be called from Gtk main thread.
+        This needs to be called from Gtk main thread. Show the loading dialog
+        just before starting the workthread.
         """
         if self.workthread is not None:
             logger.warning(
@@ -114,15 +115,19 @@ class LoadingWindow(object):
                   'or cancel() before starting a new loading event.'))
             return False
 
-        if not isinstance(workthread, WorkingThread):
-            raise Exception(
-                    _('The thread needs to be a subclass of WorkingThread.'))
-
-        self.workthread = workthread
+        if workthread is not None:
+            if not isinstance(workthread, WorkingThread):
+                raise Exception(
+                        _('The thread needs to be a subclass of WorkingThread.'))
+            self.workthread = workthread
+        else:
+            logger.debug(_('Showing the loading dialog without configuration.'))
         self.pulses = max(pulses, 1)
         self._count = 0
+        self.progress.set_fraction(0.0)
+        self.progress.set_text('')
         self.wait.show()
-        return True
+        return False
 
     def pulse(self, text=None):
         """
