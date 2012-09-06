@@ -45,7 +45,7 @@ IMAGES = ['.png', '.jpg', '.gif']
 
 class LoaderThread(WorkingThread):
     """
-    Independent thread that performs the heavy images loading process.
+    Independent thread that performs the heavy image loading process.
     """
     def payload(self):
         # Get data
@@ -184,7 +184,7 @@ class Gallery(object):
         self.images_filter = go('images_filter')
 
         loading_parent = parent if parent is not None else self.gallery
-        self.loading = LoadingWindow(parent)
+        self.loading = LoadingWindow(loading_parent)
 
         # Configure interface
         self.images_filter.set_name('Images (*.png, *.jpg, *.gif)')

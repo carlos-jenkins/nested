@@ -106,6 +106,7 @@
                 <property name="receives_default">True</property>
                 <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
+                <property name="focus_on_click">False</property>
                 <signal name="clicked" handler="_close_gallery_cb" swapped="no"/>
               </object>
               <packing>
@@ -121,6 +122,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_action_appearance">False</property>
+                <property name="focus_on_click">False</property>
                 <signal name="clicked" handler="_insert_image_cb" swapped="no"/>
               </object>
               <packing>
@@ -169,6 +171,7 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="use_action_appearance">False</property>
+                    <property name="focus_on_click">False</property>
                     <signal name="clicked" handler="_open_add_cb" swapped="no"/>
                   </object>
                   <packing>
@@ -184,6 +187,7 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="use_action_appearance">False</property>
+                    <property name="focus_on_click">False</property>
                     <signal name="clicked" handler="_remove_image_cb" swapped="no"/>
                   </object>
                   <packing>
