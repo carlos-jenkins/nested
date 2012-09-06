@@ -79,10 +79,12 @@ logging.Manager = Manager
 _manager = Manager(logging.root)
 logging.Logger.manager = _manager
 logging.manager = _manager
+logging.get_logger = logging.getLogger
 logging.setLevels = _manager.setLevels
+logging.set_levels = logging.setLevels
 
 # logging for the rest of the module
-logger = logging.getLogger(__name__)
+logger = logging.get_logger(__name__)
 
 # Monkey patch a `os.path.get_module_path` function to allow applications that
 # support this monkey patch locate the directory where they are located.

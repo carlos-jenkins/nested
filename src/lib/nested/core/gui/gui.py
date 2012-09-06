@@ -37,7 +37,7 @@ import threading        # For background processing
 from modules.latex.log.viewer import LaTeXLogViewer # To view LaTeX logs
 
 WHERE_AM_I = os.path.get_module_path(__file__)
-logger = logging.getLogger(__name__)
+logger = logging.get_logger(__name__)
 _ = gettext.translation().gettext
 
 os.chdir(WHERE_AM_I)

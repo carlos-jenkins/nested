@@ -1,6 +1,9 @@
 import gtk
 from nested.plugins.calculator.calculator import Calculator
 
+import logging
+logging.set_levels(logging.DEBUG)
+
 if __name__ == '__main__':
     try:
         window = gtk.Window(gtk.WINDOW_TOPLEVEL)

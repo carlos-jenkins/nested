@@ -33,7 +33,7 @@ import gtk
 import gobject
 
 WHERE_AM_I = os.path.get_module_path(__file__)
-logger = logging.getLogger(__name__)
+logger = logging.get_logger(__name__)
 _ = gettext.translation().gettext
 
 class WorkingThread(threading.Thread):
@@ -153,5 +153,6 @@ class LoadingWindow(object):
         This should be called when the workthread has finished it's work.
         This can be called outside the Gtk main thread.
         """
-        self.workthread.cancel()
+        if self.workthread is not None:
+            self.workthread.cancel()
         self.close()

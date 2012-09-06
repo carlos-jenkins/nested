@@ -25,23 +25,82 @@ from nested.utils import get_builder, safe_string, show_error
 import os
 import logging
 import gettext
-import threading
+import shutil
 
 import gtk
 import gobject
 
-from .loading import LoadingWindow
+from .loading import LoadingWindow, WorkingThread
 
 WHERE_AM_I = os.path.get_module_path(__file__)
-logger = logging.getLogger(__name__)
+logger = logging.get_logger(__name__)
 _ = gettext.translation().gettext
+
+THUMBNAILSIZE = (200, 300)
+PREVIEWSIZE = (200, 300)
+
+class ImporterThread(WorkingThread):
+    """
+    Independent thread that performs the heavy images import process.
+    """
+    def payload(self):
+        gallery, images = self.data
+        for image in images:
+
+            # Check if stop was requested
+            if self.stop:
+                break
+
+            # Safe rename image
+            name, ext = os.path.splitext(os.path.basename(image))
+            name = safe_string(name)
+            ext = ext.lower()
+            new_name = name + ext
+            destination = os.path.join(gallery.gallery_path, new_name)
+
+            # Rename destination if it exists
+            num = 0
+            while os.path.exists(destination):
+                new_name = name + '_' + str(num) + ext
+                destination = os.path.join(gallery.gallery_path, new_name)
+                num += 1
+
+            # Copy image
+            try:
+                logger.debug(_('Copying image to: {}').format(destination))
+                shutil.copy(image, destination)
+            except Exception as e:
+                logger.error(
+                    _('Unable to import image {}. Exception '
+                      'thrown:\n{}').format(image, str(e)))
+
+                # Update progress
+                gallery.loading.pulse(_('Error importing {}').format(new_name))
+                continue
+
+            # Load image in the gui
+            thumbnail = gtk.gdk.pixbuf_new_from_file_at_size(
+                                                    destination,
+                                                    THUMBNAILSIZE[0],
+                                                    THUMBNAILSIZE[1])
+            gobject.idle_add(gallery._load_thumbnail, thumbnail, new_name)
+
+            # Update progress
+            gallery.loading.pulse(new_name)
+
+        # Select last image
+        gobject.idle_add(gallery._select_last_image)
+
+        # Close loading dialog
+        gallery.loading.close()
+
 
 class Gallery(object):
     """
     Generic image gallery.
     """
 
-    def __init__(self, parent=None, gallery_path=None, textview=None):
+    def __init__(self, gallery_path=None, parent=None, textview=None):
         """
         The object constructor.
         """
@@ -59,7 +118,8 @@ class Gallery(object):
         self.add_image = go('add_image')
         self.preview_image= go('preview_image')
         self.preview_name = go('preview_name')
-        self.preview_size = go('preview_size')
+        self.preview_width = go('preview_width')
+        self.preview_height = go('preview_height')
 
         self.images_view = go('images_view')
         self.images_liststore = go('images_liststore')
@@ -88,8 +148,9 @@ class Gallery(object):
     # UTILITIES
     #########################
     def _select_last_image(self):
-        if self._last_image is not None:
-            self._select_image(self._last_image)
+        if self.last_image is not None:
+            self._select_image(self.last_image)
+        return False
 
     def _select_image(self, gtkiter):
         """
@@ -109,6 +170,7 @@ class Gallery(object):
         """
         Open the add image dialog.
         """
+        self._update_preview_cb(self.add_image)
         self.add_image.run()
         return False
 
@@ -116,21 +178,31 @@ class Gallery(object):
         """
         Update preview widget add selection dialog.
         """
-        fileuri = widget.get_preview_uri()
-        logger.debug('Update preview for {}'.format(fileuri))
+        filename = widget.get_preview_filename()
+        if filename is None:
+            widget.set_preview_widget_active(False)
+            return False
+        logger.debug('Update preview for {}'.format(filename))
         try:
-            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(fileuri, 128, 128)
-            self.preview_image.set_from_pixbuf(pixbuf)
+            # Get info
+            info, width, height = gtk.gdk.pixbuf_get_file_info(filename)
+            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename,
+                                                          PREVIEWSIZE[0],
+                                                          PREVIEWSIZE[1])
+            name, ext = os.path.splitext(os.path.basename(filename))
+            ext = ext.lower()
 
-            filename = file_chooser.get_preview_filename()
-            self.preview_name.set_markup('<span weight="bold">' +
-                safe_string(widget.get_preview_filename()) + '</span>')
+            # Load preview
+            self.preview_image.set_from_pixbuf(pixbuf)
+            self.preview_name.set_text(safe_string(name) + ext)
+            self.preview_width.set_text('{}px'.format(width))
+            self.preview_height.set_text('{}px'.format(height))
 
             has_preview = True
         except:
             has_preview = False
 
-        file_chooser.set_preview_widget_active(has)
+        widget.set_preview_widget_active(has_preview)
         return False
 
     def _add_image_cb(self, widget):
@@ -144,7 +216,7 @@ class Gallery(object):
             return False
 
         # Get images
-        images = filter(os.path.isfile, self.dialog_images_add.get_filenames())
+        images = filter(os.path.isfile, self.add_image.get_filenames())
         if not images:
             show_error(_('Please select a filename.'), self.add_image)
             return False
@@ -201,13 +273,11 @@ class Gallery(object):
                 remaining_images = len(self.images_liststore)
                 if remaining_images > 0:
                     iterobj = self.images_liststore.get_iter(
-                        (remaining_images - 1, ))
+                                            (remaining_images - 1, ))
                 else:
                     iterobj = None
 
             # Move to valid item, if exists
-            gob
-            _select_image
             self._select_image(iterobj)
 
     #########################
@@ -221,12 +291,11 @@ class Gallery(object):
         for index in range(len(self.images_liststore)):
             current_name = self.images_liststore[index][1]
             if name < current_name:
-                iterobj = self.images_liststore.insert(index, [thumbnail, name])
-                self.last_image = iterobj
-                return iterobj
-        iterobj = self.images_liststore.append([thumbnail, name])
-        self.last_image = iterobj
-        return
+                self.last_image = self.images_liststore.insert(
+                                                    index, [thumbnail, name])
+                return False
+        self.last_image = self.images_liststore.append([thumbnail, name])
+        return False
 
     def rescan_gallery(self):
         print('Unimplemented')
@@ -238,55 +307,11 @@ class Gallery(object):
         if not images:
             return
 
-        # Show loading dialog
-        self.loading.show(len(images))
+        workthread = ImporterThread((self, images))
+        self.loading.show(len(images), workthread)
+        workthread.start()
 
-        # Work/Payload function, this will run in it's own thread
-        def _import_payload():
-            for image in images:
-
-                # Safe rename image
-                name, ext = os.path.splitext(os.path.basename(image))
-                name = safe_string(name)
-                new_name = name + ext
-                destination = os.path.join(self.gallery_path, new_name)
-
-                # Rename destination if it exists
-                num = 0
-                while os.path.exists(destination):
-                    new_name = name + '_' + str(num) + ext
-                    destination = os.path.join(self.gallery_path, new_name)
-                    num += 1
-
-                # Copy image
-                try:
-                    shutil.copy(image, destination)
-                except Exception as e:
-                    logger.error(
-                        _('Unable to import image {}. Exception '
-                          'thrown:\n{}').format(image, str(e)))
-
-                    # Update progress
-                    self.loading.pulse(_('Error importing {}').format(new_name))
-                    continue
-
-                # Load image in the gui
-                thumbnail = gtk.gdk.pixbuf_new_from_file_at_size(
-                                                        destination, 200, 300)
-                gobject.idle_add(self._load_thumbnail, [thumbnail, new_name])
-
-                # Update progress
-                self.loading.pulse(new_name)
-
-            # Select last image
-            gobject.idle_add(self._select_last_image)
-
-            # Close loading dialog
-            self.loading.close()
-
-        return threading.Thread(target=_import_payload,
-                            name='_import_payload()').start()
-
+        return workthread
 
     #########################
     # LIFE CYCLE

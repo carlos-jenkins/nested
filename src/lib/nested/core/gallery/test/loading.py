@@ -5,6 +5,9 @@ import gtk
 
 from nested.core.gallery.loading import LoadingWindow, WorkingThread
 
+import logging
+logging.set_levels(logging.DEBUG)
+
 class MyWorkingThread(WorkingThread):
     def payload(self):
         loading = self.data

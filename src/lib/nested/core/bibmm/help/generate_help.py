@@ -43,7 +43,7 @@ from os.path import join, isfile, isdir, exists
 from nested.core.bibmm.bibtexdef import bibtex_fields_desc, bibtex_fields, bibtex_entries
 
 WHERE_AM_I = os.path.get_module_path(__file__)
-logger = logging.getLogger(__name__)
+logger = logging.get_logger(__name__)
 _ = gettext.translation().gettext
 
 # Translatable base strings

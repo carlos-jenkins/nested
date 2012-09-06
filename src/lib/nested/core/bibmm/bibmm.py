@@ -35,7 +35,7 @@ from ..widgets.textbuffer.bibtex_buffer import BibTeXBuffer
 from ..widgets.textview.code_view import CodeView
 
 WHERE_AM_I = os.path.get_module_path(__file__)
-logger = logging.getLogger(__name__)
+logger = logging.get_logger(__name__)
 _ = gettext.translation().gettext
 
 class HelpViewer(object):

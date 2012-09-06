@@ -3,6 +3,9 @@ import gtk
 from os.path import normpath, dirname, abspath, realpath, join
 from nested.core.bibmm.bibmm import BibMM
 
+import logging
+logging.set_levels(logging.DEBUG)
+
 WHERE_AM_I = normpath(dirname(abspath(realpath(__file__))))
 
 if __name__ == '__main__':

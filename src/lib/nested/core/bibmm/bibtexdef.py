@@ -24,7 +24,7 @@ import logging
 import gettext
 
 WHERE_AM_I = os.path.get_module_path(__file__)
-logger = logging.getLogger(__name__)
+logger = logging.get_logger(__name__)
 _ = gettext.translation().gettext
 
 # "Official" BibTeX fields description

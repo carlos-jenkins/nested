@@ -28,10 +28,10 @@ import gtk
 import pango
 
 WHERE_AM_I = os.path.get_module_path(__file__)
-logger = logging.getLogger(__name__)
+logger = logging.get_logger(__name__)
 _ = gettext.translation().gettext
 
-import logparser
+import .logparser
 
 class LaTeXLogViewer(object):
     """Specialized GUI to analyze LaTeX log files."""
