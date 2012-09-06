@@ -401,23 +401,22 @@ class Gallery(object):
     # INSERTION
     #########################
     def _insert_image_cb(self, widget):
-        print('Unimplemented')
+        """
+        Insert image markup at cursor.
+        """
+        if self.textview is None:
+            return False
 
-    #~ def insert_image(self, widget):
-        #~ """
-        #~ Insert image markup at cursor.
-        #~ """
-#~
-        #~ selection = self.images_view.get_cursor()
-        #~ if selection:
-            #~ # Get name of the image
-            #~ path, cell = selection
-            #~ iter = self.images_liststore.get_iter(path)
-            #~ name = self.images_liststore.get_value(iter, 1)
-#~
-            #~ # Insert mark
-            #~ pre_markup  = bounded_markup['image'][0]
-            #~ post_markup = bounded_markup['image'][1]
-            #~ text = pre_markup + name + post_markup
-            #~ start_iter, end_iter = self.content_buffer.get_selection_bounds()
-            #~ self.content_buffer.insert(start_iter, text)
+        selection = self.images_view.get_cursor()
+        if selection:
+            # Get name of the image
+            path, cell = selection
+            iterobj = self.images_liststore.get_iter(path)
+            name = self.images_liststore.get_value(iterobj, 1)
+
+            # Insert mark
+            buff = self.textview.get_buffer()
+            text = '[{}]'.format(name)
+            buff.insert_at_cursor(text)
+
+        self._close_gallery_cb(widget)

@@ -91,7 +91,7 @@ class LoadingWindow(object):
         self.progress = go('progress')
 
         # Configure object
-        self.pulses = 0
+        self.pulses = 1
         self._count = 0
         self.workthread = None
 
