@@ -226,21 +226,6 @@ class Nested(object):
         self.link_ext_label                = go('entry3')
         self.link_int                      = go('treeview2')
 
-        #  Images dialog specific
-        self.dialog_images                 = go('dialog_images')
-        self.dialog_images_add             = go('dialog_images_add')
-        self.images_liststore              = go('images_liststore')
-        self.images_view                   = go('images_view')
-        self.filter_images                 = go('filter_images')
-        self.filter_images.set_name('Images (*.png, *.jpg, *.gif)')
-        self.filter_images.add_mime_type('image/png')
-        self.filter_images.add_mime_type('image/jpeg')
-        self.filter_images.add_mime_type('image/gif')
-        self.filter_images.add_pattern('*.png')
-        self.filter_images.add_pattern('*.jpg')
-        self.filter_images.add_pattern('*.gif')
-        self.dialog_images_add.add_filter(self.filter_images)
-
         #  Tables dialog specific
         self.dialog_tables                 = go('dialog_tables')
         self.table_rows_spinbutton         = go('table_rows_spinbutton')

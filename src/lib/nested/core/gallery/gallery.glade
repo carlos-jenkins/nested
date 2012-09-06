@@ -12,20 +12,23 @@
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="preview_widget_active">False</property>
+    <property name="transient_for">gallery</property>
+    <property name="create_folders">False</property>
+    <property name="preview_widget">preview</property>
     <property name="select_multiple">True</property>
+    <signal name="update-preview" handler="_update_preview_cb" swapped="no"/>
     <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox15">
+      <object class="GtkVBox" id="add_image_body">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area15">
+          <object class="GtkHButtonBox" id="add_image_actions">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="button21">
+              <object class="GtkButton" id="add_image_cancel">
                 <property name="label">gtk-cancel</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -33,6 +36,7 @@
                 <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
                 <property name="focus_on_click">False</property>
+                <signal name="clicked" handler="_close_add_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -41,14 +45,17 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button22">
+              <object class="GtkButton" id="add_image_ok">
                 <property name="label">gtk-open</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="can_default">True</property>
+                <property name="has_default">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
                 <property name="focus_on_click">False</property>
+                <signal name="clicked" handler="_add_image_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -67,12 +74,11 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="0">button21</action-widget>
-      <action-widget response="1">button22</action-widget>
+      <action-widget response="-1">add_image_cancel</action-widget>
+      <action-widget response="0">add_image_ok</action-widget>
     </action-widgets>
   </object>
-  <object class="GtkFileFilter" id="images_filter"/>
-  <object class="GtkDialog" id="main">
+  <object class="GtkDialog" id="gallery">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Document image gallery</property>
@@ -83,12 +89,12 @@
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
     <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox2">
+      <object class="GtkVBox" id="gallery_body">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area2">
+          <object class="GtkHButtonBox" id="gallery_actions">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
@@ -100,6 +106,7 @@
                 <property name="receives_default">True</property>
                 <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
+                <signal name="clicked" handler="_close_gallery_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -114,7 +121,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_action_appearance">False</property>
-                <signal name="clicked" handler="insert_image" swapped="no"/>
+                <signal name="clicked" handler="_insert_image_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -131,7 +138,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkHBox" id="hbox11">
+          <object class="GtkHBox" id="gallery_header">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="border_width">5</property>
@@ -162,7 +169,7 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="use_action_appearance">False</property>
-                    <signal name="clicked" handler="add_image" swapped="no"/>
+                    <signal name="clicked" handler="_open_add_cb" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -177,7 +184,7 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="use_action_appearance">False</property>
-                    <signal name="clicked" handler="remove_image" swapped="no"/>
+                    <signal name="clicked" handler="_remove_image_cb" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -200,19 +207,18 @@
           </packing>
         </child>
         <child>
-          <object class="GtkScrolledWindow" id="scrolledwindow3">
+          <object class="GtkScrolledWindow" id="gallery_view_holder">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="hscrollbar_policy">never</property>
             <property name="shadow_type">in</property>
             <child>
-              <object class="GtkIconView" id="images_view">
+              <object class="GtkIconView" id="gallery_view">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="model">gallery_liststore</property>
                 <child>
-                  <object class="GtkCellRendererPixbuf" id="cellrenderertext2">
-                    <property name="height">150</property>
-                  </object>
+                  <object class="GtkCellRendererPixbuf" id="cellrenderertext2"/>
                   <attributes>
                     <attribute name="pixbuf">0</attribute>
                   </attributes>
@@ -242,49 +248,58 @@
       <action-widget response="1">button3</action-widget>
     </action-widgets>
   </object>
-  <object class="GtkWindow" id="wait">
-    <property name="height_request">80</property>
+  <object class="GtkListStore" id="gallery_liststore">
+    <columns>
+      <!-- column-name image -->
+      <column type="GdkPixbuf"/>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkFileFilter" id="images_filter"/>
+  <object class="GtkVBox" id="preview">
+    <property name="width_request">200</property>
+    <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="border_width">10</property>
-    <property name="title" translatable="yes">Please wait...</property>
-    <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="destroy_with_parent">True</property>
-    <property name="skip_taskbar_hint">True</property>
-    <property name="skip_pager_hint">True</property>
-    <property name="decorated">False</property>
-    <property name="deletable">False</property>
-    <property name="opacity">0.5</property>
+    <property name="spacing">5</property>
     <child>
-      <object class="GtkVBox" id="wait_body">
+      <object class="GtkImage" id="preview_image">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <child>
-          <object class="GtkLabel" id="wait_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes">&lt;span size="x-large"&gt;Processing. Please wait...&lt;/span&gt;</property>
-            <property name="use_markup">True</property>
-          </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkSpinner" id="wait_spinner">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="active">True</property>
-          </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
+        <property name="stock">gtk-missing-image</property>
+        <property name="icon-size">6</property>
       </object>
+      <packing>
+        <property name="expand">True</property>
+        <property name="fill">True</property>
+        <property name="position">0</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="preview_name">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">&lt;span weight="bold"&gt;New filename&lt;/span&gt;</property>
+        <property name="use_markup">True</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">False</property>
+        <property name="position">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="preview_size">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">&lt;span weight="bold"&gt;0 x 0&lt;/span&gt;</property>
+        <property name="use_markup">True</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">2</property>
+      </packing>
     </child>
   </object>
 </interface>

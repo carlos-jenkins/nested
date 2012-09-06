@@ -174,8 +174,6 @@ class BibMM(object):
         # Configure interface
         if parent is not None:
             self.dialog_bib.set_transient_for(parent)
-        else:
-            self.dialog_bib.connect('delete-event', gtk.main_quit)
         if self.help_viewer.help_view is None:
             go('entries_help').set_sensitive(False)
 
@@ -194,19 +192,6 @@ class BibMM(object):
 
         # Connect signals
         self.builder.connect_signals(self)
-
-    def _show_error(self, msg='', parent=None):
-        """
-        Show an error message to the user.
-        """
-        if parent is None:
-            parent = self.dialog_bib
-        show_error(msg, parent)
-
-    def _ask_user(self, msg='', parent=None):
-        if parent is None:
-            parent = self.dialog_bib
-        return ask_user(msg, parent)
 
     def _view_entry_help_cb(self, widget):
         """
@@ -306,12 +291,14 @@ class BibMM(object):
             strings, entries = parse_data(bib_data)
         except MalformedBibTeX as e:
             if e.line >= 0:
-                self._show_error(
-                    _('An error ocurred while parsing the database. Please check '
-                      '"{}" at line {}.').format(e.text, e.line))
+                show_error(
+                    _('An error ocurred while parsing the database. Please '
+                      'check "{}" at line {}.').format(e.text, e.line),
+                    self.dialog_bib)
             else:
-                self._show_error(
-                    _('An error ocurred while parsing the database.'))
+                show_error(
+                    _('An error ocurred while parsing the database.'),
+                    self.dialog_bib)
             return False
         self._reload_summary(entries)
         self.buffer_bibtex.refresh()
@@ -407,8 +394,8 @@ class BibMM(object):
         try:
             strings, entries = parse_data(content)
         except MalformedBibTeX as e:
-            yes = self._ask_user(
-                _('The current database has errors, do you still want to save?'))
+            yes = ask_user(_('The current database has errors, do you still '
+                             'want to save?'), self.dialog_bib)
             if not yes:
                 return False
 

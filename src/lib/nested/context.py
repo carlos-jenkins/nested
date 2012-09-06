@@ -31,6 +31,9 @@ import locale
 import gettext
 import logging
 
+import gobject
+gobject.threads_init()
+
 # Public Objects
 __all__ = ['context_path', 'context_lang']
 
