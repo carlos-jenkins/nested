@@ -269,15 +269,21 @@ class Gallery(object):
         Adds and image to the user gallery.
         """
         gallery = self.gallery_path
+        dialog = self.add_image
         if gallery is None:
             show_error(_('Cannot import images, the gallery path is'
-                         'not configured.'), self.add_image)
+                         'not configured.'), dialog)
             return False
 
         # Get images
-        images = filter(os.path.isfile, self.add_image.get_filenames())
+        filenames = sorted(dialog.get_filenames())
+        images = filter(os.path.isfile, filenames)
+        folders = filter(os.path.isdir, filenames)
         if not images:
-            show_error(_('Please select a filename.'), self.add_image)
+            if not folders:
+                show_error(_('Please select a filename.'), dialog)
+            else:
+                dialog.set_current_folder(folders[0])
             return False
 
         # Create image folder if needed
@@ -286,14 +292,14 @@ class Gallery(object):
                 os.mkdir(gallery, 0755)
             except Exception as e:
                 show_error(_('Error creating the gallery directory. '
-                             'Read-only file system?'), self.add_image)
+                             'Read-only file system?'), dialog)
                 logger.error(_('Unable to create gallery directory. '
                                'Exception thrown: \n{}').format(str(e)))
                 return False
 
         elif not os.path.isdir(gallery):
             show_error(_('The gallery path is not a directory. '
-                         'Cannot proceed.'), self.add_image)
+                         'Cannot proceed.'), dialog)
             return False
 
         self.import_images(images)
