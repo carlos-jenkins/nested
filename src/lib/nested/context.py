@@ -31,8 +31,12 @@ import locale
 import gettext
 import logging
 
-import gobject
-gobject.threads_init()
+# Make nested a threaded application is gobject is importable
+try:
+    import gobject
+    gobject.threads_init()
+except:
+    pass
 
 # Public Objects
 __all__ = ['context_path', 'context_lang']

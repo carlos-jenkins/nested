@@ -1394,6 +1394,17 @@ pywebkitgtk for Windows: http://code.google.com/p/pywebkitgtk/\
         self.dialog_code_content.set_text('')
 
 
+#~ def publish(self, widget):
+    #~ """
+    #~ Export document to the selected target.
+    #~ """
+#~
+    #~ # Flush the content first
+    #~ self.sync_tree_fields(None)
+#~
+    #~ # Get document
+    #~ header, full_config, body = self.compile_document()
+
 
 def start():
     # Start the GUI
