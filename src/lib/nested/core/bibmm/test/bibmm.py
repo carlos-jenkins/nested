@@ -25,12 +25,12 @@ if __name__ == '__main__':
 
         textview = gtk.TextView()
         launch = gtk.Button('Launch BibMM')
-        search = gtk.Button('Search BibMM')
+        cite = gtk.Button('Cite/Search BibMM')
 
         vbox = gtk.VBox()
         vbox.set_spacing(5)
         vbox.pack_start(launch, False, False)
-        vbox.pack_start(search, False, False)
+        vbox.pack_start(cite, False, False)
 
         box = gtk.HBox()
         box.set_spacing(5)
@@ -44,8 +44,12 @@ if __name__ == '__main__':
 
         def _launch_cb(widget):
             bib.load_bib(bib_file)
+            for row in bib.summary_liststore:
+                print list(row)
 
         launch.connect('clicked', _launch_cb)
+        #~ cite.connect('clicked', bib._cite_cb)
+
 
         gtk.main()
 

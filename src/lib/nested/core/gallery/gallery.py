@@ -54,7 +54,7 @@ class LoaderThread(WorkingThread):
 
         # Get list of loaded and available
         already_loaded = [l[1] for l in obj.images_liststore]
-        files_in_gallery = os.listdir(gallery)
+        files_in_gallery = sorted(os.listdir(gallery))
 
         # Find files to load
         images = []

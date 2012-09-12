@@ -131,250 +131,251 @@ def publish(header, full_config, body):
     # Magic :D :D
     content = convert(''.join(body), target, header, config)
 
-    if content:
+    if not content:
+        return
 
-        # Create export directories if needed
-        export_dir = os.path.join(self.current_file_path, 'publish')
-        export_dir_target = os.path.join(export_dir, target)
-        if not os.path.exists(export_dir_target):
-            os.makedirs(export_dir_target, 0755)
+    # Create export directories if needed
+    export_dir = os.path.join(self.current_file_path, 'publish')
+    export_dir_target = os.path.join(export_dir, target)
+    if not os.path.exists(export_dir_target):
+        os.makedirs(export_dir_target, 0755)
 
-        # Export images
-        if target == 'xhtmls' or target == 'tex':
-            # Check if image export is required
-            images_path = os.path.join(self.current_file_path, 'images')
-            if os.path.exists(images_path) and os.path.isdir(images_path): # Export is required
+    # Export images
+    if target == 'xhtmls' or target == 'tex':
+        # Check if image export is required
+        images_path = os.path.join(self.current_file_path, 'images')
+        if os.path.exists(images_path) and os.path.isdir(images_path): # Export is required
 
-                export_dir_target_images = os.path.join(export_dir_target, 'media', 'images')
+            export_dir_target_images = os.path.join(export_dir_target, 'media', 'images')
 
-                # Remove previous images
-                if os.path.exists(export_dir_target_images):
-                    shutil.rmtree(export_dir_target_images)
+            # Remove previous images
+            if os.path.exists(export_dir_target_images):
+                shutil.rmtree(export_dir_target_images)
 
-                # Copy payload
-                shutil.copytree(images_path, export_dir_target_images)
+            # Copy payload
+            shutil.copytree(images_path, export_dir_target_images)
 
-        # Include libraries
-        if target == 'xhtmls':
-            libs = config.get('nested-libs', [])
-            libs_includes = []
-            for lib in libs:
-                # Check if is a user o system library
-                lib_path = os.path.join(self.user_dir, 'libraries', lib)
-                if not os.path.exists(lib_path):
-                    lib_path = os.path.join(self.where_am_i, 'libraries', lib)
-                # If library exists
-                if os.path.exists(lib_path):
-                    # Check if library has a payload directory
-                    lib_payload_path = os.path.join(lib_path, 'media', 'libraries', lib)
-                    if os.path.exists(lib_payload_path):
+    # Include libraries
+    if target == 'xhtmls':
+        libs = config.get('nested-libs', [])
+        libs_includes = []
+        for lib in libs:
+            # Check if is a user o system library
+            lib_path = os.path.join(self.user_dir, 'libraries', lib)
+            if not os.path.exists(lib_path):
+                lib_path = os.path.join(self.where_am_i, 'libraries', lib)
+            # If library exists
+            if os.path.exists(lib_path):
+                # Check if library has a payload directory
+                lib_payload_path = os.path.join(lib_path, 'media', 'libraries', lib)
+                if os.path.exists(lib_payload_path):
 
-                        export_dir_target_library = os.path.join(export_dir_target, 'media', 'libraries')
-                        dst = os.path.join(export_dir_target_library, lib)
+                    export_dir_target_library = os.path.join(export_dir_target, 'media', 'libraries')
+                    dst = os.path.join(export_dir_target_library, lib)
 
-                        # Create target media and library directory if necessary
-                        if not os.path.exists(export_dir_target_library):
-                            os.makedirs(export_dir_target_library, 0755)
-                        # Remove previous payload
-                        elif os.path.exists(dst):
-                            shutil.rmtree(dst)
+                    # Create target media and library directory if necessary
+                    if not os.path.exists(export_dir_target_library):
+                        os.makedirs(export_dir_target_library, 0755)
+                    # Remove previous payload
+                    elif os.path.exists(dst):
+                        shutil.rmtree(dst)
 
-                        # Copy payload
-                        shutil.copytree(lib_payload_path, dst)
+                    # Copy payload
+                    shutil.copytree(lib_payload_path, dst)
 
-                    # Check if library has an include file
-                    include_path = os.path.join(lib_path, 'include.html')
-                    if os.path.exists(include_path):
-                        try:
-                            include_handler = open(include_path, 'r')
-                            include_content = include_handler.read().strip()
-                            if include_content:
-                                libs_includes.append(include_content)
-                        except:
-                            logger.warning(_('Unable to include library {0}.'.format(include_path)))
-                        finally:
-                            include_handler.close()
-                else:
-                    logger.warning(_('Ignoring library {0}').format(lib))
-
-            # Load includes
-            content = content.replace('</head>', '\n'.join(libs_includes) + '\n</head>', 1)
-
-        # Include theme
-        if target == 'xhtmls':
-            selection = self.xhtmls_themes_combobox.get_active()
-            theme = self.xhtmls_themes_liststore[selection][0]
-            # Check if is a user o system theme
-            theme_path = os.path.join(self.user_dir, 'themes', theme)
-            if not os.path.exists(theme_path):
-                theme_path = os.path.join(self.where_am_i, 'themes', theme)
-            # If theme exists
-            if os.path.exists(theme_path):
-                # We need to include, or to copy theme files?
-                theme_css = os.path.join(theme_path, 'style.css')
-                theme_js  = os.path.join(theme_path, 'scripts.js')
-                if_theme_css = os.path.exists(theme_css)
-                if_theme_js  = os.path.exists(theme_js)
-                if config.get('css-inside', False):
-                    # Include Style
-                    if if_theme_css:
-                        theme_css_content = ''
-                        try:
-                            theme_css_handler = open(theme_css, 'r')
-                            theme_css_content = theme_css_handler.read().strip()
-                        except:
-                            logger.error(_('Unable to open style {0}.'.format(theme_css)))
-                        finally:
-                            theme_css_handler.close()
-                        if theme_css_content:
-                            theme_css_content = '<style type="text/css">\n' + theme_css_content + '\n</style>\n</head>'
-                            content = content.replace('</head>', theme_css_content, 1)
-                    # Include Scripts
-                    if if_theme_js:
-                        theme_js_content = ''
-                        try:
-                            theme_js_handler = open(theme_js, 'r')
-                            theme_js_content = theme_js_handler.read().strip()
-                        except:
-                            logger.error(_('Unable to open script {0}.'.format(theme_js)))
-                        finally:
-                            theme_js_handler.close()
-                        if theme_js_content:
-                            theme_js_content = '<script type="text/javascript">\n//<![CDATA[\n' + theme_js_content + '\n//]]>\n</script>\n</head>'
-                            content = content.replace('</head>', theme_js_content, 1)
-                else:
-                    if if_theme_css or if_theme_js:
-                        # Remove old theme on the target if it exists
-                        old_theme = os.path.join(export_dir_target, 'media', 'themes', theme)
-                        if os.path.exists(old_theme):
-                            shutil.rmtree(old_theme)
-                        # Copy theme
-                        shutil.copytree(theme_path, old_theme)
-                        # Reference files
-                        if if_theme_css:
-                            relative_css = os.path.join('media', 'themes', theme, 'style.css')
-                            theme_css_link = '<link rel="stylesheet" type="text/css" href="{0}" />\n</head>'.format(relative_css)
-                            content = content.replace('</head>', theme_css_link, 1)
-                        if if_theme_js:
-                            relative_js = os.path.join('media', 'themes', theme, 'scripts.js')
-                            theme_js_link = '<script type="text/javascript" src="{0}"></script>\n</head>'.format(relative_js)
-                            content = content.replace('</head>', theme_js_link, 1)
-                # Insert header and footer is theme has one
-                theme_header = os.path.join(theme_path, 'header.html')
-                theme_footer = os.path.join(theme_path, 'footer.html')
-                if os.path.exists(theme_header):
-                    header_content = ''
+                # Check if library has an include file
+                include_path = os.path.join(lib_path, 'include.html')
+                if os.path.exists(include_path):
                     try:
-                        header_handler = open(theme_header, 'r')
-                        header_content = header_handler.read().strip()
+                        include_handler = open(include_path, 'r')
+                        include_content = include_handler.read().strip()
+                        if include_content:
+                            libs_includes.append(include_content)
                     except:
-                        logger.error(_('Unable to open header {0}.'.format(theme_header)))
+                        logger.warning(_('Unable to include library {0}.'.format(include_path)))
                     finally:
-                        header_handler.close()
-                    if header_content:
-                        content = content.replace('<body>', '<body>\n' + header_content, 1)
-                if os.path.exists(theme_footer):
-                    footer_content = ''
-                    try:
-                        footer_handler = open(theme_footer, 'r')
-                        footer_content = footer_handler.read().strip()
-                    except:
-                        logger.error(_('Unable to open footer {0}.'.format(theme_footer)))
-                    finally:
-                        footer_handler.close()
-                    if footer_content:
-                        content = content.replace('</body>', footer_content + '\n</body>\n', 1)
-
+                        include_handler.close()
             else:
-                logger.error(_('Theme {0} could not be found').format(theme))
+                logger.warning(_('Ignoring library {0}').format(lib))
 
-        # Finish the document
-        if target == 'xhtmls':
-            generator_tag = '<meta name="generator" content="http://txt2tags.org" />'
-            content = content.replace(
-                generator_tag,
-                generator_tag.replace('http://txt2tags.org', 'Nested http://nestededitor.sourceforge.net/', 1), 1)
-        elif target == 'tex':
-            # Document class
-            documentclass = config.get('nested-docclass', '{article}')
-            if documentclass != '{article}':
-                # Change document class ({IEEEtran}, {report}, {book})'
-                content = content.replace(r'\documentclass{article}', r'\documentclass' + documentclass, 1)
-                content = content.replace('\\clearpage\n', '', 1)
-            # LaTeX header
-            if config.get('nested-header'):
-                tex_header = config['nested-header']
-                content = content.replace(r'\begin{document}', '% header\n' + tex_header + '\n\n\\begin{document}', 1)
-            # Custom title
-            tex_title_path = os.path.join(self.current_file_path, 'title.tex')
-            if os.path.isfile(tex_title_path):
-                with open(tex_title_path) as tex_title_handler:
-                    tex_title = tex_title_handler.read().strip()
-                    if tex_title:
-                        title_regex = re.compile('% Title.*?% Title end', re.DOTALL)
-                        # I know this is stupid, but I didn't want to deal with re.escape - codec - slash thing
-                        content = title_regex.sub('%%%TITLETEMPORALPLACEHOLDER%%%', content, count=1)
-                        content = content.replace('%%%TITLETEMPORALPLACEHOLDER%%%', '% Title\n' + tex_title + '\n% Title end', 1)
+        # Load includes
+        content = content.replace('</head>', '\n'.join(libs_includes) + '\n</head>', 1)
 
-            # Add support for superscript and subscript
-            content = latex_commands + content
+    # Include theme
+    if target == 'xhtmls':
+        selection = self.xhtmls_themes_combobox.get_active()
+        theme = self.xhtmls_themes_liststore[selection][0]
+        # Check if is a user o system theme
+        theme_path = os.path.join(self.user_dir, 'themes', theme)
+        if not os.path.exists(theme_path):
+            theme_path = os.path.join(self.where_am_i, 'themes', theme)
+        # If theme exists
+        if os.path.exists(theme_path):
+            # We need to include, or to copy theme files?
+            theme_css = os.path.join(theme_path, 'style.css')
+            theme_js  = os.path.join(theme_path, 'scripts.js')
+            if_theme_css = os.path.exists(theme_css)
+            if_theme_js  = os.path.exists(theme_js)
+            if config.get('css-inside', False):
+                # Include Style
+                if if_theme_css:
+                    theme_css_content = ''
+                    try:
+                        theme_css_handler = open(theme_css, 'r')
+                        theme_css_content = theme_css_handler.read().strip()
+                    except:
+                        logger.error(_('Unable to open style {0}.'.format(theme_css)))
+                    finally:
+                        theme_css_handler.close()
+                    if theme_css_content:
+                        theme_css_content = '<style type="text/css">\n' + theme_css_content + '\n</style>\n</head>'
+                        content = content.replace('</head>', theme_css_content, 1)
+                # Include Scripts
+                if if_theme_js:
+                    theme_js_content = ''
+                    try:
+                        theme_js_handler = open(theme_js, 'r')
+                        theme_js_content = theme_js_handler.read().strip()
+                    except:
+                        logger.error(_('Unable to open script {0}.'.format(theme_js)))
+                    finally:
+                        theme_js_handler.close()
+                    if theme_js_content:
+                        theme_js_content = '<script type="text/javascript">\n//<![CDATA[\n' + theme_js_content + '\n//]]>\n</script>\n</head>'
+                        content = content.replace('</head>', theme_js_content, 1)
+            else:
+                if if_theme_css or if_theme_js:
+                    # Remove old theme on the target if it exists
+                    old_theme = os.path.join(export_dir_target, 'media', 'themes', theme)
+                    if os.path.exists(old_theme):
+                        shutil.rmtree(old_theme)
+                    # Copy theme
+                    shutil.copytree(theme_path, old_theme)
+                    # Reference files
+                    if if_theme_css:
+                        relative_css = os.path.join('media', 'themes', theme, 'style.css')
+                        theme_css_link = '<link rel="stylesheet" type="text/css" href="{0}" />\n</head>'.format(relative_css)
+                        content = content.replace('</head>', theme_css_link, 1)
+                    if if_theme_js:
+                        relative_js = os.path.join('media', 'themes', theme, 'scripts.js')
+                        theme_js_link = '<script type="text/javascript" src="{0}"></script>\n</head>'.format(relative_js)
+                        content = content.replace('</head>', theme_js_link, 1)
+            # Insert header and footer is theme has one
+            theme_header = os.path.join(theme_path, 'header.html')
+            theme_footer = os.path.join(theme_path, 'footer.html')
+            if os.path.exists(theme_header):
+                header_content = ''
+                try:
+                    header_handler = open(theme_header, 'r')
+                    header_content = header_handler.read().strip()
+                except:
+                    logger.error(_('Unable to open header {0}.'.format(theme_header)))
+                finally:
+                    header_handler.close()
+                if header_content:
+                    content = content.replace('<body>', '<body>\n' + header_content, 1)
+            if os.path.exists(theme_footer):
+                footer_content = ''
+                try:
+                    footer_handler = open(theme_footer, 'r')
+                    footer_content = footer_handler.read().strip()
+                except:
+                    logger.error(_('Unable to open footer {0}.'.format(theme_footer)))
+                finally:
+                    footer_handler.close()
+                if footer_content:
+                    content = content.replace('</body>', footer_content + '\n</body>\n', 1)
 
-        # Save file
-        export_file = self.current_file_name
-        if export_file is None:
-            export_file = target
-        if export_file.endswith('.t2t'):
-            export_file = export_file[:-4]
-        if not export_file:
-            export_file = '_'
+        else:
+            logger.error(_('Theme {0} could not be found').format(theme))
 
-        file_base = os.path.join(export_dir_target, export_file)
+    # Finish the document
+    if target == 'xhtmls':
+        generator_tag = '<meta name="generator" content="http://txt2tags.org" />'
+        content = content.replace(
+            generator_tag,
+            generator_tag.replace('http://txt2tags.org', 'Nested http://nestededitor.sourceforge.net/', 1), 1)
+    elif target == 'tex':
+        # Document class
+        documentclass = config.get('nested-docclass', '{article}')
+        if documentclass != '{article}':
+            # Change document class ({IEEEtran}, {report}, {book})'
+            content = content.replace(r'\documentclass{article}', r'\documentclass' + documentclass, 1)
+            content = content.replace('\\clearpage\n', '', 1)
+        # LaTeX header
+        if config.get('nested-header'):
+            tex_header = config['nested-header']
+            content = content.replace(r'\begin{document}', '% header\n' + tex_header + '\n\n\\begin{document}', 1)
+        # Custom title
+        tex_title_path = os.path.join(self.current_file_path, 'title.tex')
+        if os.path.isfile(tex_title_path):
+            with open(tex_title_path) as tex_title_handler:
+                tex_title = tex_title_handler.read().strip()
+                if tex_title:
+                    title_regex = re.compile('% Title.*?% Title end', re.DOTALL)
+                    # I know this is stupid, but I didn't want to deal with re.escape - codec - slash thing
+                    content = title_regex.sub('%%%TITLETEMPORALPLACEHOLDER%%%', content, count=1)
+                    content = content.replace('%%%TITLETEMPORALPLACEHOLDER%%%', '% Title\n' + tex_title + '\n% Title end', 1)
 
-        extension = 'html' if target == 'xhtmls' else target
-        export_file = file_base + '.' + extension
+        # Add support for superscript and subscript
+        content = latex_commands + content
 
-        try:
-            file_handler = open(export_file, 'w')
-            file_handler.write(content)
-        except:
-            self.program_statusbar.push(0, _('Unable to publish the document. Are you in a read-only system?'))
-            return
-        finally:
-            file_handler.close()
+    # Save file
+    export_file = self.current_file_name
+    if export_file is None:
+        export_file = target
+    if export_file.endswith('.t2t'):
+        export_file = export_file[:-4]
+    if not export_file:
+        export_file = '_'
 
-        # Check if PDF is requested
-        if target == 'tex':
-            pdf_requested = config.get('nested-pdf', False)
-            if pdf_requested:
-                if self.pdflatex:
-                    os.chdir(export_dir_target)
-                    if sys.platform.startswith('linux') and os.path.isfile('/usr/bin/rubber'):
-                        ret_code = subprocess.call(['/usr/bin/rubber', '--pdf', export_file])
-                    else:
-                        ret_code = subprocess.call([self.pdflatex, '-halt-on-error', '-interaction=batchmode', export_file])
-                    os.chdir(self.where_am_i)
-                    if ret_code == 0: # Succeed
-                        export_file = file_base + '.pdf'
-                    else:             # Failed
-                        export_file = file_base + '.log'
+    file_base = os.path.join(export_dir_target, export_file)
+
+    extension = 'html' if target == 'xhtmls' else target
+    export_file = file_base + '.' + extension
+
+    try:
+        file_handler = open(export_file, 'w')
+        file_handler.write(content)
+    except:
+        self.program_statusbar.push(0, _('Unable to publish the document. Are you in a read-only system?'))
+        return
+    finally:
+        file_handler.close()
+
+    # Check if PDF is requested
+    if target == 'tex':
+        pdf_requested = config.get('nested-pdf', False)
+        if pdf_requested:
+            if self.pdflatex:
+                os.chdir(export_dir_target)
+                if sys.platform.startswith('linux') and os.path.isfile('/usr/bin/rubber'):
+                    ret_code = subprocess.call(['/usr/bin/rubber', '--pdf', export_file])
                 else:
-                    logger.error(_('pdflatex command is not avalaible.'))
+                    ret_code = subprocess.call([self.pdflatex, '-halt-on-error', '-interaction=batchmode', export_file])
+                os.chdir(self.where_am_i)
+                if ret_code == 0: # Succeed
+                    export_file = file_base + '.pdf'
+                else:             # Failed
+                    export_file = file_base + '.log'
+            else:
+                logger.error(_('pdflatex command is not avalaible.'))
 
-        # Open log viewer dialog
-        if export_file.endswith('.log') or (target == 'tex' and self.config.getboolean('latex', 'always-show-log-viewer')):
-            # Create GUI if required
-            if self.log_viewer is None:
-                self.log_viewer = LaTeXLogViewer(self.window)
-            # export_file can be .pdf, .tex, etc. Make sure to open the log.
-            log_file = os.path.splitext(export_file)[0] + '.log'
-            self.log_viewer.load_log(log_file)
+    # Open log viewer dialog
+    if export_file.endswith('.log') or (target == 'tex' and self.config.getboolean('latex', 'always-show-log-viewer')):
+        # Create GUI if required
+        if self.log_viewer is None:
+            self.log_viewer = LaTeXLogViewer(self.window)
+        # export_file can be .pdf, .tex, etc. Make sure to open the log.
+        log_file = os.path.splitext(export_file)[0] + '.log'
+        self.log_viewer.load_log(log_file)
 
-        # Launch default application for that file
-        if self.config.getboolean('general', 'open-after-publish') and not export_file.endswith('.log'):
-            self.default_open(export_file)
+    # Launch default application for that file
+    if self.config.getboolean('general', 'open-after-publish') and not export_file.endswith('.log'):
+        self.default_open(export_file)
 
-        # Show to the status bar
-        self.program_statusbar.push(0, target + _(' file published to: ') + export_file)
+    # Show to the status bar
+    self.program_statusbar.push(0, target + _(' file published to: ') + export_file)
 
 def _custom_preproc(lines, target):
     """

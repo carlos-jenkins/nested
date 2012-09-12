@@ -15,6 +15,4 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .textbuffer import *
-from .textview import *
-from .treeview import *
+from .search import TreeViewSearch

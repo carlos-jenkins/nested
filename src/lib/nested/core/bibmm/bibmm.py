@@ -134,6 +134,7 @@ class BibMM(object):
 
         self.available_keys = []
         self.current_file = None
+        self.textview = textview
 
         # Create the interface
         self.builder, go = get_builder(WHERE_AM_I, 'bibmm.glade')
@@ -404,3 +405,13 @@ class BibMM(object):
             handler.write(content)
 
         self._close_cb(widget)
+
+    #~ def _cite_cb(self, widget):
+        #~ """
+        #~ Run search and cite dialog and insert selected citation in
+        #~ textview's buffer.
+        #~ """
+        #~ response = self.dialog_cite.run()
+        #~ if response != 0:
+            #~ return False
+
