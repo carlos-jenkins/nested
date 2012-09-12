@@ -40,28 +40,29 @@ class TreeViewSearch(object):
     Simple control widget to add search capabilities to a TreeView.
     """
 
-    def __init__(self, treeview, entry, filtermode=True, column=0):
+    def __init__(self, treeview, entry, filtermode=True, column=0, lower=True):
         """
         The object constructor.
         """
         self.treeview = treeview
         self.entry = entry
         self.filtermode = filtermode
+        self.lower = lower
         self.model = treeview.get_model()
 
         # Configure
-        self.treeview.set_enable_search(not filtermode)
         if filtermode:
             # Configure filter model
             self.filter_model = self.model.filter_new()
             self.filter_model.set_visible_func(self._visible_func)
             self.model = gtk.TreeModelSort(self.filter_model)
             self.treeview.set_model(self.model)
+
             # Request a new filtering on entry content change
             self.entry.connect('changed', self._search_requested_cb)
-        else:
-            # Configure entry as search entry
-            self.treeview.set_search_entry(entry)
+
+        # Configure entry as search entry
+        self.treeview.set_search_entry(entry)
 
         # Force to sort and search using some column
         self.treeview.set_search_column(column)
@@ -69,6 +70,7 @@ class TreeViewSearch(object):
 
         # Perform search action on sort change
         self.model.connect('sort-column-changed', self._search_requested_cb)
+
         # Basic GUI
         self.treeview.connect('start-interactive-search', self._select_search)
         self.entry.connect('icon-press', self._clear_cb)
@@ -78,23 +80,29 @@ class TreeViewSearch(object):
         """
         Perform a search action.
         """
-        if self.filtermode:
-            # Trigger filtering
-            self.filter_model.refilter()
-        else:
-            # Set search column
-            column, sort = self.treeview.get_model().get_sort_column_id()
+        # Set search column
+        column, sort = self.treeview.get_model().get_sort_column_id()
+        if column is not None:
             self.treeview.set_search_column(column)
+
+        # Trigger filtering
+        if self.filtermode:
+            self.filter_model.refilter()
         return False
 
     def _visible_func(self, filter_model, iterobj, data=None):
+        """
+        Perform filter search.
+        """
         column, sort = self.model.get_sort_column_id()
         if column is None:
             return True
         search_text = self.entry.get_text()
         row_text = filter_model.get_value(iterobj, column)
-        print('Search: "{}". Row: "{}"'.format(search_text, row_text))
-        return search_text.lower() in row_text.lower()
+        if self.lower:
+            search_text = search_text.lower()
+            row_text = row_text.lower()
+        return search_text in row_text
 
     def _clear_cb(self, entry, event, data=None):
         """

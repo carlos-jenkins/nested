@@ -44,8 +44,6 @@ if __name__ == '__main__':
 
         def _launch_cb(widget):
             bib.load_bib(bib_file)
-            for row in bib.summary_liststore:
-                print list(row)
 
         launch.connect('clicked', _launch_cb)
         #~ cite.connect('clicked', bib._cite_cb)
