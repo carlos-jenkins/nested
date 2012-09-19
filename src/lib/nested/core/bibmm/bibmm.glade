@@ -11,24 +11,24 @@
     <property name="default_height">600</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox1">
+      <object class="GtkVBox" id="bib_body">
         <property name="can_focus">False</property>
         <child>
-          <object class="GtkHPaned" id="paned1">
+          <object class="GtkHPaned" id="bib_columns">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <child>
-              <object class="GtkHBox" id="hbox1">
+              <object class="GtkHBox" id="bib_left_column">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child>
-                  <object class="GtkVBox" id="box2">
+                  <object class="GtkVBox" id="bib_main">
                     <property name="width_request">700</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="spacing">5</property>
                     <child>
-                      <object class="GtkLabel" id="label4">
+                      <object class="GtkLabel" id="bib_main_title">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="xalign">0</property>
@@ -42,12 +42,12 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkHBox" id="hbox2">
+                      <object class="GtkHBox" id="bib_main_templates">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="spacing">10</property>
                         <child>
-                          <object class="GtkLabel" id="label6">
+                          <object class="GtkLabel" id="bib_main_template_title">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="label" translatable="yes">Template:</property>
@@ -66,7 +66,7 @@
                             <property name="model">templates_liststore</property>
                             <property name="tearoff_title">Template</property>
                             <child>
-                              <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                              <object class="GtkCellRendererText" id="templates_name_renderer"/>
                               <attributes>
                                 <attribute name="text">1</attribute>
                               </attributes>
@@ -79,11 +79,11 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox3">
+                          <object class="GtkHBox" id="bib_template_helpers">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
-                              <object class="GtkButton" id="button7">
+                              <object class="GtkButton" id="bib_templates_insert">
                                 <property name="label" translatable="yes">Insert</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -99,7 +99,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolbar" id="toolbar1">
+                              <object class="GtkToolbar" id="bib_templates_help">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="toolbar_style">icons</property>
@@ -165,7 +165,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkVSeparator" id="vseparator1">
+                  <object class="GtkVSeparator" id="bib_columns_separator">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                   </object>
@@ -183,12 +183,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkVBox" id="box3">
+              <object class="GtkVBox" id="bib_right_column">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="spacing">5</property>
                 <child>
-                  <object class="GtkLabel" id="label5">
+                  <object class="GtkLabel" id="summary_title">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="xalign">0</property>
@@ -202,16 +202,16 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkHBox" id="hbox4">
+                  <object class="GtkHBox" id="summary_styles">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkHBox" id="box1">
+                      <object class="GtkHBox" id="summary_styles_row">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="spacing">10</property>
                         <child>
-                          <object class="GtkLabel" id="label7">
+                          <object class="GtkLabel" id="summary_style_title">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="label" translatable="yes">Style:</property>
@@ -228,7 +228,7 @@
                             <property name="can_focus">False</property>
                             <property name="model">styles_liststore</property>
                             <child>
-                              <object class="GtkCellRendererText" id="cellrenderertext2"/>
+                              <object class="GtkCellRendererText" id="styles_name_renderer"/>
                               <attributes>
                                 <attribute name="text">1</attribute>
                               </attributes>
@@ -248,7 +248,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkToolbar" id="toolbar2">
+                      <object class="GtkToolbar" id="summary_style_help">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="toolbar_style">icons</property>
@@ -256,7 +256,7 @@
                         <property name="icon_size">2</property>
                         <property name="icon_size_set">True</property>
                         <child>
-                          <object class="GtkToolButton" id="toolbutton2">
+                          <object class="GtkToolButton" id="styles_help">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="use_action_appearance">False</property>
@@ -285,7 +285,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkScrolledWindow" id="scrolledwindow3">
+                  <object class="GtkScrolledWindow" id="summary_digest">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="shadow_type">in</property>
@@ -394,12 +394,12 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkHBox" id="hbox5">
+                  <object class="GtkHBox" id="summary_search">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="spacing">5</property>
                     <child>
-                      <object class="GtkLabel" id="label1">
+                      <object class="GtkLabel" id="summary_search_label">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Search:</property>
@@ -411,7 +411,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="entry1">
+                      <object class="GtkEntry" id="summary_search_entry">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="invisible_char">•</property>
@@ -449,12 +449,12 @@
           </packing>
         </child>
         <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area1">
+          <object class="GtkHButtonBox" id="bib_actions">
             <property name="can_focus">False</property>
             <property name="homogeneous">True</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="button8">
+              <object class="GtkButton" id="bib_validate">
                 <property name="label" translatable="yes">Validate</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -470,7 +470,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button9">
+              <object class="GtkButton" id="bib_cancel">
                 <property name="label">gtk-cancel</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -486,7 +486,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button10">
+              <object class="GtkButton" id="bib_save">
                 <property name="label">gtk-save</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -510,7 +510,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkHSeparator" id="hseparator1">
+          <object class="GtkHSeparator" id="bib_separator">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
           </object>
@@ -524,9 +524,9 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="-1">button8</action-widget>
-      <action-widget response="0">button9</action-widget>
-      <action-widget response="1">button10</action-widget>
+      <action-widget response="-1">bib_validate</action-widget>
+      <action-widget response="0">bib_cancel</action-widget>
+      <action-widget response="1">bib_save</action-widget>
     </action-widgets>
   </object>
   <object class="GtkImage" id="goto_image">
@@ -551,17 +551,17 @@
     <property name="type_hint">dialog</property>
     <property name="transient_for">dialog_bib</property>
     <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox3">
+      <object class="GtkVBox" id="style_body">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area3">
+          <object class="GtkHButtonBox" id="style_actions">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="button1">
+              <object class="GtkButton" id="style_close">
                 <property name="label">gtk-close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -584,14 +584,14 @@
           </packing>
         </child>
         <child>
-          <object class="GtkScrolledWindow" id="scrolledwindow1">
+          <object class="GtkScrolledWindow" id="style_scroll">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="hscrollbar_policy">automatic</property>
             <property name="vscrollbar_policy">automatic</property>
             <property name="shadow_type">etched-out</property>
             <child>
-              <object class="GtkViewport" id="viewport1">
+              <object class="GtkViewport" id="style_previewe">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="shadow_type">none</property>
@@ -612,7 +612,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkHSeparator" id="hseparator2">
+          <object class="GtkHSeparator" id="style_separator">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
           </object>
@@ -625,7 +625,7 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="0">button1</action-widget>
+      <action-widget response="0">style_close</action-widget>
     </action-widgets>
   </object>
   <object class="GtkListStore" id="styles_liststore">

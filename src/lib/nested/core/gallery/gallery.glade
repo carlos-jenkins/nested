@@ -99,7 +99,7 @@
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="button2">
+              <object class="GtkButton" id="gallery_cancel">
                 <property name="label">gtk-cancel</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -116,7 +116,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button3">
+              <object class="GtkButton" id="gallery_insert">
                 <property name="label" translatable="yes">Insert</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -145,7 +145,7 @@
             <property name="can_focus">False</property>
             <property name="border_width">5</property>
             <child>
-              <object class="GtkLabel" id="label41">
+              <object class="GtkLabel" id="gallery_title">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
@@ -159,13 +159,13 @@
               </packing>
             </child>
             <child>
-              <object class="GtkHButtonBox" id="hbuttonbox2">
+              <object class="GtkHButtonBox" id="gallery_file_actions">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="spacing">5</property>
                 <property name="layout_style">end</property>
                 <child>
-                  <object class="GtkButton" id="button1">
+                  <object class="GtkButton" id="gallery_add">
                     <property name="label" translatable="yes">Add</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -181,7 +181,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="button4">
+                  <object class="GtkButton" id="gallery_remove">
                     <property name="label" translatable="yes">Remove</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -261,8 +261,8 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="0">button2</action-widget>
-      <action-widget response="1">button3</action-widget>
+      <action-widget response="0">gallery_cancel</action-widget>
+      <action-widget response="1">gallery_insert</action-widget>
     </action-widgets>
   </object>
   <object class="GtkFileFilter" id="images_filter"/>

@@ -62,12 +62,14 @@ class LaTeXLogViewer(object):
         self.log_parser = logparser.LogParser()
 
         # Get the pixbuf icons for the summary
-        self.icon_warning = self.summary.render_icon(stock_id=gtk.STOCK_DIALOG_INFO,
-                                                        size=gtk.ICON_SIZE_MENU,
-                                                        detail=None)
-        self.icon_error = self.summary.render_icon(stock_id=gtk.STOCK_DIALOG_ERROR,
-                                                        size=gtk.ICON_SIZE_MENU,
-                                                        detail=None)
+        self.icon_warning = self.summary.render_icon(
+                                    stock_id=gtk.STOCK_DIALOG_INFO,
+                                    size=gtk.ICON_SIZE_MENU,
+                                    detail=None)
+        self.icon_error = self.summary.render_icon(
+                                    stock_id=gtk.STOCK_DIALOG_ERROR,
+                                    size=gtk.ICON_SIZE_MENU,
+                                    detail=None)
 
         # Configure interface
         if parent is not None:
@@ -212,10 +214,12 @@ class LaTeXLogViewer(object):
             textbuffer = textview.get_buffer()
 
             # Remove previous highlight
-            old_line_iter = textbuffer.get_iter_at_mark(textbuffer.get_mark(self.LINE_SEARCH))
+            old_line_iter = textbuffer.get_iter_at_mark(
+                                textbuffer.get_mark(self.LINE_SEARCH))
             old_line_end = old_line_iter.copy()
             old_line_end.forward_to_line_end()
-            textbuffer.remove_tag_by_name(self.LINE_SEARCH, old_line_iter, old_line_end)
+            textbuffer.remove_tag_by_name(
+                                self.LINE_SEARCH, old_line_iter, old_line_end)
 
             # Highlight line if required and place cursor
             if line_num < 1:
@@ -224,7 +228,10 @@ class LaTeXLogViewer(object):
                 line_iter = textbuffer.get_iter_at_line(line_num - 1)
                 line_end = line_iter.copy()
                 line_end.forward_to_line_end()
-                textbuffer.apply_tag_by_name(self.LINE_SEARCH, line_iter, line_end)
+                textbuffer.apply_tag_by_name(
+                            self.LINE_SEARCH,
+                            line_iter,
+                            line_end)
             textbuffer.place_cursor(line_iter)
 
             # Move line mark

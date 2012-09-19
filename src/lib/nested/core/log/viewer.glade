@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="2.24"/>
+  <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkDialog" id="dialog_log">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
@@ -11,15 +12,14 @@
     <property name="type_hint">dialog</property>
     <signal name="delete-event" handler="_close_cb" swapped="no"/>
     <child internal-child="vbox">
-      <object class="GtkBox" id="dialog-vbox1">
+      <object class="GtkVBox" id="log_body">
         <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
         <child internal-child="action_area">
-          <object class="GtkButtonBox" id="dialog-action_area1">
+          <object class="GtkHButtonBox" id="log_actions">
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="button1">
+              <object class="GtkButton" id="log_close">
                 <property name="label">gtk-close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -43,17 +43,17 @@
           </packing>
         </child>
         <child>
-          <object class="GtkVBox" id="vbox1">
+          <object class="GtkVBox" id="log_panels">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="spacing">5</property>
             <child>
-              <object class="GtkFrame" id="frame1">
+              <object class="GtkFrame" id="log_info">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label_xalign">0</property>
                 <child>
-                  <object class="GtkAlignment" id="alignment1">
+                  <object class="GtkAlignment" id="log_info_align">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="top_padding">10</property>
@@ -61,7 +61,7 @@
                     <property name="left_padding">40</property>
                     <property name="right_padding">40</property>
                     <child>
-                      <object class="GtkVBox" id="box1">
+                      <object class="GtkVBox" id="log_info_options">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="homogeneous">True</property>
@@ -70,7 +70,7 @@
                             <property name="can_focus">False</property>
                             <property name="spacing">10</property>
                             <child>
-                              <object class="GtkImage" id="image1">
+                              <object class="GtkImage" id="log_err_image">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
@@ -84,7 +84,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="label2">
+                              <object class="GtkLabel" id="log_err_msg">
                                 <property name="width_request">600</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
@@ -110,7 +110,7 @@
                             <property name="can_focus">False</property>
                             <property name="spacing">10</property>
                             <child>
-                              <object class="GtkImage" id="image2">
+                              <object class="GtkImage" id="log_warning_image">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
@@ -124,7 +124,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="label5">
+                              <object class="GtkLabel" id="log_warning_mesg">
                                 <property name="width_request">600</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
@@ -151,7 +151,7 @@
                             <property name="can_focus">False</property>
                             <property name="spacing">10</property>
                             <child>
-                              <object class="GtkImage" id="image3">
+                              <object class="GtkImage" id="log_info_image">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
@@ -165,7 +165,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="label6">
+                              <object class="GtkLabel" id="log_info_msg">
                                 <property name="width_request">600</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
@@ -191,7 +191,7 @@
                   </object>
                 </child>
                 <child type="label">
-                  <object class="GtkLabel" id="label1">
+                  <object class="GtkLabel" id="log_info_title">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">&lt;b&gt;Status&lt;/b&gt;</property>
@@ -206,13 +206,13 @@
               </packing>
             </child>
             <child>
-              <object class="GtkHPaned" id="paned1">
+              <object class="GtkHPaned" id="log_columns">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="position">330</property>
                 <property name="position_set">True</property>
                 <child>
-                  <object class="GtkScrolledWindow" id="scrolledwindow3">
+                  <object class="GtkScrolledWindow" id="log_scroll_digest">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="shadow_type">in</property>
@@ -224,9 +224,6 @@
                         <property name="expander_column">description_column</property>
                         <property name="search_column">3</property>
                         <signal name="cursor-changed" handler="_scroll_to_item" swapped="no"/>
-                        <child internal-child="selection">
-                          <object class="GtkTreeSelection" id="treeview-selection"/>
-                        </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="type_column">
                             <property name="title">Type</property>
@@ -284,17 +281,17 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkHBox" id="box2">
+                  <object class="GtkHBox" id="log_files">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="spacing">10</property>
                     <property name="homogeneous">True</property>
                     <child>
-                      <object class="GtkVBox" id="box3">
+                      <object class="GtkVBox" id="log_log">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
-                          <object class="GtkLabel" id="label3">
+                          <object class="GtkLabel" id="log_log_title">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="label" translatable="yes">Log file</property>
@@ -332,11 +329,11 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkVBox" id="box4">
+                      <object class="GtkVBox" id="log_src">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
-                          <object class="GtkLabel" id="label4">
+                          <object class="GtkLabel" id="log_src_label">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="label" translatable="yes">LaTeX document</property>
@@ -396,7 +393,7 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="0">button1</action-widget>
+      <action-widget response="0">log_close</action-widget>
     </action-widgets>
   </object>
   <object class="GtkListStore" id="summary_liststore">
