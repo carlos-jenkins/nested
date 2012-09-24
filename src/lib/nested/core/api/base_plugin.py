@@ -48,6 +48,8 @@ class NestedPlugin(object):
     """
 
     # Metadata
+    #  Unique identifier
+    uid = "nested_base_1.0"
     #  Name of the plugin. Single line, no dot at the end of line.
     name = 'Nested base plugin'
     #  Version. Single line, no dot at the end of line.
