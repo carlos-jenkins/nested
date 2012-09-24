@@ -41,6 +41,9 @@ class SearchAndCite(object):
         """
         The object constructor.
         """
+
+        self.model = model
+
         # Create the interface
         self.builder, go = get_builder(WHERE_AM_I, 'cite.glade')
 
@@ -71,7 +74,7 @@ class SearchAndCite(object):
             show_error(_('Please select an entry.'), self.cite_dialog)
             return self.cite()
         self.cite_dialog.hide()
-        bibid = self.cite_view.get_model().get_value(iterobj, 2)
+        bibid = self.model.get_value(iterobj, 2)
         if not bibid:
             show_error(_('The currently selected entry doesn\'t has a valid id.'
                          ' Please correct this in your database or select '
