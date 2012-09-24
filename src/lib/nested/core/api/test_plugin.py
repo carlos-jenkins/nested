@@ -43,14 +43,21 @@ class NestedTestPlugin(NestedPlugin):
     authors = '''Carlos Jenkins <carlos@jenkins.co.cr>'''
     website = 'http://nestededitor.sourceforge.net/'
 
+    @classmethod
+    def can_configure(self):
+        return True
+
     def on_enable(self):
-        show_info('', self.nested.main)
+        show_info('The plugin was enabled.', self.nested.main)
         return
 
     def on_disable(self):
-        show_info('', self.nested.main)
+        show_info('The plugin was disabled.', self.nested.main)
         return
 
     def on_exit(self):
         logger.info(_('on_exit() called on NestedTestPlugin'))
         return
+
+    def do_configure(self):
+        show_info('This is the configuration panel.', self.nested.main)

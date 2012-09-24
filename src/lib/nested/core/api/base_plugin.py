@@ -91,6 +91,14 @@ class NestedPlugin(object):
         """
         self.nested = nested
 
+    @classmethod
+    def can_configure(cls):
+        """
+        Indicates if the plugin can load a configuration panel.
+        The configuration should open when calling do_configure().
+        """
+        return False
+
     def on_enable(self):
         """
         Enable the plugin.
@@ -116,3 +124,12 @@ class NestedPlugin(object):
         """
         logger.info(_('on_exit() called on NestedPlugin'))
         return
+
+    def do_configure(self):
+        """
+        This function is called when the configuration panel for this plugin
+        was requested by the user.
+        """
+        return
+
+

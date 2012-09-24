@@ -21,12 +21,13 @@
             <property name="can_focus">False</property>
             <property name="layout_style">spread</property>
             <child>
-              <object class="GtkButton" id="button1">
+              <object class="GtkButton" id="configure">
                 <property name="label" translatable="yes">Configure plugin</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_action_appearance">False</property>
+                <signal name="clicked" handler="_configure_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -42,6 +43,7 @@
                 <property name="receives_default">True</property>
                 <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
+                <signal name="clicked" handler="_close_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -74,6 +76,7 @@
                 <property name="enable_search">False</property>
                 <property name="enable_grid_lines">both</property>
                 <property name="tooltip_column">3</property>
+                <signal name="cursor-changed" handler="_on_select_cb" swapped="no"/>
                 <child>
                   <object class="GtkTreeViewColumn" id="enabled_column">
                     <property name="title" translatable="yes">Enabled</property>
@@ -81,7 +84,10 @@
                     <property name="reorderable">True</property>
                     <property name="sort_column_id">1</property>
                     <child>
-                      <object class="GtkCellRendererToggle" id="enabled_renderer"/>
+                      <object class="GtkCellRendererToggle" id="enabled_renderer">
+                        <property name="width">100</property>
+                        <signal name="toggled" handler="_enable_disable_cb" swapped="no"/>
+                      </object>
                       <attributes>
                         <attribute name="active">1</attribute>
                       </attributes>
@@ -276,7 +282,7 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="-1">button1</action-widget>
+      <action-widget response="-1">configure</action-widget>
       <action-widget response="0">help_close</action-widget>
     </action-widgets>
   </object>
