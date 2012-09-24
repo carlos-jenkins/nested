@@ -64,6 +64,14 @@ def time_hash(lenght=10):
     result.update(str(time.time()))
     return result.hexdigest()[:lenght]
 
+def sha1sum(filepath):
+    sha1 = hashlib.sha1()
+    f = open(filepath, 'rb')
+    try:
+        sha1.update(f.read())
+    finally:
+        f.close()
+    return sha1.hexdigest()
 
 def default_open(something_to_open):
     """

@@ -394,7 +394,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkHBox" id="summary_search">
+                  <object class="GtkHBox" id="summary_search_body">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="spacing">5</property>
@@ -411,7 +411,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="summary_search_entry">
+                      <object class="GtkEntry" id="summary_search">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="invisible_char">•</property>

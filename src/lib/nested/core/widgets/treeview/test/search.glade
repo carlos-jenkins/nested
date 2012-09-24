@@ -46,7 +46,6 @@
                 <property name="reorderable">True</property>
                 <property name="search_column">0</property>
                 <property name="tooltip_column">6</property>
-                <signal name="cursor-changed" handler="_scroll_to_item" swapped="no"/>
                 <child>
                   <object class="GtkTreeViewColumn" id="line_treeviewcolumn">
                     <property name="title">#</property>

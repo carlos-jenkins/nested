@@ -20,7 +20,7 @@ Independent Bibliography (BibTeX) Management Module for Python and PyGtk.
 """
 
 from nested import *
-from nested.utils import show_error, ask_user, get_builder
+from nested.utils import sha1sum, show_error, ask_user, get_builder
 
 import os
 import logging
@@ -31,93 +31,15 @@ import pango
 
 from .bibparse import parse_data, MalformedBibTeX
 from .bibtexdef import bibtex_entries, create_template
+from .helpviewer import HelpViewer
+from .cite import SearchAndCite
 from ..widgets.textbuffer.bibtex_buffer import BibTeXBuffer
 from ..widgets.textview.code_view import CodeView
+from nested.core.widgets.treeview.search import TreeViewSearch
 
 WHERE_AM_I = os.path.get_module_path(__file__)
 logger = logging.get_logger(__name__)
 _ = gettext.translation().gettext
-
-class HelpViewer(object):
-    """
-    Simple widget to watch help documentation in HTML.
-    """
-
-    def __init__(self, parent=None):
-        """
-        The object constructor.
-        """
-        # Create the interface
-        self.builder, go = get_builder(WHERE_AM_I, 'help.glade')
-
-        # Get the main objects
-        self.help_dialog = go('help_dialog')
-        help_holder = go('help_holder')
-
-        self.help_view = None
-        try:
-            import webkit
-            self.help_view = webkit.WebView()
-            help_holder.add_with_viewport(self.help_view)
-            self.help_view.show()
-        except ImportError:
-            logger.warning('Unable to import webkit module. Entries help will be unavailable.')
-            windows_warning = _('''\
-Help viewer is not currently supported for Microsoft Windows.
-If you need this functionality you can help the developer by packaging
-pywebkitgtk for Windows: http://code.google.com/p/pywebkitgtk/\
-''')
-            placeholder = gtk.Label(windows_warning)
-            help_holder.add_with_viewport(placeholder)
-            placeholder.show()
-
-        # Configure interface
-        if parent is not None:
-            self.help_dialog.set_transient_for(parent)
-
-        # Connect signals
-        self.builder.connect_signals(self)
-
-    def load_help(self, entry):
-        """
-        Load help for given entry id.
-        """
-        if self.help_view is None:
-            return
-
-        # Find help file
-        help_file = 'entry_{}.html'.format(entry)
-        help_path = os.path.join(WHERE_AM_I, 'help', context_lang, help_file)
-        if not os.path.isfile(help_path):
-            help_path = os.path.join(WHERE_AM_I, 'help', 'en_US', help_file)
-
-        # Load help file
-        if not os.path.isfile(help_path):
-            self.help_view.load_html_string(
-                _('<p>File {} not found.</p>').format(help_path), 'file:///')
-        else:
-            self.help_view.load_uri('file:///' + help_path)
-
-        # Run help dialog
-        self.help_dialog.run()
-        self.help_dialog.hide()
-
-    def _back_cb(self, widget):
-        """
-        Go back in help viewer.
-        """
-        if self.help_view is not None:
-            self.help_view.go_back()
-        return False
-
-    def _forward_cb(self, widget):
-        """
-        Go forward in help viewer.
-        """
-        if self.help_view is not None:
-            self.help_view.go_forward()
-        return False
-
 
 class BibMM(object):
     """
@@ -133,8 +55,11 @@ class BibMM(object):
         """
 
         self.available_keys = []
-        self.current_file = None
         self.textview = textview
+
+        self.current_file = None
+        self.reload_required = False
+        self.file_hash = None
 
         # Create the interface
         self.builder, go = get_builder(WHERE_AM_I, 'bibmm.glade')
@@ -144,6 +69,7 @@ class BibMM(object):
 
         self.summary = go('summary')
         self.summary_liststore = self.summary.get_model()
+        self.summary_search = go('summary_search')
 
         self.templates = go('templates')
         self.templates_liststore = self.templates.get_model()
@@ -159,6 +85,8 @@ class BibMM(object):
         self.view_bibtex = CodeView(self.buffer_bibtex)
         holder.add(self.view_bibtex)
         self.help_viewer = HelpViewer(self.dialog_bib)
+        self.dialog_cite = SearchAndCite(self.summary_liststore, parent)
+        self.bib_search = TreeViewSearch(self.summary, self.summary_search)
 
         # Create tags and marks
         self.buffer_bibtex.create_tag(self.LINE_SEARCH,
@@ -188,7 +116,7 @@ class BibMM(object):
 
         # Load styles
         # TODO: Should not be hardwire
-        self.styles_liststore.append(['apalike', 'APA like style (apalike)'])
+        self.styles_liststore.append(['apalike', _('APA like style (apalike)')])
         self.styles.set_active(0)
 
         # Connect signals
@@ -202,30 +130,6 @@ class BibMM(object):
             entry = self.templates_liststore[self.templates.get_active()][0]
             self.help_viewer.load_help(entry)
         return False
-
-    def load_bib(self, bib_path):
-        """
-        Load a bibliography file from the given path into the GUI.
-        """
-
-        self._reset_gui()
-
-        # Load file to TextView
-        if os.path.isfile(bib_path):
-            with open(bib_path) as bib_handler:
-                bib_data = bib_handler.read()
-                self.view_bibtex.get_buffer().set_text(bib_data)
-                try:
-                    strings, entries = parse_data(bib_data)
-                    self._reload_summary(entries)
-                except MalformedBibTeX as e:
-                    logger.warning(_('Malformed bibliographic database {}.').format(bib_path))
-                self.current_file = bib_path
-        else:
-            logger.warning(_('Unable to find file {}.').format(bib_path))
-        self.buffer_bibtex.place_cursor(self.buffer_bibtex.get_start_iter())
-
-        self.dialog_bib.run()
 
     def _reset_gui(self):
         """
@@ -246,10 +150,10 @@ class BibMM(object):
         Insert the currently selected template in the text buffer.
         """
         # Helpers
-        def _get_insert_iter():
-            return textbuffer.get_iter_at_mark(textbuffer.get_insert())
         textview = self.view_bibtex
         textbuffer = self.buffer_bibtex
+        def _get_insert_iter():
+            return textbuffer.get_iter_at_mark(textbuffer.get_insert())
 
         # Get template
         active = self.templates.get_active()
@@ -318,7 +222,8 @@ class BibMM(object):
             # Liststore {line, type, id , author, title, year, note}
             # Liststore {str , str , str, str   , str  , str , str }
             # Fields    {str , str , str, list  , str  , str , str }
-            fields = ['_line', '_type', '_code', 'author', 'title', 'year', 'note']
+            fields = ['_line', '_type', '_code', 'author', 'title',
+                      'year', 'note']
 
             for key in entries.keys():
                 entry = entries[key]
@@ -368,7 +273,8 @@ class BibMM(object):
                 line_iter = textbuffer.get_iter_at_line(line_num - 1)
                 line_end = line_iter.copy()
                 line_end.forward_to_line_end()
-                textbuffer.apply_tag_by_name(self.LINE_SEARCH, line_iter, line_end)
+                textbuffer.apply_tag_by_name(
+                    self.LINE_SEARCH, line_iter, line_end)
             textbuffer.place_cursor(line_iter)
 
             # Move line mark
@@ -378,7 +284,7 @@ class BibMM(object):
             line_mark = textbuffer.get_insert()
             textview.scroll_to_mark(line_mark, 0.2)
 
-        selection = self.summary.get_selection().get_selected()[1]
+        selection = self.bib_search.get_selected()
         if selection:
             entry_line = self.summary_liststore.get_value(selection, 0)
             _highlight_line(self.view_bibtex, int(entry_line))
@@ -406,12 +312,85 @@ class BibMM(object):
 
         self._close_cb(widget)
 
-    #~ def _cite_cb(self, widget):
-        #~ """
-        #~ Run search and cite dialog and insert selected citation in
-        #~ textview's buffer.
-        #~ """
-        #~ response = self.dialog_cite.run()
-        #~ if response != 0:
-            #~ return False
+    def _file_changed(self):
+        """
+        Check whether the bibliographic database file changed.
+        """
+        if self.reload_required:
+            self.reload_required = False
+            return True
+        if self.current_file is None:
+            return False
+        if not os.path.isfile(self.current_file):
+            return False
+        current_hash = sha1sum(self.current_file)
+        if self.file_hash and current_hash != self.file_hash:
+            self.file_hash = current_hash
+            return True
+        return False
 
+    def _load(self):
+        """
+        Load a bibliography file from the given path.
+        """
+
+        if not self._file_changed():
+            return True
+
+        self._reset_gui()
+
+        # Load file to TextView
+        if os.path.isfile(self.current_file):
+            with open(self.current_file) as bib_handler:
+                bib_data = bib_handler.read()
+                self.view_bibtex.get_buffer().set_text(bib_data)
+                try:
+                    strings, entries = parse_data(bib_data)
+                    self._reload_summary(entries)
+                except MalformedBibTeX as e:
+                    logger.warning(
+                        _('Malformed bibliographic '
+                          'database {}.').format(self.current_file))
+                    return False
+        return True
+
+    def set_file(self, bib_file):
+        """
+        Set the current file
+        """
+        self.current_file = bib_file
+        self.reload_required = True
+        self.file_hash = sha1sum(bib_file)
+
+    def edit(self, widget=None):
+        """
+        Run the bibliography manager.
+        """
+        good = self._load()
+        if not good:
+            show_error(_('Your bibliography database seems to be malformed. '
+                     'Please verify the syntax.'),
+                     self.dialog_bib.get_transient_for())
+        self.buffer_bibtex.place_cursor(self.buffer_bibtex.get_start_iter())
+        self.dialog_bib.run()
+
+    def cite(self, widget=None):
+        """
+        Run search and cite dialog and insert selected citation in
+        textview's buffer.
+        """
+        good = self._load()
+        if not good:
+            show_error(_('Your bibliography database seems to be malformed. '
+                     'Please verify the syntax in the database '
+                     'edition module.'),
+                     self.dialog_bib.get_transient_for())
+        response = self.dialog_cite.cite()
+
+        if response:
+            textview = self.textview
+            textbuffer = self.textview.get_buffer()
+            insert_iter = textbuffer.get_iter_at_mark(textbuffer.get_insert())
+            textbuffer.insert(insert_iter, '{{|{}|}}'.format(response))
+            textbuffer.place_cursor(insert_iter)
+            textview.grab_focus()

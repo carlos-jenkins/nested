@@ -43,6 +43,12 @@ class TreeViewSearch(object):
     def __init__(self, treeview, entry, filtermode=True, column=0, lower=True):
         """
         The object constructor.
+        @param: treeview - the treeview to display the search.
+        @param: entry - the input search entry.
+        @param: filtermode - filter (or just select and highlight) the search
+                results.
+        @param: column - the default column to set as search criteria.
+        @param: lower - perform case unsensitive comparison for searching.
         """
         self.treeview = treeview
         self.entry = entry
@@ -75,7 +81,6 @@ class TreeViewSearch(object):
         self.treeview.connect('start-interactive-search', self._select_search)
         self.entry.connect('icon-press', self._clear_cb)
 
-
     def _search_requested_cb(self, widget, data=None):
         """
         Perform a search action.
@@ -99,6 +104,8 @@ class TreeViewSearch(object):
             return True
         search_text = self.entry.get_text()
         row_text = filter_model.get_value(iterobj, column)
+        if row_text is None:
+            return True
         if self.lower:
             search_text = search_text.lower()
             row_text = row_text.lower()
@@ -117,3 +124,15 @@ class TreeViewSearch(object):
         """
         self.entry.grab_focus()
         return False
+
+    def get_selected(self):
+        """
+        Helper method that returns an iter to the currently selected row.
+        """
+        selection = self.treeview.get_selection().get_selected()[1]
+        if self.filtermode and selection:
+            selection = self.filter_model.convert_iter_to_child_iter(
+                            self.model.convert_iter_to_child_iter(
+                                None, selection)
+                            )
+        return selection

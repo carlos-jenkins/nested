@@ -41,12 +41,10 @@ if __name__ == '__main__':
         window.show_all()
 
         bib = BibMM(window, textview)
+        bib.set_file(bib_file)
 
-        def _launch_cb(widget):
-            bib.load_bib(bib_file)
-
-        launch.connect('clicked', _launch_cb)
-        #~ cite.connect('clicked', bib._cite_cb)
+        launch.connect('clicked', bib.edit)
+        cite.connect('clicked', bib.cite)
 
 
         gtk.main()
