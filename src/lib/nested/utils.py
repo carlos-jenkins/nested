@@ -64,6 +64,7 @@ def time_hash(lenght=10):
     result.update(str(time.time()))
     return result.hexdigest()[:lenght]
 
+
 def sha1sum(filepath):
     sha1 = hashlib.sha1()
     f = open(filepath, 'rb')
@@ -72,6 +73,7 @@ def sha1sum(filepath):
     finally:
         f.close()
     return sha1.hexdigest()
+
 
 def default_open(something_to_open):
     """
@@ -95,6 +97,18 @@ def default_open(something_to_open):
         ret_code = subprocess.call(['start', something_to_open], shell=True)
 
     return ret_code
+
+
+def show_info(msg='', parent=None):
+    """
+    Show an information message to the user.
+    """
+    info = gtk.MessageDialog(parent,
+                            gtk.DIALOG_DESTROY_WITH_PARENT,
+                            gtk.MESSAGE_INFO,
+                            gtk.BUTTONS_CLOSE, msg)
+    info.run()
+    info.destroy()
 
 
 def show_error(msg='', parent=None):

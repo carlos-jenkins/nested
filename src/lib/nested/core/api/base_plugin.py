@@ -23,6 +23,14 @@ Compatibility: 1.0
 from nested import *
 from nested.utils import *
 
+import os
+import logging
+import gettext
+
+WHERE_AM_I = os.path.get_module_path(__file__)
+logger = logging.get_logger(__name__)
+_ = gettext.translation().gettext
+
 class NestedPlugin(object):
     """
     Base class for creating Nested plugins.
@@ -48,21 +56,63 @@ class NestedPlugin(object):
     """
 
     # Metadata
-    #  Unique identifier
-    uid = "nested_base_1.0"
+    #  Unique identifier (authorprefix_name_version)
+    #   e.g.: 'nested_base_1.0'
+    uid = ''
+
     #  Name of the plugin. Single line, no dot at the end of line.
-    name = 'Nested base plugin'
+    #   e.g.: 'Nested base plugin'
+    name = ''
+
     #  Version. Single line, no dot at the end of line.
+    #   e.g.: '1.0'
     version = '1.0'
+
     #  Brief description. Single line, dot at the end of line.
-    short_description = 'Base plugin for Nested.'
+    #   e.g.: 'Base plugin for Nested.'
+    short_description = ''
+
     #  Large description . Multiple lines, dot at the end of line.
-    large_description = '''This is the base plugin class for Nested.'''
+    #   e.g.: '''This is the base plugin class for Nested.'''
+    large_description = ''''''
+
     #  Author or authors. Multiples lines, no dot at the end of line.
     #  Each author has his email in format "Author name <mail@foo.bar>".
-    authors = '''Carlos Jenkins <carlos@jenkins.co.cr>'''
+    #   e.g.: '''Carlos Jenkins <carlos@jenkins.co.cr>'''
+    authors = ''''''
+
     #  Website or url to version control system used by the creators
-    website = 'http://nestededitor.sourceforge.net/'
+    #   e.g.: 'http://nestededitor.sourceforge.net/'
+    website = ''
+
+    def __init__(self, nested):
+        """
+        Generic constructor
+        """
+        self.nested = nested
 
     def on_enable(self):
-        print('on_enable')
+        """
+        Enable the plugin.
+        This function is called when the user enables the plugin in the
+        plugins administration dialog, just after the plugin instantiation.
+        """
+        logger.info(_('on_enable() called on NestedPlugin'))
+        return
+
+    def on_disable(self):
+        """
+        Disables the plugin.
+        This function is called when the user disables the plugin in the
+        plugins administration dialog. Close and free any resources here.
+        """
+        logger.info(_('on_disable() called on NestedPlugin'))
+        return
+
+    def on_exit(self):
+        """
+        Shutdown the plugin.
+        This function is called when the user is quiting Nested.
+        """
+        logger.info(_('on_exit() called on NestedPlugin'))
+        return

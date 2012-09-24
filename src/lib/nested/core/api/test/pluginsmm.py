@@ -2,11 +2,18 @@ import sys
 import gtk
 from os.path import normpath, dirname, abspath, realpath, join
 from nested.core.api.pluginsmm import PluginsMM
+from nested.core.api.test_plugin import NestedTestPlugin
 
 import logging
 logging.set_levels(logging.DEBUG)
 
 WHERE_AM_I = normpath(dirname(abspath(realpath(__file__))))
+
+class NestedDummy(object):
+    """
+    Dummy Nested class.
+    """
+    pass
 
 if __name__ == '__main__':
 
@@ -39,7 +46,11 @@ if __name__ == '__main__':
         window.add(vbox)
         window.show_all()
 
-        admin = PluginsMM(window)
+        nested = NestedDummy()
+        nested.main = window
+        admin = PluginsMM(nested)
+        could_load = admin._load(NestedTestPlugin)
+        print('NestedTestPlugin could be loaded: {}.'.format(could_load))
 
         plugins.connect('activate', lambda x: admin.admin(x))
 
