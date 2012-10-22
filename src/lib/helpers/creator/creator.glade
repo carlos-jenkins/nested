@@ -356,6 +356,7 @@ e.g.: 'http://nestededitor.sourceforge.net/'</property>
 Each author has his email in format "Author name &lt;mail@foo.bar&gt;".
 e.g.: '''Carlos Jenkins &lt;carlos@jenkins.co.cr&gt;'''</property>
                     <property name="wrap_mode">word-char</property>
+                    <property name="accepts_tab">False</property>
                   </object>
                 </child>
               </object>
@@ -381,6 +382,7 @@ e.g.: '''Carlos Jenkins &lt;carlos@jenkins.co.cr&gt;'''</property>
                     <property name="tooltip_text" translatable="yes">Large description . Multiple lines, dot at the end of line.
 e.g.: '''This is the base plugin class for Nested.'''</property>
                     <property name="wrap_mode">word-char</property>
+                    <property name="accepts_tab">False</property>
                   </object>
                 </child>
               </object>

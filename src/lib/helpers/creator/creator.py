@@ -20,7 +20,8 @@ Utility to create plugins for Nested.
 """
 
 from nested import *
-from nested.utils import show_error, ask_user, get_builder, default_open
+from nested.utils import show_error, ask_user, show_info, get_builder
+from nested.utils import default_open, safe_string
 from nested.core.api import base_plugin
 
 import os
@@ -94,11 +95,19 @@ class Creator(object):
 
     def _ask_user(self, msg='', parent=None):
         """
-        Show an error message to the user.
+        Ask user a Yes/No question.
         """
         if parent is None:
             parent = self.window
         return ask_user(msg, parent)
+
+    def _show_info(self, msg='', parent=None):
+        """
+        Show an information message to the user.
+        """
+        if parent is None:
+            parent = self.window
+        return show_info(msg, parent)
 
     def _close_cb(self, widget, what=''): # 'what' is required for delete-event
         """
@@ -117,12 +126,79 @@ class Creator(object):
             self._show_error(_('Please select a plugin file.'))
             return False
 
+        # Check mandatory input
         for m in [self.path, self.name, self.version]:
-            if m.get_text() == '':
+            if not m.get_text():
                 self._show_error(_('Please fill all the required data.'))
                 return False
+
         # Open base plugin
-        print(self.get_base_plugin_path())
+        base = self.get_base_plugin_path()
+        if not isfile(base):
+            print(base)
+            self._show_error(_('Unable to find the base plugin for this API.'))
+            return False
+
+        # Read base plugin
+        content = ''
+        with open(base, 'r') as f:
+            content = f.read()
+        if not content:
+            self._show_error(
+                _('The base plugin for the currently selected API is empty.'))
+            return False
+
+        # Change content
+        c = content.replace('from nested import *',
+                      'from nested import *\n'
+                      'from nested.core.api.base_plugin import NestedPlugin',
+                      1)
+        c = c.replace('class NestedPlugin(object):',
+                      'class {}(NestedPlugin):'.format(
+                            self.name.get_text().replace('\'', '').\
+                            title().replace(' ', '')),
+                      1)
+        c = c.replace('    uid = \'\'',
+                      '    uid = \'{}\''.format(safe_string(
+                            self.name.get_text().replace('\'', '') + ' ' + \
+                            self.version.get_text().replace('\'', ''))),
+                      1)
+        c = c.replace('    name = \'\'',
+                      '    name = \'{}\''.format(
+                            self.name.get_text().replace('\'', '')),
+                      1)
+        c = c.replace('    version = \'1.0\'',
+                      '    version = \'{}\''.format(
+                            self.version.get_text().replace('\'', '')),
+                      1)
+        c = c.replace('    short_description = \'\'',
+                      '    short_description = \'{}\''.format(
+                            self.short.get_text().replace('\'', '')),
+                      1)
+        c = c.replace('    large_description = \'\'\'\'\'\'',
+                      '    large_description = \'\'\'\n{}\n\'\'\''.format(
+                            self.longd.get_text(
+                                self.longd.get_start_iter(),
+                                self.longd.get_end_iter()).replace('\'', '')),
+                      1)
+        c = c.replace('    authors = \'\'\'\'\'\'',
+                      '    authors = \'\'\'\n{}\n\'\'\''.format(
+                            self.authors.get_text(
+                                self.authors.get_start_iter(),
+                                self.authors.get_end_iter()).replace('\'', '')),
+                      1)
+        c = c.replace('    website = \'\'',
+                      '    website = \'{}\''.format(
+                            self.website.get_text().replace('\'', '')),
+                      1)
+
+        # Save new content
+        with open(plugin_path, 'w') as f:
+            f.write(c)
+
+
+        # Show success
+        self._show_info('Plugin successfully saved.')
 
     def _select_filename_cb(self, widget):
         """
