@@ -76,11 +76,11 @@ def process_footnotes(section, target):
         counter = 0
         for footnote in footnotes:
             formatted_footnotes.append(
-                            r"''\stepcounter{footnote}\footnotetext{''" +
+                            r"''\stepcounter{footnote}\footnotetext{''" + \
                             footnote + " ''}''")
             counter = counter + 1
         formatted_footnotes = ['',
-                            r"''\addtocounter{footnote}{-%i}''" % counter] +
+                            r"''\addtocounter{footnote}{-%i}''" % counter] + \
                             formatted_footnotes + ['']
         return formatted_footnotes
 

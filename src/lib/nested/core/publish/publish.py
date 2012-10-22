@@ -31,7 +31,7 @@ import sys
 import logging
 import gettext
 
-import .txt2tags
+import txt2tags
 from .footnotes import process_footnotes
 
 WHERE_AM_I = os.path.get_module_path(__file__)

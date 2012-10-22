@@ -1,0 +1,20 @@
+References test document
+Carlos Jenkins
+1.0
+
+%!target: tex
+%!style(xhtmls): media/themes/Clean/style.css
+%!options(tex): --enum-title --toc --toc-level 5
+%!nested(tex): --docclass {article} --pdf
+
+= Abstract =[abstract]
+
+This is a test document to test the bibliography filter in the publish workflow.
+
+= First section =[first_section]
+
+{|hicks2001|}
+
+= Referencias =[referencias]
+
+%%bib
