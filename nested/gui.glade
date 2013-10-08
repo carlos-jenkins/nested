@@ -178,8 +178,8 @@
     <property name="skip_taskbar_hint">True</property>
     <property name="transient_for">main_window</property>
     <property name="program_name">Nested</property>
-    <property name="version">Dev r222</property>
-    <property name="copyright">Copyright ® 2011 - 2012 Carlos Jenkins &lt;cjenkins@softwarelibrecr.org&gt;</property>
+    <property name="version">1.4</property>
+    <property name="copyright">Copyright ® 2011 - 2013 Carlos Jenkins &lt;carlos@jenkins.co.cr&gt;</property>
     <property name="comments" translatable="yes">Software for the creation of structured documents.</property>
     <property name="website">http://nestededitor.sourceforge.net/</property>
     <property name="license">Nested - Software for the creation of structured documents

@@ -30,7 +30,6 @@ import gtk              # For the GUI
 import pango            # For Font Descriptions
 import tempfile         # For temporal files
 import ConfigParser     # To parse configurations
-import custom_buffer    # Syntax highlight and Undo/Redo
 import txt2tags         # For loading files
 import export           # For exporting content to PDF, HTML, etc.
 import re               # For matching title when loading files
@@ -42,12 +41,13 @@ import time             # For timehash function
 import subprocess       # To call external apps
 import threading        # For background processing
 import webbrowser       # Support URL open in Windows
-from modules.latex.log.viewer import LaTeXLogViewer # To view LaTeX logs
-from modules.textviews.margin import Margin
+from . import custom_buffer                          # Syntax highlight and Undo/Redo
+from .modules.latex.log.viewer import LaTeXLogViewer # To view LaTeX logs
+from .modules.textviews.margin import Margin
 
 ####################################
 # Use application context
-from context import AppContext
+from .context import AppContext
 
 WHERE_AM_I = AppContext.where_am_i(__file__)
 logger = AppContext.get_logger(__name__)
@@ -211,10 +211,10 @@ class Nested(object):
 
         # Configure textview
         if self.config.getboolean('general', 'show-line-numbers'):
-            from modules.textviews.lines import LineNumbers
+            from .modules.textviews.lines import LineNumbers
             self.lines_numbers = LineNumbers(self.content_entry)
         if self.config.getboolean('general', 'show-margin'):
-            from modules.textviews.margin import Margin
+            from .modules.textviews.margin import Margin
             at_column = self.config.getint('general', 'margin-column')
             self.margin_widget = Margin(self.content_entry, at_column)
 
@@ -222,11 +222,11 @@ class Nested(object):
         self.spell_checking = None
         try:
             import locale
-            from modules.textviews.spellcheck import SpellChecker
+            from .modules.textviews.spellcheck import SpellChecker
 
             # Install all .oxt extensions, if any
             try:
-                from modules.oxt_import import deflate_oxt
+                from .modules.oxt_import import deflate_oxt
                 deflate_oxt(self.user_dictionaries,
                             self.user_dictionaries,
                             move_path=os.path.join(self.user_dictionaries, 'ext'))
@@ -265,8 +265,8 @@ class Nested(object):
                 spell_button.set_active(False)
                 self.toggle_spell_checking(spell_button)
         except Exception as excep:
-            raise excep
             logger.error(_('Unable to import spellcheck: spell checking will be unavailable.'))
+            raise excep
 
         if not self.config.getboolean('editor', 'word-wrap'):
             self.content_entry.set_wrap_mode(gtk.WRAP_NONE)

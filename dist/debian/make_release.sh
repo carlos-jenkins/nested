@@ -29,5 +29,5 @@ echo "Entering $DEBSDISTUN..."
 cd $DEBSDISTUN/
 echo "Ready to build package. Press [Enter] to confirm structure and continue or Ctrl+C to cancel."
 read
-#debuild -us -uc
-debuild
+debuild --set-envvar LINTIAN_PROFILE=debian -us -uc
+#debuild

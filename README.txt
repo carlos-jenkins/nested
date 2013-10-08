@@ -36,8 +36,8 @@ To have spell checking languages translated install:
 = SCRIPTS =
 
 To run Nested:
-    cd nested
-    ./nested
+
+    PYTHONPATH=$PYTHONPATH:`pwd` nested/nested
 
 To create a Python source distribution:
     python setup.py sdist

@@ -29,7 +29,7 @@ import pango
 if __name__ == '__main__':
     import sys
     sys.path.append('../../..')
-from context import AppContext
+from nested.context import AppContext
 
 WHERE_AM_I = AppContext.where_am_i(__file__)
 logger = AppContext.get_logger(__name__)
@@ -37,7 +37,7 @@ _ = AppContext(builder=True).what_do_i_speak()
 ####################################
 
 import logparser
-from modules.textviews.lines import LineNumbers
+from nested.modules.textviews.lines import LineNumbers
 
 class LaTeXLogViewer(object):
     """Specialized GUI to analyze LaTeX log files."""
@@ -46,13 +46,13 @@ class LaTeXLogViewer(object):
 
     def __init__(self, parent=None):
         """The object constructor."""
-        
+
         # Create the interface
         self.builder = gtk.Builder()
         self.builder.set_translation_domain(AppContext.DEFAULT_APP)
         glade_file = os.path.join(WHERE_AM_I, 'viewer.glade')
         self.builder.add_from_file(glade_file)
-        
+
         # Get the main objects
         self.dialog_log = self.builder.get_object('dialog_log')
 
@@ -61,7 +61,7 @@ class LaTeXLogViewer(object):
 
         self.summary = self.builder.get_object('summary')
         self.summary_liststore = self.summary.get_model()
-        
+
         self.error_msg = self.builder.get_object('error_msg')
         self.warning_msg = self.builder.get_object('warning_msg')
         self.info_msg = self.builder.get_object('info_msg')
@@ -74,7 +74,7 @@ class LaTeXLogViewer(object):
         self.icon_error = self.summary.render_icon(stock_id=gtk.STOCK_DIALOG_ERROR,
                                                         size=gtk.ICON_SIZE_MENU,
                                                         detail=None)
-        
+
         # Configure interface
         if parent is not None:
             self.dialog_log.set_transient_for(parent)
@@ -94,7 +94,7 @@ class LaTeXLogViewer(object):
                                     True)
         _configure_text_view(self.view_log)
         _configure_text_view(self.view_latex)
-        
+
         # Connect signals
         self.builder.connect_signals(self)
 
@@ -110,13 +110,13 @@ class LaTeXLogViewer(object):
         if os.path.isfile(latex_path):
             with open(latex_path) as latex_handler:
                 self.view_latex.get_buffer().set_text(latex_handler.read())
-        
+
         # Load and parse log
         if os.path.isfile(log_path):
 
             # Load log
             with open(log_path) as log_handler:
-                log_text = log_handler.read().decode('utf-8', 'ignore') 
+                log_text = log_handler.read().decode('utf-8', 'ignore')
                 self.view_log.get_buffer().set_text(log_text)
 
             # Parse log
@@ -171,7 +171,7 @@ class LaTeXLogViewer(object):
                     self.summary.set_cursor(hint)
                     self.summary.scroll_to_cell(hint)
                     self.summary.grab_focus()
-                    
+
                 # Append warnings to summary
                 for row in warnings_list:
                     self.summary_liststore.append(row)
@@ -203,7 +203,7 @@ class LaTeXLogViewer(object):
         self.error_msg.hide()
         self.warning_msg.hide()
         self.info_msg.show()
-    
+
     def _close_cb(self, widget, what=''): # 'what' is required for delete-event
         """
         If ran standalone exit the application.
@@ -226,7 +226,7 @@ class LaTeXLogViewer(object):
             old_line_end = old_line_iter.copy()
             old_line_end.forward_to_line_end()
             textbuffer.remove_tag_by_name(self.LINE_SEARCH, old_line_iter, old_line_end)
-            
+
             # Highlight line if required and place cursor
             if line_num < 1:
                 line_iter = textbuffer.get_start_iter()
@@ -236,7 +236,7 @@ class LaTeXLogViewer(object):
                 line_end.forward_to_line_end()
                 textbuffer.apply_tag_by_name(self.LINE_SEARCH, line_iter, line_end)
             textbuffer.place_cursor(line_iter)
-            
+
             # Move line mark
             textbuffer.move_mark_by_name(self.LINE_SEARCH, line_iter)
 

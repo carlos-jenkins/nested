@@ -37,7 +37,7 @@ from zipfile import ZipFile, BadZipfile
 if __name__ == '__main__':
     import sys
     sys.path.append('../..')
-from context import AppContext
+from nested.context import AppContext
 
 WHERE_AM_I = AppContext.where_am_i(__file__)
 logger = AppContext.get_logger(__name__)

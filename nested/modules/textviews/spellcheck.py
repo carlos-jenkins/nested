@@ -56,15 +56,15 @@ gtk.main()
 
 import re
 import enchant
-import modules.locales as locales #import locales
 import gtk #from gi.repository import Gtk as gtk # PyGObject
+import nested.modules.locales as locales #import locales
 
 ####################################
 # Use application context
 if __name__ == '__main__':
     import sys
     sys.path.append('../..')
-from context import AppContext
+from nested.context import AppContext
 
 WHERE_AM_I = AppContext.where_am_i(__file__)
 _ = AppContext().what_do_i_speak()
@@ -72,13 +72,13 @@ _ = AppContext().what_do_i_speak()
 
 class SpellChecker(object):
     """Spell checking object for PyGtk TextBuffers"""
-    
+
     NUMBER = re.compile('[0-9.,]+')
 
     # Available languages
     languages = [(language, locales.code_to_name(language)) for language in enchant.list_languages()]
     _language_map = dict(languages)
-    
+
     @classmethod
     def set_dictionary_path(cls, path):
         """Additional paths to find dictionaries"""
@@ -90,7 +90,7 @@ class SpellChecker(object):
     def language_exists(cls, language):
         """Check if a given code is available for spell checking"""
         return language in SpellChecker._language_map
-    
+
     def __init__(self, view, language='en', prefix='spellchecker'):
 
         self._enabled = True
@@ -108,21 +108,21 @@ class SpellChecker(object):
         self._ignore_regex = re.compile('')
         self._ignore_expressions = []
         self.buffer_setup()
-    
+
     @property
     def language(self):
         return self._language
-    
+
     @language.setter
     def language(self, language):
         self._language = language
         self._dictionary = self._broker.request_dict(language)
         self.recheck_all()
-    
+
     @property
     def enabled(self):
         return self._enabled
-    
+
     @enabled.setter
     def enabled(self, enabled):
         self._enabled = enabled
@@ -131,15 +131,15 @@ class SpellChecker(object):
         else:
             start, end = self._buffer.get_bounds()
             self._buffer.remove_tag(self._misspelled, start, end)
-    
+
     def append_ignore_regex(self, regex):
         self._ignore_expressions.append(regex)
         self._ignore_regex = re.compile('|'.join(self._ignore_expressions))
-    
+
     def remove_ignore_regex(self, regex):
         self._ignore_expressions.remove(regex)
         self._ignore_regex = re.compile('|'.join(self._ignore_expressions))
-    
+
     def recheck_all(self):
         start, end = self._buffer.get_bounds()
         self._check_range(start, end, True)
@@ -157,18 +157,18 @@ class SpellChecker(object):
         self._table = self._buffer.get_tag_table()
         self._table.add(self._misspelled)
         self.recheck_all()
-    
+
     def _ignore_all(self, item, word):
         self._dictionary.add_to_session(word)
         self.recheck_all()
-    
+
     def _add_to_dictionary(self, item, word):
         self._dictionary.add_to_pwl(word)
         self.recheck_all()
-    
+
     def _language_change_callback(self, item, language):
         self.language = language
-    
+
     def _replace_word(self, item, oldword, newword):
         start, end = self._word_extents_from_mark(self._mark_click)
         offset = start.get_offset()
@@ -177,7 +177,7 @@ class SpellChecker(object):
         self._buffer.insert(self._buffer.get_iter_at_offset(offset), newword)
         self._buffer.end_user_action()
         self._dictionary.store_replacement(oldword, newword)
-        
+
     def _word_extents_from_mark(self, mark):
         start = self._buffer.get_iter_at_mark(mark)
         if not start.starts_word():
@@ -186,11 +186,11 @@ class SpellChecker(object):
         if end.inside_word():
             end.forward_word_end()
         return start, end
-    
+
     def _mark_inside_word(self, mark):
         iter = self._buffer.get_iter_at_mark(mark)
         return iter.inside_word()
-    
+
     def _build_languages_menu(self):
         menu = gtk.Menu()
         group = gtk.RadioMenuItem() #group = [] # PyGObject
@@ -203,7 +203,7 @@ class SpellChecker(object):
             menu.append(item)
         menu.show_all()
         return menu
-    
+
     def _build_suggestion_menu(self, word):
         menu = gtk.Menu()
         suggestions = self._dictionary.suggest(word)
@@ -231,7 +231,7 @@ class SpellChecker(object):
         menu.append(item)
         menu.show_all()
         return menu
-    
+
     def _button_press_event(self, widget, event):
         if not self._enabled:
             return
@@ -242,7 +242,7 @@ class SpellChecker(object):
             iter = self._view.get_iter_at_location(x, y)
             self._buffer.move_mark(self._mark_click, iter)
         return False
-    
+
     def _populate_popup(self, entry, menu):
         if not self._enabled:
             return
@@ -261,46 +261,46 @@ class SpellChecker(object):
                 suggestions.set_submenu(self._build_suggestion_menu(word))
                 suggestions.show()
                 menu.prepend(suggestions)
-    
+
     def _popup_menu(self, *args):
         if not self._enabled:
             return
         iter = self._buffer.get_iter_at_mark(self._buffer.get_insert())
         self._buffer.move_mark(self._mark_click, iter)
-        return False 
-    
+        return False
+
     def _insert_text_before(self, textbuffer, location, text, len):
         if not self._enabled:
             return
         self._buffer.move_mark(self._mark_insert_start, location)
-    
+
     def _insert_text_after(self, textbuffer, location, text, len):
         if not self._enabled:
             return
         start = self._buffer.get_iter_at_mark(self._mark_insert_start)
         self._check_range(start, location);
         self._buffer.move_mark(self._mark_insert_end, location);
-    
+
     def _delete_range_after(self, textbuffer, start, end):
         if not self._enabled:
             return
         self._check_range(start, end);
-    
+
     def _mark_set(self, textbuffer, location, mark):
         if not self._enabled:
             return
         if mark == self._buffer.get_insert() and self._deferred_check:
             self._check_deferred_range(False);
-    
+
     def _clone_iter(self, iter):
         return self._buffer.get_iter_at_offset(iter.get_offset())
-        
+
     def _check_word(self, start, end):
         word = self._buffer.get_text(start, end, False)
         if not SpellChecker.NUMBER.match(word) and (not self._ignore_regex.match(word) or not len(self._ignore_expressions)):
             if not self._dictionary.check(word):
                 self._buffer.apply_tag(self._misspelled, start, end)
-    
+
     def _check_range(self, start, end, force_all=False):
         if end.inside_word():
             end.forward_word_end()
@@ -335,8 +335,8 @@ class SpellChecker(object):
             wend.backward_word_start()
             if wstart.equal(wend):
                 break
-            wstart = self._clone_iter(wend) 
-    
+            wstart = self._clone_iter(wend)
+
     def _check_deferred_range(self, force_all):
         start = self._buffer.get_iter_at_mark(self._mark_insert_start)
         end = self._buffer.get_iter_at_mark(self._mark_insert_end)

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#       locales.py - 
+#       locales.py -
 #
 #       Copyright (c) 2012 Carlos Jenkins <cjenkins@softwarelibrecr.org>
 #       Copyright (c) 2011 koehlma? <?@?.com>
@@ -34,7 +34,7 @@ import sqlite3
 if __name__ == '__main__':
     import sys
     sys.path.append('../..')
-from context import AppContext
+from nested.context import AppContext
 
 WHERE_AM_I = AppContext.where_am_i(__file__)
 _translator_language = AppContext('iso_639').what_do_i_speak()
@@ -56,26 +56,26 @@ class Country(object):
         self.alpha_3 = country[3]
         self.numeric = country[4]
         self.translation = _translator_country(self.name)
-        
+
     @classmethod
     def get_country(cls, code, codec):
         country = _database.execute('SELECT rowid FROM countries WHERE %s == ?' % (codec), (code,)).fetchone()
         if country:
             return cls(country[0])
         raise CountryNotFound('code: %s, codec: %s' % (code, codec))
-    
+
     @classmethod
     def by_alpha_2(cls, code):
         return Country.get_country(code, 'alpha_2')
-    
+
     @classmethod
     def by_alpha_3(cls, code):
         return Country.get_country(code, 'alpha_3')
-    
+
     @classmethod
     def by_numeric(cls, code):
         return Country.get_country(code, 'numeric')
-   
+
 class Language(object):
     def __init__(self, rowid):
         language = _database.execute('SELECT * FROM languages WHERE rowid == ?', (rowid,)).fetchone()
@@ -84,22 +84,22 @@ class Language(object):
         self.iso_639_2T = language[2]
         self.iso_639_1 = language[3]
         self.translation = _translator_language(self.name)
-        
+
     @classmethod
     def get_language(cls, code, codec):
         language = _database.execute('SELECT rowid FROM languages WHERE %s == ?' % (codec), (code,)).fetchone()
         if language:
             return cls(language[0])
         raise LanguageNotFound('code: %s, codec: %s' % (code, codec))
-        
+
     @classmethod
     def by_iso_639_2B(cls, code):
         return Language.get_language(code, 'iso_639_2B')
-    
+
     @classmethod
     def by_iso_639_2T(cls, code):
         return Language.get_language(code, 'iso_639_2T')
-    
+
     @classmethod
     def by_iso_639_1(cls, code):
         return Language.get_language(code, 'iso_639_1')
@@ -107,7 +107,7 @@ class Language(object):
 
 def code_to_name(code, separator='_'):
     """Get the natural name of a language based on it's code"""
-    
+
     code = code.split(separator)
     if len(code) > 1:
         return '%s (%s)' % (Language.by_iso_639_1(code[0]).translation,

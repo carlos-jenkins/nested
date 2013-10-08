@@ -17,20 +17,20 @@
 #       along with this program. If not, see <http://www.gnu.org/licenses/>
 
 """@package custom_buffer
-This package contains the clases for syntax highlight plus a custom buffer 
+This package contains the clases for syntax highlight plus a custom buffer
 for PyGtk TextView with syntax highlight, time based undo/redo and helper functions.
 """
 
-from modules.buffers.markup_buffer import Pattern, MarkupDefinition, MarkupBuffer
+from .modules.buffers.markup_buffer import Pattern, MarkupDefinition, MarkupBuffer
 import txt2tags
 import pango
 
 class Txt2tagsSyntax(object):
     """Txt2tags syntax highlight class."""
     def __init__(self):
-    
+
         self.bank = txt2tags.getRegexes()
-        
+
         # Styles
         self.styles = {
             'bold':             {'weight'       : pango.WEIGHT_BOLD},
@@ -48,7 +48,7 @@ class Txt2tagsSyntax(object):
             'highlight':        {'background'   : 'yellow'},
             'quote':            {'background'   : '#6D6D6D'}
             }
-        
+
         # Generate styles for titles
         sizes = [
             pango.SCALE_XX_LARGE,
@@ -62,7 +62,7 @@ class Txt2tagsSyntax(object):
                     'scale': size}
             name = 'title%s' % (level+1)
             self.styles[name] = style
-        
+
         # Generate patterns for titles
         title_patterns = []
         ''' # Disabled, because Nested don't really need those and create a lot of trouble
@@ -76,7 +76,7 @@ class Txt2tagsSyntax(object):
             numtitle = Pattern(numtitle_pattern, title_style + [(2, style_name)])
             title_patterns += [title, numtitle]
         '''
-        
+
         # Patterns
         self.patterns = [
             # Bold
@@ -111,7 +111,7 @@ class Txt2tagsSyntax(object):
             # Link : Use txt2tags link guessing mechanism
             Pattern('OVERWRITE', [(0, 'link')], regex=self.bank['link'], name='link'),
             ] + title_patterns
-        
+
         # Create lexer
         self.lang = MarkupDefinition(self.patterns)
 
@@ -130,17 +130,17 @@ class Txt2tagsSyntax(object):
 
 class CustomBuffer(MarkupBuffer):
     """
-    Custom buffer for PyGtk TextView with several options for syntax 
+    Custom buffer for PyGtk TextView with several options for syntax
     highlight and undo/redo capabilities.
     """
-    
+
     def __init__(self, table=None, syntax='txt2tags'):
         """
         Object constructor:
             - table, as in TextBuffer().
             - syntax, a string identifying the syntax highlight.
         """
-        
+
         # Use syntax highlight
         lang = None
         styles= {}
@@ -149,31 +149,31 @@ class CustomBuffer(MarkupBuffer):
             syntax_highlight = Txt2tagsSyntax()
             lang = syntax_highlight.lang
             styles = syntax_highlight.styles
-            
+
         elif syntax == 'bibtex':
             syntax = Txt2tagsSyntax()
             lang = syntax_highlight.lang
             styles = syntax_highlight.styles
-        
+
         MarkupBuffer.__init__(self, table, lang=lang, styles=styles)
 
     def get_all_text(self):
         """
-        Get all text currently in the buffer, in UTF-8. 
+        Get all text currently in the buffer, in UTF-8.
         Note: Can't believe TextBuffer doesn't have this method :S
         """
         return self.get_text(self.get_start_iter(), self.get_end_iter()).decode('utf-8')
 
     def get_selection_bounds(self):
         """Return the start and end selection iters"""
-        
+
         native = MarkupBuffer.get_selection_bounds(self)
-        
+
         if not native:
             start_iter = self.get_iter_at_mark(self.get_insert())
             end_iter = start_iter
         else:
             start_iter, end_iter = native
-        
+
         return start_iter, end_iter
 

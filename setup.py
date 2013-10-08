@@ -1,4 +1,4 @@
-NESTED_VERSION = '1.2.2'
+NESTED_VERSION = '1.4'
 
 long_description = \
 """\
@@ -19,7 +19,7 @@ def get_data(format_option=False):
     """Get recursively all the files from a directory without subversion control files"""
 
     package_data = ['config.ini', 'gui.glade', 'nested.svg', 'nested.png', 'logos.png']
-    include_dirs = ['examples', 'icons', 'libraries', 'templates', 'themes']
+    include_dirs = ['examples', 'icons', 'libraries', 'templates', 'themes', 'modules']
 
 
     base_dir = 'nested'
@@ -130,7 +130,7 @@ if 'py2exe' in sys.argv:
                          'USP10.DLL'
                    ]
     
-    kwargs = {'windows' : [{ 'script'         : 'nested/nested',
+    kwargs = {'windows' : [{ 'script'         : 'nested.run',
                              'description'    : 'Nested - Editor for structured documents.',
                              'icon_resources' : [(0, 'dist/windows/installer/nested.ico')]
                            }],
@@ -161,5 +161,5 @@ setup(name='nested',
       url='http://nestededitor.sourceforge.net/',
       packages=['nested'],
       package_data={'nested': get_data()},
-      scripts=['nested/nested'],
+      scripts=['nested.run'],
       **kwargs)

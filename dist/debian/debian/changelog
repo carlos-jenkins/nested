@@ -1,3 +1,9 @@
+nested (1.4-1) unstable; urgency=low
+
+  * New upstream release. Bug-fix release.
+
+ -- Carlos Miguel Jenkins Pérez <carlos@jenkins.co.cr>  Tue, 08 Oct 2013 13:21:37 -0600
+ 
 nested (1.2.2-1) unstable; urgency=low
 
   * New upstream release. Bug-fix release.

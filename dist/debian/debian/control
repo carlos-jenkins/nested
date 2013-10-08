@@ -1,9 +1,9 @@
 Source: nested
 Section: editors
 Priority: optional
-Maintainer: Carlos Jenkins <cjenkins@softwarelibrecr.org>
+Maintainer: Carlos Jenkins <carlos@jenkins.co.cr>
 Build-Depends: python (>=2.6), debhelper (>= 8)
-Standards-Version: 3.9.2
+Standards-Version: 3.9.4
 X-Python-Version: >= 2.6
 Homepage: http://nestededitor.sourceforge.net/
 Vcs-Browser: https://github.com/carlos-jenkins/nested
@@ -12,6 +12,7 @@ Vcs-git: https://github.com/carlos-jenkins/nested.git
 Package: nested
 Architecture: all
 Depends: ${misc:Depends}, ${python:Depends}, python-gtk2 (>= 2.24), python-webkit, python-gtkspellcheck, ttf-dejavu, xdg-utils, iso-codes
+Recommends: nested-latex, ttf-dejavu, xdg-utils, iso-codes
 Suggests: otf-stix
 Description: specialized editor for structured documents
  Nested is a specialized editor focused on creating structured documents such 
@@ -35,7 +36,8 @@ Description: specialized editor for structured documents
  
 Package: nested-latex
 Architecture: all
-Depends: nested, texlive, texlive-publishers, texlive-latex-extra, rubber
+Depends: ${misc:Depends}, nested, texlive, texlive-publishers, texlive-latex-extra
+Recommends: rubber
 Description: latex publishing support for nested
  Nested is a specialized editor focused on creating structured documents such 
  as reports, publications, presentations, books, etc. It is designed to help the
@@ -43,5 +45,5 @@ Description: latex publishing support for nested
  markup. It offers a rich WYSIWYM interface where the user writes plain text 
  with a lightweight markup language.
  .
- This package contains the required dependencies to publish in LaTeX/PDF.
+ This metapackage contains the required dependencies to publish in LaTeX/PDF.
 
