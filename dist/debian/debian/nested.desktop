@@ -1,0 +1,14 @@
+
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Nested structured document editor
+Name[es]=Editor de documentos estructurados Nested
+GenericName=Editor
+Comment=Specialized editor for structured documents
+Comment[es]=Editor especializado para documento estructurados
+Exec=nested %f
+Icon=nested
+Terminal=false
+Categories=Office;
+MimeType=text/x-txt2tags;

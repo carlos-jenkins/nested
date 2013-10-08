@@ -1,0 +1,102 @@
+/* Base/style.css - Base CSS file
+ * Copyright (c) 2011 Carlos Jenkins cjenkins (a) softwarelibrecr org
+ */
+
+/* Base settings */
+hr.light {
+}
+hr.heavy {
+    border: 2px solid black;
+}
+a.footnotemark {
+    font-size: 75%;
+    vertical-align: super;
+}
+div.footnotes {
+    border: 1px solid lightgray;
+    font-size: 85%;
+    padding-right: 20px;
+}
+div.footnotes ol {
+}
+div.footnotes ol li {
+}
+
+/* General settings */
+a {
+}
+a:link {       /* Unvisited link  */
+}
+a:visited {    /* Visited link    */
+}
+a:hover {      /* Mouse over link */
+}
+a:active {     /* Selected link */
+}
+
+body {
+}
+
+/* Header area */
+div#header {
+}
+div#header h1 {
+}
+div#header h2 {
+}
+div#header h3 {
+}
+
+/* Table of content */
+div.toc {
+}
+div.toc ul {
+}
+div.toc ul li {
+}
+div.toc ul li a {
+}
+
+/* Main content */
+div#body {
+}
+div#body div.section {
+}
+div#body em {
+}
+div#body strong {
+}
+div#body sup {
+}
+div#body sub {
+}
+div#body h1 {
+}
+div#body h2 {
+}
+div#body h3 {
+}
+div#body h4 {
+}
+div#body h5 {
+}
+div#body h6 {
+}
+div#body p {
+}
+div#body ul {
+}
+div#body ol {
+}
+div#body li {
+}
+div#body pre {
+}
+div#body table {
+}
+div#body table tr {
+}
+div#body table tr th {
+}
+div#body table tr td {
+}

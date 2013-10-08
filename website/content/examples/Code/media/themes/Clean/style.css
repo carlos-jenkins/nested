@@ -1,0 +1,156 @@
+/* Clean/style.css - Clean CSS file
+ * Copyright (c) 2011 Carlos Jenkins cjenkins (a) softwarelibrecr org
+ */
+
+/* Fonts */
+@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+
+/* General settings */
+a {
+    color: #009EB8;
+    outline: medium none;
+    text-decoration: none;
+}
+a:link {       /* Unvisited link  */
+}
+a:visited {    /* Visited link    */
+    color: #009EB8;
+}
+a:hover {      /* Mouse over link */
+}
+a:active {     /* Selected link */
+}
+
+html {
+    background-color: #EEEEEE;
+    padding: 20px 0;
+}
+
+body {
+    background-color: #FFFFFF;
+    box-shadow: 0 0 6px #777777;
+    color: #333333;
+    font-family: 'Ubuntu',sans-serif;
+    font-size: 14px;
+    margin: 10px auto;
+    padding: 30px 70px 90px;
+    max-width: 750px;
+}
+
+p {
+    line-height: 1.3;
+}
+
+strong {
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 140%;
+}
+h2 {
+    font-size: 130%;
+}
+h3 {
+    font-size: 120%;
+}
+
+small {
+    font-size: 70%;
+}
+
+/* Header area */
+div#header {
+    border-bottom: 1px dashed #C3C3C3;
+    color: #666666;
+    padding-bottom: 15px;
+}
+div#header h1 {
+    font-size: 180%;
+    margin: 0;
+    text-align: center;
+}
+div#header h2 {
+    font-size: 120%;
+    margin: 0;
+    text-align: center;
+}
+div#header h3 {
+    font-size: 100%;
+    margin: 0;
+    text-align: center;
+}
+
+/* Table of content */
+div.toc {
+    border: 4px solid #99CC66;
+    border-radius: 10px 10px 10px 10px;
+    float: right;
+    margin-left: 20px;
+    margin-top: 15px;
+    padding: 5px 0 0;
+    width: 40%;
+}
+div.toc ul {
+}
+div.toc ul li {
+}
+div.toc ul li a {
+}
+
+/* Main content */
+div#body {
+}
+div#body div.section {
+}
+div#body em {
+}
+div#body strong {
+}
+div#body sup {
+}
+div#body sub {
+}
+div#body h1:first-child {
+    clear: none !important;
+}
+div#body h1 {
+    clear: right;
+}
+div#body h2 {
+    clear: right;
+}
+div#body h3 {
+    clear: right;
+}
+div#body h4 {
+    clear: right;
+}
+div#body h5 {
+}
+div#body h6 {
+}
+div#body p {
+}
+div#body ul {
+}
+div#body ol {
+}
+div#body li {
+}
+div#body pre {
+}
+div#body table {
+    border-collapse: collapse;
+    margin: 15px;
+}
+div#body table tr {
+}
+div#body table tr th {
+    padding: 5px 10px;
+}
+div#body table tr td {
+    padding: 5px 10px;
+    text-align: left;
+    vertical-align: top;
+}

@@ -1,0 +1,111 @@
+Math Test Page
+Design Science, Inc. Adapted by Carlos Jenkins
+Version 1.1
+
+%!target: xhtmls
+%!style(xhtmls): media/themes/Clean/style.css
+%!nested(xhtmls): --libs mathjax
+%!options(tex): --enum-title --toc --toc-level 5
+%!nested(tex): --docclass {article}
+
+= Example equations =[example_equations]
+
+%
+% This is the Math Test Page.
+%
+% This document requires the MathJax library for proper visualization on the HTML target, so make 
+% sure 'mathjax' is included in the libraries of this document if you want to use that target (by default it is).
+% 
+% This document requires the amsmath package for proper visualization on the LaTeX/PDF target, so make 
+% sure '\usepackage{amsmath}' is included in the LaTeX header of this document if you want to use that target (by default it is).
+% 
+This the Nested Math Test Page.
+
+This example shows equations written in Latex. Those equations are original from the MathJax example file and were adapted for the Nested.
+
+This document requires the MathJax library for proper visualization on the HTML target, so make sure on the document properties that ``mathjax`` is included in the libraries of this document (by default it is).
+
+This document requires the amsmath package for proper visualization on the LaTeX/PDF target, so make sure ``\usepackage{amsmath}`` is included in the LaTeX header of this document if you want to use that target (by default it is).
+
+The MathJax is a free Software Javascript library for rendering math on browsers, for more information visit:
+	http://www.mathjax.org/
+
+The Nested is a specialized editor for creating structured documents of many kinds and formats. For more information visit:
+	http://nestededitor.sourceforge.net/
+
+
+== The Lorenz Equations ==[the_lorenz_equations]
+
+<<<
+\begin{align}
+\dot{x} & = \sigma(y-x) \\
+\dot{y} & = \rho x - y - xz \\
+\dot{z} & = -\beta z + xy
+\end{align}
+>>>
+
+== The Cauchy-Schwarz Inequality ==[the_cauchy_schwarz_inequality]
+
+<<<
+\[
+\left( \sum_{k=1}^n a_k b_k \right)^{\!\!2} \leq
+ \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
+\]
+>>>
+
+== A Cross Product Formula ==[a_cross_product_formula]
+
+<<<
+\[
+  \mathbf{V}_1 \times \mathbf{V}_2 =
+   \begin{vmatrix}
+    \mathbf{i} & \mathbf{j} & \mathbf{k} \\
+    \frac{\partial X}{\partial u} & \frac{\partial Y}{\partial u} & 0 \\
+    \frac{\partial X}{\partial v} & \frac{\partial Y}{\partial v} & 0 \\
+   \end{vmatrix}
+\]
+>>>
+
+== The probability of getting k heads when flipping n ==[the_probability_of_getting_k_heads_when_flipping_n]
+
+<<<
+\[P(E) = {n \choose k} p^k (1-p)^{ n-k} \]
+>>>
+
+== An Identity of Ramanujan ==[an_identity_of_ramanujan]
+
+<<<
+\[
+   \frac{1}{(\sqrt{\phi \sqrt{5}}-\phi) e^{\frac25 \pi}} =
+     1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+      {1+\frac{e^{-8\pi}} {1+\ldots} } } }
+\]
+>>>
+
+== A Rogers-Ramanujan Identity ==[a_rogers_ramanujan_identity]
+
+<<<
+\[
+  1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots =
+    \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})},
+     \quad\quad \text{for $|q|<1$}.
+\]
+>>>
+
+== Maxwell's Equations ==[maxwells_equations]
+
+<<<
+\begin{align}
+  \nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} & = \frac{4\pi}{c}\vec{\mathbf{j}} \\
+  \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
+  \nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
+  \nabla \cdot \vec{\mathbf{B}} & = 0
+\end{align}
+>>>
+
+== In-line Mathematics ==[in_line_mathematics]
+
+Finally, while display equations look good for a page of samples, the ability to mix math
+and text in a paragraph is also important. This expression \(\sqrt{3x-1}+(1+x)^2\) is an
+example of an inline equation. As you see, MathJax equations can be used this way as well,
+without unduly disturbing the spacing between lines.

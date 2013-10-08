@@ -1,0 +1,291 @@
+/* NestedWebsite/style.css - NestedWebsite CSS file
+ * Copyright (c) 2011 Carlos Jenkins cjenkins (a) softwarelibrecr org
+ */
+
+/* Fonts */
+@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+
+/* Base settings */
+hr.light {
+}
+hr.heavy {
+    border: 2px solid black;
+}
+a.footnotemark {
+    font-size: 75%;
+    vertical-align: super;
+}
+div.footnotes {
+    border: 1px solid lightgray;
+    font-size: 85%;
+    padding-right: 20px;
+}
+div.footnotes ol {
+}
+div.footnotes ol li {
+}
+
+/* General settings */
+a {
+    color: #009EB8;
+    outline: medium none;
+    text-decoration: none;
+}
+a:link {       /* Unvisited link  */
+}
+a:visited {    /* Visited link    */
+    color: #009EB8;
+}
+a:hover {      /* Mouse over link */
+}
+a:active {     /* Selected link   */
+}
+
+html {
+    background-color: #EEEEEE;
+    padding: 20px 0;
+}
+
+body {
+    background-color: #FFFFFF;
+    box-shadow: 0 0 6px #777777;
+    color: #333333;
+    font-family: 'Ubuntu',sans-serif;
+    font-size: 14px;
+    margin: 10px auto;
+    padding: 30px 70px 0;
+    max-width: 750px;
+}
+
+p {
+    line-height: 1.3;
+}
+
+strong {
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 140%;
+}
+h2 {
+    font-size: 130%;
+}
+h3 {
+    font-size: 120%;
+}
+
+small {
+    font-size: 70%;
+}
+
+/* Identity area */
+div#identity {
+}
+div#identity img#logo {
+    float: left;
+    margin-bottom: 5px;
+}
+div#identity p {
+    margin: 0;
+}
+div#identity p#identity_name {
+    font-size: 28px;
+    padding-top: 15px;
+}
+div#identity p#identity_description {
+    font-size: 15px;
+    font-style: italic;
+}
+
+/* Menu area */
+div#menu {
+    background-color: #333333;
+    clear: left;
+    height: 40px;
+    margin: 6px 0;
+    width: 100%;
+}
+div#menu ul {
+    box-shadow: 0 5px 6px #777777;
+    display: inline;
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+div#menu ul ul {
+    display: none;
+}
+div#menu ul li {
+    display: inline;
+}
+div#menu ul li a {
+    background-color: #333333;
+    border-left: 1px solid grey;
+    color: white;
+    float: left;
+    padding: 10.5px 11px;
+    text-align: center;
+    text-decoration: none;
+    width: 12%;
+}
+div#menu ul li a:visited {
+    color: white;
+}
+div#menu ul li a:hover, 
+div#menu ul li a.current {
+    background-color: #0B75B2;
+    color: white;
+}
+
+/* Header area */
+div#header {
+    display: none;
+}
+div#header h1 {
+}
+div#header h2 {
+}
+div#header h3 {
+}
+
+/* Table of content */
+div.toc {
+    border: 4px solid #009EB8;
+    border-radius: 10px 10px 10px 10px;
+    float: right;
+    margin-left: 20px;
+    margin-top: 15px;
+    padding: 5px 0 0;
+    width: 40%;
+}
+div.toc ul {
+}
+div.toc ul li {
+}
+div.toc ul li a {
+}
+
+/* Main content */
+div#body {
+}
+div#body div.section {
+}
+div#body em {
+}
+div#body strong {
+}
+div#body sup {
+}
+div#body sub {
+}
+div#body h1 {
+}
+div#body h2 {
+    margin-top: 30px;
+}
+div#body h3 {
+}
+div#body h4 {
+}
+div#body h5 {
+}
+div#body h6 {
+}
+div#body p {
+}
+div#body ul {
+}
+div#body ol {
+}
+div#body li {
+}
+div#body pre {
+}
+div#body table {
+    border-collapse: collapse;
+    width: 95%;
+    margin: 15px auto 15px auto;
+}
+div#body table tr {
+}
+div#body table tr th {
+    padding: 5px 10px;
+}
+div#body table tr td {
+    font-family: sans-serif;
+    font-size: 12.5px;
+    padding: 5px 10px;
+    text-align: left;
+    vertical-align: top;
+}
+div#body table tr td:first-child {
+    border: 1px solid #CCCCCC;
+    background-color: #EEEEEE;
+    width: 50%;
+}
+div#body table tr td table {
+    margin: 0px;
+    width: auto;
+}
+div#body table tr td table tr td:first-child {
+    background-color: #FFFFFF;
+    width: auto;
+}
+
+/* Footer area */
+div#footer {
+    border-top: 1px solid lightgray;
+    font-size: 0.7em;
+    margin-top: 70px;
+    padding: 25px 0;
+    text-align: center;
+}
+div#footer img {
+    margin: 6px 0 5px;
+}
+
+/* Custom hacks */
+div.right-image img  {
+    border: 1px solid lightGray;
+    float: right;
+    margin: 0 0 15px 15px !important;
+}
+
+div#download-button p {
+    background-color: #6C9EAB;
+    border-radius: 25px;
+    float: right;
+    font-size: 26px;
+    font-weight: bold;
+    margin: 0 0 10px 10px;
+}
+
+div#download-button p a {
+    background-image: url("images/download.png");
+    background-position: left center;
+    background-repeat: no-repeat;
+    color: white;
+    display: block;
+    padding: 20px 40px 20px 60px;
+}
+div#donate-button {
+    text-align: center;
+}
+div.download-logo {
+}
+div.download-logo p {
+    margin: 0px;
+}
+div.download-logo p img {
+    float: right;
+}
+div.screenshot-label {
+    font-size: 85%;
+    margin-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 70%;
+}

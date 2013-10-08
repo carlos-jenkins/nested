@@ -1,0 +1,39 @@
+Nested build instructions for Microsoft Windows:
+
+Setup:
+
+    python
+        Download from http://python.org/download/
+        Add Python installation folder to your PATH environment variables
+        Double click, next, next...
+        
+    gtk
+        Download from http://www.gtk.org/download/
+        Extract in C:\Gtk\
+        Add C:\Gtk\bin to PATH environment variable
+        
+    pygtk, pycairo, pygobject
+        Download from http://www.pygtk.org/downloads.html
+        Download the three separated installers
+        Double click, next, next...
+
+    PIL
+        Download from http://www.pythonware.com/products/pil/
+        Double click, next, next...
+        
+    pyexe
+        Download from http://www.py2exe.org/
+        Double click, next, next...
+
+    NSIS
+        Download from http://nsis.sourceforge.net/Download
+        Double click, next, next...
+
+    FontName plug-in for NSIS
+        Download from http://nsis.sourceforge.net/FontName_plug-in
+        Extract
+        Double click, next, next...
+
+Build:
+    cd <nested>/dist/windows/
+    make_release.bat

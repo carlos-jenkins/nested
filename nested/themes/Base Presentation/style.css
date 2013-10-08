@@ -1,0 +1,182 @@
+/* Presentation/style.css - Presentation CSS file
+ * Copyright (c) 2011 Carlos Jenkins cjenkins (a) softwarelibrecr org
+ */
+
+/* Base settings */
+hr.light {
+}
+hr.heavy {
+    border: 2px solid black;
+}
+a.footnotemark {
+    font-size: 75%;
+    vertical-align: super;
+}
+div.footnotes {
+    border: 1px solid lightgray;
+    font-size: 85%;
+    padding-right: 20px;
+}
+div.footnotes ol {
+}
+div.footnotes ol li {
+}
+
+/* Presentation elements */ 
+.nav-pager {
+    border-left: 2px dashed #C9CACB;
+    border-right: 2px dashed #C9CACB;
+    border-top: 2px dashed #C9CACB;
+    bottom: 0;
+    left: 9%;
+    padding: 15px 0 15px 10px !important;
+    width: 80%;
+}
+
+.nav-prev-next {
+    right: 10%;
+    top: 0;
+}
+
+.nav-pager,
+.nav-prev-next {
+    background-color: #FFFFFF;
+    font-size: 14px;
+    list-style: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: fixed;
+    z-index: 100;
+}
+
+.nav-pager li,
+.nav-prev-next li {
+    border: none;
+    float: left;
+    padding: 0;
+}
+
+.nav-pager a,
+.nav-prev-next a {
+    background: #84b8b1;
+    color: #FFFFFF;
+    padding: 5px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.nav-pager .current a,
+.nav-prev-next a:hover {
+    background: #F05A29;
+    color: #FFFFFF;
+}
+ 
+/* General settings */
+a {
+}
+a:link {       /* Unvisited link  */
+}
+a:visited {    /* Visited link    */
+}
+a:hover {      /* Mouse over link */
+}
+a:active {     /* Selected link */
+}
+
+html {
+}
+
+body {
+    font-family: "Trebuchet MS",Sans-serif;
+    margin: 0;
+    margin-left: 9%;
+    width: 80%;
+}
+
+/* Header area */
+div#header {
+    border-bottom: 2px dashed #C9CACB;
+    border-right: 2px dashed #C9CACB;
+    border-left: 2px dashed #C9CACB;
+    color: #666666;
+    padding: 10px;
+    width: 100%;
+}
+div#header h1 {
+    font-size: 130%;
+    margin: 0;
+}
+div#header h2 {
+    font-size: 110%;
+    margin: 0;
+    text-align: right;
+}
+div#header h3 {
+    font-size: 90%;
+    margin: 0;
+    text-align: right;
+}
+
+/* Table of content */
+div.toc {
+}
+div.toc ul {
+}
+div.toc ul li {
+}
+div.toc ul li a {
+}
+
+/* Main content */
+div#body {
+}
+div#body div.section {
+    padding: 0 10px 55px;
+    position: absolute;
+    width: 80%;
+}
+div#body em {
+}
+div#body strong {
+}
+div#body sup {
+}
+div#body sub {
+}
+div#body h1 {
+    font-size: 170%;
+    margin-top: 80px;
+    text-align: center;
+}
+div#body h2 {
+    font-size: 150%;
+}
+div#body h3 {
+    font-size: 130%;
+}
+div#body h4 {
+    font-size: 110%;
+}
+div#body h5 {
+}
+div#body h6 {
+}
+div#body p {
+}
+div#body ul {
+}
+div#body ol {
+}
+div#body li {
+}
+div#body pre {
+}
+div#body table {
+}
+div#body table tr {
+}
+div#body table tr th {
+}
+div#body table tr td {
+}

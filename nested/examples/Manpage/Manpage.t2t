@@ -1,0 +1,250 @@
+NESTED
+
+Nov, 2011
+
+%!target: xhtmls
+%!style(xhtmls): media/themes/Base/style.css
+%!nested(tex): --docclass {article}
+
+%S = LOG =[log]
+
+% 18 nov 2011 cjenkins : creation
+% 22 nov 2011 cjenkins : format is corrected
+%                        removed wrong instructions for %!style
+% 27 nov 2011 cjenkins : target comments added
+
+
+= NAME =[name]
+
+nested - specialized editor for structured documents
+
+
+= SYNOPSIS =[synopsis]
+
+%**nested** [//options//] [//FILE//]
+**nested** [//FILE//]
+
+
+= DESCRIPTION =[description]
+
+**Nested** is a specialized editor focused on creating structured documents such 
+as reports, publications, presentations, books, etc. It is designed to help the
+user concentrate on writing content without been distracted by format or markup.
+It offers a rich WYSIWYM interface where the user writes plain text with a 
+lightweight markup language known as txt2tags.
+
+Basic users are assisted with extensive examples, formatting buttons, a simple 
+image gallery per document, assisted internal and external links, section based
+layout and easy publishing options in HTML, LaTeX or PDF. Power users will like
+the advanced pre-processing and post-processing options, advanced theming, 
+version control systems compatibility, LaTeX formulas support, a complete set
+of keyboard shortcuts, among others.
+
+Nested separates content from presentation and publishing option, so same content
+can be presented as a HTML web page, a rich standard-compliant HTML presentation,
+a IEEE journal publication, a beautiful PDF book, etc. Nested files are plain
+text so they can be used with common version control systems.
+
+Please visit the program site at http://nestededitor.sourceforge.net/.
+
+
+%S = OPTIONS =[options]
+
+%
+%: **-p**, **--publish**
+%  Don't load the GUI, just publish the document as configured and run.
+%
+%
+
+= MARKUP =[markup]
+
+```
+Comment           % comments
+Bold              **words**
+Italic            //words//
+Underline         __words__
+Strike            \-\-words\-\-
+Superscript       ^^words^^
+Subscript         ,,words,,
+Monospaced        ``words``
+Tagged            ''words''
+Separator line    -----------------------...
+Strong line       =======================...
+
+Image             [filename.jpg]
+                  [300-filename.jpg]
+External link     [label url]
+Internal link     [label #section_name]
+
+Paragraph         words
+Quote             <TAB>words
+List              - words
+Numbered list     + words
+Definition list   : words
+Table             | cell1 | cell2 | cell3...
+
+Verbatim line     ``` words
+Tagged line       ''' words
+
+Verbatim block    ```
+                  lines
+                  ```
+Raw block         """
+                  lines
+                  """
+Tagged block      '''
+                  lines
+                  '''
+Math block        <<<
+                  lines
+                  >>>
+Code block        {{{ code
+                  lines
+                  }}}
+```
+
+A more complete example can be found in ``File > Examples > Markup``
+
+
+= DOCUMENT FILE =[document_file]
+
+The document files are identified by the //.t2t// extension (such as ``myfile.t2t``).
+You have three areas inside your sources:
+
+: **Header**
+  The first three lines of the file. Used for document title, author, version and 
+  date information.
+
+: **Settings**
+  Begins right after the Header and ends when the Body area starts. Used for
+  settings (configurations) in the ``%!keyword:value`` format.
+
+: **Body**
+  Begins after the settings and goes until the end of the document. Used for the
+  document contents.
+
+
+= SETTINGS =[settings]
+
+These are the settings or properties of the document that are loaded into the GUI.
+
+: **%!target**
+  Set the publishing option, it can be ``xhtmls``, ``tex`` or ``txt``
+``` %!target: xhtmls
+
+: **%!options(target)**
+  Set common options to each target. Example:
+``` %!options(xhtmls): \-\-toc \-\-toc-level 3
+
+: **%!nested(target)**
+  Set special options to each target. Example:
+``` %!nested(xhtmls): \-\-base64 \-\-libs syntaxhighlighter,jquery
+
+: **%!style**
+  Set a style for the document. Right now it can only be used to select the theme
+  on HTML target:
+``` %!style(xhtmls): media/theme/Base/style.css
+% A theme if target is HTML or a \documentclass if target is LaTeX. Example:
+% ``` %!style(tex): book
+% The above, even if it makes sense, it actually breaks the default txt2tags behaviour, 
+% because %!style is used for include \usepackage in LaTeX targets. So, to keep 
+% compatibility between files we are using %!nested(tex): --docclass {book}
+
+: **%!preproc**
+  Input search/replace filter used to change the Body of the source document 
+  BEFORE conversion to target. It can be general or specific to target. Search 
+  uses Python regular expressions. Example:
+``` %!preproc(xhtmls):  "AUTHOR"  "Carlos Jenkins"
+
+: **%!postproc**
+  Output search/replace filter used to change the generated document AFTER the 
+  conversion is done. Search uses Python regular expressions. It can be general 
+  or specific to target. Example:
+``` %!postproc(xhtmls):  "<b>"  "<strong>"
+
+
+= MACROS =[macros]
+
+Macros are handy shortcuts to insert dynamic contents in your document. The time
+macros can be customized with special directives, like ``%Y`` and ``%f``, see 
+http://docs.python.org/library/time.html for more information.
+
+: **""%%date""**
+  Insert the current date. The default format is ``%%date(%Y%m%d)``, which gives 
+  YYYYMMDD.
+
+%: **""%%mtime""**
+%  Insert the source file modification time. The default format is ``%%date(%Y%m%d)``, 
+%  which gives YYYYMMDD.
+
+: **""%%toc""**
+  Specifies where the Table of Contents will be placed. You can even use it 
+  multiple times. Note that you must also use the ``--toc`` option.
+
+
+= TARGET COMMENTS =[target_comments]
+
+Target comments are special tokens that will be removed for some specific target,
+making the content of the line avalaible.
+
+: **""%target%<space>""**
+  Avalaible targets are ``xhtmls`` (or its alias ``html``), ``tex`` (or its aliases 
+  ``latex`` or ``pdf``) or ``txt`` (or its alias ``text``). Please note the leading space.
+
+
+For example, you can insert in your document:
+
+```
+%html% You can download the PDF version of this document from [my website http://www.somedomain.com/myfile.pdf]
+%pdf% You can view the HTML version of this document in [my website http://www.somedomain.com/myfile.html]
+```
+
+
+= EXAMPLES =[examples]
+
+All examples can be found on ``File > Examples``
+
+
+= FILES AND FOLDERS =[files_and_folders]
+
+: ~/.nested/config.ini
+  Default user configuration file.
+
+: ~/.nested/recent.txt
+  Recently opened files.
+
+: ~/.nested/examples/
+  User custom examples.
+
+: ~/.nested/libraries/
+  User Javascript libraries.
+
+: ~/.nested/templates/
+  User content and structural templates.
+
+: ~/.nested/themes/
+  User HTML presentation themes.
+
+
+= AUTHOR =[author]
+
+Carlos Jenkins <cjenkins@softwarelibrecr.org>
+    http://carlos.jenkins.co.cr/
+
+Nested uses **txt2tags** by Aurelio Jargas <verde@aurelio.net>
+    http://txt2tags.org/
+
+%% TRANSLATOR: Activate the following line and add your language, name and email/site.
+
+% Man page translated to LANGUAGE by YOUR NAME <YOUR EMAIL OR WEBSITE>.
+
+
+= BUGS =[bugs]
+
+http://sourceforge.net/p/nestededitor/tickets/
+
+
+= COPYRIGHT =[copyright]
+
+Copyright (C) %%date(%Y) Carlos Jenkins, GNU GPL v2
+

@@ -1,0 +1,167 @@
+Título del documento
+Autor del documento
+%%date(%B, %Y)
+
+%!target: xhtmls
+%!style(xhtmls): media/themes/Website/style.css
+%!options(xhtmls): --toc --toc-level 1
+%!nested(xhtmls): --libs jquery
+%!nested(tex): --docclass {article}
+
+%S = WebQuest =[webquest]
+
+% 
+% Bernie Dodge profesor de Tecnología Educativa, en 1995 define las WebQuest como una actividad
+% orientada a la investigación, en la que casi toda o toda la información que se utiliza procede
+% de recursos de la Web. El objetivo es lograr aprendizajes mediante la búsqueda de la información,
+% apropiándosela e interpretándola de acuerdo a una guía proporcionada por el docente o creada por
+% el grupo de trabajo.
+% 
+% Para evitar la pérdida de tiempo en búsquedas inadecuadas y poco útiles es importante previamente
+% organizar la actividad de tal forma que las distintas tareas que se desarrollan estén encaminadas
+% al logro del aprendizaje que se proyecta en el diseño de la unidad didáctica que constituye la Webquest.
+% Anotamos aquí las secciones que Bernie Dodge describe como las etapas necesarias, con una breve
+% descripción del desarrollo de contenido que supone.
+% 
+
+= Introducción =[introduccion]
+
+% Guía para escribir ésta sección:
+% ================================
+%
+% En esta sección se podrán anotar las pautas de trabajo y brindar algo de información inicial, 
+% motivar al grupo para involucrarse en las tareas que hay que realizar.
+%
+% Nota: Usted puede mantener o eliminar ésta guía, en cualquier caso, no se mostrará una vez 
+%       publique el documento.
+
+= Tarea =[tarea]
+
+% Guía para escribir ésta sección:
+% ================================
+%
+% Aquí se suele describir de manera clara y puntual lo que se en sí se espera lograr con el todo
+% el trabajo que se va a hacer, es decir lo que será el resultado final. Por ejemplo, una
+% presentación digital, un vídeo, una página web, un collage, un socio drama, una obra de teatro,
+% una exposición oral para el grupo de clase, un beneficio específico para el centro educativo,
+% para el aula en la que se trabaja, etc.
+%
+% Nota: Usted puede mantener o eliminar ésta guía, en cualquier caso, no se mostrará una vez 
+%       publique el documento.
+
+= Proceso =[proceso]
+
+% Guía para escribir ésta sección:
+% ================================
+%
+% Se registra un listado de lo que hay que hacer y en qué orden.  Para cada paso se hará una
+% descripción  lo más detallada posible y deben incluirse los recursos online, offline y otros
+% si es del caso, que habrán de utilizarse.  También pueden indicarse o sugerirse herramientas,
+% instrumentos, o técnicas que pueden utilizarse para trabajar la información que se obtendrá.
+%
+% Nota: Usted puede mantener o eliminar ésta guía, en cualquier caso, no se mostrará una vez 
+%       publique el documento.
+
+= Recursos =[recursos]
+
+% Guía para escribir ésta sección:
+% ================================
+%
+% Se anota el listado de recursos con que contará el grupo de trabajo para realizar  la tarea a
+% fin de que no inviertan tiempo en búsquedas que puedan .  Por ejemplo, listado de direcciones
+% electrónicas, carpetas con documentos, imágenes, presentaciones, etc. Estos se habrán seleccionado
+% cuidadosamente de tal manera que la utilización de los mismos en cada proceso contribuya a
+% alcanzar el cumplimiento de la tarea propuesta.
+%
+% Nota: Usted puede mantener o eliminar ésta guía, en cualquier caso, no se mostrará una vez 
+%       publique el documento.
+
+= Evaluación sugerida =[evaluacion_sugerida]
+
+% Guía para escribir ésta sección:
+% ================================
+%
+% En este apartado se anota con detalle y de la manera más clara y puntual posible la forma en que
+% se evaluará el trabajo ejecutado. Se indicará cómo se evaluará el trabajo grupal y cómo se evaluará
+% el trabajo individual. Puede incluirse en recursos los instrumentos que se utilizarán para tal efecto
+% y apuntar aquí la forma en que se aplicarán. La evaluación puede estar sujeta a modificaciones por
+% propuestas o sugerencias del grupo de clase.
+%
+% Nota: Usted puede mantener o eliminar ésta guía, en cualquier caso, no se mostrará una vez 
+%       publique el documento.
+
+= Conclusión =[conclusion]
+
+% Guía para escribir ésta sección:
+% ================================
+%
+% En esta sección se anotarán frases que resuman lo que se ha aprendido al realizar la tarea que
+% propone la WebQuest, lo que se ha logrado mediante la experiencia vivida. Conviene estimular la
+% reflexión  del proceso seguido, de tal manera que se anime a reproducir la experiencia a otras
+% temáticas. Puede sugerirse analizar el fruto del trabajo por ejemplo en cómo aplican tensiones
+% entre lo local y lo global, lo tradicional y lo moderno, lo individual y lo colectivo. Se puede
+% además solicitar aportes para mejorar esta propuesta de WebQuest, indicando la forma en que se
+% hará entrega de las sugerencias.
+%
+% Nota: Usted puede mantener o eliminar ésta guía, en cualquier caso, no se mostrará una vez 
+%       publique el documento.
+
+= Aprender a conocer =[aprender_a_conocer]
+
+% Guía para escribir ésta sección:
+% ================================
+%
+% Se anotará el contenido, los conceptos o definiciones que  podrán conocer, y apropiarse como
+% conocimiento nuevo los integrantes del grupo, o ampliar y profundizar  de a cuerdo a sus
+% conocimientos previos.
+%
+% Nota: Usted puede mantener o eliminar ésta guía, en cualquier caso, no se mostrará una vez 
+%       publique el documento.
+
+= Aprender a hacer =[aprender_a_hacer]
+
+% Guía para escribir ésta sección:
+% ================================
+%
+% Se anotan las capacidades para la práctica cotidiana ante situaciones nuevas, vinculadas al
+% contenido, que el grupo ganará con el ejercicio que va a desarrollar.
+%
+% Nota: Usted puede mantener o eliminar ésta guía, en cualquier caso, no se mostrará una vez 
+%       publique el documento.
+
+= Aprender a convivir =[aprender_a_convivir]
+
+% Guía para escribir ésta sección:
+% ================================
+%
+% Anotar actitud o disposiciones de los integrantes para interactuar y comunicarse con otros así
+% como el ponerse en el lugar de los otros, que el trabajo a desarrollar, facilita percibir vivir
+% y compartir.
+%
+% Nota: Usted puede mantener o eliminar ésta guía, en cualquier caso, no se mostrará una vez 
+%       publique el documento.
+
+= Aprender a ser =[aprender_a_ser]
+
+% Guía para escribir ésta sección:
+% ================================
+%
+% Hacer referencia a las capacidades personales que puede con autonomía interiorizar cada integrante
+% mediante el desarrollo de la WebQuest
+%
+% Nota: Usted puede mantener o eliminar ésta guía, en cualquier caso, no se mostrará una vez 
+%       publique el documento.
+
+= Créditos =[creditos]
+
+% Guía para escribir ésta sección:
+% ================================
+%
+% En esta sección se anotan las referencias, los reconocimientos de autoría de todos los recursos
+% que se utilizan, de texto o audiovisual haciendo vínculos a las fuentes de donde han sido tomados
+% si son web, o las referencias bibliográficas correspondientes. También incluir el agradecimiento
+% a personas que nos han asesorado o facilitado información.
+%
+% Nota: Usted puede mantener o eliminar ésta guía, en cualquier caso, no se mostrará una vez 
+%       publique el documento.
+

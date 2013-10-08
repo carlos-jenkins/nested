@@ -1,0 +1,169 @@
+<?xml version="1.0"
+      encoding="UTF-8"
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Math Test Page</title>
+<meta name="generator" content="Nested http://nestededitor.sourceforge.net/" />
+<link rel="stylesheet" type="text/css" href="media/themes/Clean/style.css" />
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+    menuSettings: {zoom: "Double-Click", zscale: "300%"},
+    tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]},
+    MathMenu: {showRenderer: false},
+    "HTML-CSS": {
+        availableFonts: ["TeX"],
+        preferredFont: "TeX",
+        imageFont: null
+    }
+  });
+</script>
+<script type="text/javascript" src="media/libraries/mathjax/MathJax.js"></script>
+<link rel="stylesheet" type="text/css" href="media/themes/Clean/style.css" />
+</head>
+<body>
+
+<div class="header" id="header">
+<h1>Math Test Page</h1>
+<h2>Design Science, Inc. Adapted by Carlos Jenkins</h2>
+<h3>Version 1.1</h3>
+</div>
+
+<div class="body" id="body">
+
+<div id="section1" class="section">
+
+<h1 id="example_equations">Example equations</h1>
+
+<p>
+This the Nested Math Test Page.
+</p>
+<p>
+This example shows equations written in Latex. Those equations are original from the MathJax example file and were adapted for the Nested.
+</p>
+<p>
+This document requires the MathJax library for proper visualization on the HTML target, so make sure on the document properties that <code>mathjax</code> is included in the libraries of this document (by default it is).
+</p>
+<p>
+This document requires the amsmath package for proper visualization on the LaTeX/PDF target, so make sure <code>\usepackage{amsmath}</code> is included in the LaTeX header of this document if you want to use that target (by default it is).
+</p>
+<p>
+The MathJax is a free Software Javascript library for rendering math on browsers, for more information visit:
+</p>
+	<blockquote>
+	<a href="http://www.mathjax.org/">http://www.mathjax.org/</a>
+	</blockquote>
+<p>
+The Nested is a specialized editor for creating structured documents of many kinds and formats. For more information visit:
+</p>
+	<blockquote>
+	<a href="http://nestededitor.sourceforge.net/">http://nestededitor.sourceforge.net/</a>
+	</blockquote>
+</div>
+
+<div id="section2" class="section">
+
+<h2 id="the_lorenz_equations">The Lorenz Equations</h2>
+
+<p class="math">
+\begin{align}
+\dot{x} &amp; = \sigma(y-x) \\
+\dot{y} &amp; = \rho x - y - xz \\
+\dot{z} &amp; = -\beta z + xy
+\end{align}
+</p>
+</div>
+
+<div id="section3" class="section">
+
+<h2 id="the_cauchy_schwarz_inequality">The Cauchy-Schwarz Inequality</h2>
+
+<p class="math">
+\[
+\left( \sum_{k=1}^n a_k b_k \right)^{\!\!2} \leq
+ \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
+\]
+</p>
+</div>
+
+<div id="section4" class="section">
+
+<h2 id="a_cross_product_formula">A Cross Product Formula</h2>
+
+<p class="math">
+\[
+  \mathbf{V}_1 \times \mathbf{V}_2 =
+   \begin{vmatrix}
+    \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
+    \frac{\partial X}{\partial u} &amp; \frac{\partial Y}{\partial u} &amp; 0 \\
+    \frac{\partial X}{\partial v} &amp; \frac{\partial Y}{\partial v} &amp; 0 \\
+   \end{vmatrix}
+\]
+</p>
+</div>
+
+<div id="section5" class="section">
+
+<h2 id="the_probability_of_getting_k_heads_when_flipping_n">The probability of getting k heads when flipping n</h2>
+
+<p class="math">
+\[P(E) = {n \choose k} p^k (1-p)^{ n-k} \]
+</p>
+</div>
+
+<div id="section6" class="section">
+
+<h2 id="an_identity_of_ramanujan">An Identity of Ramanujan</h2>
+
+<p class="math">
+\[
+   \frac{1}{(\sqrt{\phi \sqrt{5}}-\phi) e^{\frac25 \pi}} =
+     1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+      {1+\frac{e^{-8\pi}} {1+\ldots} } } }
+\]
+</p>
+</div>
+
+<div id="section7" class="section">
+
+<h2 id="a_rogers_ramanujan_identity">A Rogers-Ramanujan Identity</h2>
+
+<p class="math">
+\[
+  1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots =
+    \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})},
+     \quad\quad \text{for $|q|&lt;1$}.
+\]
+</p>
+</div>
+
+<div id="section8" class="section">
+
+<h2 id="maxwells_equations">Maxwell's Equations</h2>
+
+<p class="math">
+\begin{align}
+  \nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &amp; = \frac{4\pi}{c}\vec{\mathbf{j}} \\
+  \nabla \cdot \vec{\mathbf{E}} &amp; = 4 \pi \rho \\
+  \nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} &amp; = \vec{\mathbf{0}} \\
+  \nabla \cdot \vec{\mathbf{B}} &amp; = 0
+\end{align}
+</p>
+</div>
+
+<div id="section9" class="section">
+
+<h2 id="in_line_mathematics">In-line Mathematics</h2>
+
+<p>
+Finally, while display equations look good for a page of samples, the ability to mix math
+and text in a paragraph is also important. This expression \(\sqrt{3x-1}+(1+x)^2\) is an
+example of an inline equation. As you see, MathJax equations can be used this way as well,
+without unduly disturbing the spacing between lines.
+</p>
+</div>
+</div>
+</body></html>

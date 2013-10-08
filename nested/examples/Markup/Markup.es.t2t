@@ -1,0 +1,44 @@
+Página de Ejemplo de Marcado
+Carlos Jenkins
+%%date(%B, %Y)
+
+%!target: xhtmls
+%!style(xhtmls): media/themes/Clean/style.css
+%!nested(tex): --docclass {article}
+
+= Sección 1 sin título =[seccion_1_sin_titulo]
+
+Esto es una sección de ejemplo. En ésta área usted puede insertar el texto para ésta sección.
+
+Un párafo está compuesto por una o más líneas de texto.
+
+Una linea en blanco separa los párafos.
+
+Alguna ayuda para formatear texto:
+
+- Negrita: **Texto en negrita**
+- Cursiva: //Texto en cursiva//
+- Subrayado: __Texto subrayado__
+- Tachado: --Texto tachado--
+- Sobreíndice: ^^Texto sobreíndice^^
+- Subíndice: ,,Texto subíndice,,
+
+
+Por favor note que las listas se cierran con dos líneas en blanco.
+
+También puede agregar tablas:
+
+|| Encabezado de la tabla | Encabezado de la tabla |
+|                   Tabla |     el alineamiento    |
+|            con líneas y |           es           |
+|                  celdas |         genial!        |
+
+
+Éste es sólo un simple ejemplo, si desea conocer más sobre el marcado del texto por favor visite
+la ayuda en:
+
+```
+	Ayuda -> Referencia de marcado
+```
+
+Éste es un vínculo a la [página principal del proyecto http://nestededitor.sourceforge.net/].

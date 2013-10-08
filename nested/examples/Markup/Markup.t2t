@@ -1,0 +1,42 @@
+Markup Example Page
+Carlos Jenkins
+%%date(%B, %Y)
+
+%!target: xhtmls
+%!style(xhtmls): media/themes/Clean/style.css
+
+= Untitled section 1 =[untitled_section_1]
+
+This is an example section. In this area you can insert the text for this section.
+
+A paragraph is made by one or more lines.
+
+A blank line separates them.
+
+Some formatting help:
+
+- Bold: **Bold text**
+- Italic: //Italic text//
+- Underline: __Underlined text__
+- Strike: --Striked text--
+- Superscript: ^^Superscript text^^
+- Underscript: ,,Undescript text,,
+
+
+Note that two blank lines closes the list.
+
+You can add a tables too:
+
+|| Table Heading | Table Heading |
+|          Table |   alignment   |
+|          lines |      is       |
+|     with cells |     nice!     |
+
+
+This is just a quick example, if want to know more about the markup please visit the help at:
+
+```
+	Help -> Markup reference
+```
+
+This is a link to the [project homepage http://nestededitor.sourceforge.net/].

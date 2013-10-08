@@ -1,0 +1,39 @@
+Version 1.3:
+  * New upstream release.
+  * Spell checking support added with OpenOffice/LibreOffice dictionaries support.
+  * New LaTeX log viewer for when publishing to PDF fails.
+  * Support for customs title pages using title.tex in the document folder.
+  * TODO: Bibliography support.
+  * Portuguese translation added. Thanks to Kiara Navarro.
+  * Better formatting behavior for Link and Lists buttons.
+  * If title of the first section is commented (%) then the abstract 
+    will be disabled when publishing to LaTeX with a document class
+    that supports "Abstract".
+  * Several bugs corrected.
+  * New timestamp based Undo/Redo.
+
+Version 1.2.2:
+  * New upstream release. Bug-fix release.
+  * Publishing time reduced thanks to optimization of the footnotes preprocessor.
+  * LaTeX abstract is correctly formatted now. Thanks to David Narvaez for the report.
+
+Version 1.2:
+  * Footnotes support! Works great, but it lags a bit the publishing process :(
+  * Several small bugs corrected.
+  * Corrected a bug that prevented the last child of any subsection to be deleted.
+  * Corrected a bug that prevented from rendering PDF when a code block with option is present (e.g: C-Sharp block).
+  * Corrected a bug that prevented to save a file (Save as) to the same folder where the source file was.
+  * Corrected a bug that prevented from loading filters for all the targets but the last.
+  * Linebreak filters are now a pre-filters, not post-filters, so they should play nice with other txt2tags markup.
+  * Image positioning is working now.
+  * The website was added to the Nested repository.
+  * Help menu now links to that documentation.
+  * .t2t file association on Windows.
+  * User is now able to easily find the Nested user folder.
+
+Version 1.1:
+  * Added Windows Vista and Windows XP compatibility. Yay!
+  * l10n of Examples are now possible.
+
+Version 1.0:
+  * Initial release.

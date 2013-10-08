@@ -1,0 +1,385 @@
+Nested - Specialized editor for structured documents
+Carlos Jenkins
+
+
+%!target: xhtmls
+%!style(xhtmls): media/themes/NestedWebsite/style.css
+%!options(xhtmls): --toc --toc-level 5
+%!nested(xhtmls): --libs jquery
+%!nested(tex): --docclass {article}
+
+= Getting help =[getting_help]
+
+% This is the Nested website Participate page.
+% This document uses the NestedWebsite theme, make sure it is installed with
+% your themes (File -> Examples -> My Nested folder, copy it to 'themes')
+
+Do you need help with Nested? Do you have a recommendation? Nested uses Google 
+Groups for its forum/mailing list/general discussion group. Come in and post your 
+doubts or ideas!
+
+%html% ''' <div style="font-size: 20px;">
+
+- [Support and discussion group https://groups.google.com/group/nestededitor/]
+
+
+%html% ''' </div>
+
+
+= Spread the word =[spread_the_word]
+
+**Tell a friend**
+
+%html% '''
+%html% <!-- AddThis Button BEGIN -->
+%html% <div class="addthis_toolbox addthis_default_style " 
+%html%      addthis:url="http://nestededitor.sourceforge.net/" 
+%html%      addthis:title="Nested" 
+%html%      addthis:description="Specialized editor for structured documents">
+%html% <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+%html% <a class="addthis_button_tweet"></a>
+%html% <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+%html% <a class="addthis_counter addthis_pill_style"></a>
+%html% </div>
+%html% <!-- AddThis Button END -->
+%html% '''
+
+The easier way to help Nested is by promoting it with your friends and collegues:
+tweet-it, like-it, plus-it, blog-it, share-it and talk about it! Use the above bar to share 
+Nested with your friends.
+
+**Use a badge**
+
+You can use a promotional badge on your document or put a banner in your website to show your love:
+
+[created_with_nested.png]  
+
+Under construction...
+
+**Write a review**
+
+Finally, but not least, you can write a review about Nested, good or bad, feedback is
+always welcome. Some reviews about Nested:
+
+- **``[EN]``** //Dec 12 2011// at [addictivetips.com http://www.addictivetips.com/windows-tips/nested-is-a-specialized-editor-for-creating-structured-documents/].
+- **``[ES]``** //Dec 12 2011// at [softhoy.com http://www.softhoy.com/nested-editor-texto-esencial-ademas-latex.html].
+
+
+You wrote one? [Let us know https://groups.google.com/group/nestededitor/post].
+
+= Reporting bugs and feature request =[reporting_bugs_and_feature_request]
+
+Nested uses Sourceforge.net for development and issue tracking. If you have 
+found a bug in Nested, or do you want to submit a feature request, please 
+head on over to the issue tracker and create a new ticket.
+
+%html% ''' <div style="font-size: 20px;">
+
+- [Issue tracker https://sourceforge.net/p/nestededitor/tickets/]
+
+
+%html% ''' </div>
+
+
+To report a bug, please use the following template:
+
+--------------------
+```
+**Nested version:** <version>
+**Operating system:** <name> <version> <arquitecture>
+
+**Problem:**
+<Describe briefly the problem here>
+
+**How to reproduce the problem:**
+<Describe what steps are required in order to reproduce the problem, under what conditions?>
+
+**Expected behaviour:**
+<What is the expected output or behaviour, or what whould you expect to happen?>
+
+**Comments:**
+<Add any additional comment you may like to include.>
+```
+--------------------
+
+= Translate =[translate]
+
+You can help translating Nested to your language or to the languages 
+you know. You can help by translating the Nested Software interface 
+and/or the documentation, that is, the included examples, templates, 
+manual and/or website.
+
+== Application ==[application]
+
+%html% '''
+%html% <div style="float: right;text-align: right;">
+%html%   <a target="_blank" 
+%html%      style="text-decoration:none; color:black; font-size:66%"
+%html%      href="https://www.transifex.net/projects/p/nested/resource/nested-application/"
+%html%      title="See more information on Transifex.net">Top translations: nested » nested-application</a><br/>
+%html%   <img src="https://www.transifex.net/projects/p/nested/resource/nested-application/chart/image_png"/><br/>
+%html% </div>
+%html% '''
+
+You can translate online the main Nested application via the 
+Transifex website. Visit:
+
+	https://www.transifex.net/projects/p/nested/
+
+Alternatively, you can download the latest POT/PO files from 
+Transifex (or from [here http://svn.code.sf.net/p/nestededitor/code/trunk/l10n/nested.pot]) 
+and then email it back to us.
+
+== Documentation ==[documentation]
+
+You can help translating the Nested included examples, templates,
+manual and/or website. All of those are in Nested file format 
+(known as txt2tags, *.t2t).
+
+You need to download the ``*.t2t`` source files, edit them with Nested 
+or any other plain text editor and save them with the following format:
+
+```
+	Filename.lang.t2t
+```
+
+**e.g.**: If the source file name is ``Presentation.t2t`` and you're translating 
+it to Brazil Portuguese you need rename it to ``Presentation.pt_BR.t2t``. If 
+your system is configured in Brazil Portuguese, Nested will try to load
+files with ``*.pt_BR.t2t`` extension, if is not available, then it will try 
+``*.pt.t2t``, if that one is also unavailable Nested will fallback to the 
+included English ``*.t2t`` file.
+
+Remember, always verify that your language is not already included first before 
+starting a new translation.
+
+**Examples**
+
+- [Code.t2t http://svn.code.sf.net/p/nestededitor/code/trunk/nested/examples/Code/]
+- [Footnotes.t2t http://svn.code.sf.net/p/nestededitor/code/trunk/nested/examples/Footnotes/]
+- [Markup.t2t http://svn.code.sf.net/p/nestededitor/code/trunk/nested/examples/Markup/]
+- [Math.t2t http://svn.code.sf.net/p/nestededitor/code/trunk/nested/examples/Math/]
+- [Paper.t2t http://svn.code.sf.net/p/nestededitor/code/trunk/nested/examples/Paper/]
+- [Presentation.t2t http://svn.code.sf.net/p/nestededitor/code/trunk/nested/examples/Presentation/]
+
+
+**Templates**
+
+- [WebQuest.t2t http://svn.code.sf.net/p/nestededitor/code/trunk/nested/templates/WebQuest/] (Spanish->English translation required)
+
+
+**Manual**
+
+- [Manpage.t2t http://svn.code.sf.net/p/nestededitor/code/trunk/nested/examples/Manpage/] (Used on GNU/Linux OS only)
+
+
+**Website**
+
+- [About.t2t http://svn.code.sf.net/p/nestededitor/code/trunk/website/content/]
+- [Screenshots.t2t http://svn.code.sf.net/p/nestededitor/code/trunk/website/content/]
+- [Downloads.t2t http://svn.code.sf.net/p/nestededitor/code/trunk/website/content/]
+- [Learn.t2t http://svn.code.sf.net/p/nestededitor/code/trunk/website/content/]
+- [Participate.t2t http://svn.code.sf.net/p/nestededitor/code/trunk/website/content/]
+
+
+If you want to publish any website page correctly you need to download 
+the [images http://svn.code.sf.net/p/nestededitor/code/trunk/website/content/images/] 
+and the [website theme http://svn.code.sf.net/p/nestededitor/code/trunk/website/theme/]. 
+Then, copy the //WebsiteTheme// folder to your Nested themes folder 
+(``File -> My Nested Folder -> themes``).
+
+= Extend =[extend]
+
+Extend Nested by implementing new themes, templates, examples and libraries.
+
+Under construction...
+
+= Hacking and patching =[hacking_and_patching]
+
+Patches and enhancements are always welcome! To get the source code run:
+
+%html% ''' <div style="font-size: 17px; text-align: center;">
+
+```
+svn checkout svn://svn.code.sf.net/p/nestededitor/code/trunk nested
+```
+
+%html% ''' </div>
+
+Or browse it here: http://sourceforge.net/p/nestededitor/code/
+
+Once you have downloaded the repository you will find the list of dependencies and
+how to launch Nested from source in the **``README.txt``** file. Nested is
+programmed with [Python http://python.org/], using [PyGtk http://www.pygtk.org/] 
+for the GUI and [txt2tags http://txt2tags.org/] as the backend.
+
+In the repository you will find the following tree:
+
+- **``dist/``** : Scripts and files required to package Nested to the different 
+  platforms: Ubuntu, Debian, Windows, etc.
+- **``graphics/``** : Source files of the graphics used by Nested 
+  ([SVG http://en.wikipedia.org/wiki/Scalable_Vector_Graphics] files).
+- **``l10n/``** : Localization files for Nested. This folder includes a script 
+  to extract translation strings from source code, a script to compile translation 
+  files, the localization files ([``*.po`` files http://en.wikipedia.org/wiki/Gettext])
+  and the main localization template file (``*.pot`` file). See [Translate #translate]
+  for more information.
+- **``nested/``** : This folder holds the Python scripts that compose the Nested
+  application. In particular, the important files are:
+ - **``gui.glade``** : [Glade http://glade.gnome.org/] file that holds all the GUI.
+ - **``nested``** : Launch script. Does nothing more than launching the application.
+ - **``nested_gui.py``** : This is the **MOST** important file, it holds the logic of the 
+   entire application.
+ - **``undo_buffer.py``** : A TextBuffer for PyGtk TextView with Undo/Redo capabilities.
+ - **``markup_buffer.py``** : A TextBuffer for PyGtk TextView with syntax highlight capabilities.
+ - **``custom_buffer.py``** : A TextBuffer for PyGtk TextView with txt2tags and BibTeX syntax 
+   highlight capabilities and extended functionality.
+ - **``spellcheck.py``** : Provides spell checking capabilities to PyGtk TextBuffers.
+ - **``txt2tags.py``** : The slightly modified version of [txt2tags http://txt2tags.org/]
+   library used by Nested. The header of this file enumerates the modifications made.
+ - **``export.py``** : Handles the conversion of the user content to the requested
+   target. Here you can find the default pre/post filters.
+ - **``modules/``** : Several independent modules used by Nested.
+  - **``bibmm/``** : Provides BibTeX handling.
+  - **``locales/``** : Provides codes and names for countries (ISO 3166) and languages (ISO 639).
+- **``website/``** : The source files for this entire website.
+ - **``content``** : ``*.t2t`` source files and compiled examples.
+ - **``extras``** : Some additional and specific files required to host this page in Sourceforge.
+ - **``theme``** : HTML theme for Nested that gives the look and feel to this website.
+
+
+Happy hacking ;)
+
+= Packaging =[packaging]
+
+Nested is packaged for several operating systems in several 
+formats and deployment ways. If you want to access the files 
+used to package Nested you need to get the development 
+repository, that is, the source code file (.tar.gz) don't 
+include them. See [Hacking and patching #hacking_and_patching] 
+to know how to get it.
+
+You will find the **dist** folder located in the root of the 
+development repository, in it, you can find the files used for 
+packaging.
+
+== Deb ==[deb]
+
+Nested is packaged for Debian and Ubuntu, which uses the **.deb** 
+[file format ""http://en.wikipedia.org/wiki/Deb_(file_format)""] for 
+distributing and installing Software. To create a Debian package do:
+
+```
+	cd dist/debian/
+	./make_release.sh
+```
+
+The above //make_release.sh// script will create a //source release// 
+archive in the //dist// folder, then, it will process that file and 
+create a Debian source package and a Debian binary package. You can find
+the specific Debian package files in ``dist/debian/debian``.
+
+You need to edit the //make_release.sh// script to adapt it to your
+needs, in particular you need to change the first lines with your data:
+
+```
+	export DEBFULLNAME="Your name"
+	export DEBEMAIL="your@email.com"
+```
+
+To build the Debian package you need the following packages:
+
+```
+	sudo apt-get install devscripts build-essential fakeroot dh-make wget
+```
+
+== RPM ==[rpm]
+
+Nested is packaged for Fedora and OpenSuse, which uses the **.rpm** 
+file format for distributing and installing Software. 
+%To create a RPM package do:
+%
+%```
+%	cd dist/fedora/
+%	./make_release.sh
+%```
+
+In ``dist/fedora/`` you can find the **.spec** file required to build the RPM package.
+
+To get a source release package execute from the repository root:
+
+```
+	python setup.py sdist
+```
+
+This will create a source code distribution package in the //dist// folder.
+
+== Exe ==[exe]
+
+Nested is packaged for Windows XP, Vista and 7. Windows packaging
+requires a complete and configured build system. Detailed instructions
+on how to configure your system can be found here:
+
+```
+	dist/windows/build.txt
+```
+
+Nested is written in [Python http://python.org/] and uses 
+[Gtk+ http://www.gtk.org/] for the GUI. The process of
+creating the executable is called //freezing//. The packaging process 
+consist of two steps:
+
++ Create the executable.
++ Create the installer.
+
+
+Nested uses [NSIS http://nsis.sourceforge.net/] system to create
+the installer.
+
+Once you have your system configured you can package for Windows
+just by executing:
+
+```
+	cd dist\windows
+	make_release.bat
+```
+
+= Donate =[donate]
+
+Donating is a great way to show your love for the project (a Paypal account is not required):
+
+%html% '''
+%html% <div id="donate-button">
+%html% <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+%html%   <fieldset style="border: none;">
+%html%   <input type="hidden" name="cmd" value="_s-xclick" />
+%html%   <input type="hidden" name="hosted_button_id" value="TYRDUDJRBM6A4" />
+%html%   <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" name="submit" alt="Pay through PayPal." />
+%html%   <img alt="" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1" />
+%html%   </fieldset>
+%html% </form>
+%html% </div>
+%html% <div style="clear: right;" />
+%html% '''
+
+%S = Scripts =[scripts]
+
+%html% '''
+%html% <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4eec0b625fcb88d4&domready=1"></script>
+%html% <script type="text/javascript">
+%html% 
+%html% $(document).ready(function(){
+%html% 
+%html%     addthis.init();
+%html%     $(".hidden").hide();
+%html% 
+%html%     $('#show_hide1').click(function(){
+%html%         $("#hidden1").slideToggle();
+%html%     });
+%html% 
+%html% });
+%html% 
+%html% </script>
+%html% '''
+
+

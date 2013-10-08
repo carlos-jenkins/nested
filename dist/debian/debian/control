@@ -1,0 +1,47 @@
+Source: nested
+Section: editors
+Priority: optional
+Maintainer: Carlos Jenkins <cjenkins@softwarelibrecr.org>
+Build-Depends: python (>=2.6), debhelper (>= 8)
+Standards-Version: 3.9.2
+X-Python-Version: >= 2.6
+Homepage: http://nestededitor.sourceforge.net/
+Vcs-Browser: https://github.com/carlos-jenkins/nested
+Vcs-git: https://github.com/carlos-jenkins/nested.git
+
+Package: nested
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}, python-gtk2 (>= 2.24), python-webkit, python-gtkspellcheck, ttf-dejavu, xdg-utils, iso-codes
+Suggests: otf-stix
+Description: specialized editor for structured documents
+ Nested is a specialized editor focused on creating structured documents such 
+ as reports, publications, presentations, books, etc. It is designed to help the
+ user concentrate on writing content without been distracted by format or 
+ markup. It offers a rich WYSIWYM interface where the user writes plain text 
+ with a lightweight markup language.
+ .
+ Basic users are assisted with extensive examples, formatting buttons, a simple 
+ image gallery per document, assisted internal and external links, section based
+ layout and easy publishing options in HTML, LaTeX or PDF. Power users will like
+ the advanced pre-processing and post-processing options, advanced theming, 
+ version control systems compatibility, LaTeX formulas support, a complete set
+ of keyboard shortcuts, among others.
+ .
+ Nested separates content from presentation and publishing option, so same 
+ content can be presented as a HTML web page, a rich standard-compliant HTML 
+ presentation, a IEEE journal publication, a beautiful PDF book, etc. Nested 
+ files are plain text so they can be used with common version control systems.
+ 
+ 
+Package: nested-latex
+Architecture: all
+Depends: nested, texlive, texlive-publishers, texlive-latex-extra, rubber
+Description: latex publishing support for nested
+ Nested is a specialized editor focused on creating structured documents such 
+ as reports, publications, presentations, books, etc. It is designed to help the
+ user concentrate on writing content without been distracted by format or 
+ markup. It offers a rich WYSIWYM interface where the user writes plain text 
+ with a lightweight markup language.
+ .
+ This package contains the required dependencies to publish in LaTeX/PDF.
+

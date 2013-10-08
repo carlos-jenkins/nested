@@ -1,0 +1,130 @@
+Nested - Specialized editor for structured documents
+Carlos Jenkins
+
+
+%!target: xhtmls
+%!style(xhtmls): media/themes/Clean/style.css
+%!postproc(xhtmls): '<blockquote>' '<blockquote><p>'
+%!postproc(xhtmls): '</blockquote>' '</p></blockquote>'
+%!nested(xhtmls): --libs jquery
+%!nested(tex): --docclass {article}
+
+= What is? =[what_is]
+
+% This is the Nested website About page.
+% This document uses the NestedWebsite theme, make sure it is installed with
+% your themes (File -> Examples -> My Nested folder, copy it to 'themes')
+
+%html% '''
+%html% <div class="right-image">
+%html% '''
+
+[[nested_preview.png] ./media/images/nested.png]
+
+%html% '''
+%html% </div>
+%html% '''
+
+Nested is a specialized editor focused on creating structured documents such
+as reports, publications, presentations, books, etc. It is designed to help the
+user concentrate on writing content without been distracted by format or 
+markup. It offers a rich WYSIWYM interface where the user writes plain text 
+with a lightweight markup language.
+
+Basic users are assisted with extensive examples, formatting buttons, a simple 
+image gallery per document, assisted internal and external links, section based
+layout and easy publishing options in HTML, LaTeX or PDF. Power users will like
+the advanced pre-processing and post-processing options, advanced theming, 
+version control systems compatibility, LaTeX formulas support, a complete set
+of keyboard shortcuts, among others.
+
+Nested separates content from presentation and publishing option, so same 
+content can be presented as a HTML web page, a rich standard-compliant HTML 
+presentation, a IEEE journal publication, a beautiful PDF book, etc. Nested 
+files are plain text so they can be used with common version control systems.
+
+Nested was funded by the Consejo Nacional de Rectores ([CONARE http://www.conare.ac.cr/]) 
+with the support of Universidad de Costa Rica, Universidad Nacional, 
+Universidad Estatal a Distancia and Instituto Tecnológico de Costa Rica.
+
+= Features =[features]
+
+%html% '''
+%html% <div id="download-button">
+%html% '''
+
+[Download downloads.html]
+
+%html% '''
+%html% </div>
+%html% '''
+
+- Free/Libre and Open Source Software under the GPL2+.
+- Multiplatform: Runs on GNU/Linux (Ubuntu 11.10+, Debian Wheeze, OpenSUSE, Fedora and others) and Windows (XP, Vista and 7). MacOS version should be possible.
+- Separation of content and presentation.
+- Divide and conquer philosophy: every large document is composed of small documents.
+- Easy navigation of the document tree, easy way to restructure the document via drag-and-drop interface.
+- Automatic Table Of Contents (TOC) generation. User configurable depth.
+- Automatic Numbering: Never number lists/topics/sections by hand anymore.
+- Simple, uncomplicated and natural markup. Markup don't pollute the content. [Learn it learn.html].
+- Markup supports bold, italic, underline, ordered list, unordered lists, verbatim, links, images, tables, formulas, code block and others.
+- Multiple publication types for the same content: presentation, book, scientific article, paper, report, webpage and other.
+- Multiple publication formats for the same content: HTML, LaTeX, PDF and plain text.
+- Code syntax highlight on all targets. See an example [HTML examples/Code/Code.html], [PDF examples/Code/Code.pdf].
+- LaTeX formulas support and rendering on all targets. See an example [HTML examples/Math/Math.html], [PDF examples/Math/Math.pdf].
+- Advanced theming on HTML target: header, footer, css and Javascript support.
+- Extensive documentation and examples.
+- Javascript libraries support on HTML target. Included libraries: [SyntaxHighlighter http://alexgorbatchev.com/SyntaxHighlighter/], [MathJax http://www.mathjax.org/], [jQuery http://jquery.com/], or install your own.
+- Advanced configuration for LaTeX target.
+- Advanced pre-processing and post-processing regex filters.
+- Configurable automatic backup of the working file.
+- "Concentration mode": Just write your content, without been distracted by anything (toggle with Shift+F11).
+- Multilanguage: Avalaible in English, Portuguese and Spanish, and can be easily translated.
+- Spell checking with support for LibreOffice/OpenOffice [dictionaries http://extensions.services.openoffice.org/en/dictionaries] extensions.
+
+
+= News =[news]
+
+**Sun, 18 Dec 2011 14:18:28 -0600**
+
+	Bug-fix release //Nested 1.2.2//:
+
+- Publishing time reduced thanks to optimization of the footnotes preprocessor.
+- LaTeX abstract is correctly formatted now. Thanks to David Narvaez for the report.
+
+
+**Sun, 18 Dec 2011 02:58:19 -0600**
+
+	New release //Nested 1.2//:
+
+- Footnotes support! Works great, but it lags a bit the publishing process :(
+- Several small bugs corrected.
+- Corrected a bug that prevented the last child of any subsection to be deleted.
+- Corrected a bug that prevented from rendering PDF when a code block with option is present (e.g: C-Sharp block).
+- Corrected a bug that prevented to save a file (Save as) to the same folder where the source file was.
+- Corrected a bug that prevented from loading filters for all the targets but the last.
+- Linebreak filters are now a pre-filters, not post-filters, so they should play nice with other txt2tags markup.
+- Image positioning is working now.
+- The website was added to the Nested repository.
+- Help menu now links to that documentation.
+- ``.t2t`` file association on Windows.
+- User is now able to easily find the Nested user folder.
+
+
+**Wed, 14 Dec 2011 02:05:19 -0600**
+
+	New website! Finally some documentation can be found in the //Learn// section.
+
+**Mon, 12 Dec 2011 02:55:01 -0600**
+
+	New release //Nested 1.1//:
+
+- Compatible with Windows Vista and Windows XP.
+- Bundled examples can now be translated and presented to the user in his native language.
+
+
+**Thu, 08 Dec 2011 01:03:27 -0600**
+
+	First stable release is out: //Nested 1.0//. 
+	Thanks to all the people that helped with the testing.
+

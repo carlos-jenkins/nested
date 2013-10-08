@@ -1,0 +1,36 @@
+Add to l10n: -- DONE
+    - bibmm.glade
+    - bibmm.py
+    - viewer.glade
+    - viewer.py
+    - spellcheck.py
+    - bibtexdef.py
+    - gui.glade
+    - nested_gui.glade
+    - oxt_import.py
+
+TODO:
+    - Buttons for superscript and subscript
+    - Modularize Gallery
+    - Finish BibMM : Undo/Redo, Modified/Saved, Errors
+    - Refactoring footnotes, etc, to export.py (publish module)
+    - Test everything in Windows
+    - Beta release
+    - Release
+    - Update website
+    - Modified bugs?
+    // Requested
+    - Do not publish check in section.
+    - Portable mode.
+    - Fix preproc/postproc.
+    - Percent in images.
+
+Add thanks to:
+    - Nikole Yanez, main tester.
+    - Portugues translator.
+    - Russian translator.
+    - OpenSuse packager.
+    - Fedora packager.
+    - Debian packager.
+
+

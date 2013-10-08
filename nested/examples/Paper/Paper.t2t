@@ -1,0 +1,103 @@
+IEEE Paper Example
+Carlos Jenkins
+%%date(%B, %Y)
+
+%!target: tex
+%!style(xhtmls): media\themes\Clean\style.css
+%!nested(xhtmls): --libs syntaxhighlighter,mathjax
+%!options(tex): --enum-title
+%!nested(tex): --docclass {IEEEtran}
+
+= Abstract =[abstract]
+
+% File derived from http://www.electronics.oulu.fi/latex/examples/example_1/index.html
+% Thanks to the original author, I couldn't find his name to attribute the copyright.
+
+This is abstract text: This simple document shows basic features of a Nested document 
+with ''\LaTeX{}'' as a target using the IEEE Transaction standard document class.
+
+= Introduction =[introduction]
+
+Here is the text of your introduction. We use some Latin nonsense text to fill
+the paragraphs. This way the resulting document will look more like an actual 
+scientific paper or so. Here is an equation:
+
+<<<
+\[ 
+\left( \sum_{k=1}^n a_k b_k \right)^{\!\!2} \leq 
+ \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right) 
+\]
+>>>
+
+Now you don't need to read the text any further because it's just Lorem ipsum.
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit
+amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+officia deserunt mollit anim id est laborum.
+
+== Subsection Heading Here ==[subsection_heading_here]
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+culpa qui officia deserunt mollit anim id est laborum.
+
+|| Table Heading | Table Heading |
+|          Table |   alignment   |
+|          lines |      is       |
+|     with cells |     nice!     |
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+culpa qui officia deserunt mollit anim id est laborum.
+
+%tex% '''
+%tex% \begin{figure}
+%tex% '''
+[250-sample_figure.png]
+%tex% '''
+%tex%     \caption{Simulation Results}
+%tex%     \label{simulationfigure}
+%tex% \end{figure}
+%tex% '''
+
+== Another subsection ==[another_subsection]
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+culpa qui officia deserunt mollit anim id est laborum.
+
+{{{ cpp
+#include <stdio.h>
+ 
+int main(void)
+{
+  printf("Hello world\n");
+  return 0;
+}
+}}}
+
+= Conclusion =[conclusion]
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+fugiat nulla pariatur.

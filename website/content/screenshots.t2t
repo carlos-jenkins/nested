@@ -1,0 +1,93 @@
+Nested - Specialized editor for structured documents
+Carlos Jenkins
+
+
+%!target: xhtmls
+%!style(xhtmls): media/themes/NestedWebsite/style.css
+%!options(xhtmls): --toc --toc-level 5
+%!postproc(xhtmls): '<blockquote>' '<blockquote><p>'
+%!postproc(xhtmls): '</blockquote>' '</p></blockquote>'
+%!nested(xhtmls): --libs jquery
+%!nested(tex): --docclass {article}
+
+%S = Screenshots =[screenshots]
+
+% This is the Nested website Screenshots page.
+% This document uses the NestedWebsite theme, make sure it is installed with
+% your themes (File -> Examples -> My Nested folder, copy it to 'themes')
+
+Nested is avalaible for Ubuntu GNU/Linux, Debian GNU/Linux and Microsoft Windows
+XP, Vista and 7. The following screenshots illustrates some of the possible scenarios
+you can expect with Nested.
+
+%html% ''' <div style="clear: right;" />
+
+= Windows 7 =[windows_7]
+
+[[screenshot_preview_1.png] ./media/images/screenshot_1.png]
+
+%html% ''' <div class="screenshot-label">
+
+Nested version **1.2**, Spanish, running in Microsoft Windows 7.
+Paper example loaded and showing its PDF output in 
+[Evince http://live.gnome.org/Evince/].
+
+%html% ''' </div>
+
+[[screenshot_preview_2.png] ./media/images/screenshot_2.png]
+
+%html% ''' <div class="screenshot-label">
+
+Nested version **1.2**, Spanish, running in Microsoft Windows 7.
+Paper example loaded and showing its LaTeX output in
+[TeXworks http://www.tug.org/texworks/].
+
+%html% ''' </div>
+
+= Ubuntu =[ubuntu]
+
+[[screenshot_preview_3.png] ./media/images/screenshot_3.png]
+
+%html% ''' <div class="screenshot-label">
+
+Nested version **1.2**, English, running in Ubuntu 11.10.
+Source file of the //Participate// section of this website loaded. 
+Showing the HTML output, using the NestedWebsite custom theme in
+Chromium.
+
+%html% ''' </div>
+
+[[screenshot_preview_4.png] ./media/images/screenshot_4.png]
+
+%html% ''' <div class="screenshot-label">
+
+Nested version **1.2**, English, running in Ubuntu 11.10. 
+Math example loaded and showing its HTML output in 
+Chromium, in particular how the formulas are rendered via 
+[MathJax http://www.mathjax.org/].
+
+%html% ''' </div>
+
+[[screenshot_preview_5.png] ./media/images/screenshot_5.png]
+
+%html% ''' <div class="screenshot-label">
+
+Nested version **1.2**, English, running in Ubuntu 11.10.
+Source file of the //Participate// section of this website loaded.
+Showing the program gallery.
+
+%html% ''' </div>
+
+= Windows Vista =[windows_vista]
+
+[[screenshot_preview_6.png] ./media/images/screenshot_6.png]
+
+%html% ''' <div class="screenshot-label">
+
+Nested version **1.2**, English, running in Microsoft Vista.
+Presentation example loaded and showing the document 
+//Properties// dialog. Also, note that the //Focus mode// 
+(Shift+F11) is activated.
+
+%html% ''' </div>
+
