@@ -6,12 +6,13 @@ Version 2.0:
   * Support for customs title pages using title.tex in the document folder.
   * Portuguese translation added. Thanks to Kiara Navarro.
   * Better formatting behavior for Link and Lists buttons.
-  * If title of the first section is commented (%) then the abstract 
-    will be disabled when publishing to LaTeX with a document class
-    that supports "Abstract".
   * A lot bugs corrected.
   * New timestamp based Undo/Redo.
   * Bibliography support.
+
+Version 1.4:
+  * New upstream release. Bug-fix release.
+  * Imported many fixes and features from 2.0 branch.
 
 Version 1.2.2:
   * New upstream release. Bug-fix release.
