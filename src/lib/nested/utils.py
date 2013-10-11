@@ -67,6 +67,9 @@ def time_hash(lenght=10):
 
 
 def sha1sum(filepath):
+    """
+    SHA1 of a file.
+    """
     sha1 = hashlib.sha1()
     f = open(filepath, 'rb')
     try:
