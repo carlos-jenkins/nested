@@ -1,11 +1,5 @@
 #!/usr/bin/env python
 
-try:
-    # Load module from same directory
-    import nested.core.gui as gui
-    print('Starting Nested from the source directory')
-    gui.start()
-except ImportError:
-    # Load installed module
-    import nested.nested_gui
-    nested.nested_gui.start()
+from nested.core.gui import start
+start()
+

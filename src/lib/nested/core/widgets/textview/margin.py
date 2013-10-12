@@ -52,6 +52,7 @@ class Margin(object):
         margin = widget.create_pango_layout(self._chars).get_pixel_size()[0]
 
         # Draw the margin
+        # FIXME: This doesn't support horizontal scroll very well.
         cc.set_antialias(cairo.ANTIALIAS_NONE)
         cc.set_line_width(1.0)
         cc.set_source_rgb(*self.color)

@@ -67,6 +67,7 @@ class LineNumbers(object):
 
             # Create layout with lines
             layout = pango.Layout(textview.get_pango_context())
+            # FIXME: This doesn't support lines with different fonts / height
             layout.set_markup('\n'.join(
                     [str(x + self._addition) for x in range(self._nlines)])
                 )
