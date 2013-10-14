@@ -42,7 +42,7 @@ def main():
     for bdir in bindirs:
         path = join(bdir, bin)
         if isfile(path) and os.access(path, os.X_OK):
-            cmd = 'PYTHONPATH=$PYTHONPATH:{} {}'.format(
+            cmd = 'PYTHONPATH=$PYTHONPATH:{} time {}'.format(
                     join(root, 'src/lib/'), path
                 )
             print('Running:\n\t{}'.format(cmd))

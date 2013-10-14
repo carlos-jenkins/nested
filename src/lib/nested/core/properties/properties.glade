@@ -152,7 +152,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="author_label">
+                              <object class="GtkLabel" id="authors_label">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="xalign">0</property>
@@ -186,12 +186,12 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <child>
-                                  <object class="GtkScrolledWindow" id="scrolledwindow2">
+                                  <object class="GtkScrolledWindow" id="authors_scroll">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="shadow_type">in</property>
                                     <child>
-                                      <object class="GtkTreeView" id="treeview1">
+                                      <object class="GtkTreeView" id="authors_view">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="model">authors</property>
@@ -199,10 +199,10 @@
                                         <property name="fixed_height_mode">True</property>
                                         <property name="enable_grid_lines">both</property>
                                         <child internal-child="selection">
-                                          <object class="GtkTreeSelection" id="treeview-selection"/>
+                                          <object class="GtkTreeSelection" id="authors_view_selection"/>
                                         </child>
                                         <child>
-                                          <object class="GtkTreeViewColumn" id="treeviewcolumn1">
+                                          <object class="GtkTreeViewColumn" id="authors_view_column_name">
                                             <property name="resizable">True</property>
                                             <property name="sizing">fixed</property>
                                             <property name="title" translatable="yes">Name</property>
@@ -211,7 +211,7 @@
                                             <property name="sort_indicator">True</property>
                                             <property name="sort_column_id">0</property>
                                             <child>
-                                              <object class="GtkCellRendererText" id="cellrenderertext1">
+                                              <object class="GtkCellRendererText" id="authors_view_column_name_cr">
                                                 <property name="editable">True</property>
                                               </object>
                                               <attributes>
@@ -221,7 +221,7 @@
                                           </object>
                                         </child>
                                         <child>
-                                          <object class="GtkTreeViewColumn" id="treeviewcolumn2">
+                                          <object class="GtkTreeViewColumn" id="authors_view_column_email">
                                             <property name="resizable">True</property>
                                             <property name="sizing">fixed</property>
                                             <property name="title" translatable="yes">E-Mail</property>
@@ -229,7 +229,7 @@
                                             <property name="clickable">True</property>
                                             <property name="sort_column_id">1</property>
                                             <child>
-                                              <object class="GtkCellRendererText" id="cellrenderertext2">
+                                              <object class="GtkCellRendererText" id="authors_view_column_email_cr">
                                                 <property name="editable">True</property>
                                               </object>
                                               <attributes>
@@ -248,20 +248,20 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkAlignment" id="alignment1">
+                                  <object class="GtkAlignment" id="authors_ctrl_align">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">1</property>
                                     <property name="xscale">0</property>
                                     <child>
-                                      <object class="GtkToolbar" id="toolbar1">
+                                      <object class="GtkToolbar" id="authors_ctrl">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="toolbar_style">icons</property>
                                         <property name="show_arrow">False</property>
                                         <property name="icon_size">1</property>
                                         <child>
-                                          <object class="GtkToolButton" id="toolbutton1">
+                                          <object class="GtkToolButton" id="authors_ctrl_add">
                                             <property name="use_action_appearance">False</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">False</property>
@@ -276,7 +276,7 @@
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkToolButton" id="toolbutton2">
+                                          <object class="GtkToolButton" id="authors_ctrl_remove">
                                             <property name="use_action_appearance">False</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">False</property>
@@ -517,7 +517,7 @@
                 <property name="spacing">5</property>
                 <property name="homogeneous">True</property>
                 <child>
-                  <object class="GtkFrame" id="preproc_bod">
+                  <object class="GtkFrame" id="preproc_body">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label_xalign">0</property>
@@ -530,30 +530,30 @@
                         <property name="left_padding">10</property>
                         <property name="right_padding">10</property>
                         <child>
-                          <object class="GtkVBox" id="preproc_body">
+                          <object class="GtkVBox" id="preproc_box">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
-                              <object class="GtkScrolledWindow" id="scrolledwindow3">
+                              <object class="GtkScrolledWindow" id="preproc_scroll">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="shadow_type">in</property>
                                 <child>
-                                  <object class="GtkTreeView" id="treeview2">
+                                  <object class="GtkTreeView" id="preproc_view">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="model">preproc</property>
                                     <property name="fixed_height_mode">True</property>
                                     <child internal-child="selection">
-                                      <object class="GtkTreeSelection" id="treeview-selection2"/>
+                                      <object class="GtkTreeSelection" id="preproc_view_selection"/>
                                     </child>
                                     <child>
-                                      <object class="GtkTreeViewColumn" id="treeviewcolumn3">
+                                      <object class="GtkTreeViewColumn" id="preproc_view_column_regex">
                                         <property name="sizing">fixed</property>
                                         <property name="title" translatable="yes">Regex</property>
                                         <property name="expand">True</property>
                                         <child>
-                                          <object class="GtkCellRendererText" id="cellrenderertext3">
+                                          <object class="GtkCellRendererText" id="preproc_view_column_regex_cr">
                                             <property name="editable">True</property>
                                           </object>
                                           <attributes>
@@ -563,12 +563,12 @@
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkTreeViewColumn" id="treeviewcolumn4">
+                                      <object class="GtkTreeViewColumn" id="preproc_view_column_replc">
                                         <property name="sizing">fixed</property>
                                         <property name="title" translatable="yes">Replacement</property>
                                         <property name="expand">True</property>
                                         <child>
-                                          <object class="GtkCellRendererText" id="cellrenderertext4">
+                                          <object class="GtkCellRendererText" id="preproc_view_column_replc_cr">
                                             <property name="editable">True</property>
                                           </object>
                                           <attributes>
@@ -587,53 +587,47 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkAlignment" id="alignment6">
+                              <object class="GtkAlignment" id="preproc_ctrl_align">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="xalign">1</property>
+                                <property name="xscale">0</property>
                                 <child>
-                                  <object class="GtkAlignment" id="alignment7">
+                                  <object class="GtkToolbar" id="preproc_ctrl">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="xalign">1</property>
-                                    <property name="xscale">0</property>
+                                    <property name="toolbar_style">icons</property>
+                                    <property name="show_arrow">False</property>
+                                    <property name="icon_size">1</property>
                                     <child>
-                                      <object class="GtkToolbar" id="toolbar3">
+                                      <object class="GtkToolButton" id="preproc_ctrl_add">
+                                        <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="toolbar_style">icons</property>
-                                        <property name="show_arrow">False</property>
-                                        <property name="icon_size">1</property>
-                                        <child>
-                                          <object class="GtkToolButton" id="toolbutton5">
-                                            <property name="use_action_appearance">False</property>
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="use_action_appearance">False</property>
-                                            <property name="label" translatable="yes">toolbutton3</property>
-                                            <property name="use_underline">True</property>
-                                            <property name="stock_id">gtk-add</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="homogeneous">True</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkToolButton" id="toolbutton6">
-                                            <property name="use_action_appearance">False</property>
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="use_action_appearance">False</property>
-                                            <property name="label" translatable="yes">toolbutton4</property>
-                                            <property name="use_underline">True</property>
-                                            <property name="stock_id">gtk-remove</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="homogeneous">True</property>
-                                          </packing>
-                                        </child>
+                                        <property name="use_action_appearance">False</property>
+                                        <property name="label" translatable="yes">toolbutton3</property>
+                                        <property name="use_underline">True</property>
+                                        <property name="stock_id">gtk-add</property>
                                       </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="homogeneous">True</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkToolButton" id="preproc_ctrl_remove">
+                                        <property name="use_action_appearance">False</property>
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="use_action_appearance">False</property>
+                                        <property name="label" translatable="yes">toolbutton4</property>
+                                        <property name="use_underline">True</property>
+                                        <property name="stock_id">gtk-remove</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="homogeneous">True</property>
+                                      </packing>
                                     </child>
                                   </object>
                                 </child>
@@ -663,7 +657,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkFrame" id="postproc_bod">
+                  <object class="GtkFrame" id="postproc_body">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label_xalign">0</property>
@@ -676,30 +670,30 @@
                         <property name="left_padding">10</property>
                         <property name="right_padding">10</property>
                         <child>
-                          <object class="GtkVBox" id="postproc_body">
+                          <object class="GtkVBox" id="postproc_box">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
-                              <object class="GtkScrolledWindow" id="scrolledwindow4">
+                              <object class="GtkScrolledWindow" id="postproc_scroll">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="shadow_type">in</property>
                                 <child>
-                                  <object class="GtkTreeView" id="treeview3">
+                                  <object class="GtkTreeView" id="postproc_view">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="model">postproc</property>
                                     <property name="fixed_height_mode">True</property>
                                     <child internal-child="selection">
-                                      <object class="GtkTreeSelection" id="treeview-selection3"/>
+                                      <object class="GtkTreeSelection" id="postproc_view_selection"/>
                                     </child>
                                     <child>
-                                      <object class="GtkTreeViewColumn" id="treeviewcolumn5">
+                                      <object class="GtkTreeViewColumn" id="postproc_view_column_target">
                                         <property name="sizing">fixed</property>
                                         <property name="min_width">60</property>
                                         <property name="title" translatable="yes">Target</property>
                                         <child>
-                                          <object class="GtkCellRendererCombo" id="cellrenderercombo1">
+                                          <object class="GtkCellRendererCombo" id="postproc_view_column_target_cr">
                                             <property name="editable">True</property>
                                             <property name="model">targets</property>
                                           </object>
@@ -707,12 +701,12 @@
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkTreeViewColumn" id="treeviewcolumn6">
+                                      <object class="GtkTreeViewColumn" id="postproc_view_column_regex">
                                         <property name="sizing">fixed</property>
                                         <property name="title" translatable="yes">Regex</property>
                                         <property name="expand">True</property>
                                         <child>
-                                          <object class="GtkCellRendererText" id="cellrenderertext5">
+                                          <object class="GtkCellRendererText" id="postproc_view_column_regex_cr">
                                             <property name="editable">True</property>
                                           </object>
                                           <attributes>
@@ -722,12 +716,12 @@
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkTreeViewColumn" id="treeviewcolumn7">
+                                      <object class="GtkTreeViewColumn" id="postproc_view_column_replc">
                                         <property name="sizing">fixed</property>
                                         <property name="title" translatable="yes">Replacement</property>
                                         <property name="expand">True</property>
                                         <child>
-                                          <object class="GtkCellRendererText" id="cellrenderertext6">
+                                          <object class="GtkCellRendererText" id="postproc_view_column_replc_cr">
                                             <property name="editable">True</property>
                                           </object>
                                           <attributes>
@@ -746,20 +740,20 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkAlignment" id="alignment5">
+                              <object class="GtkAlignment" id="postproc_ctrl_align">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="xscale">0</property>
                                 <child>
-                                  <object class="GtkToolbar" id="toolbar2">
+                                  <object class="GtkToolbar" id="postproc_ctrl">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="toolbar_style">icons</property>
                                     <property name="show_arrow">False</property>
                                     <property name="icon_size">1</property>
                                     <child>
-                                      <object class="GtkToolButton" id="toolbutton3">
+                                      <object class="GtkToolButton" id="postproc_ctrl_add">
                                         <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
@@ -774,7 +768,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkToolButton" id="toolbutton4">
+                                      <object class="GtkToolButton" id="postproc_ctrl_remove">
                                         <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
@@ -846,7 +840,7 @@
                     <property name="can_focus">False</property>
                     <property name="label_xalign">0</property>
                     <child>
-                      <object class="GtkAlignment" id="html_opts_alignment">
+                      <object class="GtkAlignment" id="html_opts_align">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="top_padding">5</property>
@@ -877,13 +871,13 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkComboBox" id="html_theme_combobox">
+                                  <object class="GtkComboBox" id="html_themes_view">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="model">html_themes</property>
                                     <property name="active">0</property>
                                     <child>
-                                      <object class="GtkCellRendererText" id="cellrenderertext8"/>
+                                      <object class="GtkCellRendererText" id="html_theme_view_cr"/>
                                       <attributes>
                                         <attribute name="text">0</attribute>
                                       </attributes>
@@ -903,7 +897,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkCheckButton" id="xhtmls_enum_title">
+                              <object class="GtkCheckButton" id="html_num_headers">
                                 <property name="label" translatable="yes">Display numbered headers</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
@@ -920,7 +914,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkCheckButton" id="xhtmls_toc">
+                              <object class="GtkCheckButton" id="html_toc">
                                 <property name="label" translatable="yes">Generate table of contents</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
@@ -937,12 +931,12 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkHBox" id="hbox10">
+                              <object class="GtkHBox" id="html_toc_level_box">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="spacing">10</property>
                                 <child>
-                                  <object class="GtkLabel" id="label36">
+                                  <object class="GtkLabel" id="html_toc_level_label">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">1</property>
@@ -955,7 +949,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkSpinButton" id="xhtmls_toc_level">
+                                  <object class="GtkSpinButton" id="html_toc_level">
                                     <property name="width_request">100</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
@@ -983,7 +977,7 @@
                       </object>
                     </child>
                     <child type="label">
-                      <object class="GtkLabel" id="label25">
+                      <object class="GtkLabel" id="html_opts_label">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Options:</property>
@@ -997,12 +991,12 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkFrame" id="frame2">
+                  <object class="GtkFrame" id="html_pack">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label_xalign">0</property>
                     <child>
-                      <object class="GtkAlignment" id="alignment2">
+                      <object class="GtkAlignment" id="html_pack_align">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="top_padding">5</property>
@@ -1010,12 +1004,12 @@
                         <property name="left_padding">10</property>
                         <property name="right_padding">10</property>
                         <child>
-                          <object class="GtkVBox" id="vbox16">
+                          <object class="GtkVBox" id="html_pack_box">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="spacing">5</property>
                             <child>
-                              <object class="GtkCheckButton" id="xhtmls_single">
+                              <object class="GtkCheckButton" id="html_single">
                                 <property name="label" translatable="yes">Inline Javascript and CSS</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
@@ -1032,14 +1026,14 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkTable" id="table4">
+                              <object class="GtkTable" id="html_pack_footer">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="n_rows">2</property>
                                 <property name="n_columns">2</property>
                                 <property name="column_spacing">5</property>
                                 <child>
-                                  <object class="GtkLabel" id="label39">
+                                  <object class="GtkLabel" id="html_libs_ex">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
@@ -1055,7 +1049,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkEntry" id="xhtmls_libs">
+                                  <object class="GtkEntry" id="html_libs">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="invisible_char">•</property>
@@ -1070,7 +1064,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkLabel" id="label34">
+                                  <object class="GtkLabel" id="html_libs_label">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
@@ -1082,7 +1076,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkLabel" id="label40">
+                                  <object class="GtkLabel" id="html_libs_ex_label">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
@@ -1108,7 +1102,7 @@
                       </object>
                     </child>
                     <child type="label">
-                      <object class="GtkLabel" id="label31">
+                      <object class="GtkLabel" id="html_pack_label">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Packaging:</property>
@@ -1122,12 +1116,12 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkFrame" id="frame3">
+                  <object class="GtkFrame" id="html_sec">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label_xalign">0</property>
                     <child>
-                      <object class="GtkAlignment" id="alignment3">
+                      <object class="GtkAlignment" id="html_sec_align">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="top_padding">5</property>
@@ -1135,11 +1129,11 @@
                         <property name="left_padding">10</property>
                         <property name="right_padding">10</property>
                         <child>
-                          <object class="GtkVBox" id="vbox14">
+                          <object class="GtkVBox" id="html_sec_body">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
-                              <object class="GtkLabel" id="label35">
+                              <object class="GtkLabel" id="html_sec_emails_labels">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="xalign">0</property>
@@ -1152,12 +1146,12 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkVBox" id="vbox15">
+                              <object class="GtkVBox" id="html_sec_emails_body">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="spacing">5</property>
                                 <child>
-                                  <object class="GtkRadioButton" id="xhtmls_hide_no">
+                                  <object class="GtkRadioButton" id="html_email_no">
                                     <property name="label" translatable="yes">No</property>
                                     <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
@@ -1175,7 +1169,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkRadioButton" id="xhtmls_hide_simple">
+                                  <object class="GtkRadioButton" id="html_email_simple">
                                     <property name="label" translatable="yes">As text</property>
                                     <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
@@ -1184,7 +1178,7 @@
                                     <property name="use_action_appearance">False</property>
                                     <property name="xalign">0</property>
                                     <property name="draw_indicator">True</property>
-                                    <property name="group">xhtmls_hide_no</property>
+                                    <property name="group">html_email_no</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1193,12 +1187,12 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkLabel" id="label37">
+                                  <object class="GtkLabel" id="html_email_simple_label">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="xpad">25</property>
-                                    <property name="label" translatable="yes">&lt;span size="small"&gt;user@domain.com &gt; user (a) domain com&lt;/span&gt;</property>
+                                    <property name="label" translatable="yes">&lt;span size="small"&gt;user@domain.com -&gt; user (a) domain com&lt;/span&gt;</property>
                                     <property name="use_markup">True</property>
                                   </object>
                                   <packing>
@@ -1208,17 +1202,16 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkRadioButton" id="xhtmls_hide_base64">
+                                  <object class="GtkRadioButton" id="html_hide_base64">
                                     <property name="label" translatable="yes">As inline image</property>
                                     <property name="use_action_appearance">False</property>
-                                    <property name="visible">True</property>
                                     <property name="sensitive">False</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
                                     <property name="use_action_appearance">False</property>
                                     <property name="xalign">0</property>
                                     <property name="draw_indicator">True</property>
-                                    <property name="group">xhtmls_hide_no</property>
+                                    <property name="group">html_email_no</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1227,8 +1220,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkLabel" id="label38">
-                                    <property name="visible">True</property>
+                                  <object class="GtkLabel" id="html_hide_base64_label">
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="xpad">25</property>
@@ -1253,7 +1245,7 @@
                       </object>
                     </child>
                     <child type="label">
-                      <object class="GtkLabel" id="label32">
+                      <object class="GtkLabel" id="html_sec_label">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Security:</property>
@@ -1287,7 +1279,7 @@ Options</property>
               </packing>
             </child>
             <child>
-              <object class="GtkNotebook" id="notebook1">
+              <object class="GtkNotebook" id="section4_body">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="border_width">5</property>
@@ -1298,12 +1290,12 @@ Options</property>
                     <property name="border_width">5</property>
                     <property name="spacing">5</property>
                     <child>
-                      <object class="GtkFrame" id="frame4">
+                      <object class="GtkFrame" id="latex_opts">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label_xalign">0</property>
                         <child>
-                          <object class="GtkAlignment" id="alignment4">
+                          <object class="GtkAlignment" id="latex_opts_align">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="top_padding">5</property>
@@ -1311,17 +1303,17 @@ Options</property>
                             <property name="left_padding">10</property>
                             <property name="right_padding">10</property>
                             <child>
-                              <object class="GtkVBox" id="vbox19">
+                              <object class="GtkVBox" id="latex_opts_body">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="spacing">5</property>
                                 <child>
-                                  <object class="GtkHBox" id="hbox12">
+                                  <object class="GtkHBox" id="latex_opts_header">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="spacing">10</property>
                                     <child>
-                                      <object class="GtkLabel" id="label48">
+                                      <object class="GtkLabel" id="latex_opts_header_label">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="xalign">0</property>
@@ -1334,13 +1326,13 @@ Options</property>
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkComboBox" id="docclass_combobox">
+                                      <object class="GtkComboBox" id="latex_templates_view">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="model">latex_templates</property>
                                         <property name="active">0</property>
                                         <child>
-                                          <object class="GtkCellRendererText" id="cellrenderertext9"/>
+                                          <object class="GtkCellRendererText" id="latex_templates_view_cr"/>
                                           <attributes>
                                             <attribute name="text">0</attribute>
                                           </attributes>
@@ -1360,7 +1352,7 @@ Options</property>
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkCheckButton" id="tex_pdf">
+                                  <object class="GtkCheckButton" id="latex_pdf">
                                     <property name="label" translatable="yes">Compile LaTeX after publish (PDF)</property>
                                     <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
@@ -1381,7 +1373,7 @@ Options</property>
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkCheckButton" id="tex_enum_title">
+                                  <object class="GtkCheckButton" id="latex_num_headers">
                                     <property name="label" translatable="yes">Display numbered headers</property>
                                     <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
@@ -1398,7 +1390,7 @@ Options</property>
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkCheckButton" id="tex_toc">
+                                  <object class="GtkCheckButton" id="latex_toc">
                                     <property name="label" translatable="yes">Generate table of contents</property>
                                     <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
@@ -1415,12 +1407,12 @@ Options</property>
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkHBox" id="hbox14">
+                                  <object class="GtkHBox" id="latex_toc_level_box">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="spacing">10</property>
                                     <child>
-                                      <object class="GtkLabel" id="label49">
+                                      <object class="GtkLabel" id="latex_toc_level_label">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="xalign">1</property>
@@ -1433,7 +1425,7 @@ Options</property>
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkSpinButton" id="tex_toc_level">
+                                      <object class="GtkSpinButton" id="latex_toc_level">
                                         <property name="width_request">100</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
@@ -1461,7 +1453,7 @@ Options</property>
                           </object>
                         </child>
                         <child type="label">
-                          <object class="GtkLabel" id="label43">
+                          <object class="GtkLabel" id="latex_opts_label">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="label" translatable="yes">Options:</property>
@@ -1477,7 +1469,7 @@ Options</property>
                   </object>
                 </child>
                 <child type="tab">
-                  <object class="GtkLabel" id="label1">
+                  <object class="GtkLabel" id="latex_general_label">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">General</property>
@@ -1487,12 +1479,12 @@ Options</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkScrolledWindow" id="scrolledwindow10">
+                  <object class="GtkScrolledWindow" id="latex_header_scroll">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="shadow_type">in</property>
                     <child>
-                      <object class="GtkTextView" id="tex_header">
+                      <object class="GtkTextView" id="latex_header">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="has_tooltip">True</property>
@@ -1513,7 +1505,7 @@ This header will be added after system packages and before the beginning of the 
                   </packing>
                 </child>
                 <child type="tab">
-                  <object class="GtkLabel" id="label2">
+                  <object class="GtkLabel" id="latex_header_label">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Header</property>
@@ -1524,12 +1516,12 @@ This header will be added after system packages and before the beginning of the 
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkScrolledWindow" id="scrolledwindow1">
+                  <object class="GtkScrolledWindow" id="latex_title_scroll">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="shadow_type">in</property>
                     <child>
-                      <object class="GtkTextView" id="tex_header1">
+                      <object class="GtkTextView" id="latex_title">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="tooltip_text" translatable="yes">Here you  can customized a title page for your document</property>
@@ -1542,7 +1534,7 @@ This header will be added after system packages and before the beginning of the 
                   </packing>
                 </child>
                 <child type="tab">
-                  <object class="GtkLabel" id="label3">
+                  <object class="GtkLabel" id="latex_title_label">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Title page</property>

@@ -2,5 +2,5 @@
 
 from nested.core.properties.controller import Properties
 props = Properties()
-props.properties.run()
+props.run()
 

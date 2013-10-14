@@ -48,4 +48,11 @@ class Properties(object):
         # Connect signals
         self.builder.connect_signals(self)
 
+    def run(self):
+        while True:
+            res = self.properties.run()
+            if self.validate():
+                return
 
+    def validate(self):
+        return False
