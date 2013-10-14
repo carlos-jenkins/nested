@@ -15,7 +15,37 @@
       </row>
     </data>
   </object>
-  <object class="GtkDialog" id="dialog_properties">
+  <object class="GtkListStore" id="html_themes">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="latex_templates">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="postproc">
+    <columns>
+      <!-- column-name target -->
+      <column type="gchararray"/>
+      <!-- column-name regex -->
+      <column type="gchararray"/>
+      <!-- column-name replacement -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="preproc">
+    <columns>
+      <!-- column-name regex -->
+      <column type="gchararray"/>
+      <!-- column-name replacement -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkDialog" id="properties">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Document properties</property>
@@ -1566,36 +1596,6 @@ Options</property>
       <action-widget response="0">cancel</action-widget>
       <action-widget response="0">ok</action-widget>
     </action-widgets>
-  </object>
-  <object class="GtkListStore" id="html_themes">
-    <columns>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="latex_templates">
-    <columns>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="postproc">
-    <columns>
-      <!-- column-name target -->
-      <column type="gchararray"/>
-      <!-- column-name regex -->
-      <column type="gchararray"/>
-      <!-- column-name replacement -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="preproc">
-    <columns>
-      <!-- column-name regex -->
-      <column type="gchararray"/>
-      <!-- column-name replacement -->
-      <column type="gchararray"/>
-    </columns>
   </object>
   <object class="GtkListStore" id="targets">
     <columns>
