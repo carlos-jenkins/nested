@@ -33,8 +33,17 @@ class Properties(object):
 
     def __init__(self, parent=None):
         """
+        Just initialize a flag to mark lazy initialization
+        """
+        self._init_flag = False
+
+    def _init(self):
+        """
         Build document properties GUI
         """
+
+        if(self._init_flag):
+            return
 
         # Build GUI from Glade file
         self.builder = Gtk.Builder()
@@ -48,11 +57,15 @@ class Properties(object):
         # Connect signals
         self.builder.connect_signals(self)
 
+        # Done
+        self._init_flag = True
+
     def run(self):
+        self._init()
         while True:
             res = self.properties.run()
-            if self.validate():
+            if self._validate():
                 return
 
-    def validate(self):
+    def _validate(self):
         return False
